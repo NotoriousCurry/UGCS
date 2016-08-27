@@ -42,7 +42,7 @@ public class Consultation {
         this.date = new SimpleStringProperty(date1);
     this.time = new SimpleStringProperty(time1);
     }
-    public int getconsultationid(){
+    public Integer getconsultationid(){
         return consultationid.get();
     }
     public String getnotes(){
