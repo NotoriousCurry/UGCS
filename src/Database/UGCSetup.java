@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Database;
 
 import java.sql.DatabaseMetaData;
@@ -13,7 +9,7 @@ import java.sql.Statement;
 
 /**
  *
- * @author Peter & Sam
+ * @author Peter 
  */
 public class UGCSetup extends DerbySetup {
 
@@ -30,13 +26,13 @@ public class UGCSetup extends DerbySetup {
     private void ugcSetup() {
         boolean requiresdata = false;
         openConnection();
-//looks into superclass without need to name the actual class
+
         
         try {
 
             
-            DatabaseMetaData dbmd = conn.getMetaData();//getting metadata
-            rs = dbmd.getTables(null, "APP", "UGC", null);//get all the table where the table names are called app, employee
+            DatabaseMetaData dbmd = conn.getMetaData();
+            rs = dbmd.getTables(null, "APP", "UGC", null);
 
             if (!rs.next()) {
                 requiresdata = true;
@@ -56,7 +52,7 @@ public class UGCSetup extends DerbySetup {
                 System.out.println("UGC table created");
             }
         } catch (SQLException ex) {
-            ex.printStackTrace();//executes when there is an error in the statement
+            ex.printStackTrace();
         }
 
         closeConnection();
