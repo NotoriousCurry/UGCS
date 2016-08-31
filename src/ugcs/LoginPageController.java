@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
+import ugcs.Queries.ugcQueries;
 
 
 /**
@@ -38,15 +39,37 @@ public class LoginPageController implements Initializable {
         login.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                loginCheck();
-            }
-        });
-    }    
-    
-    private void loginCheck() {
-        String usrn = usr.getText();
-        String ps = pass.getText();
-        
+                if (loginCheck()) {
+                    System.out.println("FCK YEA LOGIN");
+            } else {
+                    System.out.println("FCKED UP SON");
+                }
+        };
+    });
     }
     
-}
+    private Boolean loginCheck() {
+        String usrn = usr.getText();
+        String ps = pass.getText();
+        String check = "";
+        Boolean validLogin = false;
+        ugcQueries ugcQ = new ugcQueries();
+        outerloop:
+        for (String s : ugcQ.getUser()) {
+            if (s.equals(usrn)) {
+                String connPass = ugcQ.getPassword(usrn);
+                if (connPass.equals(ps)) {
+                    validLogin = true;
+                    break outerloop;
+                } else {
+                }
+            } else {
+            }
+        }
+        if (validLogin) {
+        } else {
+        }
+        return validLogin;
+    }
+        
+    }

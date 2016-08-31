@@ -3,6 +3,7 @@ package ugcs.Database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -36,6 +37,16 @@ public class DerbySetup {
             System.out.println(ex);
 
         }
+    }
+    
+        public static boolean isResultSetEmpty(ResultSet resultSet) {
+        Boolean E = false;
+        try {
+            E = !resultSet.first();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return E;
     }
 
 }
