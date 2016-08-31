@@ -64,7 +64,7 @@ public class Consultation {
     
     
     
-    
+
 
     public IntegerProperty getConsultationid() {
         return consultationid;

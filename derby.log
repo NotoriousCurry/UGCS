@@ -1,0 +1,10 @@
+----------------------------------------------------------------
+Mon Aug 29 04:57:12 AEST 2016:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.2.2 - (1181258): instance a816c00e-0156-d283-420e-0000038dd6b8 
+on database directory /Users/Peterrpancakes/Documents/Java stuff/UGCS/UCGDatabase  with class loader sun.misc.Launcher$AppClassLoader@45ee12a7 
+Loaded from file:/Users/Peterrpancakes/Documents/Java%20stuff/UGCS/dist/run952549695/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_40-b25
+user.dir=/Users/Peterrpancakes/Documents/Java stuff/UGCS
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

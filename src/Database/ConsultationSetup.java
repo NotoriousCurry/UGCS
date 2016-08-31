@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * @author Peter & Sam
+ * @author Peter 
  *
  */
 public class ConsultationSetup extends DerbySetup {
@@ -37,7 +37,7 @@ public class ConsultationSetup extends DerbySetup {
                         + "GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
                         + "\"ZID\" VARCHAR(8),"
                         + "\"NOTES\"VARCHAR(500),"
-                        + "\"PROGRESSIONCHECK\" VARCHAR(5),"
+                        + "\"TYPE\" VARCHAR(10),"
                         + "\"PRIORITY\"VARCHAR(10),"                     
                         + "\"DATE\" VARCHAR(12),"
                         + "\"TIME\" VARCHAR(12)"
@@ -46,13 +46,13 @@ public class ConsultationSetup extends DerbySetup {
                 System.out.println(sqlText);
                 createConsultationTable = conn.prepareStatement(
                         sqlText
-                );//next column with the data type
+                );
                 createConsultationTable.execute();
                 System.out.println("Consultation table created");
 
             }
         } catch (SQLException ex) {
-            ex.printStackTrace();//executes when there is an error in the statement
+            ex.printStackTrace();
         }
 
         closeConnection();

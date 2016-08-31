@@ -5,6 +5,9 @@
  */
 package ugcs;
 
+import Database.ConsultationSetup;
+import Database.StudentSetup;
+import Database.UGCSetup;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.event.ActionEvent;
@@ -36,6 +39,9 @@ public class UGCS extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        UGCSetup.setupDatabase();
+        ConsultationSetup.setupDatabase();
+        StudentSetup.setupDatabase();
         launch(args);
     }
     
