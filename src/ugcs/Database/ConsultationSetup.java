@@ -33,7 +33,7 @@ public class ConsultationSetup extends DerbySetup {
             if (!rs.next()) {
                
                 String sqlText = "CREATE TABLE APP.CONSULTATION("
-                        + "\"CONSULTATIONID\" INT not null primary key"   
+                        + "\"CONSULTATIONID\" INT not null primary key "   
                         + "GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
                         + "\"ZID\" VARCHAR(8),"
                         + "\"NOTES\"VARCHAR(500),"

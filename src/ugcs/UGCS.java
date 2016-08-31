@@ -15,6 +15,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import ugcs.Database.ConsultationSetup;
+import ugcs.Database.StudentSetup;
+import ugcs.Database.UGCSetup;
 
 /**
  *
@@ -36,6 +39,9 @@ public class UGCS extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        ConsultationSetup.setupDatabase();
+        StudentSetup.setupDatabase();
+        UGCSetup.setupDatabase();
         launch(args);
     }
     

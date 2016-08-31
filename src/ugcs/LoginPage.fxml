@@ -11,20 +11,20 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ugcs.LoginPageController">
     <children>
-        <Button fx:id="button" layoutX="332.0" layoutY="232.0" onAction="#handleButtonAction" text="Login" />
+        <Button fx:id="login" layoutX="332.0" layoutY="232.0" text="Login" />
         <Label fx:id="label" layoutX="298.0" layoutY="201.0" minHeight="16" minWidth="69">
          <font>
             <Font name="Baghdad Regular" size="13.0" />
          </font></Label>
-      <PasswordField layoutX="217.0" layoutY="174.0" />
+      <PasswordField fx:id="pass" layoutX="217.0" layoutY="174.0" />
       <Label layoutX="137.0" layoutY="179.0" text="Password:" />
       <ImageView fitHeight="97.0" fitWidth="200.0">
          <image>
             <Image url="@Resources/UNSW-LOGO.png" />
          </image>
       </ImageView>
-      <Label layoutX="137.0" layoutY="146.0" text="Username:" />
-      <TextField layoutX="217.0" layoutY="141.0" />
+      <Label layoutX="137.0" layoutY="146.0" text="zID:" />
+      <TextField  fx:id="usr" layoutX="217.0" layoutY="141.0" />
       <ImageView fitHeight="7.0" fitWidth="607.0" layoutY="94.0">
          <image>
             <Image url="@Resources/top.png" />

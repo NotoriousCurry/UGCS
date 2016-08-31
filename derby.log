@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Wed Aug 31 18:14:36 AEST 2016:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-0156-dfaa-02ed-00000a5ee470 
+on database directory C:\Users\sgaheer\Documents\NetBeansProjects\UGCS\UCGDatabase with class loader sun.misc.Launcher$AppClassLoader@33909752 
+Loaded from file:/C:/Users/sgaheer/Documents/NetBeansProjects/UGCS/dist/run459917734/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_65-b17
+user.dir=C:\Users\sgaheer\Documents\NetBeansProjects\UGCS
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
