@@ -1,4 +1,3 @@
-
 package ugcs.Model;
 
 import javafx.beans.property.IntegerProperty;
@@ -6,15 +5,13 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-
 /**
  *
  * @author Peter
  */
-
 public class Consultation {
-   
-    private  IntegerProperty consultationid;
+
+    private IntegerProperty consultationid;
     private final StringProperty zid;
     private final StringProperty notes;
     private final StringProperty type;
@@ -24,14 +21,15 @@ public class Consultation {
 
     // this is for finding consultations
     public Consultation(String zid1, String notes1, String type1, String priority1, String date1, String time1) {
-      //  this.ID = new SimpleIntegerProperty(ID);
+        //  this.ID = new SimpleIntegerProperty(ID);
         this.zid = new SimpleStringProperty(zid1);
         this.notes = new SimpleStringProperty(notes1);
         this.type = new SimpleStringProperty(type1);
         this.priority = new SimpleStringProperty(priority1);
         this.date = new SimpleStringProperty(date1);
-    this.time = new SimpleStringProperty(time1);
+        this.time = new SimpleStringProperty(time1);
     }
+
     // this is for creating a consultation
     public Consultation(Integer consultationid1, String zid1, String notes1, String type1, String priority1, String date1, String time1) {
         this.consultationid = new SimpleIntegerProperty(consultationid1);
@@ -40,31 +38,36 @@ public class Consultation {
         this.type = new SimpleStringProperty(type1);
         this.priority = new SimpleStringProperty(priority1);
         this.date = new SimpleStringProperty(date1);
-    this.time = new SimpleStringProperty(time1);
+        this.time = new SimpleStringProperty(time1);
     }
-    public Integer getconsultationid(){
+
+    public Integer getconsultationid() {
         return consultationid.get();
     }
-    public String getnotes(){
+
+    public String getnotes() {
         return notes.get();
     }
-    public String gettype(){
+
+    public String gettype() {
         return type.get();
     }
-    public String getpriority(){
+
+    public String getpriority() {
         return priority.get();
     }
-    public String getdate(){
+
+    public String getdate() {
         return date.get();
     }
-    public String gettime(){
+
+    public String gettime() {
         return time.get();
     }
-    
-    
-    
-    
 
+    public String getzid() {
+        return zid.get();
+    }
 
     public IntegerProperty getConsultationid() {
         return consultationid;
@@ -93,6 +96,5 @@ public class Consultation {
     public StringProperty getTime() {
         return time;
     }
-    
+
 }
-        

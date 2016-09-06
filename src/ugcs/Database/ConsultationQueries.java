@@ -80,12 +80,13 @@ public class ConsultationQueries extends DerbySetup {
         try {
 
             insertConsult = conn.prepareStatement("insert into app.Consultation ( zid, notes, type, priority, date, time) values (?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            insertConsult.setString(1, toInsert.getzid());
 
-            insertConsult.setString(1, toInsert.getnotes());
-            insertConsult.setString(2, toInsert.gettype());
-            insertConsult.setString(3, toInsert.getpriority());
-            insertConsult.setString(4, toInsert.getdate());
-            insertConsult.setString(5, toInsert.gettime());
+            insertConsult.setString(2, toInsert.getnotes());
+            insertConsult.setString(3, toInsert.gettype());
+            insertConsult.setString(4, toInsert.getpriority());
+            insertConsult.setString(5, toInsert.getdate());
+            insertConsult.setString(6, toInsert.gettime());
             insertConsult.executeUpdate();
 
             ResultSet rs = insertConsult.getGeneratedKeys();

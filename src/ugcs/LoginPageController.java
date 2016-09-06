@@ -10,21 +10,25 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
+import javafx.stage.Stage;
 import ugcs.Queries.ugcQueries;
 
-
 /**
- * FXML Controller class
- * CTRL + SHIFT + I
+ * FXML Controller class CTRL + SHIFT + I
+ *
  * @author sgaheer
  */
 public class LoginPageController implements Initializable {
-    
+
     @FXML
     private Label label;
     @FXML
@@ -33,7 +37,7 @@ public class LoginPageController implements Initializable {
     private TextField usr;
     @FXML
     private PasswordField pass;
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         login.setOnAction(new EventHandler<ActionEvent>() {
@@ -41,11 +45,15 @@ public class LoginPageController implements Initializable {
             public void handle(ActionEvent e) {
                 if (loginCheck()) {
                     System.out.println("FCK YEA LOGIN");
-            } else {
+                    gotoHome(e);
+                } else {
                     System.out.println("FCKED UP SON");
                 }
-        };
-    });
+            }
+        ;
+    }
+
+    );
     }
     
     private Boolean loginCheck() {
@@ -71,5 +79,18 @@ public class LoginPageController implements Initializable {
         }
         return validLogin;
     }
-        
+
+    private void gotoHome(ActionEvent event) {
+        Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("HomeScreen.fxml"));
+            Scene scene = new Scene(root);
+            primaryStage.setTitle("HomeScreen");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (Exception e) {
+
+        }
     }
+
+}
