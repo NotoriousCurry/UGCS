@@ -24,7 +24,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import ugcs.Database.ConsultationQueries;
+import ugcs.Queries.ConsultationQueries;
 import ugcs.Model.Consultation;
 
 /**

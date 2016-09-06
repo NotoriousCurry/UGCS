@@ -20,7 +20,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
-import ugcs.Queries.ugcQueries;
+import ugcs.Queries.UgcQueries;
 
 /**
  * FXML Controller class CTRL + SHIFT + I
@@ -61,7 +61,7 @@ public class LoginPageController implements Initializable {
         String ps = pass.getText();
         String check = "";
         Boolean validLogin = false;
-        ugcQueries ugcQ = new ugcQueries();
+        UgcQueries ugcQ = new UgcQueries();
         outerloop:
         for (String s : ugcQ.getUser()) {
             if (s.equals(usrn)) {

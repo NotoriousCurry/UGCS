@@ -32,7 +32,7 @@ public class StudentSetup extends DerbySetup {
             if (!rs.next()) {
                
                 String sqlText = "CREATE TABLE APP.STUDENT("
-                        + "\"ZID\" VARCHAR(8),"
+                        + "\"ZID\" VARCHAR(8) not null primary key, "
                         + "\"FIRSTNAME\"VARCHAR(50),"
                         + "\"LASTNAME\" VARCHAR(50),"
                         + "\"COURSE\"VARCHAR(50),"                     

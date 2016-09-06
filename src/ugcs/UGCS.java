@@ -24,13 +24,13 @@ import ugcs.Database.UGCSetup;
  * @author sgaheer
  */
 public class UGCS extends Application {
-    
+
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
-        
+
         Scene scene = new Scene(root);
-        
+
         stage.setScene(scene);
         stage.show();
     }
@@ -39,10 +39,11 @@ public class UGCS extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        ConsultationSetup.setupDatabase();
         StudentSetup.setupDatabase();
         UGCSetup.setupDatabase();
+        ConsultationSetup.setupDatabase();
+
         launch(args);
     }
-    
+
 }

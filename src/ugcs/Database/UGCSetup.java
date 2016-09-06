@@ -23,6 +23,7 @@ public class UGCSetup extends DerbySetup {
 
     }
 
+    // ANY CHANGES HERE MUST BE REFLECTED IN UGC.class and UgcQueries.class
     private void ugcSetup() {
         boolean requiresdata = false;
         openConnection();
@@ -38,10 +39,11 @@ public class UGCSetup extends DerbySetup {
                 requiresdata = true;
                
                 String sqlText = "CREATE TABLE APP.UGC ("
-                        + "\"ZID\" VARCHAR(8) primary key, "
+                        + "\"ZID\" VARCHAR(8) not null primary key, "
                         + "\"PASSWORD\" VARCHAR(100),"
-                        + "\"FIRSTNAME\" VARCHAR(12),"
-                        + "\"LASTNAME\" VARCHAR(12)"
+                        + "\"FIRSTNAME\" VARCHAR(50),"
+                        + "\"LASTNAME\" VARCHAR(50),"
+                        + "\"EMAIL\" VARCHAR(50)"
                         + ")";
 
                 System.out.println(sqlText);
