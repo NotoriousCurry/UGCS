@@ -27,18 +27,7 @@ import ugcs.Model.Event;
  * @author jenniferpho
  */
 public class HomeScreenController implements Initializable {
-
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        combo.getItems().addAll("9am", "10am",
-                "11am",
-                "12pm",
-                "1pm",
-                "2pm",
-                "3pm",
-                "4pm");
-    }
-
+    
     @FXML
     Agenda agenda;
     @FXML
@@ -50,6 +39,17 @@ public class HomeScreenController implements Initializable {
     List<Event> myEvents;
     LocalTime time;
     String w = null;
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        combo.getItems().addAll("9am", "10am",
+                "11am",
+                "12pm",
+                "1pm",
+                "2pm",
+                "3pm",
+                "4pm");
+    }
 
     public Date localDateToUtilDate(LocalDate localDate) {
         GregorianCalendar cal = new GregorianCalendar(
