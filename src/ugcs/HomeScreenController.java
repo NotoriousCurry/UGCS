@@ -12,12 +12,32 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 import jfxtras.scene.control.agenda.Agenda;
 import ugcs.Model.Event;
 
@@ -27,7 +47,7 @@ import ugcs.Model.Event;
  * @author jenniferpho
  */
 public class HomeScreenController implements Initializable {
-    
+
     @FXML
     Agenda agenda;
     @FXML
@@ -36,6 +56,8 @@ public class HomeScreenController implements Initializable {
     DatePicker date;
     @FXML
     ComboBox combo;
+    @FXML
+    Button logOut;
     List<Event> myEvents;
     LocalTime time;
     String w = null;
@@ -49,6 +71,15 @@ public class HomeScreenController implements Initializable {
                 "2pm",
                 "3pm",
                 "4pm");
+        logOut.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                lOut(e);
+            }
+        ;
+    }
+
+    );
     }
 
     public Date localDateToUtilDate(LocalDate localDate) {
@@ -113,6 +144,55 @@ public class HomeScreenController implements Initializable {
                 .withAppointmentGroup(new Agenda.AppointmentGroupImpl().withStyleClass("group1")) // you should use a map of AppointmentGroups
         );
 
+    }
+
+    private void lOut(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Group root1 = new Group();
+        Group root2 = new Group();
+        Rectangle rect1 = new Rectangle(1200,800);
+        Label lab1 = new Label("LOADING...");
+        rect1.setFill(new ImagePattern(new Image("ugcs/Resources/homeSs.png")));
+        root1.getChildren().addAll(rect1, lab1);
+        Rectangle rect2 = new Rectangle(1200,800);
+        Label lab2 = new Label("LOADED!");
+        rect2.setFill(new ImagePattern(new Image("ugcs/Resources/loginSs.png")));
+        root2.getChildren().addAll(rect2, lab2);
+        
+        Scene scene1 = new Scene(root1, 1200, 800);
+        stage.setScene(scene1);
+        stage.show();
+        
+        WritableImage wi = new WritableImage(1200, 800);
+        Image img1 = root1.snapshot(new SnapshotParameters(), wi);
+        ImageView imgView1 = new ImageView(img1);
+        wi = new WritableImage(1200, 800);
+        Image img2 = root2.snapshot(new SnapshotParameters(), wi);
+        ImageView imgView2 = new ImageView(img2);
+        // Create new pane with both images
+        imgView1.setTranslateX(0);
+        imgView2.setTranslateX(1200);
+        StackPane pane = new StackPane(imgView1, imgView2);
+        pane.setPrefSize(1200, 800);
+        // Replace root1 with new pane
+        root1.getChildren().setAll(pane);
+        // create transtition
+        Timeline timeline = new Timeline();
+        KeyValue kv = new KeyValue(imgView2.translateXProperty(), 0, Interpolator.EASE_BOTH);
+        KeyFrame kf = new KeyFrame(Duration.seconds(1), kv);
+        timeline.getKeyFrames().add(kf);
+        timeline.setOnFinished(t -> {
+            try {
+            Parent root = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
+            Scene scene = new Scene(root);
+            stage.setTitle("LoginScreen");
+            stage.setScene(scene);
+            stage.show();
+            } catch (Exception e) {
+                
+            }
+        });
+        timeline.play();
     }
 
 }
