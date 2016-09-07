@@ -39,7 +39,7 @@ public class ConsultationFormFXMLController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        comboselected.getItems().addAll("9am", "10am",
+        timePicked.getItems().addAll("9am", "10am",
                 "11am",
                 "12pm",
                 "1pm",
@@ -60,15 +60,17 @@ public class ConsultationFormFXMLController implements Initializable {
     @FXML
     TextArea notesField;
     @FXML
-    DatePicker datepicked;
+    DatePicker datePicked;
     @FXML
-    ComboBox comboselected;
+    ComboBox timePicked;
     @FXML
     ComboBox priorityChoice;
     @FXML
     Button createButton;
     @FXML
     Button cancelButton;
+    @FXML
+    Button backHome;
     // @FXML CheckBox highbox;    @FXML CheckBox mediumbox;    @FXML CheckBox lowbox;
 
     public Date localDateToUtilDate(LocalDate localDate) {
@@ -85,12 +87,12 @@ public class ConsultationFormFXMLController implements Initializable {
         //  String lastname = lastnamefield.getText();
         //  String email = emailfield.getText();  
 
-        LocalDate date1 = datepicked.getValue();
+        LocalDate date1 = datePicked.getValue();
         Date date2 = localDateToUtilDate(date1);
         SimpleDateFormat dateformatJava2 = new SimpleDateFormat("dd/MM/yyyy");
         String date3 = dateformatJava2.format(date2);
 
-        String time = comboselected.getSelectionModel().getSelectedItem().toString();
+        String time = timePicked.getSelectionModel().getSelectedItem().toString();
         String priority = priorityChoice.getSelectionModel().getSelectedItem().toString();
 
         if (notesField.getText() != null) {

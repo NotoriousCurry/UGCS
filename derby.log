@@ -1,8 +1,8 @@
 ----------------------------------------------------------------
-Wed Sep 07 17:00:21 AEST 2016:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-0157-0372-8d44-00000a5e92c0 
+Wed Sep 07 17:12:13 AEST 2016:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-0157-037d-6bac-00000a5e92c8 
 on database directory C:\Users\sgaheer\Documents\NetBeansProjects\UGCS\UCGDatabase with class loader sun.misc.Launcher$AppClassLoader@33909752 
-Loaded from file:/C:/Users/sgaheer/Documents/NetBeansProjects/UGCS/dist/run1519680098/lib/derby.jar
+Loaded from file:/C:/Users/sgaheer/Documents/NetBeansProjects/UGCS/dist/run1448719106/lib/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_65-b17
 user.dir=C:\Users\sgaheer\Documents\NetBeansProjects\UGCS
