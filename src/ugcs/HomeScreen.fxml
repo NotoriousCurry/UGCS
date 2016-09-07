@@ -26,5 +26,6 @@
          </image>
       </ImageView>
       <Button fx:id="logOut" layoutX="1027.0" layoutY="65.0" mnemonicParsing="false" opacity="0.77" prefHeight="34.0" prefWidth="167.0" text="Logout" textAlignment="CENTER" textFill="#ed0404" />
+      <Button fx:id="createCon" layoutX="838.0" layoutY="66.0" mnemonicParsing="false" opacity="0.78" prefHeight="34.0" prefWidth="167.0" text="Create Consultation" textFill="#03f53f" />
    </children>
 </AnchorPane>

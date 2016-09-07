@@ -5,6 +5,7 @@
  */
 package ugcs;
 
+import java.awt.event.KeyListener;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.animation.Interpolator;
@@ -28,8 +29,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -62,11 +63,12 @@ public class LoginPageController implements Initializable {
                     animScreen(e);
                 } else {
                     System.out.println("FCKED UP SON");
+                    animScreen(e);
                 }
-            };
+            }
+        ;
     }
-                
-                
+
     );
     }
     
@@ -111,19 +113,19 @@ public class LoginPageController implements Initializable {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Group root1 = new Group();
         Group root2 = new Group();
-        Rectangle rect1 = new Rectangle(1200,800);
+        Rectangle rect1 = new Rectangle(1200, 800);
         Label lab1 = new Label("LOADING...");
         rect1.setFill(new ImagePattern(new Image("ugcs/Resources/loginSs.png")));
         root1.getChildren().addAll(rect1, lab1);
-        Rectangle rect2 = new Rectangle(1200,800);
+        Rectangle rect2 = new Rectangle(1200, 800);
         Label lab2 = new Label("LOADED!");
         rect2.setFill(new ImagePattern(new Image("ugcs/Resources/homeSs.png")));
         root2.getChildren().addAll(rect2, lab2);
-        
+
         Scene scene1 = new Scene(root1, 1200, 800);
         stage.setScene(scene1);
         stage.show();
-        
+
         WritableImage wi = new WritableImage(1200, 800);
         Image img1 = root1.snapshot(new SnapshotParameters(), wi);
         ImageView imgView1 = new ImageView(img1);
@@ -144,13 +146,13 @@ public class LoginPageController implements Initializable {
         timeline.getKeyFrames().add(kf);
         timeline.setOnFinished(t -> {
             try {
-            Parent root = FXMLLoader.load(getClass().getResource("HomeScreen.fxml"));
-            Scene scene = new Scene(root);
-            stage.setTitle("HomeScreen");
-            stage.setScene(scene);
-            stage.show();
+                Parent root = FXMLLoader.load(getClass().getResource("HomeScreen.fxml"));
+                Scene scene = new Scene(root);
+                stage.setTitle("HomeScreen");
+                stage.setScene(scene);
+                stage.show();
             } catch (Exception e) {
-                
+
             }
         });
         timeline.play();

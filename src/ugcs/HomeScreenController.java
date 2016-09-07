@@ -53,6 +53,8 @@ public class HomeScreenController implements Initializable {
     @FXML
     Button create;
     @FXML
+    Button createCon;
+    @FXML
     DatePicker date;
     @FXML
     ComboBox combo;
@@ -77,9 +79,15 @@ public class HomeScreenController implements Initializable {
                 lOut(e);
             }
         ;
-    }
+        }
 
     );
+        createCon.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                gotoCreate(e);
+            }
+        });
     }
 
     public Date localDateToUtilDate(LocalDate localDate) {
@@ -150,19 +158,19 @@ public class HomeScreenController implements Initializable {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Group root1 = new Group();
         Group root2 = new Group();
-        Rectangle rect1 = new Rectangle(1200,800);
+        Rectangle rect1 = new Rectangle(1200, 800);
         Label lab1 = new Label("LOADING...");
         rect1.setFill(new ImagePattern(new Image("ugcs/Resources/homeSs.png")));
         root1.getChildren().addAll(rect1, lab1);
-        Rectangle rect2 = new Rectangle(1200,800);
+        Rectangle rect2 = new Rectangle(1200, 800);
         Label lab2 = new Label("LOADED!");
         rect2.setFill(new ImagePattern(new Image("ugcs/Resources/loginSs.png")));
         root2.getChildren().addAll(rect2, lab2);
-        
+
         Scene scene1 = new Scene(root1, 1200, 800);
         stage.setScene(scene1);
         stage.show();
-        
+
         WritableImage wi = new WritableImage(1200, 800);
         Image img1 = root1.snapshot(new SnapshotParameters(), wi);
         ImageView imgView1 = new ImageView(img1);
@@ -183,16 +191,29 @@ public class HomeScreenController implements Initializable {
         timeline.getKeyFrames().add(kf);
         timeline.setOnFinished(t -> {
             try {
-            Parent root = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
-            Scene scene = new Scene(root);
-            stage.setTitle("LoginScreen");
-            stage.setScene(scene);
-            stage.show();
+                Parent root = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
+                Scene scene = new Scene(root);
+                stage.setTitle("LoginScreen");
+                stage.setScene(scene);
+                stage.show();
             } catch (Exception e) {
-                
+
             }
         });
         timeline.play();
+    }
+
+    private void gotoCreate(ActionEvent event) {
+        Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("ConsultationFormFXML.fxml"));
+            Scene scene = new Scene(root);
+            primaryStage.setTitle("Create Consultation");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (Exception e) {
+
+        }
     }
 
 }

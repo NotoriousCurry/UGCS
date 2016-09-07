@@ -39,80 +39,83 @@ public class ConsultationFormFXMLController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-         comboselected.getItems().addAll("9am", "10am",
+        comboselected.getItems().addAll("9am", "10am",
                 "11am",
                 "12pm",
                 "1pm",
                 "2pm",
                 "3pm",
                 "4pm");
-           prioritybox.getItems().addAll("High", "Medium", "Low");
-    }    
-    
-    @FXML TextField zidfield;
-    @FXML TextField firstnamefield;
-    @FXML TextField lastnamefield;
-    @FXML TextField emailfield;
-    @FXML TextArea notesfield;
-    @FXML DatePicker datepicked;
-    @FXML ComboBox comboselected;
-    @FXML ComboBox prioritybox;
-    @FXML Button createbutton;
-    @FXML Button cancelbutton;
-   // @FXML CheckBox highbox;    @FXML CheckBox mediumbox;    @FXML CheckBox lowbox;
-     public Date localDateToUtilDate(LocalDate localDate) {
+        priorityChoice.getItems().addAll("High", "Medium", "Low");
+    }
+
+    @FXML
+    TextField zId;
+    @FXML
+    TextField fName;
+    @FXML
+    TextField lName;
+    @FXML
+    TextField eMail;
+    @FXML
+    TextArea notesField;
+    @FXML
+    DatePicker datepicked;
+    @FXML
+    ComboBox comboselected;
+    @FXML
+    ComboBox priorityChoice;
+    @FXML
+    Button createButton;
+    @FXML
+    Button cancelButton;
+    // @FXML CheckBox highbox;    @FXML CheckBox mediumbox;    @FXML CheckBox lowbox;
+
+    public Date localDateToUtilDate(LocalDate localDate) {
         GregorianCalendar cal = new GregorianCalendar(
                 localDate.getYear(), localDate.getMonthValue() - 1, localDate.getDayOfMonth());
         java.util.Date date = cal.getTime();
         return date;
     }
 
-public void Create(ActionEvent event){
-    
-    String zid = zidfield.getText();
-  //  String firstname = firstnamefield.getText();
-  //  String lastname = lastnamefield.getText();
-  //  String email = emailfield.getText();  
-    
-    LocalDate date1 = datepicked.getValue();
+    public void Create(ActionEvent event) {
+
+        String zid = zId.getText();
+        //  String firstname = firstnamefield.getText();
+        //  String lastname = lastnamefield.getText();
+        //  String email = emailfield.getText();  
+
+        LocalDate date1 = datepicked.getValue();
         Date date2 = localDateToUtilDate(date1);
         SimpleDateFormat dateformatJava2 = new SimpleDateFormat("dd/MM/yyyy");
         String date3 = dateformatJava2.format(date2);
-        
-    String time = comboselected.getSelectionModel().getSelectedItem().toString();
-    String priority = prioritybox.getSelectionModel().getSelectedItem().toString();
 
-    if (notesfield.getText() != null){
-    String notes = notesfield.getText();   
-    Consultation c = new Consultation(zid, notes, "plagiarism", priority, date3, time)
-    ;
-    ConsultationQueries cq = new ConsultationQueries();
-    cq.insertConsult(c);
-    
-        System.out.println(cq.getConsultations());
-        //POP UP lol
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Consultation Created");
-        alert.setHeaderText(null);
-        alert.setContentText("You have created a new consultation!");
+        String time = comboselected.getSelectionModel().getSelectedItem().toString();
+        String priority = priorityChoice.getSelectionModel().getSelectedItem().toString();
 
-        alert.showAndWait();
-    
+        if (notesField.getText() != null) {
+            String notes = notesField.getText();
+            Consultation c = new Consultation(zid, notes, "plagiarism", priority, date3, time);
+            ConsultationQueries cq = new ConsultationQueries();
+            cq.insertConsult(c);
+
+            System.out.println(cq.getConsultations());
+            //POP UP lol
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Consultation Created");
+            alert.setHeaderText(null);
+            alert.setContentText("You have created a new consultation!");
+
+            alert.showAndWait();
+
+        } else {
+            String notes = "...";
+        }
     }
-    else
-    {String notes = "...";}
-    
 
-  
-    
- 
-    
-    
-    
-}
-public void Cancel(ActionEvent event){
-    Stage stageedit = (Stage) cancelbutton.getScene().getWindow();
+    public void Cancel(ActionEvent event) {
+        Stage stageedit = (Stage) cancelButton.getScene().getWindow();
         stageedit.close();
 
-}
+    }
 }
