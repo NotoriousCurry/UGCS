@@ -63,7 +63,7 @@ public class LoginPageController implements Initializable {
                     animScreen(e);
                 } else {
                     System.out.println("FCKED UP SON");
-                    animScreen(e);
+                   // animScreen(e);
                 }
             }
         ;

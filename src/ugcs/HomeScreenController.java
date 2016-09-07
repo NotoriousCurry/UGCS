@@ -16,6 +16,8 @@ import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -30,6 +32,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
@@ -39,7 +44,9 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import jfxtras.scene.control.agenda.Agenda;
+import ugcs.Model.Consultation;
 import ugcs.Model.Event;
+import ugcs.Queries.ConsultationQueries;
 
 /**
  * FXML Controller class
@@ -47,7 +54,25 @@ import ugcs.Model.Event;
  * @author jenniferpho
  */
 public class HomeScreenController implements Initializable {
-
+    //tableview
+    @FXML
+    TableView consulttable;
+    @FXML
+    TableColumn idcol;
+    @FXML
+    TableColumn zidcol;
+    @FXML
+    TableColumn notescol;
+    @FXML
+    TableColumn prioritycol;
+    @FXML
+    TableColumn datecol;
+    @FXML
+    TableColumn timecol;
+    
+    
+    
+    //
     @FXML
     Agenda agenda;
     @FXML
@@ -73,6 +98,31 @@ public class HomeScreenController implements Initializable {
                 "2pm",
                 "3pm",
                 "4pm");
+        ConsultationQueries cq = new ConsultationQueries();
+        
+        ObservableList<Consultation> consultlist = FXCollections.observableArrayList(cq.getConsultations());
+        
+        idcol.setCellValueFactory(
+                new PropertyValueFactory<Consultation, Integer>("consultationid")
+        );
+        zidcol.setCellValueFactory(
+                new PropertyValueFactory<Consultation, String>("zid")
+        );
+        notescol.setCellValueFactory(
+                new PropertyValueFactory<Consultation, String>("notes")
+        );
+        prioritycol.setCellValueFactory(
+                new PropertyValueFactory<Consultation, String>("priority")
+        );
+        datecol.setCellValueFactory(
+                new PropertyValueFactory<Consultation, String>("date")
+        );
+        timecol.setCellValueFactory(
+                new PropertyValueFactory<Consultation, String>("time")
+        );
+        consulttable.setItems(null);
+        consulttable.setItems(consultlist);
+        
         logOut.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {

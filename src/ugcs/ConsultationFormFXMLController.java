@@ -11,6 +11,8 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -111,8 +113,10 @@ public class ConsultationFormFXMLController implements Initializable {
             Consultation c = new Consultation(zid, notes, "plagiarism", priority, date3, time);
             ConsultationQueries cq = new ConsultationQueries();
             cq.insertConsult(c);
+//ObservableList<Consultation> cd = FXCollections.observableArrayList(cq.getConsultations());
 
             System.out.println(cq.getConsultations());
+           // System.out.println(cd.get(0).getconsultationid());
             //POP UP lol
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Consultation Created");

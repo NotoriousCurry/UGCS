@@ -62,7 +62,7 @@ public class ConsultationQueries extends DerbySetup {
             rs = getAllConsult.executeQuery();
             while (rs.next()) {
                 Consultations.add(
-                        new Consultation(rs.getString("ZID"), rs.getString("notes"), rs.getString("type"), rs.getString("priority"), rs.getString("date"), rs.getString("time"))
+                        new Consultation(rs.getInt("consultationid"), rs.getString("Zid"), rs.getString("notes"), rs.getString("type"), rs.getString("priority"), rs.getString("date"), rs.getString("time"))
                 );
             }
             rs.close();

@@ -69,31 +69,31 @@ public class Consultation {
         return zid.get();
     }
 
-    public IntegerProperty getConsultationid() {
+    public IntegerProperty consultationidProperty() {
         return consultationid;
     }
 
-    public StringProperty getZid() {
+    public StringProperty zidProperty() {
         return zid;
     }
 
-    public StringProperty getNotes() {
+    public StringProperty notesProperty() {
         return notes;
     }
 
-    public StringProperty getType() {
+    public StringProperty typeProperty() {
         return type;
     }
 
-    public StringProperty getPriority() {
+    public StringProperty priorityProperty() {
         return priority;
     }
 
-    public StringProperty getDate() {
+    public StringProperty dateproperty() {
         return date;
     }
 
-    public StringProperty getTime() {
+    public StringProperty timeproperty() {
         return time;
     }
 
