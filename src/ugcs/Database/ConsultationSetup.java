@@ -39,8 +39,8 @@ public class ConsultationSetup extends DerbySetup {
                         + "\"NOTES\"VARCHAR(500),"
                         + "\"TYPE\" VARCHAR(50),"
                         + "\"PRIORITY\"VARCHAR(50),"                     
-                        + "\"DATE\" VARCHAR(50),"
-                        + "\"TIME\" VARCHAR(50)"
+                        + "\"DATE1\" VARCHAR(12),"
+                        + "\"TIME1\" VARCHAR(12)"
                         + ")";
 
                 System.out.println(sqlText);

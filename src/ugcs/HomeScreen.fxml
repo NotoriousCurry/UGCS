@@ -20,7 +20,7 @@
             <Image url="@Resources/top.png" />
          </image>
       </ImageView>
-      <DatePicker fx:id="date" layoutX="14.0" layoutY="126.0" promptText="Choose a date..." />
+      <DatePicker fx:id="datepick" layoutX="14.0" layoutY="126.0" promptText="Choose a date..." />
       <Button fx:id="create" layoutX="354.0" layoutY="126.0" mnemonicParsing="false" onAction="#create" text="Create" />
       <Agenda fx:id="agenda" layoutX="43.0" layoutY="400.0" pickOnBounds="false" prefHeight="232.0" prefWidth="709.0" />
       <ComboBox fx:id="combo" layoutX="210.0" layoutY="125.0" prefHeight="26.0" prefWidth="86.0" promptText="time..." />

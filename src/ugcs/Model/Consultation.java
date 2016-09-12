@@ -16,56 +16,56 @@ public class Consultation {
     private final StringProperty notes;
     private final StringProperty type;
     private final StringProperty priority;
-    private final StringProperty date;
-    private final StringProperty time;
+    private final StringProperty date1;
+    private final StringProperty time1;
 
     // this is for finding consultations
-    public Consultation(String zid1, String notes1, String type1, String priority1, String date1, String time1) {
+    public Consultation(String zid1, String notes1, String type1, String priority1, String date2, String time2) {
         //  this.ID = new SimpleIntegerProperty(ID);
         this.zid = new SimpleStringProperty(zid1);
         this.notes = new SimpleStringProperty(notes1);
         this.type = new SimpleStringProperty(type1);
         this.priority = new SimpleStringProperty(priority1);
-        this.date = new SimpleStringProperty(date1);
-        this.time = new SimpleStringProperty(time1);
+        this.date1 = new SimpleStringProperty(date2);
+        this.time1 = new SimpleStringProperty(time2);
     }
 
     // this is for creating a consultation
-    public Consultation(Integer consultationid1, String zid1, String notes1, String type1, String priority1, String date1, String time1) {
+    public Consultation(Integer consultationid1, String zid1, String notes1, String type1, String priority1, String date2, String time2) {
         this.consultationid = new SimpleIntegerProperty(consultationid1);
         this.zid = new SimpleStringProperty(zid1);
         this.notes = new SimpleStringProperty(notes1);
         this.type = new SimpleStringProperty(type1);
         this.priority = new SimpleStringProperty(priority1);
-        this.date = new SimpleStringProperty(date1);
-        this.time = new SimpleStringProperty(time1);
+        this.date1 = new SimpleStringProperty(date2);
+        this.time1 = new SimpleStringProperty(time2);
     }
 
-    public Integer getconsultationid() {
+    public Integer getConsultationid() {
         return consultationid.get();
     }
 
-    public String getnotes() {
+    public String getNotes() {
         return notes.get();
     }
 
-    public String gettype() {
+    public String getType() {
         return type.get();
     }
 
-    public String getpriority() {
+    public String getPriority() {
         return priority.get();
     }
 
-    public String getdate() {
-        return date.get();
+    public String getDate1() {
+        return date1.get();
     }
 
-    public String gettime() {
-        return time.get();
+    public String getTime1() {
+        return time1.get();
     }
 
-    public String getzid() {
+    public String getZid() {
         return zid.get();
     }
 
@@ -90,11 +90,11 @@ public class Consultation {
     }
 
     public StringProperty dateproperty() {
-        return date;
+        return date1;
     }
 
     public StringProperty timeproperty() {
-        return time;
+        return time1;
     }
 
 }

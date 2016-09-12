@@ -26,7 +26,7 @@ public class ConsultationQueries extends DerbySetup {
         openConnection();
         try {
             deleteConsult = conn.prepareStatement("delete from app.Consultation where ID = ?");
-            deleteConsult.setInt(1, toDelete.getconsultationid());
+            deleteConsult.setInt(1, toDelete.getConsultationid());
 
             deleteConsult.execute();
         } catch (SQLException ex) {
@@ -38,12 +38,12 @@ public class ConsultationQueries extends DerbySetup {
     public void updateConsult(Consultation toUpdate) {
         openConnection();
         try {
-            updateConsult = conn.prepareStatement("update app.Consultation set notes=?, type=?, priority=?, date=?, time=?");
-            updateConsult.setString(1, toUpdate.getnotes());
-            updateConsult.setString(2, toUpdate.gettype());
-            updateConsult.setString(3, toUpdate.getpriority());
-            updateConsult.setString(4, toUpdate.getdate());
-            updateConsult.setString(5, toUpdate.gettime());
+            updateConsult = conn.prepareStatement("update app.Consultation set notes=?, type=?, priority=?, date1=?, time1=?");
+            updateConsult.setString(1, toUpdate.getNotes());
+            updateConsult.setString(2, toUpdate.getType());
+            updateConsult.setString(3, toUpdate.getPriority());
+            updateConsult.setString(4, toUpdate.getDate1());
+            updateConsult.setString(5, toUpdate.getTime1());
             
 
             updateConsult.executeUpdate();
@@ -62,7 +62,7 @@ public class ConsultationQueries extends DerbySetup {
             rs = getAllConsult.executeQuery();
             while (rs.next()) {
                 Consultations.add(
-                        new Consultation(rs.getInt("consultationid"), rs.getString("Zid"), rs.getString("notes"), rs.getString("type"), rs.getString("priority"), rs.getString("date"), rs.getString("time"))
+                        new Consultation(rs.getInt("consultationid"), rs.getString("Zid"), rs.getString("notes"), rs.getString("type"), rs.getString("priority"), rs.getString("date1"), rs.getString("time1"))
                 );
             }
             rs.close();
@@ -80,14 +80,14 @@ public class ConsultationQueries extends DerbySetup {
         openConnection();
         try {
 
-            insertConsult = conn.prepareStatement("insert into app.Consultation ( zid, notes, type, priority, date, time) values (?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-            insertConsult.setString(1, toInsert.getzid());
+            insertConsult = conn.prepareStatement("insert into app.Consultation ( zid, notes, type, priority, date1, time1) values (?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            insertConsult.setString(1, toInsert.getZid());
 
-            insertConsult.setString(2, toInsert.getnotes());
-            insertConsult.setString(3, toInsert.gettype());
-            insertConsult.setString(4, toInsert.getpriority());
-            insertConsult.setString(5, toInsert.getdate());
-            insertConsult.setString(6, toInsert.gettime());
+            insertConsult.setString(2, toInsert.getNotes());
+            insertConsult.setString(3, toInsert.getType());
+            insertConsult.setString(4, toInsert.getPriority());
+            insertConsult.setString(5, toInsert.getDate1());
+            insertConsult.setString(6, toInsert.getTime1());
             insertConsult.executeUpdate();
 
             ResultSet rs = insertConsult.getGeneratedKeys();

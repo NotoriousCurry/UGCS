@@ -60,6 +60,8 @@ public class ConsultationFormFXMLController implements Initializable {
     @FXML
     ComboBox priorityChoice;
     @FXML
+    ComboBox typeChoice;
+    @FXML
     Button createButton;
     @FXML
     Button cancelButton;
@@ -76,6 +78,12 @@ public class ConsultationFormFXMLController implements Initializable {
                 "2pm",
                 "3pm",
                 "4pm");
+        typeChoice.getItems().addAll("Course Enrolment",
+                "Career Guidenace",
+                "Disciplinary",
+                "International Exchange",
+                "Attendance/Performance",
+                "Advanced Standing" );
         priorityChoice.getItems().addAll("High", "Medium", "Low");
         backHome.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -104,25 +112,26 @@ public class ConsultationFormFXMLController implements Initializable {
         Date date2 = localDateToUtilDate(date1);
         SimpleDateFormat dateformatJava2 = new SimpleDateFormat("dd/MM/yyyy");
         String date3 = dateformatJava2.format(date2);
-
+   //comboboxes
         String time = timePicked.getSelectionModel().getSelectedItem().toString();
         String priority = priorityChoice.getSelectionModel().getSelectedItem().toString();
+        String type = typeChoice.getSelectionModel().getSelectedItem().toString();
 
         if (notesField.getText() != null) {
             String notes = notesField.getText();
-            Consultation c = new Consultation(zid, notes, "plagiarism", priority, date3, time);
+            Consultation c = new Consultation(zid, notes, type, priority, date3, time);
             ConsultationQueries cq = new ConsultationQueries();
             cq.insertConsult(c);
-//ObservableList<Consultation> cd = FXCollections.observableArrayList(cq.getConsultations());
-
+ObservableList<Consultation> cd = FXCollections.observableArrayList(cq.getConsultations());
             System.out.println(cq.getConsultations());
+            System.out.println(cd.get(0).getDate1());
+            System.out.println(cd.get(0).getTime1());
            // System.out.println(cd.get(0).getconsultationid());
             //POP UP lol
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Consultation Created");
             alert.setHeaderText(null);
             alert.setContentText("You have created a new consultation!");
-
             alert.showAndWait();
 
         } else {
