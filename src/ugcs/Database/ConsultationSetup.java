@@ -36,7 +36,7 @@ public class ConsultationSetup extends DerbySetup {
                         + "\"CONSULTATIONID\" INT not null primary key "   
                         + "GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
                         + "\"ZID\" VARCHAR(50),"
-                        + "\"NOTES\"VARCHAR(500),"
+                        + "\"NOTES\"VARCHAR(5000),"
                         + "\"TYPE\" VARCHAR(50),"
                         + "\"PRIORITY\"VARCHAR(50),"                     
                         + "\"DATE1\" VARCHAR(12),"

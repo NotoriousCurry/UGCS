@@ -18,6 +18,8 @@ import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -37,8 +39,10 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -69,8 +73,8 @@ public class HomeScreenController implements Initializable {
     TableColumn zidcol;
     @FXML
     TableColumn typecol;
-    @FXML
-    TableColumn notescol;
+   //@FXML
+   // TableColumn notescol;
     @FXML
     TableColumn prioritycol;
     @FXML
@@ -78,7 +82,9 @@ public class HomeScreenController implements Initializable {
     @FXML
     TableColumn timecol;
     
-    
+    //
+    @FXML
+    TextArea notetextshow; 
     
     //
     @FXML
@@ -95,15 +101,23 @@ public class HomeScreenController implements Initializable {
     Button logOut;
     @FXML
     Button removebutton;
-           
+    @FXML
+    ScrollPane sp;
     
     List<Event> myEvents;
     LocalTime timenow;
-    String w = null;
-   
-
+    String w = null;  
+    
+    
+public final void setWrapText(boolean value){}
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+      
+        
+    notetextshow.setWrapText(true);
+    sp.setFitToWidth(true);
+    sp.setFitToHeight(true); 
+        
         combo.getItems().addAll("9am", "10am",
                 "11am",
                 "12pm",
@@ -124,9 +138,9 @@ public class HomeScreenController implements Initializable {
         typecol.setCellValueFactory(
                 new PropertyValueFactory<Consultation, String>("type")
         );
-        notescol.setCellValueFactory(
+       /* notescol.setCellValueFactory(
                 new PropertyValueFactory<Consultation, String>("notes")
-        );
+        ); */
         prioritycol.setCellValueFactory(
                 new PropertyValueFactory<Consultation, String>("priority")
         );
@@ -220,6 +234,18 @@ public class HomeScreenController implements Initializable {
                         
         }
         }
+        
+         consulttable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Consultation>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Consultation> observable,
+                    Consultation oldValue, Consultation newValue) {
+                showdeets(newValue);
+            }
+        });
+        
+        
+        
         }
     
             
@@ -245,6 +271,19 @@ public class HomeScreenController implements Initializable {
         });
     }
 
+    public void showdeets(Consultation consultation){
+        if (consultation == null){
+            notetextshow.setText(null);
+        
+        }
+        else {
+            ConsultationQueries csss = new ConsultationQueries();
+            notetextshow.setText(consultation.getNotes());
+        
+        }
+            
+        
+    }
     public Date localDateToUtilDate(LocalDate localDate) {
         GregorianCalendar cal = new GregorianCalendar(
                 localDate.getYear(), localDate.getMonthValue() - 1, localDate.getDayOfMonth());

@@ -1,8 +1,8 @@
 ----------------------------------------------------------------
-Wed Sep 14 17:16:31 AEST 2016:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-0157-278d-dc77-0000039119a8 
+Wed Sep 14 20:41:30 AEST 2016:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-0157-2849-8608-00000391dad0 
 on database directory /Users/Peterrpancakes/Documents/Java stuff/UGCS/UCGDatabase with class loader sun.misc.Launcher$AppClassLoader@45ee12a7 
-Loaded from file:/Users/Peterrpancakes/Documents/Java%20stuff/UGCS/dist/run2019857615/lib/derby.jar
+Loaded from file:/Users/Peterrpancakes/Documents/Java%20stuff/UGCS/dist/run1731277787/lib/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_40-b25
 user.dir=/Users/Peterrpancakes/Documents/Java stuff/UGCS

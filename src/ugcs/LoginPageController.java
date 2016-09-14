@@ -119,7 +119,7 @@ public class LoginPageController implements Initializable {
         root1.getChildren().addAll(rect1, lab1);
         Rectangle rect2 = new Rectangle(1200, 800);
         Label lab2 = new Label("LOADED!");
-        rect2.setFill(new ImagePattern(new Image("ugcs/Resources/homeSs.png")));
+        rect2.setFill(new ImagePattern(new Image("ugcs/Resources/george.png")));
         root2.getChildren().addAll(rect2, lab2);
 
         Scene scene1 = new Scene(root1, 1200, 800);
