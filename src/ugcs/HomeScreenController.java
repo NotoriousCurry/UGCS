@@ -12,6 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -29,7 +30,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -58,7 +62,7 @@ import ugcs.Queries.ConsultationQueries;
 public class HomeScreenController implements Initializable {
     //tableview
     @FXML
-    TableView consulttable;
+    TableView<Consultation> consulttable;
     @FXML
     TableColumn idcol;
     @FXML
@@ -89,9 +93,14 @@ public class HomeScreenController implements Initializable {
     ComboBox combo;
     @FXML
     Button logOut;
+    @FXML
+    Button removebutton;
+           
+    
     List<Event> myEvents;
     LocalTime timenow;
     String w = null;
+   
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -245,6 +254,39 @@ public class HomeScreenController implements Initializable {
 /* this was to create an agenda manually through a 'create' button, however the code also works with 
     the database to automatically create agendas
   */  
+    
+   public void remove(ActionEvent event){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm Removal");
+        alert.setHeaderText(null);
+        alert.setContentText("Are you sure you want to remove this Consultation?");
+        ButtonType buttonTypeyes = new ButtonType("Yes");
+        ButtonType buttonTypecancel = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(buttonTypecancel, buttonTypeyes);
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == buttonTypeyes) {
+
+   Consultation consultselected =  consulttable.getSelectionModel().getSelectedItem();
+   ConsultationQueries css = new ConsultationQueries();
+   
+   css.deleteConsult(consultselected);
+   ObservableList<Consultation> listlist = FXCollections.observableArrayList(css.getConsultations());
+   
+   consulttable.setItems(null);
+   consulttable.setItems(listlist);
+   
+   } else {
+            alert.close();    
+        }
+        }
+   
+    
+    
+    
+    
+    
     public void create(ActionEvent event) {
        // to create an agenda
         
