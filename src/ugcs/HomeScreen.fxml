@@ -39,8 +39,9 @@
             <TableColumn fx:id="notescol" prefWidth="217.0" text="Notes" />
             <TableColumn fx:id="prioritycol" minWidth="0.0" prefWidth="86.0" text="Priority" />
             <TableColumn fx:id="datecol" prefWidth="84.0" text="Date" />
-            <TableColumn fx:id="timecol" prefWidth="75.0" text="Time" />
+            <TableColumn fx:id="timecol" prefWidth="78.0" text="Time" />
         </columns>
       </TableView>
+      <Button fx:id="removebutton" layoutX="864.0" layoutY="348.0" mnemonicParsing="false" onAction="#remove" text="Remove" />
    </children>
 </AnchorPane>

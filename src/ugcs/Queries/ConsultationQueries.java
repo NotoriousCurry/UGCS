@@ -25,7 +25,7 @@ public class ConsultationQueries extends DerbySetup {
     public void deleteConsult(Consultation toDelete) {
         openConnection();
         try {
-            deleteConsult = conn.prepareStatement("delete from app.Consultation where ID = ?");
+            deleteConsult = conn.prepareStatement("delete from app.Consultation where CONSULTATIONID = ?");
             deleteConsult.setInt(1, toDelete.getConsultationid());
 
             deleteConsult.execute();
