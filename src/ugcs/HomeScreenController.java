@@ -5,7 +5,6 @@
  */
 package ugcs;
 
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -65,6 +64,8 @@ public class HomeScreenController implements Initializable {
     @FXML
     TableColumn zidcol;
     @FXML
+    TableColumn typecol;
+    @FXML
     TableColumn notescol;
     @FXML
     TableColumn prioritycol;
@@ -110,6 +111,9 @@ public class HomeScreenController implements Initializable {
         );
         zidcol.setCellValueFactory(
                 new PropertyValueFactory<Consultation, String>("zid")
+        );
+        typecol.setCellValueFactory(
+                new PropertyValueFactory<Consultation, String>("type")
         );
         notescol.setCellValueFactory(
                 new PropertyValueFactory<Consultation, String>("notes")
@@ -239,7 +243,7 @@ public class HomeScreenController implements Initializable {
         return date;
     }
 /* this was to create an agenda manually through a 'create' button, however the code also works with 
-    the database to automatically create agendas!!
+    the database to automatically create agendas
   */  
     public void create(ActionEvent event) {
        // to create an agenda

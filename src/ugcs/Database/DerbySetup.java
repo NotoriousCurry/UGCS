@@ -20,7 +20,7 @@ public class DerbySetup {
                 conn = DriverManager.getConnection("jdbc:derby:"
                         + System.getProperty("user.dir")
                         + System.getProperty("file.separator")
-                        + "UCGDatabase;create=true");
+                        + "UCGDatabase;create=true;");
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
