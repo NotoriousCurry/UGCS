@@ -36,6 +36,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import ugcs.Queries.UgcQueries;
+import org.jasypt.util.password.BasicPasswordEncryptor;
 
 /**
  * FXML Controller class CTRL + SHIFT + I
@@ -76,13 +77,14 @@ public class LoginPageController implements Initializable {
         String usrn = usr.getText();
         String ps = pass.getText();
         String check = "";
+        BasicPasswordEncryptor passEnc = new BasicPasswordEncryptor();
         Boolean validLogin = false;
         UgcQueries ugcQ = new UgcQueries();
         outerloop:
         for (String s : ugcQ.getUser()) {
             if (s.equals(usrn)) {
                 String connPass = ugcQ.getPassword(usrn);
-                if (connPass.equals(ps)) {
+                if (passEnc.checkPassword(ps, connPass)) {
                     validLogin = true;
                     break outerloop;
                 } else {
