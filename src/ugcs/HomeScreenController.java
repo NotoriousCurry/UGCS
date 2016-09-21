@@ -12,15 +12,13 @@ import java.io.IOException;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
-import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
-import com.itextpdf.text.pdf.PdfDocument;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.io.File;
 import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.net.URL;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -334,6 +332,7 @@ tb3.setToggleGroup(group);
         logOut.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
+                deleteTemp();
                 lOut(e);
             }
         ;
@@ -583,6 +582,20 @@ super.set(value);
             System.out.println(pass);
         return pass;
     }
+        
+        private void deleteTemp() {
+            try {
+                File file = new File("temp.txt");
+                if(file.delete()) {
+                    System.out.println(file.getName() + " is Deleted");
+                } else {
+                    System.out.println("Delete operation failed");
+                }
+            }
+            catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
     
 
     private void lOut(ActionEvent event) {

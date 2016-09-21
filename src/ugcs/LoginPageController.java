@@ -122,10 +122,11 @@ private Button exitbutton;
     
     private void createLoginDetailsFile() {
         String fName = "temp.txt";
-        String ps = pass.getText();
+        //String ps = pass.getText();
         String z = usr.getText();
         UgcQueries ugcQ = new UgcQueries();
         String name = ugcQ.getName(z);
+        String ps = ugcQ.getPassword(z);
         try {
             FileWriter fileWriter = new FileWriter(fName);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);

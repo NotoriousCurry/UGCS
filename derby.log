@@ -1,8 +1,8 @@
 ----------------------------------------------------------------
-Wed Sep 21 16:58:46 AEST 2016:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-0157-4b8a-236b-000003919ec8 
-on database directory /Users/Peterrpancakes/Documents/Java stuff/UGCS/UCGDatabase with class loader sun.misc.Launcher$AppClassLoader@45ee12a7 
-Loaded from file:/Users/Peterrpancakes/Documents/Java%20stuff/UGCS/dist/run1651928322/lib/derby.jar
+Wed Sep 21 17:58:23 AEST 2016:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-0157-4bc0-b748-00000e3222f8 
+on database directory C:\Users\sgahe\Documents\NetBeansProjects\UGCS\UCGDatabase with class loader sun.misc.Launcher$AppClassLoader@55f96302 
+Loaded from file:/C:/Users/sgahe/Documents/NetBeansProjects/UGCS/dist/run793158425/lib/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_101-b13
 user.dir=C:\Users\sgahe\Documents\NetBeansProjects\UGCS
@@ -11,3 +11,9 @@ os.arch=amd64
 os.version=10.0
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Wed Sep 21 17:58:44 AEST 2016: Shutting down Derby engine
+----------------------------------------------------------------
+Wed Sep 21 17:58:44 AEST 2016:
+Shutting down instance a816c00e-0157-4bc0-b748-00000e3222f8 on database directory C:\Users\sgahe\Documents\NetBeansProjects\UGCS\UCGDatabase with class loader sun.misc.Launcher$AppClassLoader@55f96302 
+----------------------------------------------------------------
