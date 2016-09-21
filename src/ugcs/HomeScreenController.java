@@ -5,6 +5,10 @@
  */
 package ugcs;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -48,7 +52,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -269,6 +272,8 @@ public final void setWrapText(boolean value){}
                 gotoCreate(e);
             }
         });
+        
+     readPass();   
     }
 
     public void showdeets(Consultation consultation){
@@ -384,6 +389,57 @@ public final void setWrapText(boolean value){}
 
         
         
+    }
+    
+    private String readName() {
+        String fName = "temp.txt";
+        String line = null;
+        String name = null;
+        
+        try {
+            FileReader fReader = new FileReader(fName);
+            BufferedReader bReader = new BufferedReader(fReader);
+            
+            line = bReader.readLine();
+            String[] sect = line.split(",");
+            name = sect[0];
+            
+            bReader.close();
+            
+        }
+        catch (FileNotFoundException ex) {
+            System.out.println("Unable to find file");
+        }
+        catch (IOException ex) {
+            System.out.println("Error Reading File");
+        }
+        return name;
+    }
+    
+        private String readPass() {
+        String fName = "temp.txt";
+        String line = null;
+        String pass = null;
+        
+        try {
+            FileReader fReader = new FileReader(fName);
+            BufferedReader bReader = new BufferedReader(fReader);
+            
+            line = bReader.readLine();
+            String[] sect = line.split(",");
+            pass = sect[1];
+            
+            bReader.close();
+            
+        }
+        catch (FileNotFoundException ex) {
+            System.out.println("Unable to find file");
+        }
+        catch (IOException ex) {
+            System.out.println("Error Reading File");
+        }
+            System.out.println(pass);
+        return pass;
     }
     
 

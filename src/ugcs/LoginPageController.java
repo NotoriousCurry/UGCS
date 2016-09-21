@@ -5,7 +5,9 @@
  */
 package ugcs;
 
-import java.awt.event.KeyListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.animation.Interpolator;
@@ -29,7 +31,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
@@ -61,6 +62,7 @@ public class LoginPageController implements Initializable {
             public void handle(ActionEvent e) {
                 if (loginCheck()) {
                     System.out.println("FCK YEA LOGIN");
+                    createLoginDetailsFile();
                     animScreen(e);
                 } else {
                     System.out.println("FCKED UP SON");
@@ -96,6 +98,25 @@ public class LoginPageController implements Initializable {
         } else {
         }
         return validLogin;
+    }
+    
+    private void createLoginDetailsFile() {
+        String fName = "temp.txt";
+        String ps = pass.getText();
+        String z = usr.getText();
+        UgcQueries ugcQ = new UgcQueries();
+        String name = ugcQ.getName(z);
+        try {
+            FileWriter fileWriter = new FileWriter(fName);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            
+            bufferedWriter.write(name + "," + ps);
+            
+            bufferedWriter.close();
+        } 
+        catch(IOException ex) {
+            System.out.println("Error writing file '" + fName + "'");
+        }
     }
 
     private void gotoHome(ActionEvent event) {
