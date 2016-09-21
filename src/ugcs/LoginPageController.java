@@ -5,7 +5,9 @@
  */
 package ugcs;
 
-import java.awt.event.KeyListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.animation.Interpolator;
@@ -30,7 +32,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
@@ -38,6 +39,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import ugcs.Database.DerbySetup;
 import ugcs.Queries.UgcQueries;
+import org.jasypt.util.password.BasicPasswordEncryptor;
 
 /**
  * FXML Controller class CTRL + SHIFT + I
@@ -74,6 +76,7 @@ private Button exitbutton;
             public void handle(ActionEvent e) {
                 if (loginCheck()) {
                     System.out.println("FCK YEA LOGIN");
+                    createLoginDetailsFile();
                     animScreen(e);
                 } else {
                     System.out.println("FCKED UP SON");
@@ -96,13 +99,14 @@ private Button exitbutton;
         String usrn = usr.getText();
         String ps = pass.getText();
         String check = "";
+        BasicPasswordEncryptor passEnc = new BasicPasswordEncryptor();
         Boolean validLogin = false;
         UgcQueries ugcQ = new UgcQueries();
         outerloop:
         for (String s : ugcQ.getUser()) {
             if (s.equals(usrn)) {
                 String connPass = ugcQ.getPassword(usrn);
-                if (connPass.equals(ps)) {
+                if (passEnc.checkPassword(ps, connPass)) {
                     validLogin = true;
                     break outerloop;
                 } else {
@@ -114,6 +118,25 @@ private Button exitbutton;
         } else {
         }
         return validLogin;
+    }
+    
+    private void createLoginDetailsFile() {
+        String fName = "temp.txt";
+        String ps = pass.getText();
+        String z = usr.getText();
+        UgcQueries ugcQ = new UgcQueries();
+        String name = ugcQ.getName(z);
+        try {
+            FileWriter fileWriter = new FileWriter(fName);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            
+            bufferedWriter.write(name + "," + ps);
+            
+            bufferedWriter.close();
+        } 
+        catch(IOException ex) {
+            System.out.println("Error writing file '" + fName + "'");
+        }
     }
 
     private void gotoHome(ActionEvent event) {

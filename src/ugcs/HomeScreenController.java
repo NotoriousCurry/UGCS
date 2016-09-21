@@ -5,6 +5,10 @@
  */
 package ugcs;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
@@ -342,6 +346,8 @@ tb3.setToggleGroup(group);
                 gotoCreate(e);
             }
         });
+        
+     readPass();   
     }
 
     public void showdeets(Consultation consultation){
@@ -525,6 +531,57 @@ super.set(value);
         }
         
     
+    }
+    
+    private String readName() {
+        String fName = "temp.txt";
+        String line = null;
+        String name = null;
+        
+        try {
+            FileReader fReader = new FileReader(fName);
+            BufferedReader bReader = new BufferedReader(fReader);
+            
+            line = bReader.readLine();
+            String[] sect = line.split(",");
+            name = sect[0];
+            
+            bReader.close();
+            
+        }
+        catch (FileNotFoundException ex) {
+            System.out.println("Unable to find file");
+        }
+        catch (IOException ex) {
+            System.out.println("Error Reading File");
+        }
+        return name;
+    }
+    
+        private String readPass() {
+        String fName = "temp.txt";
+        String line = null;
+        String pass = null;
+        
+        try {
+            FileReader fReader = new FileReader(fName);
+            BufferedReader bReader = new BufferedReader(fReader);
+            
+            line = bReader.readLine();
+            String[] sect = line.split(",");
+            pass = sect[1];
+            
+            bReader.close();
+            
+        }
+        catch (FileNotFoundException ex) {
+            System.out.println("Unable to find file");
+        }
+        catch (IOException ex) {
+            System.out.println("Error Reading File");
+        }
+            System.out.println(pass);
+        return pass;
     }
     
 

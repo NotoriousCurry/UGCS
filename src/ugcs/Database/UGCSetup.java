@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import org.jasypt.util.password.BasicPasswordEncryptor;
 
 /**
  *
@@ -14,6 +15,7 @@ import java.sql.Statement;
 public class UGCSetup extends DerbySetup {
 
     PreparedStatement createUGCTable = null;
+    PreparedStatement createDefaultUGC = null;
     private Statement stmt = null;
     ResultSet rs = null;
 
@@ -70,9 +72,15 @@ public class UGCSetup extends DerbySetup {
         try {
             System.out.println("Beginning insert");
             Statement stmt = conn.createStatement();
+            BasicPasswordEncryptor passEnc = new BasicPasswordEncryptor();
+            String encPass = passEnc.encryptPassword("ugc");
+            
+            createDefaultUGC = conn.prepareStatement("INSERT INTO APP.UGC(ZID, PASSWORD, FIRSTNAME, LASTNAME)" + 
+                    "VALUES ('z1234567', ?, 'Micheal','Cahalane')");
+            createDefaultUGC.setString(1, encPass);
+            createDefaultUGC.executeUpdate();
 
-            stmt.executeUpdate("INSERT INTO APP.UGC(ZID, PASSWORD, FIRSTNAME, LASTNAME)" + 
-                    "VALUES ('z1234567', 'ugc', 'Micheal','Cahalane')");
+
             System.out.println("UGC inserted.");
         } catch (SQLException ex) {
             ex.printStackTrace();

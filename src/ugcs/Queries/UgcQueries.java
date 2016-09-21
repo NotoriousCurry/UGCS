@@ -84,6 +84,25 @@ public class UgcQueries extends ugcs.Database.DerbySetup {
         closeConnection();
         return pass;
     }
+    
+        public String getName(String username) {
+        String name = "";
+        openConnection();
+        try {
+            getPassword = conn.prepareStatement("SELECT FIRSTNAME FROM APP.UGC WHERE ZID=?");
+            getPassword.setString(1, username); // To fill int the ? value above
+            rs = getPassword.executeQuery();
+            while (rs.next()) {
+                name = rs.getString("FIRSTNAME");
+            }
+            rs.close();
+            getPassword.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        closeConnection();
+        return name;
+    }
 
     public void insertUgc(UGC toInsert) {
         openConnection();
