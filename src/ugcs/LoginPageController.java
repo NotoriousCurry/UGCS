@@ -35,6 +35,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import ugcs.Database.DerbySetup;
 import ugcs.Queries.UgcQueries;
 
 /**
@@ -52,7 +53,8 @@ public class LoginPageController implements Initializable {
     private TextField usr;
     @FXML
     private PasswordField pass;
-
+@FXML
+private Button exitbutton;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         login.setOnAction(new EventHandler<ActionEvent>() {
@@ -71,6 +73,12 @@ public class LoginPageController implements Initializable {
 
     );
     }
+    
+     public void Exitkey(ActionEvent event) {
+        Stage stage = (Stage) exitbutton.getScene().getWindow();
+        stage.close();
+       
+     }
     
     private Boolean loginCheck() {
         String usrn = usr.getText();

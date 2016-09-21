@@ -82,7 +82,7 @@ public class ConsultationFormFXMLController implements Initializable {
                 "3pm",
                 "4pm");
         typeChoice.getItems().addAll("Course Enrolment",
-                "Career Guidenace",
+                "Career Guidance",
                 "Disciplinary",
                 "International Exchange",
                 "Attendance/Performance",

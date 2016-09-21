@@ -13,6 +13,9 @@ import java.sql.SQLException;
 public class DerbySetup {
 
     protected Connection conn;
+        protected Connection conn2;
+
+    
 
     public void openConnection() {
         if (conn == null) {
@@ -20,19 +23,20 @@ public class DerbySetup {
                 conn = DriverManager.getConnection("jdbc:derby:"
                         + System.getProperty("user.dir")
                         + System.getProperty("file.separator")
-                        + "UCGDatabase;create=true;");
+                        + "UCGDatabase;create=true");
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
         }
     }
 
-    protected void closeConnection() {
+    public void closeConnection() {
         try {
-            if (conn != null) {
+            if (conn != null){
                 conn.close();
-                conn = null;
+                        conn=null;            
             }
+            
         } catch (SQLException ex) {
             System.out.println(ex);
 

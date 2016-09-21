@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
@@ -48,5 +49,9 @@
             <TextArea fx:id="notetextshow" prefHeight="156.0" prefWidth="160.0" wrapText="true" />
          </content>
       </ScrollPane>
+      <ToggleButton fx:id="tb" layoutX="57.0" layoutY="698.0" mnemonicParsing="false" text="Day" />
+      <ToggleButton fx:id="tb2" layoutX="99.0" layoutY="698.0" mnemonicParsing="false" text="Week" />
+      <ToggleButton fx:id="tb3" layoutX="151.0" layoutY="698.0" mnemonicParsing="false" text="Range" />
+      <Button fx:id="pdf" layoutX="641.0" layoutY="364.0" mnemonicParsing="false" onAction="#PDF" text="PDF" />
    </children>
 </AnchorPane>

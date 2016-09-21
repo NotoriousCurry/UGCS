@@ -5,7 +5,21 @@
  */
 package ugcs;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfDocument;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.net.URL;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -43,20 +57,26 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import jfxtras.internal.scene.control.skin.agenda.AgendaDaySkin;
+import jfxtras.internal.scene.control.skin.agenda.AgendaDaysFromDisplayedSkin;
+import jfxtras.internal.scene.control.skin.agenda.AgendaWeekSkin;
 import jfxtras.scene.control.agenda.Agenda;
 import ugcs.Model.Consultation;
 import ugcs.Model.Event;
 import ugcs.Queries.ConsultationQueries;
+
 
 /**
  * FXML Controller class
@@ -102,12 +122,22 @@ public class HomeScreenController implements Initializable {
     @FXML
     Button removebutton;
     @FXML
+    Button exitbutton;
+    @FXML
     ScrollPane sp;
+    @FXML 
+    ToggleButton tb;
+    @FXML 
+    ToggleButton tb2;
+    @FXML 
+    ToggleButton tb3;
     
     List<Event> myEvents;
     LocalTime timenow;
     String w = null;  
-    
+    @FXML Pane pane;
+    @FXML
+    ToggleGroup tg;
     
 public final void setWrapText(boolean value){}
     @Override
@@ -210,7 +240,8 @@ public final void setWrapText(boolean value){}
                 new Agenda.AppointmentImplLocal()
                 .withStartLocalDateTime(newevent.getstartlocaldate().atTime(time))
                 .withEndLocalDateTime(newevent.getendlocaldate().atTime(time2))
-                .withDescription("High Appointment")                  
+                .withDescription("High Appointment")
+                
                 .withAppointmentGroup(new Agenda.AppointmentGroupImpl().withStyleClass("group2")) // you should use a map of AppointmentGroups
         );
                         break;
@@ -231,10 +262,13 @@ public final void setWrapText(boolean value){}
                 .withDescription("Low Appointment")                  
                 .withAppointmentGroup(new Agenda.AppointmentGroupImpl().withStyleClass("group15")) // you should use a map of AppointmentGroups
         );
+            
+                        this.agenda = agenda;
+                        		
                         
         }
         }
-        
+                
          consulttable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Consultation>() {
 
             @Override
@@ -247,12 +281,51 @@ public final void setWrapText(boolean value){}
         
         
         }
+               
+ ToggleGroup group = new ToggleGroup();
+
+tb.setToggleGroup(group);
+
+tb2.setToggleGroup(group);
+tb2.setSelected(true);
+
+tb3.setToggleGroup(group);
+/*
+       ToggleButton ggg = (ToggleButton) group.selectedToggleProperty().getValue();
+        if (ggg == tb){agenda.setSkin((new AgendaDaySkin(agenda)));}
+        else if (ggg == tb2){agenda.setSkin(new AgendaWeekSkin(agenda));}
+        else if (ggg == tb3){System.out.println("not yet");}
+        
+        
+ Calendar c = new GregorianCalendar();
+    c.set(Calendar.HOUR_OF_DAY, 0); //anything 0 - 23
+    c.set(Calendar.MINUTE, 0);
+    c.set(Calendar.SECOND, 0);
+  
     
-            
         
+        displayedCalendarObjectProperty.setValue(c);*/
+          
+        tb.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                agenda.setSkin((new AgendaDaySkin(agenda)));
+            }
+        } );
+        tb2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                agenda.setSkin((new AgendaWeekSkin(agenda)));
+            }
+        } );
+       tb3.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e)  {
+                agenda.setSkin((new AgendaDaysFromDisplayedSkin(agenda)));
+            }
+        } );
         
-        
-        
+           
         
         logOut.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -284,6 +357,19 @@ public final void setWrapText(boolean value){}
             
         
     }
+    /*
+
+	private final ObjectProperty<Calendar> displayedCalendarObjectProperty = new SimpleObjectProperty<Calendar>(this, "displayedCalendar", Calendar.getInstance())
+{
+public void set(Calendar value)
+{
+if (value == null) throw new NullPointerException("Null not allowed");
+super.set(value);
+}};
+    */
+    
+        
+    
     public Date localDateToUtilDate(LocalDate localDate) {
         GregorianCalendar cal = new GregorianCalendar(
                 localDate.getYear(), localDate.getMonthValue() - 1, localDate.getDayOfMonth());
@@ -385,6 +471,61 @@ public final void setWrapText(boolean value){}
         
         
     }
+    @FXML Button pdf;
+    
+    public void PDF(ActionEvent event){
+        Document d = new Document();
+        
+        Consultation chosen = consulttable.getSelectionModel().getSelectedItem();
+        ConsultationQueries cq = new ConsultationQueries();
+        ObservableList<Consultation> listconsult = FXCollections.observableArrayList(cq.getConsultations());
+      Font f1 = new Font(Font.FontFamily.TIMES_ROMAN, 15, Font.BOLD, new BaseColor(0,0,0));
+      Font f2 = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD, new BaseColor(0,0,0));
+
+        System.out.println(chosen);
+        for (Consultation cc : listconsult){
+            if (chosen.getZid().equals(cc.getZid())) {
+                try{                    
+       
+                    PdfWriter.getInstance(d, new FileOutputStream("Student Report PDF #" + cc.getConsultationid() + ".pdf"));
+                d.open();
+
+                    d.add(new Paragraph ("Student Report #" + cc.getConsultationid(), f1));
+                    d.add(Chunk.NEWLINE);
+                    PdfPTable table = new PdfPTable(4);
+                    
+                    String zids = cc.getZid();
+                    String types = cc.getType();
+                    String dates = cc.getDate1();
+                    String times = cc.getTime1();
+                    
+                    table.addCell(new Phrase("ZID",f2));
+                    table.addCell(new Phrase("Type",f2));
+                    table.addCell(new Phrase("Date",f2));
+                    table.addCell(new Phrase("Time",f2));
+                    
+                    table.addCell(zids);
+                    table.addCell(types);
+                    table.addCell(dates);
+                    table.addCell(times);
+                    d.add(table);
+                    d.add(Chunk.NEWLINE);
+                    d.add(new Paragraph("Comments:",f1));
+                    d.add(new Paragraph(cc.getNotes()));
+                    
+                    
+                    
+                    d.close();
+                    
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }        
+            }
+            
+        }
+        
+    
+    }
     
 
     private void lOut(ActionEvent event) {
@@ -434,8 +575,39 @@ public final void setWrapText(boolean value){}
             }
         });
         timeline.play();
+        
+        try {
+            DriverManager.getConnection(
+                    "jdbc:derby:;shutdown=true");
+        } catch (SQLException ex) {
+            System.out.println("Closing Derby");            }
     }
+    
+    /* public void Exitkey(ActionEvent event) {
+        Stage stage = (Stage) exitbutton.getScene().getWindow();
+        stage.close();
+        DerbySetup ds = new DerbySetup();
 
+        ds.closeConnection();
+     }
+*/
+    /* for new student
+    StudentSetup ss = new StudentSetup();
+   String  zid1 =zidtextfield.getText();
+    String fname = fnametextfield.getText();
+        String lname = lnametextfield.getText();
+    String course = coursetextfield.getText();
+    String email = emailtextfield.getText();
+
+    ss.insertStudents(zid1, fname, lname, course, email);
+    
+    
+    
+    
+    */
+    
+    
+    
     private void gotoCreate(ActionEvent event) {
         Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         try {
