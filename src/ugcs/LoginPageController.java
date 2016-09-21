@@ -12,6 +12,7 @@ import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -57,6 +58,17 @@ public class LoginPageController implements Initializable {
 private Button exitbutton;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+      
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                usr.requestFocus();
+            }
+        });
+        
+        
+        
+        
         login.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
