@@ -9,6 +9,8 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -90,6 +92,11 @@ private Button exitbutton;
     }
     
      public void Exitkey(ActionEvent event) {
+        try {
+            DriverManager.getConnection(
+                    "jdbc:derby:;shutdown=true");
+        } catch (SQLException ex) {
+            System.out.println("Closing Derby");            }
         Stage stage = (Stage) exitbutton.getScene().getWindow();
         stage.close();
        
@@ -140,30 +147,17 @@ private Button exitbutton;
         }
     }
 
-    private void gotoHome(ActionEvent event) {
-        Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("HomeScreen.fxml"));
-            Scene scene = new Scene(root);
-            primaryStage.setTitle("HomeScreen");
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        } catch (Exception e) {
-
-        }
-    }
-
     private void animScreen(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Group root1 = new Group();
         Group root2 = new Group();
         Rectangle rect1 = new Rectangle(1200, 800);
         Label lab1 = new Label("LOADING...");
-        rect1.setFill(new ImagePattern(new Image("ugcs/Resources/loginSs.png")));
+        rect1.setFill(new ImagePattern(new Image("ugcs/Resources/loginS.png")));
         root1.getChildren().addAll(rect1, lab1);
         Rectangle rect2 = new Rectangle(1200, 800);
         Label lab2 = new Label("LOADED!");
-        rect2.setFill(new ImagePattern(new Image("ugcs/Resources/george.png")));
+        rect2.setFill(new ImagePattern(new Image("ugcs/Resources/homeS.png")));
         root2.getChildren().addAll(rect2, lab2);
 
         Scene scene1 = new Scene(root1, 1200, 800);
