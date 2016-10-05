@@ -23,7 +23,7 @@
          </image>
       </ImageView>
       <DatePicker fx:id="datepick" layoutX="14.0" layoutY="126.0" promptText="Choose a date..." />
-      <Button fx:id="create" layoutX="354.0" layoutY="126.0" mnemonicParsing="false" onAction="#create" text="Create" />
+      <Button fx:id="create" layoutX="309.0" layoutY="126.0" mnemonicParsing="false" onAction="#create" text="Create" />
       <Agenda fx:id="agenda" layoutX="41.0" layoutY="400.0" pickOnBounds="false" prefHeight="291.0" prefWidth="798.0" />
       <ComboBox fx:id="combo" layoutX="210.0" layoutY="125.0" prefHeight="26.0" prefWidth="86.0" promptText="time..." />
       <ImageView fitHeight="114.0" fitWidth="150.0" layoutX="6.0" layoutY="-26.0" pickOnBounds="true" preserveRatio="true">
@@ -53,5 +53,7 @@
       <ToggleButton fx:id="tb2" layoutX="99.0" layoutY="698.0" mnemonicParsing="false" text="Week" />
       <ToggleButton fx:id="tb3" layoutX="151.0" layoutY="698.0" mnemonicParsing="false" text="Range" />
       <Button fx:id="pdf" layoutX="641.0" layoutY="364.0" mnemonicParsing="false" onAction="#PDF" text="PDF" />
+      <TextField fx:id="searchBox" layoutX="478.0" layoutY="126.0" />
+      <Label layoutX="425.0" layoutY="130.0" text="Search:" />
    </children>
 </AnchorPane>

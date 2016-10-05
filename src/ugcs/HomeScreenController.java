@@ -20,8 +20,6 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.net.URL;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -38,6 +36,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -59,6 +59,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -107,6 +108,8 @@ public class HomeScreenController implements Initializable {
     //
     @FXML
     TextArea notetextshow; 
+    @FXML
+    TextField searchBox;
     
     //
     @FXML
@@ -140,7 +143,7 @@ public class HomeScreenController implements Initializable {
     @FXML Pane pane;
     @FXML
     ToggleGroup tg;
-    
+        
 public final void setWrapText(boolean value){}
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -182,8 +185,32 @@ public final void setWrapText(boolean value){}
         timecol.setCellValueFactory(
                 new PropertyValueFactory<Consultation, String>("time1")
         );
+        
+        // Search Functionality Code
+        FilteredList<Consultation> filteredData = new FilteredList<>(consultlist, p -> true);
+        
+        searchBox.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(Consultation -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                
+                String lowerCaseFilter = newValue.toLowerCase();
+                
+                if (Consultation.getZid().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (Consultation.getNotes().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
+                return false;
+            });
+        });
+        
+        SortedList<Consultation> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(consulttable.comparatorProperty());
+        
         consulttable.setItems(null);
-        consulttable.setItems(consultlist);
+        consulttable.setItems(sortedData);
          // making agenda automatic 
         
         for (Consultation c: consultlist){
