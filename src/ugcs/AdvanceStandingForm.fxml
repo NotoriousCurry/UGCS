@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ugcs.CareerGuidanceFormController">
+   <children>
+      <ImageView fitHeight="804.0" fitWidth="1200.0">
+         <image>
+            <Image url="@Resources/genericbackroung3605.png" />
+         </image>
+      </ImageView>
+      <CheckBox layoutX="755.0" layoutY="531.0" mnemonicParsing="false" text="Load Transcript" />
+      <TextField fx:id="lName" layoutX="580.0" layoutY="297.0" prefHeight="26.0" prefWidth="150.0" />
+      <Label layoutX="494.0" layoutY="338.0" prefHeight="17.0" prefWidth="48.0" text="Course:" />
+      <TextField fx:id="zId" layoutX="299.0" layoutY="334.0" prefHeight="27.0" prefWidth="147.0" />
+      <TextField fx:id="fName" layoutX="299.0" layoutY="299.0" prefHeight="11.0" prefWidth="150.0" />
+      <Label layoutX="245.0" layoutY="335.0" prefHeight="16.0" prefWidth="27.0" text="ZID:" />
+      <TextArea fx:id="notesField" layoutX="294.0" layoutY="421.0" prefHeight="73.0" prefWidth="427.0" />
+      <Label layoutX="235.0" layoutY="427.0" text="Notes:" />
+      <Label layoutX="208.0" layoutY="300.0" prefHeight="1.0" prefWidth="80.0" text="First Name:" />
+      <AnchorPane layoutX="777.0" layoutY="286.0" prefHeight="132.0" prefWidth="115.0" style="-fx-background-color: silver;">
+         <children>
+            <Label layoutX="32.0" layoutY="8.0" text="Priority" />
+            <ComboBox fx:id="priorityChoice" layoutX="16.0" layoutY="32.0" prefHeight="28.0" prefWidth="77.0" style="-fx-border-color: black;">
+               <effect>
+                  <Glow />
+               </effect>
+            </ComboBox>
+            <Label layoutX="39.0" layoutY="66.0" text="Type" />
+            <ComboBox fx:id="typeChoice" layoutX="16.0" layoutY="90.0" prefHeight="28.0" prefWidth="77.0" style="-fx-border-color: black;">
+               <effect>
+                  <Glow />
+               </effect>
+            </ComboBox>
+         </children>
+      </AnchorPane>
+      <Label layoutX="482.0" layoutY="297.0" text="Last Name:" />
+      <TextField fx:id="lName" layoutX="579.0" layoutY="335.0" prefHeight="26.0" prefWidth="150.0" />
+      <TextField fx:id="eMail" layoutX="294.0" layoutY="376.0" prefHeight="27.0" prefWidth="432.0" />
+      <Label layoutX="237.0" layoutY="381.0" text="Email:" />
+      <Button fx:id="createButton" layoutX="514.0" layoutY="527.0" mnemonicParsing="false" onAction="#Create" text="Create" />
+      <Button fx:id="cancelButton" layoutX="367.0" layoutY="528.0" mnemonicParsing="false" onAction="#Cancel" text="Cancel" />
+      <DatePicker fx:id="datePicked" layoutX="742.0" layoutY="427.0" prefHeight="29.0" prefWidth="158.0" promptText="Select a date..." style="-fx-border-color: black;" />
+      <ComboBox fx:id="timePicked" layoutX="760.0" layoutY="476.0" prefHeight="28.0" prefWidth="120.0" promptText="time..." style="-fx-border-color: black;">
+         <effect>
+            <Glow />
+         </effect>
+      </ComboBox>
+      <Label layoutX="384.0" layoutY="249.0" text="Advance Standing Form">
+         <font>
+            <Font name="Arial Bold" size="24.0" />
+         </font>
+      </Label>
+      <Accordion layoutX="14.0" layoutY="157.0" />
+      <TitledPane animated="false" layoutX="12.0" layoutY="255.0" prefHeight="339.0" prefWidth="188.0" text="Forms" />
+      <AnchorPane layoutX="342.0" layoutY="-103.0" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+      <Label layoutX="285.0" layoutY="140.0" text="Forms" textFill="WHITE">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="48.0" layoutY="140.0" text="UGCS" textFill="WHITE">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="482.0" layoutY="140.0" text="Advance Standing Form" textFill="WHITE">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

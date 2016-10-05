@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="800.0" fitWidth="1203.0" layoutX="-1.0" pickOnBounds="true">
+         <image>
+            <Image url="@Resources/genericbackroung3605.png" />
+         </image>
+      </ImageView>
+      <ScrollPane fx:id="sp" layoutX="979.0" layoutY="248.0" prefHeight="194.0" prefViewportHeight="197.0" prefViewportWidth="195.0" prefWidth="197.0">
+         <content>
+            <TextArea fx:id="notetextshow" prefHeight="168.0" prefWidth="172.0" wrapText="true" />
+         </content>
+      </ScrollPane>
+      <Button fx:id="removebutton" layoutX="860.0" layoutY="189.0" mnemonicParsing="false" onAction="#remove" prefHeight="34.0" prefWidth="88.0" text="Remove" />
+      <TableView fx:id="consulttable" layoutX="41.0" layoutY="248.0" prefHeight="416.0" prefWidth="903.0">
+         <columns>
+            <TableColumn fx:id="idcol" prefWidth="73.0" text="ID" />
+            <TableColumn fx:id="zidcol" prefWidth="170.0" text="Zid" />
+            <TableColumn fx:id="typecol" prefWidth="170.0" text="Type" />
+            <TableColumn fx:id="prioritycol" minWidth="0.0" prefWidth="170.0" text="Priority" />
+            <TableColumn fx:id="datecol" prefWidth="170.0" text="Date" />
+            <TableColumn fx:id="timecol" prefWidth="170.0" text="Time" />
+         </columns>
+      </TableView>
+      <Button fx:id="createCon" layoutX="41.0" layoutY="189.0" mnemonicParsing="false" opacity="0.86" prefHeight="34.0" prefWidth="167.0" text="Create Consultation" textFill="#03f53f" />
+      <Label layoutX="980.0" layoutY="141.0" text="FirstName" textFill="WHITE" />
+      <Label layoutX="1099.0" layoutY="141.0" text="Log Out" textFill="WHITE" />
+      <Label layoutX="915.0" layoutY="141.0" text="Welcome, " textFill="WHITE" />
+      <Button layoutY="680.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="146.0" text="Return to Dashboard" />
+      <Button layoutX="1056.0" layoutY="680.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="146.0" text="Return to Previous" />
+      <Button fx:id="pdf" layoutX="978.0" layoutY="189.0" mnemonicParsing="false" onAction="#PDF" prefHeight="34.0" prefWidth="197.0" text="Print PDF" />
+      <Button fx:id="logOut" layoutX="1045.0" layoutY="136.0" mnemonicParsing="false" opacity="0.0" prefHeight="27.0" prefWidth="141.0" text="Logout" textAlignment="CENTER" textFill="WHITE" />
+      <Button fx:id="editbutton1" layoutX="229.0" layoutY="189.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="167.0" text="Edit Consultation" />
+   </children>
+</AnchorPane>
