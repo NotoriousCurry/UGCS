@@ -22,54 +22,52 @@
 
 <AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #e5e4e2;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ugcs.ConsultationFormFXMLController">
    <children>
-      <TextField fx:id="zId" layoutX="293.0" layoutY="240.0" prefHeight="26.0" prefWidth="120.0" />
-      <TextField fx:id="fName" layoutX="278.0" layoutY="281.0" prefHeight="26.0" prefWidth="150.0" />
-      <Label layoutX="194.0" layoutY="245.0" prefHeight="16.0" prefWidth="27.0" text="ZID:" />
-      <TextArea fx:id="notesField" layoutX="246.0" layoutY="361.0" prefHeight="262.0" prefWidth="496.0" />
-      <Label layoutX="190.0" layoutY="364.0" text="Notes:" />
-      <Label layoutX="162.0" layoutY="284.0" text="First Name:" />
-      <AnchorPane layoutX="843.0" layoutY="294.0" prefHeight="132.0" prefWidth="107.0" style="-fx-background-color: silver;">
+      <ImageView fitHeight="800.0" fitWidth="1203.0" pickOnBounds="true">
+         <image>
+            <Image url="@Resources/genericbackroung3605.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="zId" layoutX="263.0" layoutY="225.0" prefHeight="27.0" prefWidth="186.0" />
+      <TextField fx:id="fName" layoutX="262.0" layoutY="284.0" prefHeight="27.0" prefWidth="186.0" />
+      <Label layoutX="264.0" layoutY="209.0" prefHeight="16.0" prefWidth="27.0" text="zID:">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font></Label>
+      <TextArea fx:id="notesField" layoutX="261.0" layoutY="420.0" prefHeight="207.0" prefWidth="423.0" />
+      <Label layoutX="262.0" layoutY="397.0" text="Notes:" />
+      <Label layoutX="264.0" layoutY="261.0" text="First Name:">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font></Label>
+      <AnchorPane layoutX="747.0" layoutY="208.0" prefHeight="173.0" prefWidth="196.0" style="-fx-background-color: silver;">
          <children>
-            <Label layoutX="20.0" layoutY="6.0" text="Priority" />
-            <ComboBox fx:id="priorityChoice" layoutX="15.0" layoutY="28.0" prefHeight="28.0" prefWidth="77.0" style="-fx-border-color: black;">
+            <Label layoutX="14.0" layoutY="23.0" text="Priority" />
+            <ComboBox fx:id="priorityChoice" layoutX="12.0" layoutY="46.0" prefHeight="29.0" prefWidth="171.0" style="-fx-border-color: black;">
                <effect>
                   <Glow />
                </effect>
             </ComboBox>
-            <Label layoutX="20.0" layoutY="58.0" text="Type" />
-            <ComboBox fx:id="typeChoice" layoutX="15.0" layoutY="82.0" prefHeight="28.0" prefWidth="77.0" style="-fx-border-color: black;">
+            <Label layoutX="14.0" layoutY="87.0" text="Type" />
+            <ComboBox fx:id="typeChoice" layoutX="13.0" layoutY="107.0" prefHeight="29.0" prefWidth="171.0" style="-fx-border-color: black;">
                <effect>
                   <Glow />
                </effect>
             </ComboBox>
          </children>
       </AnchorPane>
-      <Label layoutX="466.0" layoutY="284.0" text="Last Name:" />
-      <TextField fx:id="lName" layoutX="566.0" layoutY="280.0" prefHeight="26.0" prefWidth="150.0" />
-      <TextField fx:id="eMail" layoutX="278.0" layoutY="322.0" prefHeight="26.0" prefWidth="438.0" />
-      <Label layoutX="192.0" layoutY="327.0" text="Email:" />
-      <Button fx:id="createButton" layoutX="933.0" layoutY="592.0" mnemonicParsing="false" onAction="#Create" text="Create" />
-      <Button fx:id="cancelButton" layoutX="808.0" layoutY="592.0" mnemonicParsing="false" onAction="#Cancel" text="Cancel" />
-      <DatePicker fx:id="datePicked" layoutX="808.0" layoutY="459.0" promptText="Select a date..." style="-fx-border-color: black;" />
-      <ComboBox fx:id="timePicked" layoutX="843.0" layoutY="526.0" prefHeight="28.0" prefWidth="120.0" promptText="time..." style="-fx-border-color: black;">
+      <Label layoutX="498.0" layoutY="261.0" text="Last Name:" />
+      <TextField fx:id="lName" layoutX="497.0" layoutY="284.0" prefHeight="27.0" prefWidth="186.0" />
+      <TextField fx:id="eMail" layoutX="261.0" layoutY="356.0" prefHeight="27.0" prefWidth="423.0" />
+      <Label layoutX="264.0" layoutY="324.0" text="Email:" />
+      <Button fx:id="createButton" layoutX="747.0" layoutY="558.0" mnemonicParsing="false" onAction="#Create" prefHeight="29.0" prefWidth="196.0" text="Create" />
+      <Button fx:id="cancelButton" layoutX="747.0" layoutY="598.0" mnemonicParsing="false" onAction="#Cancel" prefHeight="29.0" prefWidth="196.0" text="Cancel" />
+      <DatePicker fx:id="datePicked" layoutX="747.0" layoutY="420.0" promptText="Select a date..." style="-fx-border-color: black;" />
+      <ComboBox fx:id="timePicked" layoutX="747.0" layoutY="457.0" prefHeight="27.0" prefWidth="196.0" promptText="time..." style="-fx-border-color: black;">
          <effect>
             <Glow />
          </effect>
       </ComboBox>
-      <ImageView fitHeight="169.0" fitWidth="1200.0" layoutX="-1.0" pickOnBounds="true">
-         <image>
-            <Image url="@Resources/top.png" />
-         </image>
-      </ImageView>
-      <Button fx:id="backHome" layoutX="14.0" layoutY="108.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="52.0" style="-fx-background-color: silver;" text="&lt;" textFill="WHITE">
-         <font>
-            <Font name="System Bold Italic" size="22.0" />
-         </font>
-      </Button>
-      <ImageView fitHeight="169.0" fitWidth="250.0" layoutX="14.0" layoutY="-31.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Resources/TranspLogo.png" />
-         </image>
-      </ImageView>
+      <Button fx:id="backHome" layoutX="1049.0" layoutY="680.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="146.0" text="Return to Previous" />
+      <Button layoutX="7.0" layoutY="680.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="146.0" text="Return to Dashboard" />
    </children>
 </AnchorPane>
