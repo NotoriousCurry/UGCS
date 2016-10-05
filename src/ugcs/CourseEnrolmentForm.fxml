@@ -11,21 +11,21 @@
 
 <AnchorPane id="AnchorPane" prefHeight="498.0" prefWidth="899.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ugcs.CareerGuidanceFormController">
    <children>
-      <ImageView fitHeight="498.0" fitWidth="899.0" layoutY="4.0">
+      <ImageView fitHeight="800.0" fitWidth="1200.0" layoutY="2.0">
          <image>
-            <Image url="@../../../../Desktop/HeaderBackground.jpg" />
+            <Image url="@Resources/genericbackroung3605.png" />
          </image>
       </ImageView>
-      <CheckBox layoutX="748.0" layoutY="409.0" mnemonicParsing="false" text="Load Transcript" />
-      <TextField fx:id="lName" layoutX="566.0" layoutY="162.0" prefHeight="26.0" prefWidth="150.0" />
-      <Label layoutX="480.0" layoutY="203.0" prefHeight="17.0" prefWidth="48.0" text="Course:" />
-      <TextField fx:id="zId" layoutX="285.0" layoutY="199.0" prefHeight="27.0" prefWidth="147.0" />
-      <TextField fx:id="fName" layoutX="285.0" layoutY="164.0" prefHeight="11.0" prefWidth="150.0" />
-      <Label layoutX="231.0" layoutY="200.0" prefHeight="16.0" prefWidth="27.0" text="ZID:" />
-      <TextArea fx:id="notesField" layoutX="280.0" layoutY="286.0" prefHeight="73.0" prefWidth="427.0" />
-      <Label layoutX="221.0" layoutY="292.0" text="Notes:" />
-      <Label layoutX="194.0" layoutY="165.0" prefHeight="1.0" prefWidth="80.0" text="First Name:" />
-      <AnchorPane layoutX="783.0" layoutY="115.0" prefHeight="109.0" prefWidth="101.0" style="-fx-background-color: silver;">
+      <CheckBox layoutX="768.0" layoutY="452.0" mnemonicParsing="false" text="Load Transcript" />
+      <TextField fx:id="lName" layoutX="579.0" layoutY="234.0" prefHeight="26.0" prefWidth="150.0" />
+      <Label layoutX="493.0" layoutY="275.0" prefHeight="17.0" prefWidth="48.0" text="Course:" />
+      <TextField fx:id="zId" layoutX="298.0" layoutY="271.0" prefHeight="27.0" prefWidth="147.0" />
+      <TextField fx:id="fName" layoutX="298.0" layoutY="236.0" prefHeight="11.0" prefWidth="150.0" />
+      <Label layoutX="244.0" layoutY="272.0" prefHeight="16.0" prefWidth="27.0" text="ZID:" />
+      <TextArea fx:id="notesField" layoutX="293.0" layoutY="358.0" prefHeight="73.0" prefWidth="427.0" />
+      <Label layoutX="234.0" layoutY="364.0" text="Notes:" />
+      <Label layoutX="207.0" layoutY="237.0" prefHeight="1.0" prefWidth="80.0" text="First Name:" />
+      <AnchorPane layoutX="796.0" layoutY="187.0" prefHeight="109.0" prefWidth="101.0" style="-fx-background-color: silver;">
          <children>
             <Label layoutX="32.0" layoutY="8.0" text="Priority" />
             <ComboBox fx:id="priorityChoice" layoutX="16.0" layoutY="25.0" prefHeight="2.0" prefWidth="77.0" style="-fx-border-color: black;">
@@ -41,19 +41,19 @@
             </ComboBox>
          </children>
       </AnchorPane>
-      <Label layoutX="468.0" layoutY="162.0" text="Last Name:" />
-      <TextField fx:id="lName" layoutX="565.0" layoutY="200.0" prefHeight="26.0" prefWidth="150.0" />
-      <TextField fx:id="eMail" layoutX="280.0" layoutY="241.0" prefHeight="27.0" prefWidth="432.0" />
-      <Label layoutX="223.0" layoutY="246.0" text="Email:" />
-      <Button fx:id="createButton" layoutX="500.0" layoutY="392.0" mnemonicParsing="false" onAction="#Create" text="Create" />
-      <Button fx:id="cancelButton" layoutX="353.0" layoutY="393.0" mnemonicParsing="false" onAction="#Cancel" text="Cancel" />
-      <DatePicker fx:id="datePicked" layoutX="741.0" layoutY="254.0" prefHeight="29.0" prefWidth="147.0" promptText="Select a date..." style="-fx-border-color: black;" />
-      <ComboBox fx:id="timePicked" layoutX="755.0" layoutY="301.0" prefHeight="28.0" prefWidth="120.0" promptText="time..." style="-fx-border-color: black;">
+      <Label layoutX="481.0" layoutY="234.0" text="Last Name:" />
+      <TextField fx:id="lName" layoutX="578.0" layoutY="272.0" prefHeight="26.0" prefWidth="150.0" />
+      <TextField fx:id="eMail" layoutX="293.0" layoutY="313.0" prefHeight="27.0" prefWidth="432.0" />
+      <Label layoutX="236.0" layoutY="318.0" text="Email:" />
+      <Button fx:id="createButton" layoutX="513.0" layoutY="464.0" mnemonicParsing="false" onAction="#Create" text="Create" />
+      <Button fx:id="cancelButton" layoutX="366.0" layoutY="465.0" mnemonicParsing="false" onAction="#Cancel" text="Cancel" />
+      <DatePicker fx:id="datePicked" layoutX="754.0" layoutY="326.0" prefHeight="29.0" prefWidth="147.0" promptText="Select a date..." style="-fx-border-color: black;" />
+      <ComboBox fx:id="timePicked" layoutX="768.0" layoutY="373.0" prefHeight="28.0" prefWidth="120.0" promptText="time..." style="-fx-border-color: black;">
          <effect>
             <Glow />
          </effect>
       </ComboBox>
-      <Label layoutX="370.0" layoutY="114.0" text="Course Enrolment Form">
+      <Label layoutX="383.0" layoutY="186.0" text="Course Enrolment Form">
          <font>
             <Font name="Arial Bold" size="24.0" />
          </font>
@@ -74,14 +74,11 @@
             <Font name="Arial" size="20.0" />
          </font>
       </Label>
-      <TitledPane animated="false" layoutY="107.0" prefHeight="339.0" prefWidth="188.0" text="Forms" />
+      <TitledPane animated="false" layoutX="14.0" layoutY="251.0" prefHeight="339.0" prefWidth="188.0" text="Forms" />
       <AnchorPane layoutX="342.0" layoutY="-103.0" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-      <AnchorPane layoutX="589.0" layoutY="352.0" prefHeight="109.0" prefWidth="166.0">
-         <children>
-            <RadioButton layoutX="29.0" layoutY="71.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="42.0" text="No" />
-            <RadioButton layoutX="26.0" layoutY="46.0" mnemonicParsing="false" text="Yes" />
-            <Label layoutX="34.0" layoutY="21.0" text="Progression Check?" />
-         </children>
-      </AnchorPane>
+      <AnchorPane layoutX="589.0" layoutY="352.0" prefHeight="109.0" prefWidth="166.0" />
+      <RadioButton layoutX="675.0" layoutY="569.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="42.0" text="No" />
+      <RadioButton layoutX="672.0" layoutY="544.0" mnemonicParsing="false" text="Yes" />
+      <Label layoutX="680.0" layoutY="519.0" text="Progression Check?" />
    </children>
 </AnchorPane>
