@@ -5,20 +5,16 @@
  */
 package ugcs;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import com.itextpdf.text.BaseColor;
-import com.itextpdf.text.Chunk;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.Font;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Phrase;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
 import java.io.File;
-import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -72,14 +68,19 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javax.imageio.ImageIO;
 import jfxtras.internal.scene.control.skin.agenda.AgendaDaySkin;
 import jfxtras.internal.scene.control.skin.agenda.AgendaDaysFromDisplayedSkin;
 import jfxtras.internal.scene.control.skin.agenda.AgendaWeekSkin;
 import jfxtras.scene.control.agenda.Agenda;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.PDPageContentStream.AppendMode;
+import org.apache.pdfbox.pdmodel.font.PDFont;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import ugcs.Model.Consultation;
 import ugcs.Model.Event;
 import ugcs.Queries.ConsultationQueries;
-
 
 /**
  * FXML Controller class
@@ -87,6 +88,7 @@ import ugcs.Queries.ConsultationQueries;
  * @author jenniferpho
  */
 public class HomeScreenController implements Initializable {
+
     //tableview
     @FXML
     TableView<Consultation> consulttable;
@@ -96,21 +98,21 @@ public class HomeScreenController implements Initializable {
     TableColumn zidcol;
     @FXML
     TableColumn typecol;
-   //@FXML
-   // TableColumn notescol;
+    //@FXML
+    // TableColumn notescol;
     @FXML
     TableColumn prioritycol;
     @FXML
     TableColumn datecol;
     @FXML
     TableColumn timecol;
-    
+
     //
     @FXML
-    TextArea notetextshow; 
+    TextArea notetextshow;
     @FXML
     TextField searchBox;
-    
+
     //
     @FXML
     Agenda agenda;
@@ -129,30 +131,34 @@ public class HomeScreenController implements Initializable {
     @FXML
     Button exitbutton;
     @FXML
+    Button pdf;
+    @FXML
     ScrollPane sp;
-    @FXML 
+    @FXML
     ToggleButton tb;
-    @FXML 
+    @FXML
     ToggleButton tb2;
-    @FXML 
+    @FXML
     ToggleButton tb3;
-    
+
     List<Event> myEvents;
     LocalTime timenow;
-    String w = null;  
-    @FXML Pane pane;
+    String w = null;
+    @FXML
+    Pane pane;
     @FXML
     ToggleGroup tg;
-        
-public final void setWrapText(boolean value){}
+
+    public final void setWrapText(boolean value) {
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-      
-        
-    notetextshow.setWrapText(true);
-    sp.setFitToWidth(true);
-    sp.setFitToHeight(true); 
-        
+
+        notetextshow.setWrapText(true);
+        sp.setFitToWidth(true);
+        sp.setFitToHeight(true);
+
         combo.getItems().addAll("9am", "10am",
                 "11am",
                 "12pm",
@@ -161,9 +167,9 @@ public final void setWrapText(boolean value){}
                 "3pm",
                 "4pm");
         ConsultationQueries cq = new ConsultationQueries();
-        
+
         ObservableList<Consultation> consultlist = FXCollections.observableArrayList(cq.getConsultations());
-        
+
         idcol.setCellValueFactory(
                 new PropertyValueFactory<Consultation, Integer>("consultationid")
         );
@@ -173,7 +179,7 @@ public final void setWrapText(boolean value){}
         typecol.setCellValueFactory(
                 new PropertyValueFactory<Consultation, String>("type")
         );
-       /* notescol.setCellValueFactory(
+        /* notescol.setCellValueFactory(
                 new PropertyValueFactory<Consultation, String>("notes")
         ); */
         prioritycol.setCellValueFactory(
@@ -185,18 +191,18 @@ public final void setWrapText(boolean value){}
         timecol.setCellValueFactory(
                 new PropertyValueFactory<Consultation, String>("time1")
         );
-        
+
         // Search Functionality Code
         FilteredList<Consultation> filteredData = new FilteredList<>(consultlist, p -> true);
-        
+
         searchBox.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(Consultation -> {
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
-                
+
                 String lowerCaseFilter = newValue.toLowerCase();
-                
+
                 if (Consultation.getZid().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
                 } else if (Consultation.getNotes().toLowerCase().contains(lowerCaseFilter)) {
@@ -205,121 +211,117 @@ public final void setWrapText(boolean value){}
                 return false;
             });
         });
-        
+
         SortedList<Consultation> sortedData = new SortedList<>(filteredData);
         sortedData.comparatorProperty().bind(consulttable.comparatorProperty());
-        
+
         consulttable.setItems(null);
         consulttable.setItems(sortedData);
-         // making agenda automatic 
-        
-        for (Consultation c: consultlist){
-          String  localdatenow = c.getDate1();
-          DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        // making agenda automatic 
 
-        //convert String to LocalDate
-         LocalDate localdatenow1 = LocalDate.parse(localdatenow, formatter);
-          
-         String t = c.getTime1();
-         if (t != null) {
-            switch (t) {
-                case "9am":
-                    w = "09";
-                    break;
-                case "10am":
-                    w = "10";
-                    break;
-                case "11am":
-                    w = "11";
-                    break;
-                case "12pm":
-                    w = "12";
-                    break;
-                case "1pm":
-                    w = "13";
-                    break;
-                case "2pm":
-                    w = "14";
-                    break;
-                case "3pm":
-                    w = "15";
-                    break;
-                case "4pm":
-                    w = "16";
-                    break;
+        for (Consultation c : consultlist) {
+            String localdatenow = c.getDate1();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+            //convert String to LocalDate
+            LocalDate localdatenow1 = LocalDate.parse(localdatenow, formatter);
+
+            String t = c.getTime1();
+            if (t != null) {
+                switch (t) {
+                    case "9am":
+                        w = "09";
+                        break;
+                    case "10am":
+                        w = "10";
+                        break;
+                    case "11am":
+                        w = "11";
+                        break;
+                    case "12pm":
+                        w = "12";
+                        break;
+                    case "1pm":
+                        w = "13";
+                        break;
+                    case "2pm":
+                        w = "14";
+                        break;
+                    case "3pm":
+                        w = "15";
+                        break;
+                    case "4pm":
+                        w = "16";
+                        break;
+                }
             }
-        }
-        LocalTime time = LocalTime.parse(w + ":00:00");
+            LocalTime time = LocalTime.parse(w + ":00:00");
 
-        int w2 = Integer.parseInt(w);
-        int w3 = w2 + 1;
+            int w2 = Integer.parseInt(w);
+            int w3 = w2 + 1;
 
-        String w4 = Integer.toString(w3);
-        LocalTime time2 = LocalTime.parse(w4 + ":00:00");
-        Event newevent = new Event();
-        newevent.setstartlocaldate(localdatenow1);
-        newevent.setendlocaldate(localdatenow1);
+            String w4 = Integer.toString(w3);
+            LocalTime time2 = LocalTime.parse(w4 + ":00:00");
+            Event newevent = new Event();
+            newevent.setstartlocaldate(localdatenow1);
+            newevent.setendlocaldate(localdatenow1);
 
-        time.now();
-        String p = c.getPriority();
-        if (p != null){
-                switch(p){
+            time.now();
+            String p = c.getPriority();
+            if (p != null) {
+                switch (p) {
                     case "High":
-        agenda.appointments().addAll(
-                new Agenda.AppointmentImplLocal()
-                .withStartLocalDateTime(newevent.getstartlocaldate().atTime(time))
-                .withEndLocalDateTime(newevent.getendlocaldate().atTime(time2))
-                .withDescription("High Appointment")
-                
-                .withAppointmentGroup(new Agenda.AppointmentGroupImpl().withStyleClass("group2")) // you should use a map of AppointmentGroups
-        );
+                        agenda.appointments().addAll(
+                                new Agenda.AppointmentImplLocal()
+                                .withStartLocalDateTime(newevent.getstartlocaldate().atTime(time))
+                                .withEndLocalDateTime(newevent.getendlocaldate().atTime(time2))
+                                .withDescription("High Appointment")
+                                .withAppointmentGroup(new Agenda.AppointmentGroupImpl().withStyleClass("group2")) // you should use a map of AppointmentGroups
+                        );
                         break;
                     case "Medium":
                         agenda.appointments().addAll(
-                new Agenda.AppointmentImplLocal()
-                .withStartLocalDateTime(newevent.getstartlocaldate().atTime(time))
-                .withEndLocalDateTime(newevent.getendlocaldate().atTime(time2))
-                .withDescription("Medium Appointment")                  
-                .withAppointmentGroup(new Agenda.AppointmentGroupImpl().withStyleClass("group8")) // you should use a map of AppointmentGroups
-        );
+                                new Agenda.AppointmentImplLocal()
+                                .withStartLocalDateTime(newevent.getstartlocaldate().atTime(time))
+                                .withEndLocalDateTime(newevent.getendlocaldate().atTime(time2))
+                                .withDescription("Medium Appointment")
+                                .withAppointmentGroup(new Agenda.AppointmentGroupImpl().withStyleClass("group8")) // you should use a map of AppointmentGroups
+                        );
                         break;
                     case "Low":
-                          agenda.appointments().addAll(
-                new Agenda.AppointmentImplLocal()
-                .withStartLocalDateTime(newevent.getstartlocaldate().atTime(time))
-                .withEndLocalDateTime(newevent.getendlocaldate().atTime(time2))
-                .withDescription("Low Appointment")                  
-                .withAppointmentGroup(new Agenda.AppointmentGroupImpl().withStyleClass("group15")) // you should use a map of AppointmentGroups
-        );
-            
+                        agenda.appointments().addAll(
+                                new Agenda.AppointmentImplLocal()
+                                .withStartLocalDateTime(newevent.getstartlocaldate().atTime(time))
+                                .withEndLocalDateTime(newevent.getendlocaldate().atTime(time2))
+                                .withDescription("Low Appointment")
+                                .withAppointmentGroup(new Agenda.AppointmentGroupImpl().withStyleClass("group15")) // you should use a map of AppointmentGroups
+                        );
+
                         this.agenda = agenda;
-                        		
-                        
-        }
-        }
-                
-         consulttable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Consultation>() {
 
-            @Override
-            public void changed(ObservableValue<? extends Consultation> observable,
-                    Consultation oldValue, Consultation newValue) {
-                showdeets(newValue);
+                }
             }
-        });
-        
-        
-        
+
+            consulttable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Consultation>() {
+
+                @Override
+                public void changed(ObservableValue<? extends Consultation> observable,
+                        Consultation oldValue, Consultation newValue) {
+                    showdeets(newValue);
+                }
+            });
+
         }
-               
- ToggleGroup group = new ToggleGroup();
 
-tb.setToggleGroup(group);
+        ToggleGroup group = new ToggleGroup();
 
-tb2.setToggleGroup(group);
-tb2.setSelected(true);
+        tb.setToggleGroup(group);
 
-tb3.setToggleGroup(group);
-/*
+        tb2.setToggleGroup(group);
+        tb2.setSelected(true);
+
+        tb3.setToggleGroup(group);
+        /*
        ToggleButton ggg = (ToggleButton) group.selectedToggleProperty().getValue();
         if (ggg == tb){agenda.setSkin((new AgendaDaySkin(agenda)));}
         else if (ggg == tb2){agenda.setSkin(new AgendaWeekSkin(agenda));}
@@ -334,28 +336,26 @@ tb3.setToggleGroup(group);
     
         
         displayedCalendarObjectProperty.setValue(c);*/
-          
+
         tb.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
                 agenda.setSkin((new AgendaDaySkin(agenda)));
             }
-        } );
+        });
         tb2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
                 agenda.setSkin((new AgendaWeekSkin(agenda)));
             }
-        } );
-       tb3.setOnAction(new EventHandler<ActionEvent>() {
+        });
+        tb3.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent e)  {
+            public void handle(ActionEvent e) {
                 agenda.setSkin((new AgendaDaysFromDisplayedSkin(agenda)));
             }
-        } );
-        
-           
-        
+        });
+
         logOut.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
@@ -372,23 +372,22 @@ tb3.setToggleGroup(group);
                 gotoCreate(e);
             }
         });
-        
-     readPass();   
+
+        readPass();
     }
 
-    public void showdeets(Consultation consultation){
-        if (consultation == null){
+    public void showdeets(Consultation consultation) {
+        if (consultation == null) {
             notetextshow.setText(null);
-        
-        }
-        else {
+
+        } else {
             ConsultationQueries csss = new ConsultationQueries();
             notetextshow.setText(consultation.getNotes());
-        
+
         }
-            
-        
+
     }
+
     /*
 
 	private final ObjectProperty<Calendar> displayedCalendarObjectProperty = new SimpleObjectProperty<Calendar>(this, "displayedCalendar", Calendar.getInstance())
@@ -398,21 +397,20 @@ public void set(Calendar value)
 if (value == null) throw new NullPointerException("Null not allowed");
 super.set(value);
 }};
-    */
-    
-        
-    
+     */
+
     public Date localDateToUtilDate(LocalDate localDate) {
         GregorianCalendar cal = new GregorianCalendar(
                 localDate.getYear(), localDate.getMonthValue() - 1, localDate.getDayOfMonth());
         java.util.Date date = cal.getTime();
         return date;
     }
-/* this was to create an agenda manually through a 'create' button, however the code also works with 
+
+    /* this was to create an agenda manually through a 'create' button, however the code also works with 
     the database to automatically create agendas
-  */  
-    
-   public void remove(ActionEvent event){
+     */
+
+    public void remove(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirm Removal");
         alert.setHeaderText(null);
@@ -425,28 +423,23 @@ super.set(value);
 
         if (result.get() == buttonTypeyes) {
 
-   Consultation consultselected =  consulttable.getSelectionModel().getSelectedItem();
-   ConsultationQueries css = new ConsultationQueries();
-   
-   css.deleteConsult(consultselected);
-   ObservableList<Consultation> listlist = FXCollections.observableArrayList(css.getConsultations());
-   
-   consulttable.setItems(null);
-   consulttable.setItems(listlist);
-   
-   } else {
-            alert.close();    
+            Consultation consultselected = consulttable.getSelectionModel().getSelectedItem();
+            ConsultationQueries css = new ConsultationQueries();
+
+            css.deleteConsult(consultselected);
+            ObservableList<Consultation> listlist = FXCollections.observableArrayList(css.getConsultations());
+
+            consulttable.setItems(null);
+            consulttable.setItems(listlist);
+
+        } else {
+            alert.close();
         }
-        }
-   
-    
-    
-    
-    
-    
+    }
+
     public void create(ActionEvent event) {
-       // to create an agenda
-        
+        // to create an agenda
+
         LocalDate localdate1 = datepick.getValue();
 
         String q = combo.getSelectionModel().getSelectedItem().toString();
@@ -500,130 +493,143 @@ super.set(value);
                 .withAppointmentGroup(new Agenda.AppointmentGroupImpl().withStyleClass("group1")) // you should use a map of AppointmentGroups
         );
 
-        
-        
     }
-    @FXML Button pdf;
-    
-    public void PDF(ActionEvent event){
-        Document d = new Document();
+
+    public void PDF(ActionEvent event) {
+        try {
+        PDDocument doc = new PDDocument();
+        PDPage page = new PDPage();
+        doc.addPage(page);
+        //String imagePath = "ugcs/Resources/UNSW-LOGO.png";
+        float scale = 1f;
+        PDImageXObject pdImage = PDImageXObject.createFromFile("src/ugcs/Resources/UNSW-LOGO.png", doc);
         
+        PDPageContentStream content = new PDPageContentStream(doc, page);
+
         Consultation chosen = consulttable.getSelectionModel().getSelectedItem();
         ConsultationQueries cq = new ConsultationQueries();
         ObservableList<Consultation> listconsult = FXCollections.observableArrayList(cq.getConsultations());
-      Font f1 = new Font(Font.FontFamily.TIMES_ROMAN, 15, Font.BOLD, new BaseColor(0,0,0));
-      Font f2 = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD, new BaseColor(0,0,0));
+        PDFont font = PDType1Font.COURIER_BOLD_OBLIQUE;
 
         System.out.println(chosen);
-        for (Consultation cc : listconsult){
+        for (Consultation cc : listconsult) {
             if (chosen.getZid().equals(cc.getZid())) {
-                try{                    
-       
-                    PdfWriter.getInstance(d, new FileOutputStream("Student Report PDF #" + cc.getConsultationid() + ".pdf"));
-                d.open();
+                try {
 
-                    d.add(new Paragraph ("Student Report #" + cc.getConsultationid(), f1));
-                    d.add(Chunk.NEWLINE);
-                    PdfPTable table = new PdfPTable(4);
+                    String fileName = "Student Report PDF #" + cc.getConsultationid() + ".pdf";
                     
+                    content.drawImage(pdImage, 20, 20, pdImage.getWidth()*scale, pdImage.getHeight()*scale);
+                    
+                    content.beginText();
+                    content.setFont(PDType1Font.HELVETICA, 26);
+                    content.moveTextPositionByAmount(220,750);
+                    content.drawString("Student Report #" + cc.getConsultationid());
+                    content.endText();
+
                     String zids = cc.getZid();
                     String types = cc.getType();
                     String dates = cc.getDate1();
                     String times = cc.getTime1();
                     
-                    table.addCell(new Phrase("ZID",f2));
-                    table.addCell(new Phrase("Type",f2));
-                    table.addCell(new Phrase("Date",f2));
-                    table.addCell(new Phrase("Time",f2));
+                    content.beginText();
+                    content.setFont(PDType1Font.HELVETICA, 16);
+                    content.moveTextPositionByAmount(220,700);
+                    content.drawString("Zid: " + zids);
+                    content.endText();
                     
-                    table.addCell(zids);
-                    table.addCell(types);
-                    table.addCell(dates);
-                    table.addCell(times);
-                    d.add(table);
-                    d.add(Chunk.NEWLINE);
-                    d.add(new Paragraph("Comments:",f1));
-                    d.add(new Paragraph(cc.getNotes()));
+                    content.beginText();
+                    content.setFont(PDType1Font.HELVETICA, 16);
+                    content.moveTextPositionByAmount(220,650);
+                    content.drawString("Type: " + types);
+                    content.endText();
                     
+                    content.beginText();
+                    content.setFont(PDType1Font.HELVETICA, 16);
+                    content.moveTextPositionByAmount(220,600);
+                    content.drawString("Date: " + dates);
+                    content.endText();
                     
+                    content.beginText();
+                    content.setFont(PDType1Font.HELVETICA, 16);
+                    content.moveTextPositionByAmount(220,550);
+                    content.drawString("Time: " + times);
+                    content.endText();
                     
-                    d.close();
-                    
+                    content.close();
+                    doc.save(fileName);
+                    doc.close();
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                }        
+                }
             }
-            
+
         }
-        
-    
+        }
+        catch (IOException e) {
+            System.out.println("error");
+        }
+
     }
-    
+
     private String readName() {
         String fName = "temp.txt";
         String line = null;
         String name = null;
-        
+
         try {
             FileReader fReader = new FileReader(fName);
             BufferedReader bReader = new BufferedReader(fReader);
-            
+
             line = bReader.readLine();
             String[] sect = line.split(",");
             name = sect[0];
-            
+
             bReader.close();
-            
-        }
-        catch (FileNotFoundException ex) {
+
+        } catch (FileNotFoundException ex) {
             System.out.println("Unable to find file");
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             System.out.println("Error Reading File");
         }
         return name;
     }
-    
-        private String readPass() {
+
+    private String readPass() {
         String fName = "temp.txt";
         String line = null;
         String pass = null;
-        
+
         try {
             FileReader fReader = new FileReader(fName);
             BufferedReader bReader = new BufferedReader(fReader);
-            
+
             line = bReader.readLine();
             String[] sect = line.split(",");
             pass = sect[1];
-            
+
             bReader.close();
-            
-        }
-        catch (FileNotFoundException ex) {
+
+        } catch (FileNotFoundException ex) {
             System.out.println("Unable to find file");
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             System.out.println("Error Reading File");
         }
-            System.out.println(pass);
+        System.out.println(pass);
         return pass;
     }
-        
-        private void deleteTemp() {
-            try {
-                File file = new File("temp.txt");
-                if(file.delete()) {
-                    System.out.println(file.getName() + " is Deleted");
-                } else {
-                    System.out.println("Delete operation failed");
-                }
+
+    private void deleteTemp() {
+        try {
+            File file = new File("temp.txt");
+            if (file.delete()) {
+                System.out.println(file.getName() + " is Deleted");
+            } else {
+                System.out.println("Delete operation failed");
             }
-            catch(Exception e) {
-                e.printStackTrace();
-            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    
+    }
 
     private void lOut(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -673,7 +679,7 @@ super.set(value);
         });
         timeline.play();
     }
-    
+
     /* public void Exitkey(ActionEvent event) {
         Stage stage = (Stage) exitbutton.getScene().getWindow();
         stage.close();
@@ -681,8 +687,8 @@ super.set(value);
 
         ds.closeConnection();
      }
-*/
-    /* for new student
+     */
+ /* for new student
     StudentSetup ss = new StudentSetup();
    String  zid1 =zidtextfield.getText();
     String fname = fnametextfield.getText();
@@ -695,10 +701,7 @@ super.set(value);
     
     
     
-    */
-    
-    
-
+     */
     private void gotoCreate(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Group root1 = new Group();
