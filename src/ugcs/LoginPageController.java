@@ -42,6 +42,7 @@ import javafx.util.Duration;
 import ugcs.Database.DerbySetup;
 import ugcs.Queries.UgcQueries;
 import org.jasypt.util.password.BasicPasswordEncryptor;
+import ugcs.Audio.AudioMethods;
 
 /**
  * FXML Controller class CTRL + SHIFT + I
@@ -58,31 +59,30 @@ public class LoginPageController implements Initializable {
     private TextField usr;
     @FXML
     private PasswordField pass;
-@FXML
-private Button exitbutton;
+    @FXML
+    private Button exitbutton;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-      
+
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 usr.requestFocus();
             }
         });
-        
-        
-        
-        
+
         login.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
                 if (loginCheck()) {
                     System.out.println("FCK YEA LOGIN");
+                    handleAudio("pad_confirm.wav");
                     createLoginDetailsFile();
                     animScreen(e);
                 } else {
                     System.out.println("FCKED UP SON");
-                   // animScreen(e);
+                    // animScreen(e);
                 }
             }
         ;
@@ -96,12 +96,13 @@ private Button exitbutton;
             DriverManager.getConnection(
                     "jdbc:derby:;shutdown=true");
         } catch (SQLException ex) {
-            System.out.println("Closing Derby");            }
+            System.out.println("Closing Derby");
+        }
         Stage stage = (Stage) exitbutton.getScene().getWindow();
         stage.close();
-       
-     }
-    
+
+    }
+
     private Boolean loginCheck() {
         String usrn = usr.getText();
         String ps = pass.getText();
@@ -126,7 +127,7 @@ private Button exitbutton;
         }
         return validLogin;
     }
-    
+
     private void createLoginDetailsFile() {
         String fName = "temp.txt";
         //String ps = pass.getText();
@@ -137,14 +138,19 @@ private Button exitbutton;
         try {
             FileWriter fileWriter = new FileWriter(fName);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            
+
             bufferedWriter.write(name + "," + ps);
-            
+
             bufferedWriter.close();
-        } 
-        catch(IOException ex) {
+        } catch (IOException ex) {
             System.out.println("Error writing file '" + fName + "'");
         }
+    }
+
+    private void handleAudio(String file) {
+        AudioMethods am = new AudioMethods();
+
+        am.playAudio(file);
     }
 
     private void animScreen(ActionEvent event) {

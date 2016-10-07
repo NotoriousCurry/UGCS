@@ -81,6 +81,7 @@ import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import ugcs.Model.Consultation;
 import ugcs.Model.Event;
 import ugcs.Queries.ConsultationQueries;
+import ugcs.Audio.AudioMethods;
 
 /**
  * FXML Controller class
@@ -154,7 +155,7 @@ public class HomeScreenController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        
         notetextshow.setWrapText(true);
         sp.setFitToWidth(true);
         sp.setFitToHeight(true);
@@ -500,7 +501,6 @@ super.set(value);
         PDDocument doc = new PDDocument();
         PDPage page = new PDPage();
         doc.addPage(page);
-        //String imagePath = "ugcs/Resources/UNSW-LOGO.png";
         float scale = 1f;
         PDImageXObject pdImage = PDImageXObject.createFromFile("src/ugcs/Resources/UNSW-LOGO.png", doc);
         
@@ -702,6 +702,13 @@ super.set(value);
     
     
      */
+    
+    private void handleAudio(String file) {
+        AudioMethods am = new AudioMethods();
+        
+        am.playAudio(file);
+    }
+    
     private void gotoCreate(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Group root1 = new Group();
