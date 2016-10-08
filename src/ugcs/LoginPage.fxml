@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
@@ -22,36 +23,36 @@
       </ImageView>
       <TextField fx:id="usr" layoutX="136.0" layoutY="381.0" prefHeight="38.0" prefWidth="250.0" promptText="User ID">
          <font>
-            <Font size="18.0" />
+            <Font size="16.0" />
          </font></TextField>
       <PasswordField fx:id="pass" layoutX="136.0" layoutY="458.0" prefHeight="38.0" prefWidth="250.0" promptText="Enter Your Password">
          <font>
-            <Font name="Arial" size="18.0" />
+            <Font name="Arial" size="16.0" />
          </font></PasswordField>
-        <Button fx:id="login" layoutX="136.0" layoutY="521.0" prefHeight="29.0" prefWidth="250.0" text="Login">
+        <Button fx:id="login" layoutX="136.0" layoutY="521.0" prefHeight="32.0" prefWidth="250.0" style=".button: hover;" stylesheets="@Resources/test.css" text="Login" textFill="WHITE">
          <font>
-            <Font name="Arial" size="18.0" />
+            <Font name="Arial Bold" size="16.0" />
          </font></Button>
       <Label layoutX="136.0" layoutY="357.0" text="zID:">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="Arial Bold" size="16.0" />
          </font></Label>
       <Label layoutX="136.0" layoutY="429.0" text="Password:">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="Arial Bold" size="16.0" />
          </font></Label>
       <Button fx:id="exitbutton" layoutX="136.0" layoutY="563.0" mnemonicParsing="false" onAction="#Exitkey" prefHeight="23.0" prefWidth="250.0" text="Exit">
          <font>
-            <Font name="Arial" size="18.0" />
+            <Font name="Arial Bold" size="16.0" />
          </font></Button>
       <Text fill="WHITE" layoutX="68.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UGCS">
          <font>
-            <Font name="Arial" size="20.0" />
+            <Font name="Arial" size="18.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="313.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign In">
+      <Text fill="WHITE" layoutX="302.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign In">
          <font>
-            <Font name="Arial" size="20.0" />
+            <Font name="Arial" size="18.0" />
          </font>
       </Text>
       <Text fill="WHITE" layoutX="14.0" layoutY="733.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UNSW Sydney NSW 2052 Australia Telephone +61 2 9385 1000">

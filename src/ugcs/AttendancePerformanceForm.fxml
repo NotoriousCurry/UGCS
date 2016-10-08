@@ -17,14 +17,6 @@
          </image>
       </ImageView>
       <CheckBox layoutX="766.0" layoutY="522.0" mnemonicParsing="false" text="Load Transcript" />
-      <TextField fx:id="lName" layoutX="591.0" layoutY="288.0" prefHeight="26.0" prefWidth="150.0" />
-      <Label layoutX="519.0" layoutY="337.0" prefHeight="17.0" prefWidth="48.0" text="Course:" />
-      <TextField fx:id="zId" layoutX="310.0" layoutY="325.0" prefHeight="27.0" prefWidth="147.0" />
-      <TextField fx:id="fName" layoutX="310.0" layoutY="290.0" prefHeight="11.0" prefWidth="150.0" />
-      <Label layoutX="256.0" layoutY="326.0" prefHeight="16.0" prefWidth="27.0" text="ZID:" />
-      <TextArea fx:id="notesField" layoutX="305.0" layoutY="412.0" prefHeight="73.0" prefWidth="427.0" />
-      <Label layoutX="246.0" layoutY="418.0" text="Notes:" />
-      <Label layoutX="219.0" layoutY="291.0" prefHeight="1.0" prefWidth="80.0" text="First Name:" />
       <AnchorPane layoutX="788.0" layoutY="277.0" prefHeight="132.0" prefWidth="115.0" style="-fx-background-color: silver;">
          <children>
             <Label layoutX="32.0" layoutY="8.0" text="Priority" />
@@ -41,23 +33,12 @@
             </ComboBox>
          </children>
       </AnchorPane>
-      <Label layoutX="507.0" layoutY="296.0" text="Last Name:" />
-      <TextField fx:id="lName" layoutX="590.0" layoutY="326.0" prefHeight="26.0" prefWidth="150.0" />
-      <TextField fx:id="eMail" layoutX="305.0" layoutY="367.0" prefHeight="27.0" prefWidth="432.0" />
-      <Label layoutX="248.0" layoutY="372.0" text="Email:" />
-      <Button fx:id="createButton" layoutX="525.0" layoutY="518.0" mnemonicParsing="false" onAction="#Create" text="Create" />
-      <Button fx:id="cancelButton" layoutX="378.0" layoutY="519.0" mnemonicParsing="false" onAction="#Cancel" text="Cancel" />
       <DatePicker fx:id="datePicked" layoutX="753.0" layoutY="418.0" prefHeight="29.0" prefWidth="158.0" promptText="Select a date..." style="-fx-border-color: black;" />
       <ComboBox fx:id="timePicked" layoutX="771.0" layoutY="467.0" prefHeight="28.0" prefWidth="120.0" promptText="time..." style="-fx-border-color: black;">
          <effect>
             <Glow />
          </effect>
       </ComboBox>
-      <Label layoutX="395.0" layoutY="240.0" text="Attendance Performance Form">
-         <font>
-            <Font name="Arial Bold" size="24.0" />
-         </font>
-      </Label>
       <Accordion layoutX="14.0" layoutY="157.0" />
       <Label layoutX="48.0" layoutY="139.0" prefHeight="23.0" prefWidth="61.0" text="UGCS" textFill="WHITE">
          <font>
@@ -74,7 +55,55 @@
             <Font name="Arial" size="20.0" />
          </font>
       </Label>
-      <TitledPane animated="false" layoutX="25.0" layoutY="233.0" prefHeight="339.0" prefWidth="188.0" text="Forms" />
       <AnchorPane layoutX="342.0" layoutY="-103.0" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+      <SplitPane dividerPositions="0.65" layoutX="160.0" layoutY="264.0" prefHeight="399.0" prefWidth="900.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <Label layoutX="15.0" layoutY="149.0" text="Student Email:" />
+                  <TextField fx:id="eMail" layoutX="15.0" layoutY="172.0" prefHeight="27.0" prefWidth="550.0" />
+                  <TextField fx:id="lName" layoutX="300.0" layoutY="45.0" prefHeight="27.0" prefWidth="265.0" />
+                  <Label layoutX="301.0" layoutY="88.0" text="Student Last Name:" />
+                  <Label layoutX="16.0" layoutY="88.0" prefHeight="17.0" prefWidth="130.0" text="Student First Name:" />
+                  <Label layoutX="15.0" layoutY="211.0" text="Notes:" />
+                  <TextArea fx:id="notesField" layoutX="15.0" layoutY="234.0" prefHeight="114.0" prefWidth="550.0" />
+                  <Label layoutX="15.0" layoutY="20.0" prefHeight="16.0" prefWidth="27.0" text="zID:" />
+                  <TextField fx:id="fName" layoutX="15.0" layoutY="111.0" prefHeight="27.0" prefWidth="265.0" />
+                  <TextField fx:id="zId" layoutX="15.0" layoutY="45.0" prefHeight="27.0" prefWidth="265.0" />
+                  <Label layoutX="300.0" layoutY="20.0" prefHeight="17.0" prefWidth="48.0" text="Course:" />
+                  <TextField fx:id="lName" layoutX="301.0" layoutY="111.0" prefHeight="27.0" prefWidth="265.0" />
+                  <CheckBox layoutX="17.0" layoutY="359.0" mnemonicParsing="false" text="Select if another staff member present" />
+               </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <AnchorPane layoutX="29.0" layoutY="14.0" prefHeight="180.0" prefWidth="252.0" style="-fx-background-color: silver;">
+                     <children>
+                        <Label layoutX="14.0" layoutY="6.0" text="Priority" />
+                        <ComboBox fx:id="priorityChoice1" layoutX="12.0" layoutY="30.0" prefHeight="27.0" prefWidth="229.0" style="-fx-border-color: black;">
+                           <effect>
+                              <Glow />
+                           </effect>
+                        </ComboBox>
+                     </children>
+                  </AnchorPane>
+                  <DatePicker fx:id="datePicked1" layoutX="41.0" layoutY="109.0" prefHeight="29.0" prefWidth="229.0" promptText="Select a date..." style="-fx-border-color: black;" />
+                  <ComboBox fx:id="timePicked1" layoutX="41.0" layoutY="147.0" prefHeight="29.0" prefWidth="229.0" promptText="time..." style="-fx-border-color: black;">
+                     <effect>
+                        <Glow />
+                     </effect>
+                  </ComboBox>
+                  <Button fx:id="createButton" layoutX="29.0" layoutY="304.0" mnemonicParsing="false" onAction="#Create" prefHeight="29.0" prefWidth="252.0" text="Create Consultation" />
+                  <Button fx:id="cancelButton" layoutX="29.0" layoutY="342.0" mnemonicParsing="false" onAction="#Cancel" prefHeight="29.0" prefWidth="252.0" text="Cancel" />
+                  <Button fx:id="createButton1" layoutX="30.0" layoutY="233.0" mnemonicParsing="false" onAction="#Create" prefHeight="29.0" prefWidth="252.0" text="Upload Student Transcript" />
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+      <Label layoutX="160.0" layoutY="235.0" text="Please fill out the attendance performance form below:">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

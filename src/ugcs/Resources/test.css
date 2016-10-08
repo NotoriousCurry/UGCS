@@ -1,0 +1,28 @@
+.button {
+-fx-background-color:#036fc2;
+}
+
+.button:hover {
+    -fx-background-color: #046fc2ea;
+}
+
+.table-view:row-selection .column-header-background {
+    -fx-background-color: black;
+}
+
+.table-view:row-selection .column-header-background .nested-column-header .table-column .label
+{
+-fx-background-color : black;
+}
+
+.table-view:row-selection .column-header-background .nested-column-header .table-column{
+-fx-background-color : white;
+}
+
+.table-view:row-selection .column-header-background .nested-column-header .table-column .label .text{
+    -fx-fill : white
+}
+
+.table-view:row-selection .column-header-background .nested-column-header .table-column{
+    -fx-padding : 0.01
+}
