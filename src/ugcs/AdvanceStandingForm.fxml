@@ -77,9 +77,9 @@
                         <Glow />
                      </effect>
                   </ComboBox>
-                  <Button fx:id="createButton" layoutX="29.0" layoutY="304.0" mnemonicParsing="false" onAction="#Create" prefHeight="29.0" prefWidth="252.0" text="Create Consultation" />
+                  <Button fx:id="createButton" layoutX="29.0" layoutY="304.0" mnemonicParsing="false" onAction="#Create" prefHeight="29.0" prefWidth="252.0" stylesheets="@Resources/test.css" text="Create Consultation" />
                   <Button fx:id="cancelButton" layoutX="29.0" layoutY="342.0" mnemonicParsing="false" onAction="#Cancel" prefHeight="29.0" prefWidth="252.0" text="Cancel" />
-                  <Button fx:id="createButton1" layoutX="30.0" layoutY="233.0" mnemonicParsing="false" onAction="#Create" prefHeight="29.0" prefWidth="252.0" text="Upload Student Transcript" />
+                  <Button fx:id="createButton1" layoutX="30.0" layoutY="233.0" mnemonicParsing="false" onAction="#Create" prefHeight="29.0" prefWidth="252.0" stylesheets="@Resources/addprintbutton.css" text="Upload Student Transcript" />
                </children>
             </AnchorPane>
         </items>
