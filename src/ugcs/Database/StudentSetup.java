@@ -36,7 +36,8 @@ public class StudentSetup extends DerbySetup {
                         + "\"FIRSTNAME\"VARCHAR(50),"
                         + "\"LASTNAME\" VARCHAR(50),"
                         + "\"COURSE\"VARCHAR(50),"                     
-                        + "\"EMAIL\" VARCHAR(100)"                  
+                        + "\"EMAIL\" VARCHAR(100),"   
+                        + "\"TRANSCRIPT\" BLOB"
                         + ")";
 
                 System.out.println(sqlText);
@@ -54,3 +55,4 @@ public class StudentSetup extends DerbySetup {
         closeConnection();
     }
 }
+

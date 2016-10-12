@@ -5,18 +5,9 @@
  */
 package ugcs;
 
-import com.itextpdf.text.BaseColor;
-import com.itextpdf.text.Chunk;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.Font;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Phrase;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
@@ -32,8 +23,6 @@ import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -54,12 +43,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
@@ -109,7 +95,8 @@ public class CalendarviewController implements Initializable {
     Button exitbutton;
     @FXML
     DatePicker datepick;
-
+    @FXML
+    Button createCon;
     @FXML
     ComboBox combo;
 
@@ -264,27 +251,35 @@ public class CalendarviewController implements Initializable {
                 agenda.setSkin((new AgendaDaysFromDisplayedSkin(agenda)));
             }
         });
+        createCon.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                handleTransitionButton(e, "calendarS.png", "loginS.png", "StudentAndCons.fxml", "Create Consultation");
+
+            }
+        });
 
         logOut.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
                 deleteTemp();
                 handleTransitionButton(e, "calendarS.png", "loginS.png", "LoginPage.fxml", "Login");
-            };
+            }
+        ;
         });
         rDash.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                deleteTemp();
                 handleTransitionButton(e, "calendarS.png", "dashS.png", "Dashboard.fxml", "Home");
-            };
+            }
+        ;
         });
         rPrev.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                deleteTemp();
                 handleTransitionButton(e, "calendarS.png", "dashS.png", "Dashboard.fxml", "Home");
-            };
+            }
+        ;
         });
         readPass();
     }

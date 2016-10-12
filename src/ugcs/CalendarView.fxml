@@ -24,7 +24,7 @@
       </ImageView>
       <Button fx:id="logOut" layoutX="1096.0" layoutY="136.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="87.0" stylesheets="@Resources/returnandlogout.css" text="Logout" textAlignment="CENTER" textFill="WHITE" />
       <DatePicker fx:id="datepick" layoutX="11.0" layoutY="196.0" prefHeight="34.0" prefWidth="197.0" promptText="Choose a date..." />
-      <Button fx:id="create" layoutX="308.0" layoutY="196.0" mnemonicParsing="false" onAction="#create" prefHeight="34.0" prefWidth="141.0" stylesheets="@Resources/test.css" text="Create Consultation" textFill="WHITE" />
+      <Button fx:id="createCon" layoutX="308.0" layoutY="196.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="141.0" stylesheets="@Resources/test.css" text="Create Consultation" textFill="WHITE" />
       <Agenda fx:id="agenda" layoutX="13.0" layoutY="256.0" pickOnBounds="false" prefHeight="409.0" prefWidth="909.0" />
       <ComboBox fx:id="combo" layoutX="208.0" layoutY="196.0" prefHeight="34.0" prefWidth="87.0" promptText="time..." />
       <ToggleButton fx:id="tb" layoutX="545.0" layoutY="196.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="57.0" text="Day" />

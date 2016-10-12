@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ugcs.CareerGuidanceFormController">
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ugcs.AttendancePerformanceFormController">
    <children>
       <ImageView fitHeight="804.0" fitWidth="1200.0">
          <image>
@@ -20,25 +20,10 @@
       <AnchorPane layoutX="788.0" layoutY="277.0" prefHeight="132.0" prefWidth="115.0" style="-fx-background-color: silver;">
          <children>
             <Label layoutX="32.0" layoutY="8.0" text="Priority" />
-            <ComboBox fx:id="priorityChoice" layoutX="16.0" layoutY="32.0" prefHeight="28.0" prefWidth="77.0" style="-fx-border-color: black;">
-               <effect>
-                  <Glow />
-               </effect>
-            </ComboBox>
             <Label layoutX="39.0" layoutY="66.0" text="Type" />
-            <ComboBox fx:id="typeChoice" layoutX="19.0" layoutY="90.0" prefHeight="28.0" prefWidth="77.0" style="-fx-border-color: black;">
-               <effect>
-                  <Glow />
-               </effect>
-            </ComboBox>
          </children>
       </AnchorPane>
       <DatePicker fx:id="datePicked" layoutX="753.0" layoutY="418.0" prefHeight="29.0" prefWidth="158.0" promptText="Select a date..." style="-fx-border-color: black;" />
-      <ComboBox fx:id="timePicked" layoutX="771.0" layoutY="467.0" prefHeight="28.0" prefWidth="120.0" promptText="time..." style="-fx-border-color: black;">
-         <effect>
-            <Glow />
-         </effect>
-      </ComboBox>
       <Accordion layoutX="14.0" layoutY="157.0" />
       <Label layoutX="48.0" layoutY="139.0" prefHeight="23.0" prefWidth="61.0" text="UGCS" textFill="WHITE">
          <font>
@@ -61,18 +46,33 @@
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
                   <Label layoutX="15.0" layoutY="149.0" text="Student Email:" />
-                  <TextField fx:id="eMail" layoutX="15.0" layoutY="172.0" prefHeight="27.0" prefWidth="550.0" />
-                  <TextField fx:id="lName" layoutX="300.0" layoutY="45.0" prefHeight="27.0" prefWidth="265.0" />
+                  <TextField fx:id="eMail" editable="false" layoutX="15.0" layoutY="172.0" opacity="0.51" prefHeight="27.0" prefWidth="550.0">
+                     <effect>
+                        <InnerShadow height="11.89" radius="7.7225" />
+                     </effect></TextField>
+                  <TextField fx:id="course" editable="false" layoutX="300.0" layoutY="45.0" opacity="0.51" prefHeight="27.0" prefWidth="265.0">
+                     <effect>
+                        <InnerShadow height="11.89" radius="7.7225" />
+                     </effect></TextField>
                   <Label layoutX="301.0" layoutY="88.0" text="Student Last Name:" />
                   <Label layoutX="16.0" layoutY="88.0" prefHeight="17.0" prefWidth="130.0" text="Student First Name:" />
                   <Label layoutX="15.0" layoutY="211.0" text="Notes:" />
                   <TextArea fx:id="notesField" layoutX="15.0" layoutY="234.0" prefHeight="114.0" prefWidth="550.0" />
                   <Label layoutX="15.0" layoutY="20.0" prefHeight="16.0" prefWidth="27.0" text="zID:" />
-                  <TextField fx:id="fName" layoutX="15.0" layoutY="111.0" prefHeight="27.0" prefWidth="265.0" />
-                  <TextField fx:id="zId" layoutX="15.0" layoutY="45.0" prefHeight="27.0" prefWidth="265.0" />
+                  <TextField fx:id="fName" editable="false" layoutX="15.0" layoutY="111.0" opacity="0.51" prefHeight="27.0" prefWidth="265.0">
+                     <effect>
+                        <InnerShadow height="11.89" radius="7.7225" />
+                     </effect></TextField>
+                  <TextField fx:id="zId" editable="false" layoutX="15.0" layoutY="45.0" opacity="0.51" prefHeight="27.0" prefWidth="265.0">
+                     <effect>
+                        <InnerShadow height="11.89" radius="7.7225" />
+                     </effect></TextField>
                   <Label layoutX="300.0" layoutY="20.0" prefHeight="17.0" prefWidth="48.0" text="Course:" />
-                  <TextField fx:id="lName" layoutX="301.0" layoutY="111.0" prefHeight="27.0" prefWidth="265.0" />
-                  <CheckBox layoutX="17.0" layoutY="359.0" mnemonicParsing="false" text="Select if another staff member present" />
+                  <TextField fx:id="lName" editable="false" layoutX="301.0" layoutY="111.0" opacity="0.51" prefHeight="27.0" prefWidth="265.0">
+                     <effect>
+                        <InnerShadow height="11.89" radius="7.7225" />
+                     </effect></TextField>
+                  <CheckBox fx:id="staffcheck" layoutX="17.0" layoutY="359.0" mnemonicParsing="false" text="Select if another staff member present" />
                </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -80,7 +80,7 @@
                   <AnchorPane layoutX="29.0" layoutY="14.0" prefHeight="180.0" prefWidth="252.0" style="-fx-background-color: silver;">
                      <children>
                         <Label layoutX="14.0" layoutY="6.0" text="Priority" />
-                        <ComboBox fx:id="priorityChoice1" layoutX="12.0" layoutY="30.0" prefHeight="27.0" prefWidth="229.0" style="-fx-border-color: black;">
+                        <ComboBox fx:id="priorityChoice" layoutX="12.0" layoutY="30.0" prefHeight="27.0" prefWidth="229.0" style="-fx-border-color: black;">
                            <effect>
                               <Glow />
                            </effect>
@@ -88,14 +88,16 @@
                      </children>
                   </AnchorPane>
                   <DatePicker fx:id="datePicked1" layoutX="41.0" layoutY="109.0" prefHeight="29.0" prefWidth="229.0" promptText="Select a date..." style="-fx-border-color: black;" />
-                  <ComboBox fx:id="timePicked1" layoutX="41.0" layoutY="147.0" prefHeight="29.0" prefWidth="229.0" promptText="time..." style="-fx-border-color: black;">
+                  <ComboBox fx:id="timePicked" layoutX="41.0" layoutY="147.0" prefHeight="29.0" prefWidth="229.0" promptText="time..." style="-fx-border-color: black;">
                      <effect>
                         <Glow />
                      </effect>
                   </ComboBox>
                   <Button fx:id="createButton" layoutX="29.0" layoutY="304.0" mnemonicParsing="false" onAction="#Create" prefHeight="29.0" prefWidth="252.0" text="Create Consultation" />
-                  <Button fx:id="cancelButton" layoutX="29.0" layoutY="342.0" mnemonicParsing="false" onAction="#Cancel" prefHeight="29.0" prefWidth="252.0" text="Cancel" />
-                  <Button fx:id="createButton1" layoutX="30.0" layoutY="233.0" mnemonicParsing="false" onAction="#Create" prefHeight="29.0" prefWidth="252.0" text="Upload Student Transcript" />
+                  <Button fx:id="backHome" layoutX="29.0" layoutY="342.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="252.0" text="Cancel" />
+                  <Button fx:id="upload" layoutX="34.0" layoutY="200.0" mnemonicParsing="false" onAction="#Upload" prefHeight="29.0" prefWidth="252.0" text="Upload Student Transcript" />
+                  <ImageView fx:id="imageaa" fitHeight="48.0" fitWidth="61.0" layoutX="41.0" layoutY="243.0" opacity="0.7" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="viewlabel" layoutX="113.0" layoutY="259.0" text="View Transcript" />
                </children>
             </AnchorPane>
          </items>

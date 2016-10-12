@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ugcs.StudentAndConsController">
    <children>
       <ImageView fitHeight="800.0" fitWidth="1203.0" layoutX="-1.0" pickOnBounds="true">
          <image>
@@ -19,7 +20,7 @@
          </font>
       </Label>
       <Button layoutX="1033.0" layoutY="681.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="146.0" text="Return to Previous" />
-      <Button layoutX="14.0" layoutY="681.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="146.0" text="Return to Dashboard" />
+      <Button fx:id="backHome" layoutX="14.0" layoutY="681.0" mnemonicParsing="false" onAction="#backhome" prefHeight="10.0" prefWidth="146.0" text="Return to Dashboard" />
       <Button fx:id="logOut" layoutX="1045.0" layoutY="135.0" mnemonicParsing="false" opacity="0.0" prefHeight="27.0" prefWidth="141.0" text="Logout" textAlignment="CENTER" textFill="WHITE" />
       <Label layoutX="915.0" layoutY="140.0" text="Welcome, " textFill="WHITE" />
       <Label layoutX="980.0" layoutY="140.0" text="FirstName" textFill="WHITE" />
@@ -29,40 +30,40 @@
             <Font name="Arial Bold" size="13.0" />
          </font>
       </Label>
-      <RadioButton layoutX="160.0" layoutY="571.0" mnemonicParsing="false" text="Advanced Standing" />
-      <RadioButton layoutX="160.0" layoutY="596.0" mnemonicParsing="false" text="Attendance and Performance" />
-      <RadioButton layoutX="160.0" layoutY="621.0" mnemonicParsing="false" text="Career Guidance" />
-      <RadioButton layoutX="398.0" layoutY="571.0" mnemonicParsing="false" text="Course Enrolment" />
-      <RadioButton layoutX="398.0" layoutY="596.0" mnemonicParsing="false" text="Disciplinary" />
-      <RadioButton layoutX="398.0" layoutY="621.0" mnemonicParsing="false" text="International Exchange" />
+      <RadioButton fx:id="adbox" layoutX="160.0" layoutY="571.0" mnemonicParsing="false" text="Advanced Standing" />
+      <RadioButton fx:id="apbox" layoutX="160.0" layoutY="596.0" mnemonicParsing="false" text="Attendance and Performance" />
+      <RadioButton fx:id="cgbox" layoutX="160.0" layoutY="621.0" mnemonicParsing="false" text="Career Guidance" />
+      <RadioButton fx:id="cebox" layoutX="398.0" layoutY="571.0" mnemonicParsing="false" text="Course Enrolment" />
+      <RadioButton fx:id="dpbox" layoutX="398.0" layoutY="596.0" mnemonicParsing="false" text="Disciplinary" />
+      <RadioButton fx:id="iebox" layoutX="398.0" layoutY="621.0" mnemonicParsing="false" text="International Exchange" />
       <SplitPane dividerPositions="0.7" layoutX="157.0" layoutY="232.0" prefHeight="310.0" prefWidth="887.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TableView fx:id="consulttable" prefHeight="310.0" prefWidth="616.0">
+                  <TableView fx:id="studenttable" prefHeight="310.0" prefWidth="616.0">
                      <columns>
-                        <TableColumn fx:id="zidentitycol" prefWidth="100.0" text="zID" />
-                        <TableColumn fx:id="firstnamecol" prefWidth="102.0" text="First Name" />
-                        <TableColumn fx:id="lastnamecol" minWidth="0.0" prefWidth="102.0" text="Last Name" />
+                        <TableColumn fx:id="zidcol" prefWidth="100.0" text="zID" />
+                        <TableColumn fx:id="fnamecol" prefWidth="102.0" text="First Name" />
+                        <TableColumn fx:id="lnamecol" minWidth="0.0" prefWidth="102.0" text="Last Name" />
                         <TableColumn fx:id="emailcol" prefWidth="189.0" text="Email" />
                         <TableColumn fx:id="coursecol" prefWidth="122.0" text="Course" />
                      </columns>
                   </TableView>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="308.0" prefWidth="314.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="264.0" prefWidth="261.0">
                <children>
                   <Label layoutX="8.0" layoutY="6.0" text="zID:" />
                   <Label layoutX="8.0" layoutY="58.0" text="First Name:" />
-                  <TextField layoutX="8.0" layoutY="23.0" prefHeight="27.0" prefWidth="245.0" />
-                  <TextField layoutX="8.0" layoutY="75.0" prefHeight="27.0" prefWidth="245.0" />
-                  <TextField layoutX="8.0" layoutY="127.0" prefHeight="27.0" prefWidth="245.0" />
+                  <TextField fx:id="zidtex" layoutX="8.0" layoutY="23.0" prefHeight="27.0" prefWidth="245.0" />
+                  <TextField fx:id="fnametex" layoutX="8.0" layoutY="75.0" prefHeight="27.0" prefWidth="245.0" />
+                  <TextField fx:id="lnametex" layoutX="8.0" layoutY="127.0" prefHeight="27.0" prefWidth="245.0" />
                   <Label layoutX="8.0" layoutY="110.0" text="Last Name:" />
                   <Label layoutX="8.0" layoutY="163.0" text="Email:" />
-                  <TextField layoutX="8.0" layoutY="180.0" prefHeight="27.0" prefWidth="245.0" />
-                  <TextField layoutX="8.0" layoutY="235.0" prefHeight="27.0" prefWidth="245.0" />
+                  <TextField fx:id="emailtex" layoutX="8.0" layoutY="180.0" prefHeight="27.0" prefWidth="245.0" />
+                  <TextField fx:id="coursetex" layoutX="8.0" layoutY="235.0" prefHeight="27.0" prefWidth="245.0" />
                   <Label layoutX="8.0" layoutY="218.0" text="Course:" />
-                  <Button layoutX="8.0" layoutY="267.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="245.0" text="Add Student" />
+                  <Button fx:id="addStudentbutton" layoutX="8.0" layoutY="267.0" mnemonicParsing="false" onAction="#addStudent" prefHeight="36.0" prefWidth="245.0" text="Add Student" />
                </children>
             </AnchorPane>
         </items>
@@ -72,5 +73,29 @@
             <Font name="Arial Bold" size="13.0" />
          </font>
       </Label>
+      <Button fx:id="createButton" layoutX="1058.0" layoutY="232.0" mnemonicParsing="false" onAction="#createConsult" opacity="0.84" prefHeight="308.0" prefWidth="93.0" style="-fx-background-color: silver;" text="&gt;">
+         <font>
+            <Font name="Calibri" size="17.0" />
+         </font>
+         <effect>
+            <SepiaTone level="0.0">
+               <input>
+                  <Lighting>
+                     <bumpInput>
+                        <Shadow />
+                     </bumpInput>
+                     <light>
+                        <Light.Distant />
+                     </light>
+                  </Lighting>
+               </input>
+            </SepiaTone>
+         </effect>
+      </Button>
+      <Button fx:id="viewbutton" layoutX="654.0" layoutY="197.0" mnemonicParsing="false" onAction="#ViewTranscript" style="-fx-background-color: white;" text="View Transcript" underline="true">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

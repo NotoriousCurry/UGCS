@@ -5,11 +5,14 @@
  */
 package ugcs.Queries;
 
+import java.sql.Blob;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import ugcs.Model.Student;
 
 /**
@@ -19,7 +22,7 @@ import ugcs.Model.Student;
 public class StudentQueries extends ugcs.Database.DerbySetup {
 
     PreparedStatement getAllStudent = null;
-    PreparedStatement insertStudent = null;
+    PreparedStatement insertStudent;
     PreparedStatement updateStudent = null;
     PreparedStatement deleteStudent = null;
 
@@ -34,7 +37,7 @@ public class StudentQueries extends ugcs.Database.DerbySetup {
             while (rs.next()) {
                 students.add(
                         new Student(rs.getString("ZID"), rs.getString("FIRSTNAME"), rs.getString("LASTNAME"),
-                                rs.getString("COURSE"), rs.getString("EMAIL"))
+                                rs.getString("COURSE"), rs.getString("EMAIL"), rs.getBlob("TRANSCRIPT"))
                 );
             }
             rs.close();
@@ -45,17 +48,21 @@ public class StudentQueries extends ugcs.Database.DerbySetup {
         closeConnection();
         return students;
     }
-    
+   
      public void insertStudents(Student toInsert) {
         openConnection();
         try {
-            insertStudent = conn.prepareStatement("insert into APP.STUDENT (ZID, FIRSTNAME, LASTNAME, COURSE, EMAIL) "
-                    + "values (?, ?, ?, ?, ?)");
-            insertStudent.setString(1, toInsert.getzID());
-            insertStudent.setString(2, toInsert.getfName());
-            insertStudent.setString(3, toInsert.getlName());
+            insertStudent = conn.prepareStatement("insert into APP.STUDENT (ZID, FIRSTNAME, LASTNAME, COURSE, EMAIL, TRANSCRIPT) "
+                    + "values (?, ?, ?, ?, ?, ?)");
+            insertStudent.setString(1, toInsert.getZID());
+            insertStudent.setString(2, toInsert.getFName());
+            insertStudent.setString(3, toInsert.getLName());
             insertStudent.setString(4, toInsert.getCourse());
-            insertStudent.setString(5, toInsert.geteMail());
+            insertStudent.setString(5, toInsert.getEMail());
+            Blob blob = null;
+           insertStudent.setBlob(6, blob);
+
+            
             insertStudent.executeUpdate();
 
         } catch (SQLException ex) {
@@ -68,11 +75,14 @@ public class StudentQueries extends ugcs.Database.DerbySetup {
     public void updateStudents(Student toUpdate) {
         openConnection();
         try {
-            updateStudent = conn.prepareStatement("update APP.STUDENT set FIRSTNAME=?, LASTNAME=?, COURSE=?, EMAIL=?");
-            updateStudent.setString(1, toUpdate.getfName());
-            updateStudent.setString(2, toUpdate.getlName());
+            updateStudent = conn.prepareStatement("update APP.STUDENT set FIRSTNAME=?, LASTNAME=?, COURSE=?, EMAIL=? , TRANSCRIPT=?");
+            updateStudent.setString(1, toUpdate.getFName());
+            updateStudent.setString(2, toUpdate.getLName());
             updateStudent.setString(3, toUpdate.getCourse());
-            updateStudent.setString(4, toUpdate.geteMail());
+            updateStudent.setString(4, toUpdate.getEMail());
+            Blob blob = null;
+            updateStudent.setBlob(5, blob);
+           // updateStudent.setBlob(5, toUpdate.getTRanscript());
 
             updateStudent.executeUpdate();
 
@@ -86,12 +96,16 @@ public class StudentQueries extends ugcs.Database.DerbySetup {
         openConnection();
         try {
             deleteStudent = conn.prepareStatement("delete from APP.STUDENT where ZID = ?");
-            deleteStudent.setString(1, toDelete.getzID());
+            deleteStudent.setString(1, toDelete.getZID());
 
             deleteStudent.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         closeConnection();
+    }
+
+    public void updateStudents(String fName, String lName, String eMail, String course, Blob tRanscript) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
