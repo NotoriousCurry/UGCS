@@ -154,10 +154,14 @@ public class AttendancePerformanceFormController implements Initializable {
                         System.out.println("read = " + ImageIO.read(in));
 
                         imageaa.setImage(SwingFXUtils.toFXImage(read, null));
+                        conn.close();
+                        in.close();
+                        rs.close();
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
-                    }
+                    } rs.close();
+                    conn.close();
                 } catch (SQLException ex) {
                     Logger.getLogger(VIEWIMAGEController.class.getName()).log(Level.SEVERE, null, ex);
                 }
