@@ -254,7 +254,7 @@ public class CalendarviewController implements Initializable {
         createCon.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                handleTransitionButton(e, "calendarS.png", "loginS.png", "StudentAndCons.fxml", "Create Consultation");
+                handleTransitionButton(e, "calendarS.png", "conS.png", "StudentAndCons.fxml", "Create Consultation");
 
             }
         });

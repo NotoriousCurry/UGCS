@@ -164,9 +164,9 @@ public class StudentAndConsController implements Initializable {
         System.out.println("Has value " + getselected());
 
         if (adbox.isSelected()) {
-            handleTransitionButton(event, "calendarS.png", "loginS.png", "AdvanceStandingForm.fxml", "Create Consultation");
+            handleTransitionButton(event, "calendarS.png", "asformS.png", "AdvanceStandingForm.fxml", "Create Consultation");
         } else if (apbox.isSelected()) {
-            handleTransitionButton(event, "calendarS.png", "loginS.png", "AttendancePerformanceForm.fxml", "Create Consultation");
+            handleTransitionButton(event, "calendarS.png", "apformS.png", "AttendancePerformanceForm.fxml", "Create Consultation");
         } else if (cgbox.isSelected()) {
             handleTransitionButton(event, "calendarS.png", "loginS.png", "CareerGuidanceForm.fxml", "Create Consultation");
         } else if (cebox.isSelected()) {
@@ -215,7 +215,7 @@ public class StudentAndConsController implements Initializable {
 
     @FXML
     public void backhome(ActionEvent event) {
-        handleTransitionButton(event, "calendarS.png", "loginS.png", "CalendarView.fxml", "Consultations");
+        handleTransitionButton(event, "conS.png", "calendarS.png", "CalendarView.fxml", "Consultations");
     }
 
     private static String studentst;

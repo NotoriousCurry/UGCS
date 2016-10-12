@@ -50,11 +50,13 @@ import javafx.scene.control.TextField;
 import java.awt.Image;
 import java.io.ByteArrayInputStream;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
+import ugcs.Audio.AudioMethods;
 import ugcs.Queries.ConsultationQueries;
 import ugcs.Model.Consultation;
 import ugcs.Model.Student;
@@ -126,6 +128,7 @@ public class AttendancePerformanceFormController implements Initializable {
                     rs = pstmt.executeQuery();
                     rs.next();
                     Blob blob2 = rs.getBlob("TRANSCRIPT");
+                    if(blob2!=null){
                     byte[] aa = blob2.getBytes(1, (int) blob2.length());
                     // BufferedImage bi = ImageIO.read(blob2.getBinaryStream());
                     //      System.out.println("bufferimage = " + bi);
@@ -153,6 +156,7 @@ public class AttendancePerformanceFormController implements Initializable {
                         imageaa.setImage(SwingFXUtils.toFXImage(read, null));
                     } catch (IOException ex) {
                         ex.printStackTrace();
+                    }
                     }
                 } catch (SQLException ex) {
                     Logger.getLogger(VIEWIMAGEController.class.getName()).log(Level.SEVERE, null, ex);
@@ -486,7 +490,7 @@ ex.printStackTrace();                }*/
     private void gotoHome(ActionEvent event) {
         Stage primaryStage = (Stage) backHome.getScene().getWindow();
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("calendarview.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("CalendarView.fxml"));
             Scene scene = new Scene(root);
             primaryStage.setTitle("Home Screen");
             primaryStage.setScene(scene);
@@ -494,5 +498,22 @@ ex.printStackTrace();                }*/
         } catch (Exception e) {
 
         }
+    }
+        private void handleAudio(String file) {
+        AudioMethods am = new AudioMethods();
+
+        am.playAudio(file);
+    }
+
+    private void handleTransitionButton(ActionEvent e, String a, String b, String c, String d) {
+        AnimationsTransitions at = new AnimationsTransitions();
+        at.changeScreenButton(e, a, b, c, d);
+
+    }
+
+    private void handleTransitionKey(KeyEvent e, String a, String b, String c, String d) {
+        AnimationsTransitions at = new AnimationsTransitions();
+        at.changeScreenKey(e, a, b, c, d);
+
     }
 }

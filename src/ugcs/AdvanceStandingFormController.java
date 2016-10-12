@@ -77,6 +77,10 @@ public class AdvanceStandingFormController implements Initializable {
     Button backHome;
     private @FXML
     CheckBox staffcheck;
+    private @FXML
+    Button rDash;
+    private @FXML
+    Button rPrev;
 
 
     @Override
@@ -111,7 +115,23 @@ public class AdvanceStandingFormController implements Initializable {
         backHome.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                handleTransitionButton(e, "calendarS.png", "loginS.png", "StudentAndCons.fxml", "Create Consultation");
+                handleTransitionButton(e, "asformS.png", "conS.png", "StudentAndCons.fxml", "Create Consultation");
+
+            }
+        });
+        
+        rDash.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                handleTransitionButton(e, "asformS.png", "dashS.png", "Dashboard.fxml", "Create Consultation");
+
+            }
+        });
+        
+        rPrev.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                handleTransitionButton(e, "asformS.png", "conS.png", "StudentAndCons.fxml", "Create Consultation");
 
             }
         });
@@ -218,7 +238,7 @@ public class AdvanceStandingFormController implements Initializable {
     private void gotoHome(ActionEvent event) {
         Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("calendarview.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("CalendarView.fxml"));
             Scene scene = new Scene(root);
             primaryStage.setTitle("Home Screen");
             primaryStage.setScene(scene);
