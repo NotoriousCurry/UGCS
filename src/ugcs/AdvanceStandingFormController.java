@@ -5,6 +5,7 @@
  */
 package ugcs;
 
+import java.io.File;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -12,10 +13,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import javafx.animation.Interpolator;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,11 +20,9 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -35,17 +30,11 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import javafx.util.Duration;
+import ugcs.Audio.AudioMethods;
 import ugcs.Queries.ConsultationQueries;
 import ugcs.Model.Consultation;
 import ugcs.Model.Student;
@@ -89,6 +78,7 @@ public class AdvanceStandingFormController implements Initializable {
     private @FXML
     CheckBox staffcheck;
 
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         StudentQueries sq = new StudentQueries();
@@ -121,7 +111,8 @@ public class AdvanceStandingFormController implements Initializable {
         backHome.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                gotoHome(e);
+                handleTransitionButton(e, "calendarS.png", "loginS.png", "StudentAndCons.fxml", "Create Consultation");
+
             }
         });
     }
@@ -235,5 +226,35 @@ public class AdvanceStandingFormController implements Initializable {
         } catch (Exception e) {
 
         }
+    }
+
+    private void deleteTemp() {
+        try {
+            File file = new File("temp.txt");
+            if (file.delete()) {
+                System.out.println(file.getName() + " is Deleted");
+            } else {
+                System.out.println("Delete operation failed");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void handleAudio(String file) {
+        AudioMethods am = new AudioMethods();
+
+        am.playAudio(file);
+    }
+
+    private void handleTransitionButton(ActionEvent e, String a, String b, String c, String d) {
+        AnimationsTransitions at = new AnimationsTransitions();
+        at.changeScreenButton(e, a, b, c, d);
+
+    }
+
+    private void handleTransitionKey(KeyEvent e, String a, String b, String c, String d) {
+        AnimationsTransitions at = new AnimationsTransitions();
+        at.changeScreenKey(e, a, b, c, d);
     }
 }
