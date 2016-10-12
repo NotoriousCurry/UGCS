@@ -16,69 +16,99 @@
             <Image url="@Resources/genericbackroung3605.png" />
          </image>
       </ImageView>
-      <CheckBox layoutX="615.0" layoutY="501.0" mnemonicParsing="false" text="Load Transcript" />
-      <TextField fx:id="lName" layoutX="579.0" layoutY="266.0" prefHeight="26.0" prefWidth="150.0" />
-      <Label layoutX="493.0" layoutY="307.0" prefHeight="17.0" prefWidth="48.0" text="Course:" />
-      <TextField fx:id="zId" layoutX="298.0" layoutY="303.0" prefHeight="27.0" prefWidth="147.0" />
-      <TextField fx:id="fName" layoutX="298.0" layoutY="268.0" prefHeight="11.0" prefWidth="150.0" />
-      <Label layoutX="244.0" layoutY="304.0" prefHeight="16.0" prefWidth="27.0" text="ZID:" />
-      <TextArea fx:id="notesField" layoutX="293.0" layoutY="390.0" prefHeight="73.0" prefWidth="427.0" />
-      <Label layoutX="234.0" layoutY="396.0" text="Notes:" />
-      <Label layoutX="207.0" layoutY="269.0" prefHeight="1.0" prefWidth="80.0" text="First Name:" />
-      <AnchorPane layoutX="841.0" layoutY="176.0" prefHeight="123.0" prefWidth="115.0" style="-fx-background-color: silver;">
-         <children>
-            <Label layoutX="32.0" layoutY="8.0" text="Priority" />
-            <ComboBox fx:id="priorityChoice" layoutX="16.0" layoutY="32.0" prefHeight="0.0" prefWidth="77.0" style="-fx-border-color: black;">
-               <effect>
-                  <Glow />
-               </effect>
-            </ComboBox>
-            <Label layoutX="42.0" layoutY="59.0" text="Type" />
-            <ComboBox fx:id="typeChoice" layoutX="20.0" layoutY="82.0" prefHeight="0.0" prefWidth="77.0" style="-fx-border-color: black;">
-               <effect>
-                  <Glow />
-               </effect>
-            </ComboBox>
-         </children>
-      </AnchorPane>
-      <Label layoutX="481.0" layoutY="266.0" text="Last Name:" />
-      <TextField fx:id="lName" layoutX="578.0" layoutY="304.0" prefHeight="26.0" prefWidth="150.0" />
-      <TextField fx:id="eMail" layoutX="293.0" layoutY="345.0" prefHeight="27.0" prefWidth="432.0" />
-      <Label layoutX="236.0" layoutY="350.0" text="Email:" />
-      <Button fx:id="createButton" layoutX="513.0" layoutY="496.0" mnemonicParsing="false" onAction="#Create" text="Create" />
-      <Button fx:id="cancelButton" layoutX="366.0" layoutY="497.0" mnemonicParsing="false" onAction="#Cancel" text="Cancel" />
-      <DatePicker fx:id="datePicked" layoutX="805.0" layoutY="311.0" prefHeight="29.0" prefWidth="158.0" promptText="Select a date..." style="-fx-border-color: black;" />
-      <ComboBox fx:id="timePicked" layoutX="822.0" layoutY="351.0" prefHeight="28.0" prefWidth="120.0" promptText="time..." style="-fx-border-color: black;">
-         <effect>
-            <Glow />
-         </effect>
-      </ComboBox>
-      <Label layoutX="383.0" layoutY="218.0" text="Disciplinary Form">
-         <font>
-            <Font name="Arial Bold" size="24.0" />
-         </font>
-      </Label>
       <Accordion layoutX="14.0" layoutY="157.0" />
-      <Label layoutX="61.0" layoutY="138.0" text="UGCS" textFill="WHITE">
-         <font>
-            <Font name="Arial" size="20.0" />
-         </font>
-      </Label>
-      <Label layoutX="275.0" layoutY="137.0" text="Forms" textFill="WHITE">
-         <font>
-            <Font name="Arial" size="20.0" />
-         </font>
-      </Label>
-      <Label layoutX="474.0" layoutY="138.0" text="Disciplinary Form" textFill="WHITE">
-         <font>
-            <Font name="Arial" size="20.0" />
-         </font>
-      </Label>
-      <TitledPane animated="false" layoutY="251.0" prefHeight="339.0" prefWidth="188.0" text="Forms" />
       <AnchorPane layoutX="342.0" layoutY="-103.0" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
       <AnchorPane layoutX="710.0" layoutY="371.0" prefHeight="69.0" prefWidth="147.0" />
-      <CheckBox layoutX="814.0" layoutY="387.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="155.0" text="Non Applicable (N/A)" />
-      <ComboBox layoutX="850.0" layoutY="489.0" prefHeight="27.0" prefWidth="121.0" />
-      <Label layoutX="853.0" layoutY="463.0" text="Level of Plagiarism" />
+      <SplitPane dividerPositions="0.65" layoutX="146.0" layoutY="205.0" prefHeight="461.0" prefWidth="934.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <Label layoutX="15.0" layoutY="149.0" text="Student Email:" />
+                  <TextField fx:id="eMail" editable="false" layoutX="15.0" layoutY="172.0" opacity="0.51" prefHeight="27.0" prefWidth="550.0">
+                     <effect>
+                        <InnerShadow height="11.89" radius="7.7225" />
+                     </effect>
+                  </TextField>
+                  <TextField fx:id="course" editable="false" layoutX="300.0" layoutY="45.0" opacity="0.51" prefHeight="27.0" prefWidth="265.0">
+                     <effect>
+                        <InnerShadow height="11.89" radius="7.7225" />
+                     </effect>
+                  </TextField>
+                  <Label layoutX="301.0" layoutY="88.0" text="Student Last Name:" />
+                  <Label layoutX="16.0" layoutY="88.0" prefHeight="17.0" prefWidth="130.0" text="Student First Name:" />
+                  <Label layoutX="15.0" layoutY="211.0" text="Notes:" />
+                  <TextArea fx:id="notesField" layoutX="15.0" layoutY="234.0" prefHeight="115.0" prefWidth="550.0" />
+                  <Label layoutX="15.0" layoutY="20.0" prefHeight="16.0" prefWidth="27.0" text="zID:" />
+                  <TextField fx:id="fName" editable="false" layoutX="15.0" layoutY="111.0" opacity="0.51" prefHeight="27.0" prefWidth="265.0">
+                     <effect>
+                        <InnerShadow height="11.89" radius="7.7225" />
+                     </effect>
+                  </TextField>
+                  <TextField fx:id="zId" editable="false" layoutX="15.0" layoutY="45.0" opacity="0.51" prefHeight="27.0" prefWidth="265.0">
+                     <effect>
+                        <InnerShadow height="11.89" radius="7.7225" />
+                     </effect>
+                  </TextField>
+                  <Label layoutX="300.0" layoutY="20.0" prefHeight="17.0" prefWidth="48.0" text="Course:" />
+                  <TextField fx:id="lName" editable="false" layoutX="301.0" layoutY="111.0" opacity="0.51" prefHeight="27.0" prefWidth="265.0">
+                     <effect>
+                        <InnerShadow height="11.89" radius="7.7225" />
+                     </effect>
+                  </TextField>
+                  <CheckBox fx:id="staffcheck" layoutX="14.0" layoutY="427.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="301.0" text="Select if another staff member present" />
+                  <CheckBox layoutX="301.0" layoutY="358.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="252.0" text="Non Applicable (N/A)" />
+                  <Label layoutX="16.0" layoutY="358.0" text="Level of Plagiarism" />
+                  <ComboBox layoutX="14.0" layoutY="384.0" prefHeight="27.0" prefWidth="265.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <AnchorPane layoutX="29.0" layoutY="14.0" prefHeight="180.0" prefWidth="252.0" style="-fx-background-color: silver;">
+                     <children>
+                        <ComboBox fx:id="priorityChoice" layoutX="12.0" layoutY="30.0" prefHeight="27.0" prefWidth="229.0" promptText="Priority Level" style="-fx-border-color: black;">
+                           <effect>
+                              <Glow />
+                           </effect>
+                        </ComboBox>
+                        <DatePicker fx:id="datePicked" layoutX="12.0" layoutY="82.0" prefHeight="29.0" prefWidth="229.0" promptText="Select a date..." style="-fx-border-color: black;" />
+                     </children>
+                  </AnchorPane>
+                  <ComboBox fx:id="timePicked" layoutX="41.0" layoutY="147.0" prefHeight="29.0" prefWidth="229.0" promptText="time..." style="-fx-border-color: black;">
+                     <effect>
+                        <Glow />
+                     </effect>
+                  </ComboBox>
+                  <Button fx:id="createButton" layoutX="30.0" layoutY="365.0" mnemonicParsing="false" onAction="#Create" prefHeight="29.0" prefWidth="252.0" stylesheets="@Resources/test.css" text="Create Consultation" />
+                  <Button fx:id="backHome" layoutX="30.0" layoutY="410.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="252.0" text="Cancel" />
+                  <Button layoutX="30.0" layoutY="233.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="252.0" stylesheets="@Resources/addprintbutton.css" text="Upload Student Transcript" />
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+      <Label layoutX="146.0" layoutY="182.0" text="Please fill out the disciplinary form below:">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Label>
+      <Button fx:id="rDash" layoutY="687.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="146.0" stylesheets="@Resources/returnandlogout.css" text="Return to Dashboard" />
+      <Button fx:id="rPrev" layoutX="1061.0" layoutY="687.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="139.0" stylesheets="@Resources/returnandlogout.css" text="Return to Previous" />
+      <Label layoutX="954.0" layoutY="139.0" text="FirstName" textFill="WHITE" />
+      <Label layoutX="889.0" layoutY="139.0" text="Welcome, " textFill="WHITE" />
+      <Button fx:id="logOut" layoutX="1101.0" layoutY="134.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="87.0" stylesheets="@Resources/returnandlogout.css" text="Logout" textAlignment="CENTER" textFill="WHITE" />
+      <Text fill="WHITE" layoutX="12.0" layoutY="777.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Developed by The Suicide Squad">
+         <font>
+            <Font name="Arial" size="11.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="11.0" layoutY="757.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UNSW Coordinator Information System, School of Information Systems and Technology Management" wrappingWidth="535.6162109375">
+         <font>
+            <Font name="Arial" size="11.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="11.0" layoutY="737.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UNSW Sydney NSW 2052 Australia Telephone +61 2 9385 1000">
+         <font>
+            <Font name="Arial" size="11.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

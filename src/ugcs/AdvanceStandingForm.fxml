@@ -25,21 +25,6 @@
       </Label>
       <Accordion layoutX="14.0" layoutY="157.0" />
       <AnchorPane layoutX="342.0" layoutY="-103.0" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-      <Label layoutX="285.0" layoutY="140.0" text="Forms" textFill="WHITE">
-         <font>
-            <Font name="Arial" size="20.0" />
-         </font>
-      </Label>
-      <Label layoutX="48.0" layoutY="140.0" text="UGCS" textFill="WHITE">
-         <font>
-            <Font name="Arial" size="20.0" />
-         </font>
-      </Label>
-      <Label layoutX="482.0" layoutY="140.0" text="Advance Standing Form" textFill="WHITE">
-         <font>
-            <Font name="Arial" size="20.0" />
-         </font>
-      </Label>
       <SplitPane dividerPositions="0.65" layoutX="150.0" layoutY="254.0" prefHeight="399.0" prefWidth="900.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -71,7 +56,7 @@
                      <effect>
                         <InnerShadow height="11.89" radius="7.7225" />
                      </effect></TextField>
-                  <CheckBox fx:id="staffcheck" layoutX="14.0" layoutY="359.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="252.0" text="Select if another staff member present" />
+                  <CheckBox fx:id="staffcheck" layoutX="14.0" layoutY="359.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="306.0" text="Select if another staff member present" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -98,5 +83,25 @@
             </AnchorPane>
         </items>
       </SplitPane>
+      <Text fill="WHITE" layoutX="11.0" layoutY="778.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Developed by The Suicide Squad">
+         <font>
+            <Font name="Arial" size="11.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="10.0" layoutY="758.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UNSW Coordinator Information System, School of Information Systems and Technology Management" wrappingWidth="535.6162109375">
+         <font>
+            <Font name="Arial" size="11.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="10.0" layoutY="738.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UNSW Sydney NSW 2052 Australia Telephone +61 2 9385 1000">
+         <font>
+            <Font name="Arial" size="11.0" />
+         </font>
+      </Text>
+      <Button fx:id="logOut" layoutX="1101.0" layoutY="135.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="87.0" stylesheets="@Resources/returnandlogout.css" text="Logout" textAlignment="CENTER" textFill="WHITE" />
+      <Label layoutX="889.0" layoutY="140.0" text="Welcome, " textFill="WHITE" />
+      <Label layoutX="954.0" layoutY="140.0" text="FirstName" textFill="WHITE" />
+      <Button fx:id="rPrev" layoutX="1061.0" layoutY="686.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="139.0" stylesheets="@Resources/returnandlogout.css" text="Return to Previous" />
+      <Button fx:id="rDash" layoutY="686.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="146.0" stylesheets="@Resources/returnandlogout.css" text="Return to Dashboard" />
    </children>
 </AnchorPane>

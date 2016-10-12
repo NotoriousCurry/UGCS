@@ -25,21 +25,6 @@
       </AnchorPane>
       <DatePicker fx:id="datePicked" layoutX="753.0" layoutY="418.0" prefHeight="29.0" prefWidth="158.0" promptText="Select a date..." style="-fx-border-color: black;" />
       <Accordion layoutX="14.0" layoutY="157.0" />
-      <Label layoutX="48.0" layoutY="139.0" prefHeight="23.0" prefWidth="61.0" text="UGCS" textFill="WHITE">
-         <font>
-            <Font name="Arial" size="20.0" />
-         </font>
-      </Label>
-      <Label layoutX="271.0" layoutY="139.0" prefHeight="23.0" prefWidth="61.0" text="Forms" textFill="WHITE">
-         <font>
-            <Font name="Arial" size="20.0" />
-         </font>
-      </Label>
-      <Label layoutX="472.0" layoutY="139.0" text="Attendance Performance Form" textFill="WHITE">
-         <font>
-            <Font name="Arial" size="20.0" />
-         </font>
-      </Label>
       <AnchorPane layoutX="342.0" layoutY="-103.0" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
       <SplitPane dividerPositions="0.65" layoutX="160.0" layoutY="264.0" prefHeight="399.0" prefWidth="900.0">
          <items>
@@ -93,9 +78,9 @@
                         <Glow />
                      </effect>
                   </ComboBox>
-                  <Button fx:id="createButton" layoutX="29.0" layoutY="304.0" mnemonicParsing="false" onAction="#Create" prefHeight="29.0" prefWidth="252.0" text="Create Consultation" />
+                  <Button fx:id="createButton" layoutX="29.0" layoutY="304.0" mnemonicParsing="false" onAction="#Create" prefHeight="29.0" prefWidth="252.0" stylesheets="@Resources/test.css" text="Create Consultation" />
                   <Button fx:id="backHome" layoutX="29.0" layoutY="342.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="252.0" text="Cancel" />
-                  <Button fx:id="upload" layoutX="34.0" layoutY="200.0" mnemonicParsing="false" onAction="#Upload" prefHeight="29.0" prefWidth="252.0" text="Upload Student Transcript" />
+                  <Button fx:id="upload" layoutX="34.0" layoutY="200.0" mnemonicParsing="false" onAction="#Upload" prefHeight="29.0" prefWidth="252.0" stylesheets="@Resources/addprintbutton.css" text="Upload Student Transcript" />
                   <ImageView fx:id="imageaa" fitHeight="48.0" fitWidth="61.0" layoutX="41.0" layoutY="243.0" opacity="0.7" pickOnBounds="true" preserveRatio="true" />
                   <Label fx:id="viewlabel" layoutX="113.0" layoutY="259.0" text="View Transcript" />
                </children>
@@ -107,5 +92,25 @@
             <Font name="Arial Bold" size="13.0" />
          </font>
       </Label>
+      <Button fx:id="rDash" layoutY="688.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="146.0" stylesheets="@Resources/returnandlogout.css" text="Return to Dashboard" />
+      <Button fx:id="rPrev" layoutX="1061.0" layoutY="688.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="139.0" stylesheets="@Resources/returnandlogout.css" text="Return to Previous" />
+      <Label layoutX="954.0" layoutY="142.0" text="FirstName" textFill="WHITE" />
+      <Label layoutX="889.0" layoutY="142.0" text="Welcome, " textFill="WHITE" />
+      <Button fx:id="logOut" layoutX="1101.0" layoutY="137.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="87.0" stylesheets="@Resources/returnandlogout.css" text="Logout" textAlignment="CENTER" textFill="WHITE" />
+      <Text fill="WHITE" layoutX="10.0" layoutY="740.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UNSW Sydney NSW 2052 Australia Telephone +61 2 9385 1000">
+         <font>
+            <Font name="Arial" size="11.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="10.0" layoutY="760.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UNSW Coordinator Information System, School of Information Systems and Technology Management" wrappingWidth="535.6162109375">
+         <font>
+            <Font name="Arial" size="11.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="11.0" layoutY="780.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Developed by The Suicide Squad">
+         <font>
+            <Font name="Arial" size="11.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
