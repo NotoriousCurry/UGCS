@@ -19,7 +19,7 @@ import javax.sound.sampled.SourceDataLine;
  * @author sgahe
  */
 public class AudioMethods {
-    
+
     private final int BUFFER_SIZE = 128000;
     private File sFile;
     private AudioInputStream audStream;
@@ -28,58 +28,66 @@ public class AudioMethods {
 
     public AudioMethods() {
     }
-    
-    
-    
+
     public void playAudio(String file) {
-        String audFile = "src/ugcs/Audio/" + file;
-        
         try {
-            sFile = new File(audFile);
-        } catch (Exception e) {
+            new Thread() {
+                public void run() {
+                    String audFile = "src/ugcs/Audio/" + file;
+
+                    try {
+                        sFile = new File(audFile);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        System.exit(1);
+                    }
+
+                    try {
+                        audStream = AudioSystem.getAudioInputStream(sFile);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        System.exit(1);
+                    }
+
+                    audFormat = audStream.getFormat();
+
+                    DataLine.Info inf = new DataLine.Info(SourceDataLine.class, audFormat);
+
+                    try {
+                        sLine = (SourceDataLine) AudioSystem.getLine(inf);
+                        sLine.open(audFormat);
+                    } catch (LineUnavailableException e) {
+                        e.printStackTrace();
+                        System.exit(1);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        System.exit(1);
+                    }
+
+                    sLine.start();
+
+                    int i = 0;
+                    byte[] abData = new byte[BUFFER_SIZE];
+                    while (i
+                            != -1) {
+                        try {
+                            i = audStream.read(abData, 0, abData.length);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        if (i >= 0) {
+                            @SuppressWarnings("unused")
+                            int ii = sLine.write(abData, 0, i);
+                        }
+                    }
+
+                    sLine.drain();
+
+                    sLine.close();
+                }
+            }.start();
+        } catch (Throwable e) {
             e.printStackTrace();
-            System.exit(1);
         }
-        
-        try {
-            audStream = AudioSystem.getAudioInputStream(sFile);
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.exit(1);
-        }
-        
-        audFormat = audStream.getFormat();
-        
-        DataLine.Info inf = new DataLine.Info(SourceDataLine.class, audFormat);
-        
-        try {
-            sLine = (SourceDataLine) AudioSystem.getLine(inf);
-            sLine.open(audFormat);
-        } catch (LineUnavailableException e) {
-            e.printStackTrace();
-            System.exit(1);
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.exit(1);
-        }
-        
-        sLine.start();
-        
-        int i = 0;
-        byte[] abData = new byte[BUFFER_SIZE];
-        while (i != -1) {
-            try {
-                i = audStream.read(abData, 0, abData.length);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if (i >= 0) {
-                @SuppressWarnings("unused")
-                int ii = sLine.write(abData, 0, i);
-            }
-        }
-        
-        sLine.drain();
-        sLine.close();
     }
 }
