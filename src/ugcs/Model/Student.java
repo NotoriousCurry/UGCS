@@ -23,6 +23,17 @@ public class Student {
     private String eMail;
     private Blob tRanscript;
 
+    public Student() {
+        this.zID = null;
+        this.fName = null;
+        this.lName = null;
+        this.course = null;
+        this.eMail = null;
+    }
+
+    
+    
+    
     public Student(String zID, String fName, String lName, String course, String eMail, Blob tRanscript) {
         this.zID = zID;
         this.fName = fName;

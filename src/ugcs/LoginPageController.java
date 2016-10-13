@@ -12,6 +12,9 @@ import java.net.URL;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import javafx.animation.FadeTransition;
+import javafx.animation.PathTransition;
+import javafx.animation.PathTransition.OrientationType;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -23,7 +26,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import ugcs.Queries.UgcQueries;
 import org.jasypt.util.password.BasicPasswordEncryptor;
 import ugcs.Audio.AudioMethods;
@@ -36,8 +43,6 @@ import ugcs.Audio.AudioMethods;
 public class LoginPageController implements Initializable {
 
     @FXML
-    private Label label;
-    @FXML
     private Button login;
     @FXML
     private TextField usr;
@@ -45,6 +50,10 @@ public class LoginPageController implements Initializable {
     private PasswordField pass;
     @FXML
     private Button exitbutton;
+    @FXML
+    private Label incPass;
+
+    private PathTransition pathT = new PathTransition();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -55,15 +64,18 @@ public class LoginPageController implements Initializable {
                 usr.requestFocus();
             }
         });
+        
+     
 
         login.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
                 if (loginCheck()) {
-                    System.out.println("FCK YEA LOGIN");
                     handleTransitionButton(e, "loginS.png", "dashS.png", "Dashboard.fxml", "Home");
                 } else {
-                    System.out.println("FCKED UP SON");
+                    incPass.setVisible(true);
+                    animateLabel(pathT, incPass);
+                    handleAudio("beep_short_off.wav");
                 }
             }
         ;
@@ -72,10 +84,12 @@ public class LoginPageController implements Initializable {
             public void handle(KeyEvent e) {
                 if (e.getCode() == KeyCode.ENTER) {
                     if (loginCheck()) {
-                        System.out.println("FCK YEA LOGIN");
                         handleTransitionKey(e, "loginS.png", "dashS.png", "Dashboard.fxml", "Home");
                     } else {
-                        System.out.println("FCKED UP SON");
+                        incPass.setVisible(true);
+                        animateLabel(pathT, incPass);
+                        handleAudio("beep_short_off.wav");
+
                     }
                 }
             }
@@ -151,6 +165,11 @@ public class LoginPageController implements Initializable {
         handleAudio("pad_confirm.wav");
         at.changeScreenButton(e, a, b, c, d);
 
+    }
+    
+    private void animateLabel(PathTransition pt, Label node) {
+        AnimationsTransitions at = new AnimationsTransitions();
+        at.animateError(pt, node);
     }
 
     private void handleTransitionKey(KeyEvent e, String a, String b, String c, String d) {

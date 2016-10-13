@@ -5,7 +5,6 @@
  */
 package ugcs;
 
-import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -13,8 +12,6 @@ import java.io.IOException;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -68,13 +65,11 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import javax.imageio.ImageIO;
 import jfxtras.internal.scene.control.skin.agenda.AgendaDaySkin;
 import jfxtras.internal.scene.control.skin.agenda.AgendaDaysFromDisplayedSkin;
 import jfxtras.internal.scene.control.skin.agenda.AgendaWeekSkin;
 import jfxtras.scene.control.agenda.Agenda;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.PDPageContentStream.AppendMode;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;

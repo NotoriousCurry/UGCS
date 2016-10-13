@@ -8,6 +8,7 @@ package ugcs;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
+import javafx.animation.PathTransition;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -23,11 +24,12 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Circle;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import javax.swing.ImageIcon;
 
 /**
  *
@@ -134,5 +136,18 @@ public class AnimationsTransitions {
             }
         });
         timeline.play();
+    }
+    
+        public void animateError(PathTransition pathT, Label node) {
+        // Animate error Label
+        Path path = new Path();
+        path.getElements().add(new MoveTo(0, 5));
+        path.getElements().add(new LineTo(5,5));
+        pathT.setNode(node);
+        pathT.setPath(path);
+        pathT.setDuration(Duration.millis(50));
+        pathT.setCycleCount(4);
+        pathT.setAutoReverse(true);
+        pathT.play();
     }
 }

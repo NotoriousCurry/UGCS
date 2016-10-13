@@ -96,5 +96,6 @@
             <Font name="Arial" size="13.0" />
          </font>
       </Button>
+      <Label fx:id="errorLabel" layoutX="914.0" layoutY="548.0" prefHeight="17.0" prefWidth="262.0" textAlignment="CENTER" textFill="#fc0101" />
    </children>
 </AnchorPane>

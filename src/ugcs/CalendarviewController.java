@@ -50,6 +50,12 @@ import jfxtras.internal.scene.control.skin.agenda.AgendaDaySkin;
 import jfxtras.internal.scene.control.skin.agenda.AgendaDaysFromDisplayedSkin;
 import jfxtras.internal.scene.control.skin.agenda.AgendaWeekSkin;
 import jfxtras.scene.control.agenda.Agenda;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDFont;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import ugcs.Audio.AudioMethods;
 import ugcs.Model.Consultation;
 import ugcs.Model.Event;
@@ -478,7 +484,80 @@ public class CalendarviewController implements Initializable {
     Button pdf;
 
     public void PDF(ActionEvent event) {
+        // NEED TO UPDATE WITH NEW PDF CODE
         System.out.println("ADD NEW PDF CODE HERE");
+         try {
+        PDDocument doc = new PDDocument();
+        PDPage page = new PDPage();
+        doc.addPage(page);
+        float scale = 1f;
+        PDImageXObject pdImage = PDImageXObject.createFromFile("src/ugcs/Resources/UNSW-LOGO.png", doc);
+        
+        PDPageContentStream content = new PDPageContentStream(doc, page);
+
+        Consultation chosen = consulttable.getSelectionModel().getSelectedItem();
+        ConsultationQueries cq = new ConsultationQueries();
+        ObservableList<Consultation> listconsult = FXCollections.observableArrayList(cq.getConsultations());
+        PDFont font = PDType1Font.COURIER_BOLD_OBLIQUE;
+
+        System.out.println(chosen);
+        for (Consultation cc : listconsult) {
+            if (chosen.getZid().equals(cc.getZid())) {
+                try {
+
+                    String fileName = "Student Report PDF #" + cc.getConsultationid() + ".pdf";
+                    
+                    content.drawImage(pdImage, 20, 20, pdImage.getWidth()*scale, pdImage.getHeight()*scale);
+                    
+                    content.beginText();
+                    content.setFont(PDType1Font.HELVETICA, 26);
+                    content.moveTextPositionByAmount(220,750);
+                    content.drawString("Student Report #" + cc.getConsultationid());
+                    content.endText();
+
+                    String zids = cc.getZid();
+                    String types = cc.getType();
+                    String dates = cc.getDate1();
+                    String times = cc.getTime1();
+                    
+                    content.beginText();
+                    content.setFont(PDType1Font.HELVETICA, 16);
+                    content.moveTextPositionByAmount(220,700);
+                    content.drawString("Zid: " + zids);
+                    content.endText();
+                    
+                    content.beginText();
+                    content.setFont(PDType1Font.HELVETICA, 16);
+                    content.moveTextPositionByAmount(220,650);
+                    content.drawString("Type: " + types);
+                    content.endText();
+                    
+                    content.beginText();
+                    content.setFont(PDType1Font.HELVETICA, 16);
+                    content.moveTextPositionByAmount(220,600);
+                    content.drawString("Date: " + dates);
+                    content.endText();
+                    
+                    content.beginText();
+                    content.setFont(PDType1Font.HELVETICA, 16);
+                    content.moveTextPositionByAmount(220,550);
+                    content.drawString("Time: " + times);
+                    content.endText();
+                    
+                    content.close();
+                    doc.save(fileName);
+                    doc.close();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+
+        }
+        }
+        catch (IOException e) {
+            System.out.println("error");
+        }
+
     }
 
     private String readName() {
