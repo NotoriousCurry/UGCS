@@ -50,7 +50,7 @@
         <Button fx:id="pdf" layoutX="989.0" layoutY="196.0" mnemonicParsing="false" onAction="#PDF" prefHeight="34.0" prefWidth="197.0" stylesheets="@Resources/addprintbutton.css" text="Print PDF" />
         <ScrollPane fx:id="sp" layoutX="989.0" layoutY="258.0" prefHeight="194.0" prefViewportHeight="197.0" prefViewportWidth="195.0" prefWidth="197.0">
             <content>
-                <TextArea fx:id="notetextshow" prefHeight="168.0" prefWidth="172.0" wrapText="true" />
+                <TextArea fx:id="notetextshow" prefHeight="168.0" prefWidth="172.0" wrapText="true" visible="false"/>
             </content>
         </ScrollPane>
     </children>

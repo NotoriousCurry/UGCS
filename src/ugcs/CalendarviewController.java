@@ -19,6 +19,8 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -151,8 +153,8 @@ public class CalendarviewController implements Initializable {
         ConsultationQueries cq = new ConsultationQueries();
 
         ObservableList<Consultation> consultlist = FXCollections.observableArrayList(cq.getConsultations());
-        
-         idcol.setCellValueFactory(
+
+        idcol.setCellValueFactory(
                 new PropertyValueFactory<Consultation, Integer>("consultationid")
         );
         zidcol.setCellValueFactory(
@@ -199,6 +201,15 @@ public class CalendarviewController implements Initializable {
 
         consulttable.setItems(null);
         consulttable.setItems(sortedData);
+
+        consulttable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Consultation>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Consultation> observable,
+                    Consultation oldValue, Consultation newValue) {
+                showdeets(newValue);
+            }
+        });
 
         for (Consultation c : consultlist) {
             String localdatenow = c.getDate1();
@@ -322,6 +333,7 @@ public class CalendarviewController implements Initializable {
                 consulttable.setVisible(true);
                 searchBox.setVisible(true);
                 searchLabel.setVisible(true);
+                notetextshow.setVisible(true);
             }
         });
 
@@ -334,6 +346,7 @@ public class CalendarviewController implements Initializable {
                 consulttable.setVisible(false);
                 searchBox.setVisible(false);
                 searchLabel.setVisible(false);
+                notetextshow.setVisible(false);
             }
         });
 
