@@ -16,30 +16,42 @@
 <?import jfxtras.scene.control.agenda.*?>
 
 <AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #e5e4e2;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ugcs.CalendarviewController">
-   <children>
-      <ImageView fitHeight="800.0" fitWidth="1203.0" pickOnBounds="true">
-         <image>
-            <Image url="@Resources/genericbackroung3605.png" />
-         </image>
-      </ImageView>
-      <Button fx:id="logOut" layoutX="1096.0" layoutY="136.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="87.0" stylesheets="@Resources/returnandlogout.css" text="Logout" textAlignment="CENTER" textFill="WHITE" />
-      <DatePicker fx:id="datepick" layoutX="11.0" layoutY="196.0" prefHeight="34.0" prefWidth="197.0" promptText="Choose a date..." />
-      <Button fx:id="createCon" layoutX="308.0" layoutY="196.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="141.0" stylesheets="@Resources/test.css" text="Create Consultation" textFill="WHITE" />
-      <Agenda fx:id="agenda" layoutX="13.0" layoutY="256.0" pickOnBounds="false" prefHeight="409.0" prefWidth="909.0" />
-      <ComboBox fx:id="combo" layoutX="208.0" layoutY="196.0" prefHeight="34.0" prefWidth="87.0" promptText="time..." />
-      <ToggleButton fx:id="tb" layoutX="545.0" layoutY="196.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="57.0" text="Day" />
-      <ToggleButton fx:id="tb2" layoutX="602.0" layoutY="196.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="57.0" text="Week" />
-      <ToggleButton fx:id="tb3" layoutX="659.0" layoutY="196.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="63.0" text="Range" />
-      <Label layoutX="884.0" layoutY="141.0" text="Welcome, " textFill="WHITE" />
-      <Label layoutX="949.0" layoutY="141.0" text="FirstName" textFill="WHITE" />
-      <Button fx:id="switchTable" layoutX="768.0" layoutY="196.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="153.0" text="Switch to Table View" />
-      <Button fx:id="rPrev" layoutX="1056.0" layoutY="679.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="147.0" stylesheets="@Resources/returnandlogout.css" text="Return to Previous" />
-      <Button fx:id="rDash" layoutY="676.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="146.0" stylesheets="@Resources/returnandlogout.css" text="Return to Dashboard" />
-      <Button fx:id="pdf" layoutX="989.0" layoutY="196.0" mnemonicParsing="false" onAction="#PDF" prefHeight="34.0" prefWidth="197.0" stylesheets="@Resources/addprintbutton.css" text="Print PDF" />
-      <ScrollPane fx:id="sp" layoutX="989.0" layoutY="258.0" prefHeight="194.0" prefViewportHeight="197.0" prefViewportWidth="195.0" prefWidth="197.0">
-         <content>
-            <TextArea fx:id="notetextshow" prefHeight="168.0" prefWidth="172.0" wrapText="true" />
-         </content>
-      </ScrollPane>
-   </children>
+    <children>
+        <ImageView fitHeight="800.0" fitWidth="1203.0" pickOnBounds="true">
+            <image>
+                <Image url="@Resources/genericbackroung3605.png" />
+            </image>
+        </ImageView>
+        <Button fx:id="logOut" layoutX="1096.0" layoutY="136.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="87.0" stylesheets="@Resources/returnandlogout.css" text="Logout" textAlignment="CENTER" textFill="WHITE" />
+        <DatePicker fx:id="datepick" layoutX="11.0" layoutY="196.0" prefHeight="34.0" prefWidth="197.0" promptText="Choose a date..." />
+        <Button fx:id="createCon" layoutX="308.0" layoutY="196.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="141.0" stylesheets="@Resources/test.css" text="Create Consultation" textFill="WHITE" />
+        <Agenda fx:id="agenda" layoutX="13.0" layoutY="256.0" pickOnBounds="false" prefHeight="409.0" prefWidth="909.0" />
+        <Label fx:id="searchLabel" layoutX="715.0" layoutY="252.0" text="Search:" visible="false" />
+        <TextField fx:id="searchBox" layoutX="775.0" layoutY="249.0" visible="false" />
+        <TableView fx:id="consulttable" layoutX="13.0" layoutY="296.0" prefHeight="369.0" prefWidth="909.0" visible="false">
+            <columns>
+                <TableColumn fx:id="idcol" prefWidth="75.0" text="ID" />
+                <TableColumn fx:id="zidcol" prefWidth="206.0" text="Zid" />
+                <TableColumn fx:id="typecol" prefWidth="190.0" text="Type" />
+                <TableColumn fx:id="prioritycol" minWidth="0.0" prefWidth="166.0" text="Priority" />
+                <TableColumn fx:id="datecol" prefWidth="143.0" text="Date" />
+                <TableColumn fx:id="timecol" prefWidth="130.0" text="Time" />
+            </columns>
+        </TableView>
+        <ComboBox fx:id="combo" layoutX="208.0" layoutY="196.0" prefHeight="34.0" prefWidth="87.0" promptText="time..." />
+        <ToggleButton fx:id="tb" layoutX="545.0" layoutY="196.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="57.0" text="Day" />
+        <ToggleButton fx:id="tb2" layoutX="602.0" layoutY="196.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="57.0" text="Week" />
+        <ToggleButton fx:id="tb3" layoutX="659.0" layoutY="196.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="63.0" text="Range" />
+        <Label fx:id="fName" layoutX="884.0" layoutY="141.0" textFill="WHITE" />
+        <Button fx:id="switchTable" layoutX="768.0" layoutY="196.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="153.0" text="Switch to Table View" />
+        <Button fx:id="switchCalendar" layoutX="768.0" layoutY="196.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="153.0" text="Switch to Calendar View" visible="false" />
+        <Button fx:id="rPrev" layoutX="1056.0" layoutY="679.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="147.0" stylesheets="@Resources/returnandlogout.css" text="Return to Previous" />
+        <Button fx:id="rDash" layoutY="676.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="146.0" stylesheets="@Resources/returnandlogout.css" text="Return to Dashboard" />
+        <Button fx:id="pdf" layoutX="989.0" layoutY="196.0" mnemonicParsing="false" onAction="#PDF" prefHeight="34.0" prefWidth="197.0" stylesheets="@Resources/addprintbutton.css" text="Print PDF" />
+        <ScrollPane fx:id="sp" layoutX="989.0" layoutY="258.0" prefHeight="194.0" prefViewportHeight="197.0" prefViewportWidth="195.0" prefWidth="197.0">
+            <content>
+                <TextArea fx:id="notetextshow" prefHeight="168.0" prefWidth="172.0" wrapText="true" />
+            </content>
+        </ScrollPane>
+    </children>
 </AnchorPane>

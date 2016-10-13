@@ -19,22 +19,14 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import javafx.animation.Interpolator;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
@@ -43,19 +35,15 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
-import javafx.util.Duration;
 import jfxtras.internal.scene.control.skin.agenda.AgendaDaySkin;
 import jfxtras.internal.scene.control.skin.agenda.AgendaDaysFromDisplayedSkin;
 import jfxtras.internal.scene.control.skin.agenda.AgendaWeekSkin;
@@ -71,6 +59,24 @@ import ugcs.Queries.ConsultationQueries;
  */
 public class CalendarviewController implements Initializable {
 
+    //tableview
+    @FXML
+    TableView<Consultation> consulttable;
+    @FXML
+    TableColumn idcol;
+    @FXML
+    TableColumn zidcol;
+    @FXML
+    TableColumn typecol;
+    @FXML
+    TableColumn prioritycol;
+    @FXML
+    TableColumn datecol;
+    @FXML
+    TableColumn timecol;
+    @FXML
+    TextField searchBox;
+
     //
     @FXML
     TextArea notetextshow;
@@ -83,6 +89,8 @@ public class CalendarviewController implements Initializable {
     Button create;
     @FXML
     Button switchTable;
+    @FXML
+    Button switchCalendar;
     @FXML
     Button rPrev;
     @FXML
@@ -99,6 +107,10 @@ public class CalendarviewController implements Initializable {
     Button createCon;
     @FXML
     ComboBox combo;
+    @FXML
+    Label fName;
+    @FXML
+    Label searchLabel;
 
     @FXML
     ScrollPane sp;
@@ -127,6 +139,7 @@ public class CalendarviewController implements Initializable {
         notetextshow.setWrapText(true);
         sp.setFitToWidth(true);
         sp.setFitToHeight(true);
+        fName.setText(readName());
 
         combo.getItems().addAll("9am", "10am",
                 "11am",
@@ -138,6 +151,54 @@ public class CalendarviewController implements Initializable {
         ConsultationQueries cq = new ConsultationQueries();
 
         ObservableList<Consultation> consultlist = FXCollections.observableArrayList(cq.getConsultations());
+        
+         idcol.setCellValueFactory(
+                new PropertyValueFactory<Consultation, Integer>("consultationid")
+        );
+        zidcol.setCellValueFactory(
+                new PropertyValueFactory<Consultation, String>("zid")
+        );
+        typecol.setCellValueFactory(
+                new PropertyValueFactory<Consultation, String>("type")
+        );
+        /* notescol.setCellValueFactory(
+                new PropertyValueFactory<Consultation, String>("notes")
+        ); */
+        prioritycol.setCellValueFactory(
+                new PropertyValueFactory<Consultation, String>("priority")
+        );
+        datecol.setCellValueFactory(
+                new PropertyValueFactory<Consultation, String>("date1")
+        );
+        timecol.setCellValueFactory(
+                new PropertyValueFactory<Consultation, String>("time1")
+        );
+
+        // Search Functionality Code
+        FilteredList<Consultation> filteredData = new FilteredList<>(consultlist, p -> true);
+
+        searchBox.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(Consultation -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (Consultation.getZid().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (Consultation.getNotes().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                }
+                return false;
+            });
+        });
+
+        SortedList<Consultation> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(consulttable.comparatorProperty());
+
+        consulttable.setItems(null);
+        consulttable.setItems(sortedData);
 
         for (Consultation c : consultlist) {
             String localdatenow = c.getDate1();
@@ -251,6 +312,31 @@ public class CalendarviewController implements Initializable {
                 agenda.setSkin((new AgendaDaysFromDisplayedSkin(agenda)));
             }
         });
+
+        switchTable.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                agenda.setVisible(false);
+                switchTable.setVisible(false);
+                switchCalendar.setVisible(true);
+                consulttable.setVisible(true);
+                searchBox.setVisible(true);
+                searchLabel.setVisible(true);
+            }
+        });
+
+        switchCalendar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                agenda.setVisible(true);
+                switchTable.setVisible(true);
+                switchCalendar.setVisible(false);
+                consulttable.setVisible(false);
+                searchBox.setVisible(false);
+                searchLabel.setVisible(false);
+            }
+        });
+
         createCon.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
@@ -385,7 +471,7 @@ public class CalendarviewController implements Initializable {
     private String readName() {
         String fName = "temp.txt";
         String line = null;
-        String name = null;
+        String name = "Welcome, New User";
 
         try {
             FileReader fReader = new FileReader(fName);
@@ -393,7 +479,7 @@ public class CalendarviewController implements Initializable {
 
             line = bReader.readLine();
             String[] sect = line.split(",");
-            name = sect[0];
+            name = "Welcome, " + sect[0];
 
             bReader.close();
 

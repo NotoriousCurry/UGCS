@@ -135,6 +135,7 @@ public class LoginPageController implements Initializable {
             bufferedWriter.close();
         } catch (IOException ex) {
             System.out.println("Error writing file '" + fName + "'");
+            ex.printStackTrace();
         }
     }
 
