@@ -293,14 +293,7 @@ public class StudentAndConsController implements Initializable {
                 StudentQueries sq = new StudentQueries();
                 
                 Student student = new Student(a, b, c, d, e, null);
-                for (Student s : FXCollections.observableArrayList(sq.getStudents())){
-                if(s.getZID().equals(student.getZID())){     Alert alerterror = new Alert(Alert.AlertType.ERROR);
-            alerterror.setTitle("Zid Already Exists");
-            alerterror.setHeaderText("Error");
-            alerterror.setContentText("Please choose another zid"); 
-            alerterror.showAndWait();
-            break;
-                } else {
+                
                     
                 sq.insertStudents(student);
 
@@ -308,11 +301,11 @@ public class StudentAndConsController implements Initializable {
                 studenttable.setItems(null);
                 studenttable.setItems(studentlist2);
                 
-               break;
+               
             
-                    }
-            }
-            }
+                    
+            } 
+            
             
         }
 

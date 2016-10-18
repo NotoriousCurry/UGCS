@@ -219,6 +219,7 @@ public class CalendarviewController implements Initializable {
                 return false;
             });
         });
+                        pdf.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("Resources/mini3.gif"))));
 
         SortedList<Consultation> sortedData = new SortedList<>(filteredData);
         sortedData.comparatorProperty().bind(consulttable.comparatorProperty());
@@ -386,8 +387,7 @@ public class CalendarviewController implements Initializable {
                 }
 
             });
-            
-            pdf.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("Resources/mini3.gif"))));
+
             pdf.setOnMouseEntered(new EventHandler<MouseEvent>
     () {
 
