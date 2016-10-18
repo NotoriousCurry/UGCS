@@ -18,7 +18,7 @@
             <Image url="@Resources/genericbackroung3605.png" />
          </image>
       </ImageView>
-      <Label layoutX="150.0" layoutY="225.0" text="Please fill out the advanced standing form below:">
+      <Label layoutX="150.0" layoutY="225.0" text="Please fill out the international exchange form below:">
          <font>
             <Font name="Arial Bold" size="13.0" />
          </font>

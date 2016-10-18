@@ -577,7 +577,21 @@ public void removeappointment(Appointment aa){
 
         if (event.getSource() == followupbutton) {
             try {
-                System.out.println(" attemping to open");
+                 stage = (Stage) followupbutton.getScene().getWindow();
+                    stage.close();
+                    stage = new Stage();
+                   
+                      Parent  root = FXMLLoader.load(getClass().getResource("FollowUpStudentFXML.fxml"));
+                   
+                    
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.initModality(Modality.APPLICATION_MODAL);
+                    stage.initOwner(followupbutton.getScene().getWindow());
+                    
+                    stage.show();
+                    
+              /*  System.out.println(" attemping to open");
 
                 stage = new Stage();
 
@@ -588,7 +602,8 @@ public void removeappointment(Appointment aa){
                 stage.initModality(Modality.APPLICATION_MODAL);
                 stage.initOwner(followupbutton.getScene().getWindow());
 
-                stage.showAndWait();
+                stage.show();
+                */
 
             } catch (IOException ex) {
                 ex.printStackTrace();

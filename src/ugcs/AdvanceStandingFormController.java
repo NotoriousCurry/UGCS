@@ -461,7 +461,7 @@ public class AdvanceStandingFormController implements Initializable {
             // System.out.println(cd.get(0).getconsultationid());
             if(staffcheck.isSelected() ==true){
                 System.out.println("true");
-            }
+            
              StudentQueries sq = new StudentQueries();
                   ObservableList<Student> slist = FXCollections.observableList(sq.getStudents());
               StudentFollowQueries sfq = new StudentFollowQueries();
@@ -474,7 +474,7 @@ public class AdvanceStandingFormController implements Initializable {
               sfq.insertStudents(s);
           }
           
-      }
+      }}
             //POP UP lol
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Consultation Created");
