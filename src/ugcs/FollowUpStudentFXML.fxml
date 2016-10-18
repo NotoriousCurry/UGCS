@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="387.0" prefWidth="379.0" style="-fx-background-color: silver; -fx-border-color: green;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ugcs.FollowUpStudentFXMLController">
+   <children>
+      <TableView fx:id="studentfollowtable" layoutX="14.0" layoutY="14.0" prefHeight="329.0" prefWidth="349.0">
+        <columns>
+          <TableColumn fx:id="zidcol1" prefWidth="105.0" text="ZID" />
+          <TableColumn fx:id="fnamecol1" prefWidth="96.0" text="FIRSTNAME" />
+            <TableColumn fx:id="lnamecol1" prefWidth="147.0" text="LASTNAME" />
+        </columns>
+      </TableView>
+      <Button layoutX="254.0" layoutY="347.0" mnemonicParsing="false" style="-fx-background-color: green;" stylesheets="@Resources/test.css" text="Follow Up Now" />
+   </children>
+   <effect>
+      <InnerShadow color="#589a40" height="98.41" radius="42.254999999999995" width="72.61" />
+   </effect>
+</AnchorPane>

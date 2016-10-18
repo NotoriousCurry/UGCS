@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ugcs.CareerGuidanceFormController">
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ugcs.DisciplinaryFormController">
    <children>
       <ImageView fitHeight="804.0" fitWidth="1200.0">
          <image>
@@ -55,7 +55,7 @@
                         <InnerShadow height="11.89" radius="7.7225" />
                      </effect>
                   </TextField>
-                  <CheckBox fx:id="staffcheck" layoutX="14.0" layoutY="427.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="301.0" text="Select if another staff member present" />
+                  <CheckBox fx:id="staffcheck" layoutX="14.0" layoutY="427.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="301.0" text="Requires Follow-Up" />
                   <CheckBox layoutX="301.0" layoutY="358.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="252.0" text="Non Applicable (N/A)" />
                   <Label layoutX="16.0" layoutY="358.0" text="Level of Plagiarism" />
                   <ComboBox layoutX="14.0" layoutY="384.0" prefHeight="27.0" prefWidth="265.0" />

@@ -5,16 +5,32 @@
  */
 package ugcs;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.sql.Blob;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -30,14 +46,21 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javax.imageio.ImageIO;
 import ugcs.Audio.AudioMethods;
 import ugcs.Queries.ConsultationQueries;
 import ugcs.Model.Consultation;
 import ugcs.Model.Student;
+import ugcs.Queries.StudentFollowQueries;
 import ugcs.Queries.StudentQueries;
 
 /**
@@ -50,6 +73,10 @@ public class AdvanceStandingFormController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    private @FXML
+    Button upload;
+    private @FXML
+    Label viewlabel;
     private @FXML
     TextField zId;
     private @FXML
@@ -81,7 +108,162 @@ public class AdvanceStandingFormController implements Initializable {
     Button rDash;
     private @FXML
     Button rPrev;
+    @FXML
+    private ImageView imageaa;
+    
+    Stage stage;
+    Parent newroot;
+      public void Viewlabel(MouseEvent event) {
+        try {
+             stage = new Stage();
 
+            newroot = FXMLLoader.load(getClass().getResource("VIEWIMAGE.fxml"));
+
+            Scene scene = new Scene(newroot);
+            stage.setScene(scene);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initOwner(viewlabel.getScene().getWindow());
+
+            stage.showAndWait();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+      /*
+      public void staffcheck(ActionEvent event){
+          Boolean check = true;
+          StudentQueries sq = new StudentQueries();
+                  ObservableList<Student> slist = FXCollections.observableList(sq.getStudents());
+              StudentFollowQueries sfq = new StudentFollowQueries();
+
+          for(Student s : slist){
+              if(s.getZID().equals(zId)){
+          if (staffcheck.isSelected() == check){
+              sfq.insertStudents(s);
+          }
+          else{
+              check = false;
+              sfq.deleteStudent(s);
+              
+          }    
+      }
+      }
+      }
+      */
+
+    public void Upload(ActionEvent event) {
+
+        FileChooser file1 = new FileChooser();
+        file1.setTitle("Upload Student Transcript");
+        file1.setInitialDirectory(
+                new File(System.getProperty("user.home"))
+        );
+        file1.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("All Images", "*.*"),
+                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                new FileChooser.ExtensionFilter("PNG", "*.png")
+        );
+        file1.setTitle("Save Image");
+
+        File file = file1.showOpenDialog(stage);
+        System.out.println("file is " + file);
+        String path = file.getAbsolutePath();
+        StudentQueries sq = new StudentQueries();
+        ObservableList<Student> slist2 = FXCollections.observableList(sq.getStudents());
+        for (Student sww : slist2) {
+            if (sww.getZID().equals(StudentAndConsController.getselected())) {
+
+                try {
+                    Image image = null;
+                    System.out.println("name is " + sww.getFName());
+
+                    InputStream data = new BufferedInputStream(new FileInputStream(file));
+
+                    StudentQueries sqq = new StudentQueries();
+                    try {
+
+                        Connection conn = DriverManager.getConnection("jdbc:derby:"
+                                + System.getProperty("user.dir")
+                                + System.getProperty("file.separator")
+                                + "UCGDatabase;create=true");
+
+                        PreparedStatement updateStudent = conn.prepareStatement("update APP.STUDENT set FIRSTNAME=?, LASTNAME=?, COURSE=?, EMAIL=? , TRANSCRIPT=? where "
+                                + "ZID = " + "'" + sww.getZID() + "'");
+
+                        updateStudent.setString(1, sww.getFName());
+                        updateStudent.setString(2, sww.getLName());
+                        updateStudent.setString(3, sww.getCourse());
+                        updateStudent.setString(4, sww.getEMail());
+                        //updateStudent.setBlob(5, sww.getTRanscript());
+
+                        updateStudent.setBinaryStream(5, data, (int) file.length());
+               
+                        updateStudent.executeUpdate();
+                        // blob.free();
+                        System.out.println("1234");
+//MOVING TO INITALISE as well.
+
+                        ResultSet rs = null;
+                        PreparedStatement pstmt = null;
+                        String stringzid = sww.getZID();
+                        String query = "SELECT * FROM APP.STUDENT WHERE ZID = " + "'" + stringzid + "'";
+                        pstmt = conn.prepareStatement(query);
+                        rs = pstmt.executeQuery();
+                        rs.next();
+                        Blob blob2 = rs.getBlob("TRANSCRIPT");
+                        byte[] aa = blob2.getBytes(1, (int) blob2.length());
+                     
+
+                        System.out.println("bytes = " + aa);
+                        ByteArrayInputStream in = new ByteArrayInputStream(aa);
+         
+                        BufferedImage read = ImageIO.read(in); //returns null
+                        System.out.println("setting image");
+                        System.out.println(" in = " + in);
+                        System.out.println("read = " + ImageIO.read(in));
+
+                        imageaa.setImage(SwingFXUtils.toFXImage(read, null));
+                        System.out.println("should be set?");
+                        System.out.println("attempting read");
+                   
+                        data.close();
+                        conn.close();
+
+
+                        rs.close();
+                        pstmt.close();
+                        conn.close();
+                        } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+
+                } catch (IOException ex) {
+                    Logger.getLogger(AttendancePerformanceFormController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                System.out.println(file);
+            }
+        }
+    }
+
+    public void Viewlabel1(MouseEvent event) {
+        try {
+            stage = new Stage();
+
+            newroot = FXMLLoader.load(getClass().getResource("VIEWIMAGE.fxml"));
+
+            Scene scene = new Scene(newroot);
+            stage.setScene(scene);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initOwner(viewlabel.getScene().getWindow());
+
+            stage.showAndWait();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -102,6 +284,61 @@ public class AdvanceStandingFormController implements Initializable {
                 course.setText(course1);
             }
         }
+         for (Student sw : slist) {
+            if (sw.getZID().equals(StudentAndConsController.getselected())) {
+                try {
+                    Connection conn = DriverManager.getConnection("jdbc:derby:"
+                            + System.getProperty("user.dir")
+                            + System.getProperty("file.separator")
+                            + "UCGDatabase;create=true");
+
+                    ResultSet rs = null;
+                    PreparedStatement pstmt = null;
+                    String stringzid = sw.getZID();
+                    String query = "SELECT * FROM APP.STUDENT WHERE ZID = " + "'" + stringzid + "'";
+                    pstmt = conn.prepareStatement(query);
+                    rs = pstmt.executeQuery();
+                    rs.next();
+                    Blob blob2 = rs.getBlob("TRANSCRIPT");
+                    if(blob2!=null){
+                    byte[] aa = blob2.getBytes(1, (int) blob2.length());
+                    // BufferedImage bi = ImageIO.read(blob2.getBinaryStream());
+                    //      System.out.println("bufferimage = " + bi);
+
+                    System.out.println("bytes = " + aa);
+                    ByteArrayInputStream in = new ByteArrayInputStream(aa);
+                    // ImageReader rdr = ImageIO.getImageReadersByFormatName("png").next();
+                    //Iterator<ImageReader> iter = ImageIO.getImageReadersBySuffix(gg);
+                    // ImageReader reader = rdr.next();
+                    // ImageInputStream imageinput = ImageIO.createImageInputStream(in);
+                    //rdr.setInput(imageinput);
+                    //BufferedImage bi = rdr.read(0);
+                    // in.close();
+
+                    //    System.out.println("please be buffered image = " + bi);
+                    // System.out.println("iter = " + rdr);
+                    BufferedImage read;
+                    try {
+                        read = ImageIO.read(in); //returns null
+
+                        System.out.println("setting image");
+                        System.out.println(" in = " + in);
+                        System.out.println("read = " + ImageIO.read(in));
+
+                        imageaa.setImage(SwingFXUtils.toFXImage(read, null));
+                        conn.close();
+                        in.close();
+                        rs.close();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                    } rs.close();
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(VIEWIMAGEController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
         timePicked.getItems().addAll("9am", "10am",
                 "11am",
                 "12pm",
@@ -111,6 +348,13 @@ public class AdvanceStandingFormController implements Initializable {
                 "4pm");
 
         priorityChoice.getItems().addAll("High", "Medium", "Low");
+        
+        viewlabel.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent e) {
+                Viewlabel1(e);
+            }
+        });
 
         backHome.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -153,6 +397,11 @@ public class AdvanceStandingFormController implements Initializable {
         String type = "";
 
         // TextField Erro Echecking
+        
+      
+            
+        
+        
         if (zId.getText() != null && !zId.getText().isEmpty()) {
             zid = zId.getText();
             isComplete = true;
@@ -201,6 +450,7 @@ public class AdvanceStandingFormController implements Initializable {
         //  String email = emailfield.getText();  
         if (notesField.getText() != null && isComplete == true) {
             String notes = notesField.getText();
+            System.out.println("date is " + date3 + "time is " + time);
             Consultation c = new Consultation(zid, notes, "Advanced Standing", priority, date3, time);
             ConsultationQueries cq = new ConsultationQueries();
             cq.insertConsult(c);
@@ -209,6 +459,22 @@ public class AdvanceStandingFormController implements Initializable {
             //  System.out.println(cd.get(0).getDate1());
             //  System.out.println(cd.get(0).getTime1());
             // System.out.println(cd.get(0).getconsultationid());
+            if(staffcheck.isSelected() ==true){
+                System.out.println("true");
+            }
+             StudentQueries sq = new StudentQueries();
+                  ObservableList<Student> slist = FXCollections.observableList(sq.getStudents());
+              StudentFollowQueries sfq = new StudentFollowQueries();
+
+          for(Student s : slist){
+              
+              if(s.getZID().equals(zId.getText()))
+              {System.out.println("true2");
+          
+              sfq.insertStudents(s);
+          }
+          
+      }
             //POP UP lol
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Consultation Created");
