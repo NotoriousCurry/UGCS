@@ -14,6 +14,7 @@ import javafx.animation.PathTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -47,6 +48,8 @@ public class StudentAndConsController implements Initializable {
     private Button logOut;
     @FXML
     private Button viewbutton;
+    @FXML
+    private Button rPrev;
 
     private static String studentst;
 
@@ -136,6 +139,21 @@ public class StudentAndConsController implements Initializable {
         dpbox.setToggleGroup(group);
         iebox.setToggleGroup(group);
         adbox.setSelected(true);
+        
+        logOut.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                deleteTemp();
+                handleTransitionButton(e, "conS.png", "loginS.png", "LoginPage.fxml", "Login");
+            }
+        });
+        
+        rPrev.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                handleTransitionButton(e, "conS.png", "calendarS.png", "CalendarView.fxml", "Consultations");
+            }
+        });
 
     }
 
@@ -187,17 +205,17 @@ public class StudentAndConsController implements Initializable {
                 System.out.println("Has value " + getselected());
 
                 if (adbox.isSelected()) {
-                    handleTransitionButton(event, "calendarS.png", "asformS.png", "AdvanceStandingForm.fxml", "Create Consultation");
+                    handleTransitionButton(event, "conS.png", "asformS.png", "AdvanceStandingForm.fxml", "Create Consultation");
                 } else if (apbox.isSelected()) {
-                    handleTransitionButton(event, "calendarS.png", "apformS.png", "AttendancePerformanceForm.fxml", "Create Consultation");
+                    handleTransitionButton(event, "conS.png", "apformS.png", "AttendancePerformanceForm.fxml", "Create Consultation");
                 } else if (cgbox.isSelected()) {
-                    handleTransitionButton(event, "calendarS.png", "loginS.png", "CareerGuidanceForm.fxml", "Create Consultation");
+                    handleTransitionButton(event, "conS.png", "loginS.png", "CareerGuidanceForm.fxml", "Create Consultation");
                 } else if (cebox.isSelected()) {
-                    handleTransitionButton(event, "calendarS.png", "loginS.png", "CourseEnrolmentForm.fxml", "Create Consultation");
+                    handleTransitionButton(event, "conS.png", "loginS.png", "CourseEnrolmentForm.fxml", "Create Consultation");
                 } else if (dpbox.isSelected()) {
-                    handleTransitionButton(event, "calendarS.png", "loginS.png", "DisciplinaryForm.fxml", "Create Consultation");
+                    handleTransitionButton(event, "conS.png", "loginS.png", "DisciplinaryForm.fxml", "Create Consultation");
                 } else if (iebox.isSelected()) {
-                    handleTransitionButton(event, "calendarS.png", "loginS.png", "InternationalExchangeForm.fxml", "Create Consultation");
+                    handleTransitionButton(event, "conS.png", "loginS.png", "InternationalExchangeForm.fxml", "Create Consultation");
                 } else {
                     System.out.println("Please check box");
                 }
@@ -313,7 +331,7 @@ public class StudentAndConsController implements Initializable {
 
     @FXML
     public void backhome(ActionEvent event) {
-        handleTransitionButton(event, "conS.png", "calendarS.png", "CalendarView.fxml", "Consultations");
+        handleTransitionButton(event, "conS.png", "dashS.png", "Dashboard.fxml", "Dashboard");
     }
 
     public static String getselected() {
@@ -359,4 +377,6 @@ public class StudentAndConsController implements Initializable {
         AnimationsTransitions at = new AnimationsTransitions();
         at.animateError(pt, node);
     }
+    
+    
 }

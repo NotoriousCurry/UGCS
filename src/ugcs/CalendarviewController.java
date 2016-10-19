@@ -166,6 +166,7 @@ public class CalendarviewController implements Initializable {
         sp.setFitToWidth(true);
         sp.setFitToHeight(true);
         fName.setText(readName());
+        pdf.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("Resources/mini3.gif"))));
 
         combo.getItems().addAll("9am", "10am",
                 "11am",
@@ -219,7 +220,6 @@ public class CalendarviewController implements Initializable {
                 return false;
             });
         });
-                        pdf.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("Resources/mini3.gif"))));
 
         SortedList<Consultation> sortedData = new SortedList<>(filteredData);
         sortedData.comparatorProperty().bind(consulttable.comparatorProperty());
@@ -344,11 +344,11 @@ public class CalendarviewController implements Initializable {
                         } else {
                             ConsultationQueries cq = new ConsultationQueries();
 
-        ObservableList<Consultation> consultlist2 = FXCollections.observableArrayList(cq.getConsultations());
+                            ObservableList<Consultation> consultlist2 = FXCollections.observableArrayList(cq.getConsultations());
                             for (Appointment a : c1.getRemoved()) {
-                                if (!agenda.appointments().contains(a)){
-                                System.out.println("onchange removed");
-                                /*
+                                if (!agenda.appointments().contains(a)) {
+                                    System.out.println("onchange removed");
+                                    /*
 
                                 for (Consultation cc : consultlist2) {
                                     System.out.println("description = " + a.getDescription() + " consutlation id = " + cc.getConsultationid().toString());
@@ -372,8 +372,8 @@ public class CalendarviewController implements Initializable {
                                     }
                                     else {System.out.println("nothing removed");}
                                 } */
-                                removeappointment(a);
-                                break;
+                                    removeappointment(a);
+                                    break;
                                 }
                             }
 
@@ -388,45 +388,39 @@ public class CalendarviewController implements Initializable {
 
             });
 
-            pdf.setOnMouseEntered(new EventHandler<MouseEvent>
-    () {
+            pdf.setOnMouseEntered(new EventHandler<MouseEvent>() {
 
-        @Override
-        public void handle(MouseEvent t) {
-           pdf.setStyle("-fx-background-color:#dae7f3;");
+                @Override
+                public void handle(MouseEvent t) {
+                    pdf.setStyle("-fx-background-color:#dae7f3;");
+                }
+            });
+
+            pdf.setOnMouseExited(new EventHandler<MouseEvent>() {
+
+                @Override
+                public void handle(MouseEvent t) {
+                    pdf.setStyle("-fx-background-colour:orange");
+                }
+            });
+
+            followupbutton.setOnMouseEntered(new EventHandler<MouseEvent>() {
+
+                @Override
+                public void handle(MouseEvent t) {
+                    followupbutton.setStyle("-fx-background-color:#dae7f3;");
+                }
+            });
+
+            followupbutton.setOnMouseExited(new EventHandler<MouseEvent>() {
+
+                @Override
+                public void handle(MouseEvent t) {
+                    followupbutton.setStyle("-fx-background-colour:orange");
+                }
+            });
+
         }
-    });
-
-    pdf.setOnMouseExited(new EventHandler<MouseEvent>
-    () {
-
-        @Override
-        public void handle(MouseEvent t) {
-           pdf.setStyle("-fx-background-colour:orange");
-        }
-    });
-            
-        
-       followupbutton.setOnMouseEntered(new EventHandler<MouseEvent>
-    () {
-
-        @Override
-        public void handle(MouseEvent t) {
-           followupbutton.setStyle("-fx-background-color:#dae7f3;");
-        }
-    });
-
-    followupbutton.setOnMouseExited(new EventHandler<MouseEvent>
-    () {
-
-        @Override
-        public void handle(MouseEvent t) {
-           followupbutton.setStyle("-fx-background-colour:orange");
-        }
-    });
-            
-        }
-
 
         ToggleGroup group = new ToggleGroup();
 
@@ -459,15 +453,9 @@ public class CalendarviewController implements Initializable {
         switchTable.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-        ConsultationQueries cq = new ConsultationQueries();
-        ObservableList<Consultation> consultlist4 = FXCollections.observableArrayList(cq.getConsultations());
-        FilteredList<Consultation> filteredData = new FilteredList<>(consultlist4, p -> true);
 
-        SortedList<Consultation> sortedData = new SortedList<>(filteredData);
-        sortedData.comparatorProperty().bind(consulttable.comparatorProperty());
-
-        consulttable.setItems(null);
-        consulttable.setItems(sortedData);
+                consulttable.setItems(null);
+                consulttable.setItems(sortedData);
 
                 agenda.setVisible(false);
                 switchTable.setVisible(false);
@@ -478,7 +466,7 @@ public class CalendarviewController implements Initializable {
                 notetextshow.setVisible(true);
                 pdf.setVisible(true);
                 notetextshow.setVisible(true);
-                
+
             }
         });
 
@@ -529,35 +517,33 @@ public class CalendarviewController implements Initializable {
         });
         readPass();
     }
-public void removeappointment(Appointment aa){   
-    ConsultationQueries cqq = new ConsultationQueries();
 
+    public void removeappointment(Appointment aa) {
+        ConsultationQueries cqq = new ConsultationQueries();
 
-  ObservableList<Consultation> consultlist = FXCollections.observableArrayList(cqq.getConsultations());
+        ObservableList<Consultation> consultlist = FXCollections.observableArrayList(cqq.getConsultations());
 
+        for (Consultation cc : consultlist) {
+            System.out.println("description = " + aa.getDescription() + " consutlation id = " + cc.getConsultationid().toString());
+            if (aa.getDescription().equals(cc.getConsultationid().toString())) {
+                System.out.println("gogogo");
+                cqq.deleteConsult(cc);
 
-    for (Consultation cc : consultlist) {
-                                    System.out.println("description = " + aa.getDescription() + " consutlation id = " + cc.getConsultationid().toString());
-                                    if (aa.getDescription().equals(cc.getConsultationid().toString())) {
-                                        System.out.println("gogogo");
-                                        cqq.deleteConsult(cc);
+                FilteredList<Consultation> filteredData = new FilteredList<>(consultlist, p -> true);
 
+                SortedList<Consultation> sortedData = new SortedList<>(filteredData);
+                sortedData.comparatorProperty().bind(consulttable.comparatorProperty());
+                consulttable.setItems(null);
+                consulttable.setItems(sortedData);
+                System.out.println("removed");
+                break;
 
-                                        FilteredList<Consultation> filteredData = new FilteredList<>(consultlist, p -> true);
+            } else {
+                System.out.println("nigga please");
+            }
+        }
+    }
 
-                                        SortedList<Consultation> sortedData = new SortedList<>(filteredData);
-                                        sortedData.comparatorProperty().bind(consulttable.comparatorProperty());
-                                        consulttable.setItems(null);
-                                        consulttable.setItems(sortedData);
-                                        System.out.println("removed");
-                                        break;
-
-                                        
-
-}
-    else{ System.out.println("nigga please");}
-}}
-                                    
     public void showdeets(Consultation consultation) {
         if (consultation == null) {
             notetextshow.setText(null);
@@ -577,21 +563,20 @@ public void removeappointment(Appointment aa){
 
         if (event.getSource() == followupbutton) {
             try {
-                 stage = (Stage) followupbutton.getScene().getWindow();
-                    stage.close();
-                    stage = new Stage();
-                   
-                      Parent  root = FXMLLoader.load(getClass().getResource("FollowUpStudentFXML.fxml"));
-                   
-                    
-                    Scene scene = new Scene(root);
-                    stage.setScene(scene);
-                    stage.initModality(Modality.APPLICATION_MODAL);
-                    stage.initOwner(followupbutton.getScene().getWindow());
-                    
-                    stage.show();
-                    
-              /*  System.out.println(" attemping to open");
+                stage = (Stage) followupbutton.getScene().getWindow();
+                stage.close();
+                stage = new Stage();
+
+                Parent root = FXMLLoader.load(getClass().getResource("FollowUpStudentFXML.fxml"));
+
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.initOwner(followupbutton.getScene().getWindow());
+
+                stage.show();
+
+                /*  System.out.println(" attemping to open");
 
                 stage = new Stage();
 
@@ -603,8 +588,7 @@ public void removeappointment(Appointment aa){
                 stage.initOwner(followupbutton.getScene().getWindow());
 
                 stage.show();
-                */
-
+                 */
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -685,8 +669,8 @@ public void removeappointment(Appointment aa){
         Date date2 = localDateToUtilDate(localdate1);
         SimpleDateFormat dateformatJava2 = new SimpleDateFormat("dd/MM/yyyy");
         String date3 = dateformatJava2.format(date2);
-                                    // String dateonly = a.getStartLocalDateTime().toLocalDate().toString();
-                                  /* String timeonly = a.getStartLocalDateTime().toLocalTime().toString();
+        // String dateonly = a.getStartLocalDateTime().toLocalDate().toString();
+        /* String timeonly = a.getStartLocalDateTime().toLocalTime().toString();
 
          if (timeonly != null) {
          switch (timeonly) {
@@ -740,36 +724,36 @@ public void removeappointment(Appointment aa){
                 new Agenda.AppointmentImplLocal()
                 .withStartLocalDateTime(newevent.getstartlocaldate().atTime(time))
                 .withEndLocalDateTime(newevent.getendlocaldate().atTime(time2))
-                .withDescription(cqq.getConsultations().get(cqq.getConsultations().size()-1).getConsultationid().toString())
+                .withDescription(cqq.getConsultations().get(cqq.getConsultations().size() - 1).getConsultationid().toString())
                 .withAppointmentGroup(new Agenda.AppointmentGroupImpl().withStyleClass("group1")) // you should use a map of AppointmentGroups
         );
-        System.out.println("consultation id = " + cqq.getConsultations().get(cqq.getConsultations().size()-1).getConsultationid().toString());
- agenda.refresh();
- 
+        System.out.println("consultation id = " + cqq.getConsultations().get(cqq.getConsultations().size() - 1).getConsultationid().toString());
+        agenda.refresh();
+
     }
     @FXML
     Button pdf;
-    
+
     //testing
     public void PDFClicked(ActionEvent event) throws Exception {
-       Consultation chosen = consulttable.getSelectionModel().getSelectedItem();
-    PDFMaker pdf = new PDFMaker();
-byte[] bytes = pdf.PDFForm(chosen.getConsultationid(), chosen.getZid(), chosen.getNotes(), chosen.getType(), chosen.getPriority(), chosen.getDate1(), chosen.getTime1());
-   
-FileChooser fc = new FileChooser();
-fc.setTitle("Consultation PDF");
-fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
-File file = fc.showSaveDialog(null);
-FileOutputStream output = new FileOutputStream(file);
-if(file != null){
-    System.out.println("not chosen");
-} 
-if(!file.exists()){file.createNewFile();
-}
-output.write(bytes);
-output.flush();
-output.close();
+        Consultation chosen = consulttable.getSelectionModel().getSelectedItem();
+        PDFMaker pdf = new PDFMaker();
+        byte[] bytes = pdf.PDFForm(chosen.getConsultationid(), chosen.getZid(), chosen.getNotes(), chosen.getType(), chosen.getPriority(), chosen.getDate1(), chosen.getTime1());
 
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Consultation PDF");
+        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
+        File file = fc.showSaveDialog(null);
+        FileOutputStream output = new FileOutputStream(file);
+        if (file != null) {
+            System.out.println("not chosen");
+        }
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+        output.write(bytes);
+        output.flush();
+        output.close();
 
     }
 
@@ -848,7 +832,6 @@ output.close();
         }
 
     }
-    
 
     private String readName() {
         String fName = "temp.txt";

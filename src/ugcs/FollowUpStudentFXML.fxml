@@ -17,6 +17,7 @@
         </columns>
       </TableView>
       <Button fx:id="followup" layoutX="282.0" layoutY="463.0" mnemonicParsing="false" onAction="#followupevent" style="-fx-background-color: green;" stylesheets="@Resources/test.css" text="Follow Up Now" />
+      <Button fx:id="return" layoutX="29.0" layoutY="463.0" mnemonicParsing="false" onAction="#returnPrev" style="-fx-background-color: green;" stylesheets="@Resources/test.css" text="Return Previous" />
       <RadioButton fx:id="iebox" layoutX="260.0" layoutY="416.0" mnemonicParsing="false" text="International Exchange" />
       <RadioButton fx:id="dpbox" layoutX="260.0" layoutY="391.0" mnemonicParsing="false" text="Disciplinary" />
       <RadioButton fx:id="cebox" layoutX="260.0" layoutY="366.0" mnemonicParsing="false" text="Course Enrolment" />

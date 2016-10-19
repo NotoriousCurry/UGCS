@@ -5,7 +5,6 @@ package ugcs;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -35,7 +34,7 @@ public class FollowUpStudentFXMLController implements Initializable {
     /**
      * Initializes the controller class.
      */
-        @FXML
+    @FXML
     RadioButton adbox;
     @FXML
     RadioButton apbox;
@@ -47,7 +46,7 @@ public class FollowUpStudentFXMLController implements Initializable {
     RadioButton dpbox;
     @FXML
     RadioButton iebox;
-     @FXML
+    @FXML
     TableView<Student> studentfollowtable;
     @FXML
     TableColumn zidcol1;
@@ -57,13 +56,13 @@ public class FollowUpStudentFXMLController implements Initializable {
     TableColumn lnamecol1;
     @FXML
     Button followup;
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-StudentFollowQueries sfq = new StudentFollowQueries();
+        StudentFollowQueries sfq = new StudentFollowQueries();
 
         ObservableList<Student> studentlist = FXCollections.observableArrayList(sfq.getStudents());
-        System.out.println("sss " + studentlist );
+        System.out.println("sss " + studentlist);
         zidcol1.setCellValueFactory(
                 new PropertyValueFactory<Student, String>("zID")
         );
@@ -72,60 +71,64 @@ StudentFollowQueries sfq = new StudentFollowQueries();
         );
         lnamecol1.setCellValueFactory(
                 new PropertyValueFactory<Student, String>("lName")
-        );       
-      ToggleGroup group = new ToggleGroup();
+        );
+        ToggleGroup group = new ToggleGroup();
         adbox.setToggleGroup(group);
         apbox.setToggleGroup(group);
         cgbox.setToggleGroup(group);
         cebox.setToggleGroup(group);
         dpbox.setToggleGroup(group);
         iebox.setToggleGroup(group);
-        
-        
-    studentfollowtable.setItems(null);
-    studentfollowtable.setItems(studentlist);
 
-       
-}
-    public void followupevent(ActionEvent event){
-        
-   Student selected = studentfollowtable.getSelectionModel().getSelectedItem();
-   StudentAndConsController.setselected(selected.getZID());
- if (adbox.isSelected()) { 
-     
-     Stage stageedit = (Stage) followup.getScene().getWindow();
-        stageedit.close();
-                    handleTransitionButton(event, "calendarS.png", "asformS.png", "AdvanceStandingForm.fxml", "Create Consultation");
-                } else if (apbox.isSelected()) {
-                    Stage stageedit = (Stage) followup.getScene().getWindow();
-        stageedit.close();
-                    handleTransitionButton(event, "calendarS.png", "apformS.png", "AttendancePerformanceForm.fxml", "Create Consultation");
-                } else if (cgbox.isSelected()) {
-                    Stage stageedit = (Stage) followup.getScene().getWindow();
-        stageedit.close();
-                    handleTransitionButton(event, "calendarS.png", "loginS.png", "CareerGuidanceForm.fxml", "Create Consultation");
-                } else if (cebox.isSelected()) {
-                    Stage stageedit = (Stage) followup.getScene().getWindow();
-        stageedit.close();
-                    handleTransitionButton(event, "calendarS.png", "loginS.png", "CourseEnrolmentForm.fxml", "Create Consultation");
-                } else if (dpbox.isSelected()) {
-                    Stage stageedit = (Stage) followup.getScene().getWindow();
-        stageedit.close();
-                    handleTransitionButton(event, "calendarS.png", "loginS.png", "DisciplinaryForm.fxml", "Create Consultation");
-                } else if (iebox.isSelected()) {
-                    Stage stageedit = (Stage) followup.getScene().getWindow();
-        stageedit.close();
-                    handleTransitionButton(event, "calendarS.png", "loginS.png", "InternationalExchangeForm.fxml", "Create Consultation");
-                } else {
-                    System.out.println("Please check box");
-                }
- 
-   
+        studentfollowtable.setItems(null);
+        studentfollowtable.setItems(studentlist);
+
     }
-    
+
+    public void followupevent(ActionEvent event) {
+
+        Student selected = studentfollowtable.getSelectionModel().getSelectedItem();
+        StudentAndConsController.setselected(selected.getZID());
+        if (adbox.isSelected()) {
+
+            Stage stageedit = (Stage) followup.getScene().getWindow();
+            stageedit.close();
+            handleTransitionButton(event, "calendarS.png", "asformS.png", "AdvanceStandingForm.fxml", "Create Consultation");
+        } else if (apbox.isSelected()) {
+            Stage stageedit = (Stage) followup.getScene().getWindow();
+            stageedit.close();
+            handleTransitionButton(event, "calendarS.png", "apformS.png", "AttendancePerformanceForm.fxml", "Create Consultation");
+        } else if (cgbox.isSelected()) {
+            Stage stageedit = (Stage) followup.getScene().getWindow();
+            stageedit.close();
+            handleTransitionButton(event, "calendarS.png", "loginS.png", "CareerGuidanceForm.fxml", "Create Consultation");
+        } else if (cebox.isSelected()) {
+            Stage stageedit = (Stage) followup.getScene().getWindow();
+            stageedit.close();
+            handleTransitionButton(event, "calendarS.png", "loginS.png", "CourseEnrolmentForm.fxml", "Create Consultation");
+        } else if (dpbox.isSelected()) {
+            Stage stageedit = (Stage) followup.getScene().getWindow();
+            stageedit.close();
+            handleTransitionButton(event, "calendarS.png", "loginS.png", "DisciplinaryForm.fxml", "Create Consultation");
+        } else if (iebox.isSelected()) {
+            Stage stageedit = (Stage) followup.getScene().getWindow();
+            stageedit.close();
+            handleTransitionButton(event, "calendarS.png", "loginS.png", "InternationalExchangeForm.fxml", "Create Consultation");
+        } else {
+            System.out.println("Please check box");
+        }
+
+    }
+
     private void handleTransitionButton(ActionEvent e, String a, String b, String c, String d) {
         AnimationsTransitions at = new AnimationsTransitions();
         at.changeScreenButton(e, a, b, c, d);
 
+    }
+
+    public void returnPrev(ActionEvent event) {
+        Stage stageedit = (Stage) followup.getScene().getWindow();
+        stageedit.close();
+        handleTransitionButton(event, "calendarS.png", "calendarS.png", "CalendarView.fxml", "Create Consulation");
     }
 }

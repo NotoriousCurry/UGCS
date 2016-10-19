@@ -19,7 +19,7 @@
             <Font name="Arial Bold" size="13.0" />
          </font>
       </Label>
-      <Button layoutX="1056.0" layoutY="684.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="146.0" text="Return to Previous" />
+      <Button fx:id="rPrev" layoutX="1056.0" layoutY="684.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="146.0" text="Return to Previous" />
       <Button fx:id="backHome" layoutX="-1.0" layoutY="683.0" mnemonicParsing="false" onAction="#backhome" prefHeight="10.0" prefWidth="146.0" text="Return to Dashboard" />
       <Button fx:id="logOut" layoutX="1045.0" layoutY="135.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="141.0" text="Logout" textAlignment="CENTER" textFill="WHITE" />
       <Label layoutX="917.0" layoutY="138.0" text="Welcome, " textFill="WHITE" />
