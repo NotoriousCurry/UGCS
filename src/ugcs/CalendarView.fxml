@@ -26,10 +26,14 @@
         </ImageView>
         <Button fx:id="logOut" layoutX="1096.0" layoutY="136.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="87.0" stylesheets="@Resources/returnandlogout.css" text="Logout" textAlignment="CENTER" textFill="WHITE" />
         <Button fx:id="createCon" layoutX="1024.0" layoutY="196.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="181.0" stylesheets="@Resources/test.css" text="Create Consultation" textFill="WHITE" />
-        <Agenda fx:id="agenda" allowDragging="false" allowResize="false" layoutX="221.0" layoutY="256.0" pickOnBounds="false" prefHeight="409.0" prefWidth="794.0" />
+      <ScrollPane fx:id="sp2" hbarPolicy="NEVER" layoutX="221.0" layoutY="256.0" prefViewportHeight="409.0" prefViewportWidth="795.0" vbarPolicy="NEVER" vvalue="40.0">
+         <content>
+              <Agenda fx:id="agenda" allowDragging="false" allowResize="false" layoutX="221.0" layoutY="256.0" pickOnBounds="false" prefHeight="715.0" prefWidth="794.0" />
+         </content>
+      </ScrollPane>
         <Label fx:id="searchLabel" layoutX="775.0" layoutY="211.0" text="Search:" visible="false" />
-        <TextField fx:id="searchBox" layoutX="840.0" layoutY="206.0" visible="false" />
-        <TableView fx:id="consulttable" layoutX="221.0" layoutY="256.0" prefHeight="409.0" prefWidth="794.0" visible="false">
+        <TextField fx:id="searchBox" layoutX="840.0" layoutY="206.0" prefHeight="26.0" prefWidth="153.0" visible="false" />
+        <TableView fx:id="consulttable" layoutX="221.0" layoutY="256.0" prefHeight="409.0" prefWidth="794.0" style="-fx-background-color: #696969;" stylesheets="@Resources/highlightrow%20copy.css" visible="false">
             <columns>
                 <TableColumn fx:id="idcol" prefWidth="75.0" text="ID" />
                 <TableColumn fx:id="zidcol" prefWidth="124.0" text="Zid" />
@@ -47,8 +51,12 @@
         <Button fx:id="switchCalendar" layoutX="418.0" layoutY="196.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="153.0" text="Switch Back" visible="false" />
         <Button fx:id="rPrev" layoutX="1056.0" layoutY="679.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="147.0" stylesheets="@Resources/returnandlogout.css" text="Return to Previous" />
         <Button fx:id="rDash" layoutY="676.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="146.0" stylesheets="@Resources/returnandlogout.css" text="Return to Dashboard" />
-        <Button fx:id="pdf" layoutX="1059.0" layoutY="320.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#PDFClicked" prefHeight="26.0" prefWidth="146.0" stylesheets="@Resources/test.css" text="Print PDF" textFill="WHITE" visible="false" />
-      <Button fx:id="followupbutton" layoutX="1059.0" layoutY="282.0" mnemonicParsing="false" onAction="#Follow" prefHeight="26.0" prefWidth="146.0" stylesheets="@Resources/test.css" text="Follow Up" />
+        <Button fx:id="pdf" layoutX="1059.0" layoutY="322.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#PDFClicked" prefHeight="26.0" prefWidth="146.0" stylesheets="@Resources/test.css" text="Print PDF" textFill="WHITE" visible="false" />
+      <Button fx:id="followupbutton" layoutX="1059.0" layoutY="435.0" mnemonicParsing="false" onAction="#Follow" prefHeight="26.0" prefWidth="146.0" text="Follow Up">
+         <stylesheets>
+            <URL value="@Resources/test.css" />
+            <URL value="@Resources/addprintbutton.css" />
+         </stylesheets></Button>
       <SplitPane dividerPositions="0.4836272040302267" layoutX="15.0" layoutY="196.0" orientation="VERTICAL" prefHeight="455.0" prefWidth="181.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="239.0" prefWidth="179.0">
@@ -68,5 +76,7 @@
             <ColorAdjust brightness="-0.02" contrast="0.14" />
          </effect>
       </SplitPane>
+      <Button fx:id="editbutton" layoutX="1059.0" layoutY="282.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#EditC" prefHeight="26.0" prefWidth="146.0" stylesheets="@Resources/test.css" text="Edit" textFill="WHITE" />
+      <Button fx:id="addstudentbutton" layoutX="1059.0" layoutY="364.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="26.0" prefWidth="146.0" stylesheets="@Resources/test.css" text="Add a Student " textFill="WHITE" visible="false" />
     </children>
 </AnchorPane>

@@ -31,6 +31,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -52,7 +54,8 @@ public class StudentAndConsController implements Initializable {
     private Button rPrev;
 
     private static String studentst;
-
+    private static String f = "False";
+    private static Integer i;
     private PathTransition pathT = new PathTransition();
 
     @FXML
@@ -108,7 +111,8 @@ public class StudentAndConsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        createButton.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("Resources/arrow4.png"))));
+        createButton.resize(20, 20);
         StudentQueries ss = new StudentQueries();
 
         ObservableList<Student> studentlist = FXCollections.observableArrayList(ss.getStudents());
@@ -155,6 +159,7 @@ public class StudentAndConsController implements Initializable {
             }
         });
 
+      
     }
 
     @FXML
@@ -284,6 +289,7 @@ public class StudentAndConsController implements Initializable {
         errorLabel.setVisible(false);
         return isComplete;
     }
+    
 
     @FXML
     public void addStudent(ActionEvent event) {
@@ -341,7 +347,27 @@ public class StudentAndConsController implements Initializable {
     public static void setselected(String studentst) {
         StudentAndConsController.studentst = studentst;
     }
+    
+      public static Integer getselectedCID() {
+        return i;
+    }
 
+    public static void setselectedCID(Integer i) {
+        StudentAndConsController.i = i;
+    }
+  
+  
+    
+
+   public static String getExists(){
+   return f;
+           
+           }
+   public static void setExists(String f){
+       StudentAndConsController.f = f;
+   }
+   
+   
     private void deleteTemp() {
         try {
             File file = new File("temp.txt");

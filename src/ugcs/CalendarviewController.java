@@ -148,6 +148,10 @@ public class CalendarviewController implements Initializable {
     ToggleButton tb2;
     @FXML
     ToggleButton tb3;
+    @FXML
+    Button editbutton;
+    @FXML
+    Button addstudentbutton;
 
     List<Event> myEvents;
     LocalTime timenow;
@@ -156,18 +160,22 @@ public class CalendarviewController implements Initializable {
     Pane pane;
     @FXML
     ToggleGroup tg;
+@FXML
+ScrollPane sp2;
 
     public final void setWrapText(boolean value) {
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+        // followupbutton.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("Resources/Butt.gif"))));
         notetextshow.setWrapText(true);
         sp.setFitToWidth(true);
         sp.setFitToHeight(true);
         fName.setText(readName());
         pdf.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("Resources/mini3.gif"))));
-
+sp2.setVvalue(40);
         combo.getItems().addAll("9am", "10am",
                 "11am",
                 "12pm",
@@ -235,8 +243,9 @@ public class CalendarviewController implements Initializable {
                 showdeets(newValue);
             }
         });
+        
 
-        for (Consultation c : consultlist) {
+        for (Consultation c : sortedData) {
             String localdatenow = c.getDate1();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
@@ -285,6 +294,7 @@ public class CalendarviewController implements Initializable {
 
             time.now();
             String p = c.getPriority();
+            System.out.println("p is priority = " + p);
             if (p != null) {
                 switch (p) {
                     case "High":
@@ -317,7 +327,7 @@ public class CalendarviewController implements Initializable {
                         this.agenda = agenda;
                 }
 
-            }
+            }}
             //check for change in appointment
             agenda.selectedAppointments().addListener(new ListChangeListener< Appointment>() {
                 public void onChanged(Change<? extends Appointment> c1) {
@@ -333,14 +343,14 @@ public class CalendarviewController implements Initializable {
                         } else if (c1.wasUpdated()) {
                             System.out.println("updated");
                             agenda.selectedAppointments().remove(c1);
-
+/*
                             agenda.appointments().addAll(
                                     new Agenda.AppointmentImplLocal()
                                     .withStartLocalDateTime(c1.getList().get(0).getStartLocalDateTime())
                                     .withEndLocalDateTime(c1.getList().get(0).getEndLocalDateTime())
                                     .withDescription(c.getZid())
                                     .withAppointmentGroup(new Agenda.AppointmentGroupImpl().withStyleClass(c1.getList().get(0).getAppointmentGroup().getStyleClass())) // you should use a map of AppointmentGroups
-                            );
+                            );*/
                         } else {
                             ConsultationQueries cq = new ConsultationQueries();
 
@@ -350,28 +360,28 @@ public class CalendarviewController implements Initializable {
                                     System.out.println("onchange removed");
                                     /*
 
-                                for (Consultation cc : consultlist2) {
-                                    System.out.println("description = " + a.getDescription() + " consutlation id = " + cc.getConsultationid().toString());
-                                    if (a.getDescription().equals(cc.getConsultationid().toString())) {
-                                        System.out.println("gogogo");
-                                        ConsultationQueries cqq = new ConsultationQueries();
-                                        cqq.deleteConsult(cc);
+                                     for (Consultation cc : consultlist2) {
+                                     System.out.println("description = " + a.getDescription() + " consutlation id = " + cc.getConsultationid().toString());
+                                     if (a.getDescription().equals(cc.getConsultationid().toString())) {
+                                     System.out.println("gogogo");
+                                     ConsultationQueries cqq = new ConsultationQueries();
+                                     cqq.deleteConsult(cc);
 
-                                        ObservableList<Consultation> consultlist = FXCollections.observableArrayList(cqq.getConsultations());
+                                     ObservableList<Consultation> consultlist = FXCollections.observableArrayList(cqq.getConsultations());
 
-                                        FilteredList<Consultation> filteredData = new FilteredList<>(consultlist, p -> true);
+                                     FilteredList<Consultation> filteredData = new FilteredList<>(consultlist, p -> true);
 
-                                        SortedList<Consultation> sortedData = new SortedList<>(filteredData);
-                                        sortedData.comparatorProperty().bind(consulttable.comparatorProperty());
-                                        consulttable.setItems(null);
-                                        consulttable.setItems(sortedData);
-                                        System.out.println("removed");
+                                     SortedList<Consultation> sortedData = new SortedList<>(filteredData);
+                                     sortedData.comparatorProperty().bind(consulttable.comparatorProperty());
+                                     consulttable.setItems(null);
+                                     consulttable.setItems(sortedData);
+                                     System.out.println("removed");
 
-                                        break;
+                                     break;
 
-                                    }
-                                    else {System.out.println("nothing removed");}
-                                } */
+                                     }
+                                     else {System.out.println("nothing removed");}
+                                     } */
                                     removeappointment(a);
                                     break;
                                 }
@@ -419,8 +429,10 @@ public class CalendarviewController implements Initializable {
                     followupbutton.setStyle("-fx-background-colour:orange");
                 }
             });
+            
+           
 
-        }
+        
 
         ToggleGroup group = new ToggleGroup();
 
@@ -454,9 +466,8 @@ public class CalendarviewController implements Initializable {
             @Override
             public void handle(ActionEvent e) {
 
-                consulttable.setItems(null);
-                consulttable.setItems(sortedData);
-
+                                
+                
                 agenda.setVisible(false);
                 switchTable.setVisible(false);
                 switchCalendar.setVisible(true);
@@ -473,6 +484,7 @@ public class CalendarviewController implements Initializable {
         switchCalendar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
+                addstudentbutton.setVisible(false);
                 agenda.setVisible(true);
                 switchTable.setVisible(true);
                 switchCalendar.setVisible(false);
@@ -549,9 +561,48 @@ public class CalendarviewController implements Initializable {
             notetextshow.setText(null);
 
         } else {
-            ConsultationQueries csss = new ConsultationQueries();
+           // ConsultationQueries csss = new ConsultationQueries();
             notetextshow.setText(consultation.getNotes());
 
+        }
+        try{if(consultation.getZid()==null){
+        addstudentbutton.setVisible(true);}
+        else{addstudentbutton.setVisible(false);}}
+        catch(NullPointerException e) {System.out.println("no consultation zid added");}
+
+    }
+
+    @FXML
+    public void EditC(ActionEvent event) {
+        Consultation c2 = consulttable.getSelectionModel().getSelectedItem();
+        Integer a = c2.getConsultationid();
+        String b = c2.getType();
+        System.out.println("b = " + b);
+
+        StudentAndConsController.setselectedCID(a);
+        if (b.equals("Advanced Standing")) {
+
+            StudentAndConsController.setExists("true");
+
+            System.out.println("ffmpeowfpewmfwe");
+            handleTransitionButton(event, "calendarS.png", "asformS.png", "AdvanceStandingForm.fxml", "Create Consultation");
+        } else if (b.equals("Attendance/Performance")) {
+StudentAndConsController.setExists("true");
+            handleTransitionButton(event, "calendarS.png", "apformS.png", "AttendancePerformanceForm.fxml", "Create Consultation");
+        } else if (b.equals("Career Guidance")) {
+StudentAndConsController.setExists("true");
+            handleTransitionButton(event, "calendarS.png", "loginS.png", "CareerGuidanceForm.fxml", "Create Consultation");
+        } else if (b.equals("Course Enrolment")) {
+StudentAndConsController.setExists("true");
+            handleTransitionButton(event, "calendarS.png", "loginS.png", "CourseEnrolmentForm.fxml", "Create Consultation");
+        } else if (b.equals("Displinary Action")) {
+StudentAndConsController.setExists("true");
+            handleTransitionButton(event, "calendarS.png", "loginS.png", "DisciplinaryForm.fxml", "Create Consultation");
+        } else if (b.equals("International Exchange")) {
+StudentAndConsController.setExists("true");
+            handleTransitionButton(event, "calendarS.png", "loginS.png", "InternationalExchangeForm.fxml", "Create Consultation");
+        } else {
+            System.out.println("no type");
         }
 
     }
@@ -578,16 +629,16 @@ public class CalendarviewController implements Initializable {
 
                 /*  System.out.println(" attemping to open");
 
-                stage = new Stage();
+                 stage = new Stage();
 
-                newroot = FXMLLoader.load(getClass().getResource("FollowUpStudentFXML.fxml"));
+                 newroot = FXMLLoader.load(getClass().getResource("FollowUpStudentFXML.fxml"));
 
-                Scene scene = new Scene(newroot);
-                stage.setScene(scene);
-                stage.initModality(Modality.APPLICATION_MODAL);
-                stage.initOwner(followupbutton.getScene().getWindow());
+                 Scene scene = new Scene(newroot);
+                 stage.setScene(scene);
+                 stage.initModality(Modality.APPLICATION_MODAL);
+                 stage.initOwner(followupbutton.getScene().getWindow());
 
-                stage.show();
+                 stage.show();
                  */
             } catch (IOException ex) {
                 ex.printStackTrace();
@@ -606,6 +657,14 @@ public class CalendarviewController implements Initializable {
     /* this was to create an agenda manually through a 'create' button, however the code also works with 
      the database to automatically create agendas
      */
+    public void AddStudent(ActionEvent event) {
+        Consultation con2 = consulttable.getSelectionModel().getSelectedItem();
+        StudentAndConsController.setselected(con2.getZid());
+        StudentAndConsController.setExists("true");
+        handleTransitionButton(event, "calendarS.png", "conS.png", "StudentAndCons.fxml", "Add a Student to Consultation");
+
+    }
+
     public void remove(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirm Removal");

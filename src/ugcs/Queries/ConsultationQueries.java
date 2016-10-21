@@ -38,12 +38,14 @@ public class ConsultationQueries extends DerbySetup {
     public void updateConsult(Consultation toUpdate) {
         openConnection();
         try {
-            updateConsult = conn.prepareStatement("update app.Consultation set notes=?, type=?, priority=?, date1=?, time1=?");
+            updateConsult = conn.prepareStatement("update app.Consultation set notes=?, type=?, priority=?, date1=?, time1=? where consultationid=?");
             updateConsult.setString(1, toUpdate.getNotes());
             updateConsult.setString(2, toUpdate.getType());
             updateConsult.setString(3, toUpdate.getPriority());
             updateConsult.setString(4, toUpdate.getDate1());
             updateConsult.setString(5, toUpdate.getTime1());
+            updateConsult.setInt(6, toUpdate.getConsultationid());
+
             
 
             updateConsult.executeUpdate();

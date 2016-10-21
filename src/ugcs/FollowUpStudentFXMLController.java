@@ -89,6 +89,8 @@ public class FollowUpStudentFXMLController implements Initializable {
 
         Student selected = studentfollowtable.getSelectionModel().getSelectedItem();
         StudentAndConsController.setselected(selected.getZID());
+                      StudentFollowQueries sfq = new StudentFollowQueries();
+                      sfq.deleteStudent(selected);
         if (adbox.isSelected()) {
 
             Stage stageedit = (Stage) followup.getScene().getWindow();

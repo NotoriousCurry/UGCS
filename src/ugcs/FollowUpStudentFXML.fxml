@@ -7,9 +7,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="530.0" prefWidth="379.0" style="-fx-background-color: silver; -fx-border-color: green;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ugcs.FollowUpStudentFXMLController">
+
+<AnchorPane id="AnchorPane" prefHeight="538.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ugcs.FollowUpStudentFXMLController">
    <children>
-      <TableView fx:id="studentfollowtable" layoutX="14.0" layoutY="14.0" prefHeight="329.0" prefWidth="393.0">
+      <TableView fx:id="studentfollowtable" layoutX="24.0" layoutY="14.0" prefHeight="329.0" prefWidth="393.0" stylesheets="@Resources/highlightrow%20copy.css">
         <columns>
           <TableColumn fx:id="zidcol1" prefWidth="128.0" text="ZID" />
           <TableColumn fx:id="fnamecol1" prefWidth="130.0" text="FIRSTNAME" />
@@ -25,7 +26,4 @@
       <RadioButton fx:id="apbox" layoutX="22.0" layoutY="391.0" mnemonicParsing="false" text="Attendance and Performance" />
       <RadioButton fx:id="adbox" layoutX="22.0" layoutY="366.0" mnemonicParsing="false" text="Advanced Standing" />
    </children>
-   <effect>
-      <InnerShadow color="#589a40" height="98.41" radius="42.254999999999995" width="72.61" />
-   </effect>
 </AnchorPane>

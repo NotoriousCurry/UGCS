@@ -1,6 +1,9 @@
-.table-view.table-row-cell {
-    -fx-background-color: silver;
-    -fx-background-insets: 0, 1, 2;
-    -fx-background: -fx-accent;
-    -fx-text-fill: -fx-selection-bar-text;
+.text-field {
+    -fx-background-color: #a9a9a9 , gold , white;
+    -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 2 -1;
+}
+
+.text-field:focused {
+    -fx-background-color: #a9a9a9 , white , white;
+    -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 6 -1;
 }

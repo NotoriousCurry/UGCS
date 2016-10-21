@@ -30,7 +30,7 @@ public class Consultation {
         this.time1 = new SimpleStringProperty(time2);
     }
 
-    // this is for creating a consultation
+    // this is for creating a consultation and updating
     public Consultation(Integer consultationid1, String zid1, String notes1, String type1, String priority1, String date2, String time2) {
         this.consultationid = new SimpleIntegerProperty(consultationid1);
         this.zid = new SimpleStringProperty(zid1);

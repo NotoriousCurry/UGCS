@@ -424,7 +424,7 @@ public class CareerGuidanceFormController implements Initializable {
         if (notesField.getText() != null && isComplete == true) {
             String notes = notesField.getText();
             System.out.println("date is " + date3 + "time is " + time);
-            Consultation c = new Consultation(zid, notes, "Advanced Standing", priority, date3, time);
+            Consultation c = new Consultation(zid, notes, "Career Guidance", priority, date3, time);
             ConsultationQueries cq = new ConsultationQueries();
             cq.insertConsult(c);
             ObservableList<Consultation> cd = FXCollections.observableArrayList(cq.getConsultations());

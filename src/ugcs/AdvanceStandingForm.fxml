@@ -25,62 +25,83 @@
       </Label>
       <Accordion layoutX="14.0" layoutY="157.0" />
       <AnchorPane layoutX="342.0" layoutY="-103.0" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-      <SplitPane dividerPositions="0.65" layoutX="150.0" layoutY="254.0" prefHeight="399.0" prefWidth="900.0">
+      <SplitPane dividerPositions="0.65" layoutX="150.0" layoutY="254.0" prefHeight="399.0" prefWidth="900.0" stylesheets="@Resources/highlightrow%20copy.css">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <Label layoutX="15.0" layoutY="149.0" text="Student Email:" />
-                  <TextField fx:id="eMail" editable="false" layoutX="15.0" layoutY="172.0" opacity="0.51" prefHeight="27.0" prefWidth="550.0">
+                  <Label layoutX="15.0" layoutY="135.0" text="Student Email:" />
+                  <TextField fx:id="eMail" editable="false" layoutX="15.0" layoutY="158.0" opacity="0.5" prefHeight="27.0" prefWidth="550.0" stylesheets="@Resources/highlightrow.css">
                      <effect>
-                        <InnerShadow height="11.89" radius="7.7225" />
+                        <Lighting bumpInput="$null">
+                           <light>
+                              <Light.Distant />
+                           </light>
+                        </Lighting>
                      </effect></TextField>
-                  <TextField fx:id="course" editable="false" layoutX="300.0" layoutY="45.0" opacity="0.51" prefHeight="27.0" prefWidth="265.0">
+                  <TextField fx:id="course" editable="false" layoutX="300.0" layoutY="31.0" opacity="0.5" prefHeight="27.0" prefWidth="265.0" stylesheets="@Resources/highlightrow.css">
                      <effect>
-                        <InnerShadow height="11.89" radius="7.7225" />
+                        <Lighting bumpInput="$null">
+                           <light>
+                              <Light.Distant />
+                           </light>
+                        </Lighting>
                      </effect></TextField>
-                  <Label layoutX="301.0" layoutY="88.0" text="Student Last Name:" />
-                  <Label layoutX="16.0" layoutY="88.0" prefHeight="17.0" prefWidth="130.0" text="Student First Name:" />
-                  <Label layoutX="15.0" layoutY="211.0" text="Notes:" />
-                  <TextArea fx:id="notesField" layoutX="15.0" layoutY="234.0" prefHeight="115.0" prefWidth="550.0" />
-                  <Label layoutX="15.0" layoutY="20.0" prefHeight="16.0" prefWidth="27.0" text="zID:" />
-                  <TextField fx:id="fName" editable="false" layoutX="15.0" layoutY="111.0" opacity="0.51" prefHeight="27.0" prefWidth="265.0">
+                  <Label layoutX="301.0" layoutY="74.0" text="Student Last Name:" />
+                  <Label layoutX="16.0" layoutY="74.0" prefHeight="17.0" prefWidth="130.0" text="Student First Name:" />
+                  <Label layoutX="15.0" layoutY="199.0" text="Notes:" />
+                  <TextArea fx:id="notesField" layoutX="15.0" layoutY="222.0" prefHeight="135.0" prefWidth="550.0" stylesheets="@Resources/searchexpand.css" />
+                  <Label layoutX="15.0" layoutY="6.0" prefHeight="16.0" prefWidth="27.0" text="ZID:" />
+                  <TextField fx:id="fName" editable="false" layoutX="15.0" layoutY="97.0" opacity="0.5" prefHeight="27.0" prefWidth="265.0" stylesheets="@Resources/highlightrow.css">
                      <effect>
-                        <InnerShadow height="11.89" radius="7.7225" />
+                        <Lighting bumpInput="$null">
+                           <light>
+                              <Light.Distant />
+                           </light>
+                        </Lighting>
                      </effect></TextField>
-                  <TextField fx:id="zId" editable="false" layoutX="15.0" layoutY="45.0" opacity="0.51" prefHeight="27.0" prefWidth="265.0">
+                  <TextField fx:id="zId" editable="false" layoutX="15.0" layoutY="31.0" opacity="0.5" prefHeight="27.0" prefWidth="265.0" stylesheets="@Resources/highlightrow.css">
                      <effect>
-                        <InnerShadow height="11.89" radius="7.7225" />
+                        <Lighting bumpInput="$null">
+                           <light>
+                              <Light.Distant />
+                           </light>
+                        </Lighting>
                      </effect></TextField>
-                  <Label layoutX="300.0" layoutY="20.0" prefHeight="17.0" prefWidth="48.0" text="Course:" />
-                  <TextField fx:id="lName" editable="false" layoutX="301.0" layoutY="111.0" opacity="0.51" prefHeight="27.0" prefWidth="265.0">
+                  <Label layoutX="300.0" layoutY="6.0" prefHeight="17.0" prefWidth="48.0" text="Course:" />
+                  <TextField fx:id="lName" editable="false" layoutX="301.0" layoutY="97.0" opacity="0.5" prefHeight="27.0" prefWidth="265.0" stylesheets="@Resources/highlightrow.css">
                      <effect>
-                        <InnerShadow height="11.89" radius="7.7225" />
+                        <Lighting bumpInput="$null">
+                           <light>
+                              <Light.Distant />
+                           </light>
+                        </Lighting>
                      </effect></TextField>
-                  <CheckBox fx:id="staffcheck" layoutX="14.0" layoutY="359.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="184.0" text="Requires Follow-Up" />
+                  <CheckBox fx:id="staffcheck" layoutX="16.0" layoutY="365.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="184.0" text="Requires Follow-Up" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
                   <AnchorPane layoutX="29.0" layoutY="14.0" prefHeight="180.0" prefWidth="252.0" style="-fx-background-color: silver;">
                      <children>
-                        <ComboBox fx:id="priorityChoice" layoutX="12.0" layoutY="30.0" prefHeight="27.0" prefWidth="229.0" promptText="Priority Level" style="-fx-border-color: black;">
+                        <ComboBox fx:id="priorityChoice" layoutX="12.0" layoutY="25.0" prefHeight="29.0" prefWidth="229.0" promptText="Priority Level" stylesheets="@Resources/highlightrow%20copy.css">
                            <effect>
                               <Glow />
                            </effect>
                         </ComboBox>
-                        <DatePicker fx:id="datePicked" layoutX="12.0" layoutY="82.0" prefHeight="29.0" prefWidth="229.0" promptText="Select a date..." style="-fx-border-color: black;" />
+                        <DatePicker fx:id="datePicked" layoutX="12.0" layoutY="76.0" prefHeight="29.0" prefWidth="229.0" promptText="Select a date..." stylesheets="@Resources/highlightrow%20copy.css" />
+                        <ComboBox fx:id="timePicked" layoutX="12.0" layoutY="128.0" prefHeight="29.0" prefWidth="229.0" promptText="time..." stylesheets="@Resources/highlightrow%20copy.css">
+                           <effect>
+                              <Glow />
+                           </effect>
+                        </ComboBox>
                      </children>
                   </AnchorPane>
-                  <ComboBox fx:id="timePicked" layoutX="41.0" layoutY="147.0" prefHeight="29.0" prefWidth="229.0" promptText="time..." style="-fx-border-color: black;">
-                     <effect>
-                        <Glow />
-                     </effect>
-                  </ComboBox>
                   <Button fx:id="createButton" layoutX="29.0" layoutY="304.0" mnemonicParsing="false" onAction="#Create" prefHeight="29.0" prefWidth="252.0" stylesheets="@Resources/test.css" text="Create Consultation" />
                   <Button fx:id="backHome" layoutX="29.0" layoutY="342.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="252.0" text="Cancel" />
                   <Button fx:id="upload" layoutX="30.0" layoutY="233.0" mnemonicParsing="false" onAction="#Upload" prefHeight="29.0" prefWidth="252.0" stylesheets="@Resources/addprintbutton.css" text="Upload Student Transcript" />
                   <Label fx:id="viewlabel" layoutX="110.0" layoutY="270.0" text="View Transcript" underline="true" />
                   <ImageView fx:id="imageaa" fitHeight="29.0" fitWidth="27.0" layoutX="56.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true" />
+                  <Button fx:id="updatebutton" layoutX="30.0" layoutY="304.0" mnemonicParsing="false" onAction="#UpdateNow" prefHeight="29.0" prefWidth="252.0" stylesheets="@Resources/test.css" text="Update Consultation" visible="false" />
                </children>
             </AnchorPane>
         </items>
