@@ -16,6 +16,7 @@ public class UGCSetup extends DerbySetup {
 
     PreparedStatement createUGCTable = null;
     PreparedStatement createDefaultUGC = null;
+    PreparedStatement createDefaultCOOP = null;
     private Statement stmt = null;
     ResultSet rs = null;
 
@@ -45,7 +46,8 @@ public class UGCSetup extends DerbySetup {
                         + "\"PASSWORD\" VARCHAR(100),"
                         + "\"FIRSTNAME\" VARCHAR(50),"
                         + "\"LASTNAME\" VARCHAR(50),"
-                        + "\"EMAIL\" VARCHAR(50)"
+                        + "\"EMAIL\" VARCHAR(50),"
+                        + "\"TYPE\" VARCHAR(25)"
                         + ")";
 
                 System.out.println(sqlText);
@@ -73,15 +75,20 @@ public class UGCSetup extends DerbySetup {
             System.out.println("Beginning insert");
             Statement stmt = conn.createStatement();
             BasicPasswordEncryptor passEnc = new BasicPasswordEncryptor();
-            String encPass = passEnc.encryptPassword("ugc");
+            String encPassUGC = passEnc.encryptPassword("ugc");
+            String encPassCOOP = passEnc.encryptPassword("coop");
             
-            createDefaultUGC = conn.prepareStatement("INSERT INTO APP.UGC(ZID, PASSWORD, FIRSTNAME, LASTNAME)" + 
-                    "VALUES ('z1234567', ?, 'Micheal','Cahalane')");
-            createDefaultUGC.setString(1, encPass);
+            createDefaultUGC = conn.prepareStatement("INSERT INTO APP.UGC(ZID, PASSWORD, FIRSTNAME, LASTNAME, EMAIL, TYPE)" + 
+                    "VALUES ('z1234567', ?, 'Micheal','Cahalane', 'z1234567@unsw.edu.au', 'NORM')");
+            createDefaultUGC.setString(1, encPassUGC);
             createDefaultUGC.executeUpdate();
 
+            createDefaultCOOP = conn.prepareStatement("INSERT INTO APP.UGC(ZID, PASSWORD, FIRSTNAME, LASTNAME, EMAIL, TYPE)" + 
+                    "VALUES ('z7654321', ?, 'Sim','Coop', 'z7654321@unsw.edu.au', 'COOP')");
+            createDefaultCOOP.setString(1, encPassCOOP);
+            createDefaultCOOP.executeUpdate();
 
-            System.out.println("UGC inserted.");
+            System.out.println("UGC & COOP inserted.");
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

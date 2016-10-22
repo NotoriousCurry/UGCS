@@ -24,6 +24,7 @@ public class UgcQueries extends ugcs.Database.DerbySetup {
     PreparedStatement insertUgc = null;
     PreparedStatement updateUgc = null;
     PreparedStatement deleteUgc = null;
+    PreparedStatement checkUgcType = null;
 
     ResultSet rs = null;
 
@@ -36,7 +37,7 @@ public class UgcQueries extends ugcs.Database.DerbySetup {
             while (rs.next()) {
                 ugcs.add(
                         new UGC(rs.getString("ZID"), rs.getString("PASSWORD"), rs.getString("FIRSTNAME"), rs.getString("LASTNAME"),
-                                rs.getString("EMAIL"))
+                                rs.getString("EMAIL"), rs.getString("TYPE"))
                 );
             }
             rs.close();
@@ -152,4 +153,47 @@ public class UgcQueries extends ugcs.Database.DerbySetup {
         }
         closeConnection();
     }
+    
+        public String getType(String username) {
+        String type = "";
+        openConnection();
+        try {
+            checkUgcType = conn.prepareStatement("SELECT TYPE FROM APP.UGC WHERE ZID=?");
+            checkUgcType.setString(1, username); // To fill int the ? value above
+            rs = checkUgcType.executeQuery();
+            while (rs.next()) {
+                type = rs.getString("TYPE");
+            }
+            rs.close();
+            checkUgcType.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        closeConnection();
+        return type;
+    }
+    
+    public Boolean checkType(String pass) {
+        // False return means UGC logged in is not a COOP coordinator
+        Boolean ugcType = false;
+        openConnection();
+        try {
+            checkUgcType = conn.prepareStatement("SELECT TYPE FROM APP.UGC WHERE PASSWORD=?");
+            checkUgcType.setString(1, pass); // To fill int the ? value above
+            rs = checkUgcType.executeQuery();
+            while (rs.next()) {
+                String type = rs.getString("TYPE");
+                if (type == "COOP") {
+                    ugcType = true;
+                }
+            }
+            rs.close();
+            checkUgcType.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        closeConnection();
+        return ugcType;
+    }
+   
 }

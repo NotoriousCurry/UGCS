@@ -17,13 +17,15 @@ public class UGC {
     private String fname;
     private String lname;
     private String eMail;
+    private String type;
 
-    public UGC(String zID, String password, String fname, String lname, String eMail) {
+    public UGC(String zID, String password, String fname, String lname, String eMail, String type) {
         this.zID = zID;
         this.password = password;
         this.fname = fname;
         this.lname = lname;
         this.eMail = eMail;
+        this.type = type;
     }
 
     public String getzID() {

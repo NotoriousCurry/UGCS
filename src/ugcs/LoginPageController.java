@@ -147,11 +147,12 @@ public class LoginPageController implements Initializable {
         UgcQueries ugcQ = new UgcQueries();
         String name = ugcQ.getName(z);
         String ps = ugcQ.getPassword(z);
+        String ty = ugcQ.getType(z);
         try {
             FileWriter fileWriter = new FileWriter(fName);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-            bufferedWriter.write(name + "," + ps);
+            bufferedWriter.write(name + "," + ps + "," + ty);
 
             bufferedWriter.close();
         } catch (IOException ex) {
