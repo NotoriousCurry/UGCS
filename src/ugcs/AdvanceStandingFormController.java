@@ -472,6 +472,7 @@ staffcheck.setSelected(false);
             String i = String.valueOf(StudentAndConsController.getselectedCID());
             if (cw.getConsultationid().toString().equals(i)) {
                 Integer a1 = cw.getConsultationid();
+                
                 System.out.println("a1 = " + a1);
                 String a2 = cw.getZid();
                 String a3 = notesField.getText();

@@ -13,9 +13,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -46,6 +48,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -58,6 +61,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -95,7 +99,7 @@ public class CalendarviewController implements Initializable {
     @FXML
     TableColumn prioritycol;
     @FXML
-    TableColumn datecol;
+    TableColumn<Consultation, String> datecol;
     @FXML
     TableColumn timecol;
     @FXML
@@ -205,6 +209,42 @@ sp2.setVvalue(40);
         datecol.setCellValueFactory(
                 new PropertyValueFactory<Consultation, String>("date1")
         );
+        datecol.setCellValueFactory(cellData -> cellData.getValue().dateproperty());
+        
+        
+        
+        datecol.setCellFactory(column -> { 
+            return new TableCell<Consultation, String>(){
+                @Override
+                protected void updateItem(String item, boolean empty){
+                    super.updateItem(item, empty);
+                   
+                    if(item == null || empty){
+                        setText(null);
+                        setStyle("");
+                    } else{ 
+                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+//formatter = formatter.withLocale(Locale.ENGLISH);  // Locale specifies human language for translating, and cultural norms for lowercase/uppercase and abbreviations and such. Example: Locale.US or Locale.CANADA_FRENCH
+                    System.out.println("item " + item);
+                    LocalDate date = LocalDate.parse(item, formatter);
+                        setText(item);
+                         LocalDate datenow1 = LocalDate.now();
+                Date dateupdate2 = localDateToUtilDate(datenow1);
+                SimpleDateFormat dateformatJava2 = new SimpleDateFormat("dd/MM/yyyy");
+                String datenow3 = dateformatJava2.format(dateupdate2);
+                LocalDate datenowcompare = LocalDate.parse(datenow3, formatter);
+                        if(date == datenowcompare){
+                            setTextFill(Color.BLACK);
+                            setStyle("-fx-background-color: lightgreen");
+                        
+                    }
+                }
+            }
+        };
+                    });
+        
+        
+        
         timecol.setCellValueFactory(
                 new PropertyValueFactory<Consultation, String>("time1")
         );
@@ -659,7 +699,7 @@ StudentAndConsController.setExists("true");
      */
     public void AddStudent(ActionEvent event) {
         Consultation con2 = consulttable.getSelectionModel().getSelectedItem();
-        StudentAndConsController.setselected(con2.getZid());
+        StudentAndConsController.setselectedCID(con2.getConsultationid());
         StudentAndConsController.setExists("true");
         handleTransitionButton(event, "calendarS.png", "conS.png", "StudentAndCons.fxml", "Add a Student to Consultation");
 
@@ -784,7 +824,7 @@ StudentAndConsController.setExists("true");
                 .withStartLocalDateTime(newevent.getstartlocaldate().atTime(time))
                 .withEndLocalDateTime(newevent.getendlocaldate().atTime(time2))
                 .withDescription(cqq.getConsultations().get(cqq.getConsultations().size() - 1).getConsultationid().toString())
-                .withAppointmentGroup(new Agenda.AppointmentGroupImpl().withStyleClass("group1")) // you should use a map of AppointmentGroups
+                .withAppointmentGroup(new Agenda.AppointmentGroupImpl().withStyleClass("group10")) // you should use a map of AppointmentGroups
         );
         System.out.println("consultation id = " + cqq.getConsultations().get(cqq.getConsultations().size() - 1).getConsultationid().toString());
         agenda.refresh();

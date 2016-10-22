@@ -37,7 +37,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import ugcs.Audio.AudioMethods;
+import ugcs.Model.Consultation;
 import ugcs.Model.Student;
+import ugcs.Queries.ConsultationQueries;
 import ugcs.Queries.StudentQueries;
 
 /**
@@ -105,7 +107,8 @@ public class StudentAndConsController implements Initializable {
     TableColumn emailcol;
     Stage stage;
     Parent newroot;
-
+@FXML
+Button updatebuttonnow;
     /**
      * Initializes the controller class.
      */
@@ -114,9 +117,54 @@ public class StudentAndConsController implements Initializable {
         createButton.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("Resources/arrow4.png"))));
         createButton.resize(20, 20);
         StudentQueries ss = new StudentQueries();
+        updatebuttonnow.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("Resources/plus.png"))));
 
         ObservableList<Student> studentlist = FXCollections.observableArrayList(ss.getStudents());
+if(getExists() == "true"){
+    updatebuttonnow.setVisible(true);
+    createButton.setVisible(false);
+}
+        updatebuttonnow.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                setExists("false");
+                Student S = studenttable.getSelectionModel().getSelectedItem();
+                String zidstring = S.getZID();
+                String type = null;
+                 if (adbox.isSelected()) {
+                     type = "Advanced Standing";
+                } else if (apbox.isSelected()) {
+                     type = "Attendance/Performance";
+                } else if (cgbox.isSelected()) {
+                     type = "Career Guidance";
+                } else if (cebox.isSelected()) {
+                     type = "Course Enrolment";
+                } else if (dpbox.isSelected()) {
+                     type = "Discplinary Action";
+                } else if (iebox.isSelected()) {
+                     type = "International Exchange";
+                } else {
+                    System.out.println("Please check box");
+                }System.out.println("zid = " + zidstring);
+                 ConsultationQueries ccc = new ConsultationQueries();  
+ObservableList<Consultation> ckk = FXCollections.observableArrayList(ccc.getConsultations());
+                 for(Consultation c: ckk){
+                     if(c.getConsultationid() == getselectedCID()){
+                 Consultation consultupdate = new Consultation(c.getConsultationid(), zidstring,  null,  type, "Low",  c.getDate1(),  c.getTime1() );
+ccc.updateConsult(consultupdate);
+                         System.out.println("student and type added");
+                         handleTransitionButton(e, "conS.png", "calendarS.png", "CalendarView.fxml", "Consultations");
 
+                         
+                         
+                     }
+
+                 }
+                
+            }
+        });
+        
+        
         zidcol.setCellValueFactory(
                 new PropertyValueFactory<Student, String>("zID")
         );

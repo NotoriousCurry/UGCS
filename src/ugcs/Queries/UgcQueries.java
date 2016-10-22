@@ -134,7 +134,7 @@ public class UgcQueries extends ugcs.Database.DerbySetup {
 
             updateUgc.executeUpdate();
 
-        } catch (SQLException ex) {
+    } catch (SQLException ex) {
             ex.printStackTrace();
         }
         closeConnection();
