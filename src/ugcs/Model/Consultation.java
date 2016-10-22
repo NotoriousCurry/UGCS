@@ -18,9 +18,10 @@ public class Consultation {
     private final StringProperty priority;
     private final StringProperty date1;
     private final StringProperty time1;
+    private final StringProperty owner;
 
     // this is for finding consultations
-    public Consultation(String zid1, String notes1, String type1, String priority1, String date2, String time2) {
+    public Consultation(String zid1, String notes1, String type1, String priority1, String date2, String time2, String owner) {
         //  this.ID = new SimpleIntegerProperty(ID);
         this.zid = new SimpleStringProperty(zid1);
         this.notes = new SimpleStringProperty(notes1);
@@ -28,10 +29,22 @@ public class Consultation {
         this.priority = new SimpleStringProperty(priority1);
         this.date1 = new SimpleStringProperty(date2);
         this.time1 = new SimpleStringProperty(time2);
+        this.owner = new SimpleStringProperty(owner);
+    }
+    
+        public Consultation(String zid1, String notes1, String type1, String priority1, String date2, String time2) {
+        //  this.ID = new SimpleIntegerProperty(ID);
+        this.zid = new SimpleStringProperty(zid1);
+        this.notes = new SimpleStringProperty(notes1);
+        this.type = new SimpleStringProperty(type1);
+        this.priority = new SimpleStringProperty(priority1);
+        this.date1 = new SimpleStringProperty(date2);
+        this.time1 = new SimpleStringProperty(time2);
+        this.owner = new SimpleStringProperty("");
     }
 
     // this is for creating a consultation and updating
-    public Consultation(Integer consultationid1, String zid1, String notes1, String type1, String priority1, String date2, String time2) {
+    public Consultation(Integer consultationid1, String zid1, String notes1, String type1, String priority1, String date2, String time2, String owner) {
         this.consultationid = new SimpleIntegerProperty(consultationid1);
         this.zid = new SimpleStringProperty(zid1);
         this.notes = new SimpleStringProperty(notes1);
@@ -39,6 +52,18 @@ public class Consultation {
         this.priority = new SimpleStringProperty(priority1);
         this.date1 = new SimpleStringProperty(date2);
         this.time1 = new SimpleStringProperty(time2);
+        this.owner = new SimpleStringProperty(owner);
+    }
+    
+        public Consultation(Integer consultationid1, String zid1, String notes1, String type1, String priority1, String date2, String time2) {
+        this.consultationid = new SimpleIntegerProperty(consultationid1);
+        this.zid = new SimpleStringProperty(zid1);
+        this.notes = new SimpleStringProperty(notes1);
+        this.type = new SimpleStringProperty(type1);
+        this.priority = new SimpleStringProperty(priority1);
+        this.date1 = new SimpleStringProperty(date2);
+        this.time1 = new SimpleStringProperty(time2);
+        this.owner = new SimpleStringProperty("");
     }
 
     public Integer getConsultationid() {
@@ -67,6 +92,10 @@ public class Consultation {
 
     public String getZid() {
         return zid.get();
+    }
+    
+    public String getOwner() {
+        return owner.get();
     }
 
     public IntegerProperty consultationidProperty() {
@@ -97,4 +126,7 @@ public class Consultation {
         return time1;
     }
 
+    public StringProperty ownerProperty() {
+        return owner;
+    }
 }

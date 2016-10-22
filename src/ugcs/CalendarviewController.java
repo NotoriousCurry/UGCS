@@ -164,8 +164,8 @@ public class CalendarviewController implements Initializable {
     Pane pane;
     @FXML
     ToggleGroup tg;
-@FXML
-ScrollPane sp2;
+    @FXML
+    ScrollPane sp2;
 
     public final void setWrapText(boolean value) {
     }
@@ -179,7 +179,7 @@ ScrollPane sp2;
         sp.setFitToHeight(true);
         fName.setText(readName());
         pdf.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("Resources/mini3.gif"))));
-sp2.setVvalue(40);
+        sp2.setVvalue(40);
         combo.getItems().addAll("9am", "10am",
                 "11am",
                 "12pm",
@@ -210,41 +210,37 @@ sp2.setVvalue(40);
                 new PropertyValueFactory<Consultation, String>("date1")
         );
         datecol.setCellValueFactory(cellData -> cellData.getValue().dateproperty());
-        
-        
-        
-        datecol.setCellFactory(column -> { 
-            return new TableCell<Consultation, String>(){
+
+        datecol.setCellFactory(column -> {
+            return new TableCell<Consultation, String>() {
                 @Override
-                protected void updateItem(String item, boolean empty){
+                protected void updateItem(String item, boolean empty) {
                     super.updateItem(item, empty);
-                   
-                    if(item == null || empty){
+
+                    if (item == null || empty) {
                         setText(null);
                         setStyle("");
-                    } else{ 
-                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    } else {
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 //formatter = formatter.withLocale(Locale.ENGLISH);  // Locale specifies human language for translating, and cultural norms for lowercase/uppercase and abbreviations and such. Example: Locale.US or Locale.CANADA_FRENCH
-                    System.out.println("item " + item);
-                    LocalDate date = LocalDate.parse(item, formatter);
+                        System.out.println("item " + item);
+                        LocalDate date = LocalDate.parse(item, formatter);
                         setText(item);
-                         LocalDate datenow1 = LocalDate.now();
-                Date dateupdate2 = localDateToUtilDate(datenow1);
-                SimpleDateFormat dateformatJava2 = new SimpleDateFormat("dd/MM/yyyy");
-                String datenow3 = dateformatJava2.format(dateupdate2);
-                LocalDate datenowcompare = LocalDate.parse(datenow3, formatter);
-                        if(date == datenowcompare){
+                        LocalDate datenow1 = LocalDate.now();
+                        Date dateupdate2 = localDateToUtilDate(datenow1);
+                        SimpleDateFormat dateformatJava2 = new SimpleDateFormat("dd/MM/yyyy");
+                        String datenow3 = dateformatJava2.format(dateupdate2);
+                        LocalDate datenowcompare = LocalDate.parse(datenow3, formatter);
+                        if (date == datenowcompare) {
                             setTextFill(Color.BLACK);
                             setStyle("-fx-background-color: lightgreen");
-                        
+
+                        }
                     }
                 }
-            }
-        };
-                    });
-        
-        
-        
+            };
+        });
+
         timecol.setCellValueFactory(
                 new PropertyValueFactory<Consultation, String>("time1")
         );
@@ -283,7 +279,6 @@ sp2.setVvalue(40);
                 showdeets(newValue);
             }
         });
-        
 
         for (Consultation c : sortedData) {
             String localdatenow = c.getDate1();
@@ -367,23 +362,24 @@ sp2.setVvalue(40);
                         this.agenda = agenda;
                 }
 
-            }}
-            //check for change in appointment
-            agenda.selectedAppointments().addListener(new ListChangeListener< Appointment>() {
-                public void onChanged(Change<? extends Appointment> c1) {
-                    System.out.println("onchange start");
-                    while (c1.next()) {
-                        System.out.println("onchange next");
-                        if (c1.wasPermutated()) {
-                            System.out.println("on change listening");
-                            for (int i = c1.getFrom(); i < c1.getTo(); ++i) {
-                                System.out.println("permuated" + c1.getPermutation(i));
+            }
+        }
+        //check for change in appointment
+        agenda.selectedAppointments().addListener(new ListChangeListener< Appointment>() {
+            public void onChanged(Change<? extends Appointment> c1) {
+                System.out.println("onchange start");
+                while (c1.next()) {
+                    System.out.println("onchange next");
+                    if (c1.wasPermutated()) {
+                        System.out.println("on change listening");
+                        for (int i = c1.getFrom(); i < c1.getTo(); ++i) {
+                            System.out.println("permuated" + c1.getPermutation(i));
 
-                            }
-                        } else if (c1.wasUpdated()) {
-                            System.out.println("updated");
-                            agenda.selectedAppointments().remove(c1);
-/*
+                        }
+                    } else if (c1.wasUpdated()) {
+                        System.out.println("updated");
+                        agenda.selectedAppointments().remove(c1);
+                        /*
                             agenda.appointments().addAll(
                                     new Agenda.AppointmentImplLocal()
                                     .withStartLocalDateTime(c1.getList().get(0).getStartLocalDateTime())
@@ -391,14 +387,14 @@ sp2.setVvalue(40);
                                     .withDescription(c.getZid())
                                     .withAppointmentGroup(new Agenda.AppointmentGroupImpl().withStyleClass(c1.getList().get(0).getAppointmentGroup().getStyleClass())) // you should use a map of AppointmentGroups
                             );*/
-                        } else {
-                            ConsultationQueries cq = new ConsultationQueries();
+                    } else {
+                        ConsultationQueries cq = new ConsultationQueries();
 
-                            ObservableList<Consultation> consultlist2 = FXCollections.observableArrayList(cq.getConsultations());
-                            for (Appointment a : c1.getRemoved()) {
-                                if (!agenda.appointments().contains(a)) {
-                                    System.out.println("onchange removed");
-                                    /*
+                        ObservableList<Consultation> consultlist2 = FXCollections.observableArrayList(cq.getConsultations());
+                        for (Appointment a : c1.getRemoved()) {
+                            if (!agenda.appointments().contains(a)) {
+                                System.out.println("onchange removed");
+                                /*
 
                                      for (Consultation cc : consultlist2) {
                                      System.out.println("description = " + a.getDescription() + " consutlation id = " + cc.getConsultationid().toString());
@@ -422,57 +418,53 @@ sp2.setVvalue(40);
                                      }
                                      else {System.out.println("nothing removed");}
                                      } */
-                                    removeappointment(a);
-                                    break;
-                                }
+                                removeappointment(a);
+                                break;
                             }
+                        }
 
-                            for (Appointment a : c1.getAddedSubList()) {
+                        for (Appointment a : c1.getAddedSubList()) {
 
-                                System.out.println("nothing added");
+                            System.out.println("nothing added");
 
-                            }
                         }
                     }
                 }
+            }
 
-            });
+        });
 
-            pdf.setOnMouseEntered(new EventHandler<MouseEvent>() {
+        pdf.setOnMouseEntered(new EventHandler<MouseEvent>() {
 
-                @Override
-                public void handle(MouseEvent t) {
-                    pdf.setStyle("-fx-background-color:#dae7f3;");
-                }
-            });
+            @Override
+            public void handle(MouseEvent t) {
+                pdf.setStyle("-fx-background-color:#dae7f3;");
+            }
+        });
 
-            pdf.setOnMouseExited(new EventHandler<MouseEvent>() {
+        pdf.setOnMouseExited(new EventHandler<MouseEvent>() {
 
-                @Override
-                public void handle(MouseEvent t) {
-                    pdf.setStyle("-fx-background-colour:orange");
-                }
-            });
+            @Override
+            public void handle(MouseEvent t) {
+                pdf.setStyle("-fx-background-colour:orange");
+            }
+        });
 
-            followupbutton.setOnMouseEntered(new EventHandler<MouseEvent>() {
+        followupbutton.setOnMouseEntered(new EventHandler<MouseEvent>() {
 
-                @Override
-                public void handle(MouseEvent t) {
-                    followupbutton.setStyle("-fx-background-color:#dae7f3;");
-                }
-            });
+            @Override
+            public void handle(MouseEvent t) {
+                followupbutton.setStyle("-fx-background-color:#dae7f3;");
+            }
+        });
 
-            followupbutton.setOnMouseExited(new EventHandler<MouseEvent>() {
+        followupbutton.setOnMouseExited(new EventHandler<MouseEvent>() {
 
-                @Override
-                public void handle(MouseEvent t) {
-                    followupbutton.setStyle("-fx-background-colour:orange");
-                }
-            });
-            
-           
-
-        
+            @Override
+            public void handle(MouseEvent t) {
+                followupbutton.setStyle("-fx-background-colour:orange");
+            }
+        });
 
         ToggleGroup group = new ToggleGroup();
 
@@ -506,8 +498,6 @@ sp2.setVvalue(40);
             @Override
             public void handle(ActionEvent e) {
 
-                                
-                
                 agenda.setVisible(false);
                 switchTable.setVisible(false);
                 switchCalendar.setVisible(true);
@@ -601,14 +591,19 @@ sp2.setVvalue(40);
             notetextshow.setText(null);
 
         } else {
-           // ConsultationQueries csss = new ConsultationQueries();
+            // ConsultationQueries csss = new ConsultationQueries();
             notetextshow.setText(consultation.getNotes());
 
         }
-        try{if(consultation.getZid()==null){
-        addstudentbutton.setVisible(true);}
-        else{addstudentbutton.setVisible(false);}}
-        catch(NullPointerException e) {System.out.println("no consultation zid added");}
+        try {
+            if (consultation.getZid() == null) {
+                addstudentbutton.setVisible(true);
+            } else {
+                addstudentbutton.setVisible(false);
+            }
+        } catch (NullPointerException e) {
+            System.out.println("no consultation zid added");
+        }
 
     }
 
@@ -627,19 +622,19 @@ sp2.setVvalue(40);
             System.out.println("ffmpeowfpewmfwe");
             handleTransitionButton(event, "calendarS.png", "asformS.png", "AdvanceStandingForm.fxml", "Create Consultation");
         } else if (b.equals("Attendance/Performance")) {
-StudentAndConsController.setExists("true");
+            StudentAndConsController.setExists("true");
             handleTransitionButton(event, "calendarS.png", "apformS.png", "AttendancePerformanceForm.fxml", "Create Consultation");
         } else if (b.equals("Career Guidance")) {
-StudentAndConsController.setExists("true");
+            StudentAndConsController.setExists("true");
             handleTransitionButton(event, "calendarS.png", "loginS.png", "CareerGuidanceForm.fxml", "Create Consultation");
         } else if (b.equals("Course Enrolment")) {
-StudentAndConsController.setExists("true");
+            StudentAndConsController.setExists("true");
             handleTransitionButton(event, "calendarS.png", "loginS.png", "CourseEnrolmentForm.fxml", "Create Consultation");
         } else if (b.equals("Displinary Action")) {
-StudentAndConsController.setExists("true");
+            StudentAndConsController.setExists("true");
             handleTransitionButton(event, "calendarS.png", "loginS.png", "DisciplinaryForm.fxml", "Create Consultation");
         } else if (b.equals("International Exchange")) {
-StudentAndConsController.setExists("true");
+            StudentAndConsController.setExists("true");
             handleTransitionButton(event, "calendarS.png", "loginS.png", "InternationalExchangeForm.fxml", "Create Consultation");
         } else {
             System.out.println("no type");

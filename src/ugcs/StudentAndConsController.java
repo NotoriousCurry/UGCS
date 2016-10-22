@@ -107,8 +107,9 @@ public class StudentAndConsController implements Initializable {
     TableColumn emailcol;
     Stage stage;
     Parent newroot;
-@FXML
-Button updatebuttonnow;
+    @FXML
+    Button updatebuttonnow;
+
     /**
      * Initializes the controller class.
      */
@@ -120,10 +121,10 @@ Button updatebuttonnow;
         updatebuttonnow.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("Resources/plus.png"))));
 
         ObservableList<Student> studentlist = FXCollections.observableArrayList(ss.getStudents());
-if(getExists() == "true"){
-    updatebuttonnow.setVisible(true);
-    createButton.setVisible(false);
-}
+        if (getExists() == "true") {
+            updatebuttonnow.setVisible(true);
+            createButton.setVisible(false);
+        }
         updatebuttonnow.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
@@ -131,40 +132,38 @@ if(getExists() == "true"){
                 Student S = studenttable.getSelectionModel().getSelectedItem();
                 String zidstring = S.getZID();
                 String type = null;
-                 if (adbox.isSelected()) {
-                     type = "Advanced Standing";
+                if (adbox.isSelected()) {
+                    type = "Advanced Standing";
                 } else if (apbox.isSelected()) {
-                     type = "Attendance/Performance";
+                    type = "Attendance/Performance";
                 } else if (cgbox.isSelected()) {
-                     type = "Career Guidance";
+                    type = "Career Guidance";
                 } else if (cebox.isSelected()) {
-                     type = "Course Enrolment";
+                    type = "Course Enrolment";
                 } else if (dpbox.isSelected()) {
-                     type = "Discplinary Action";
+                    type = "Discplinary Action";
                 } else if (iebox.isSelected()) {
-                     type = "International Exchange";
+                    type = "International Exchange";
                 } else {
                     System.out.println("Please check box");
-                }System.out.println("zid = " + zidstring);
-                 ConsultationQueries ccc = new ConsultationQueries();  
-ObservableList<Consultation> ckk = FXCollections.observableArrayList(ccc.getConsultations());
-                 for(Consultation c: ckk){
-                     if(c.getConsultationid() == getselectedCID()){
-                 Consultation consultupdate = new Consultation(c.getConsultationid(), zidstring,  null,  type, "Low",  c.getDate1(),  c.getTime1() );
-ccc.updateConsult(consultupdate);
-                         System.out.println("student and type added");
-                         handleTransitionButton(e, "conS.png", "calendarS.png", "CalendarView.fxml", "Consultations");
+                }
+                System.out.println("zid = " + zidstring);
+                ConsultationQueries ccc = new ConsultationQueries();
+                ObservableList<Consultation> ckk = FXCollections.observableArrayList(ccc.getConsultations());
+                for (Consultation c : ckk) {
+                    if (c.getConsultationid() == getselectedCID()) {
+                        Consultation consultupdate = new Consultation(c.getConsultationid(), zidstring, null, type, "Low", c.getDate1(), c.getTime1());
+                        ccc.updateConsult(consultupdate);
+                        System.out.println("student and type added");
+                        handleTransitionButton(e, "conS.png", "calendarS.png", "CalendarView.fxml", "Consultations");
 
-                         
-                         
-                     }
+                    }
 
-                 }
-                
+                }
+
             }
         });
-        
-        
+
         zidcol.setCellValueFactory(
                 new PropertyValueFactory<Student, String>("zID")
         );
@@ -191,7 +190,7 @@ ccc.updateConsult(consultupdate);
         dpbox.setToggleGroup(group);
         iebox.setToggleGroup(group);
         adbox.setSelected(true);
-        
+
         logOut.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
@@ -199,7 +198,7 @@ ccc.updateConsult(consultupdate);
                 handleTransitionButton(e, "conS.png", "loginS.png", "LoginPage.fxml", "Login");
             }
         });
-        
+
         rPrev.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
@@ -207,7 +206,6 @@ ccc.updateConsult(consultupdate);
             }
         });
 
-      
     }
 
     @FXML
@@ -337,7 +335,6 @@ ccc.updateConsult(consultupdate);
         errorLabel.setVisible(false);
         return isComplete;
     }
-    
 
     @FXML
     public void addStudent(ActionEvent event) {
@@ -363,22 +360,17 @@ ccc.updateConsult(consultupdate);
 
             if (result.get() == buttonTypeyes) {
                 StudentQueries sq = new StudentQueries();
-                
+
                 Student student = new Student(a, b, c, d, e, null);
-                
-                    
+
                 sq.insertStudents(student);
 
                 ObservableList<Student> studentlist2 = FXCollections.observableArrayList(sq.getStudents());
                 studenttable.setItems(null);
                 studenttable.setItems(studentlist2);
-                
-               
-            
-                    
-            } 
-            
-            
+
+            }
+
         }
 
     }
@@ -395,27 +387,24 @@ ccc.updateConsult(consultupdate);
     public static void setselected(String studentst) {
         StudentAndConsController.studentst = studentst;
     }
-    
-      public static Integer getselectedCID() {
+
+    public static Integer getselectedCID() {
         return i;
     }
 
     public static void setselectedCID(Integer i) {
         StudentAndConsController.i = i;
     }
-  
-  
-    
 
-   public static String getExists(){
-   return f;
-           
-           }
-   public static void setExists(String f){
-       StudentAndConsController.f = f;
-   }
-   
-   
+    public static String getExists() {
+        return f;
+
+    }
+
+    public static void setExists(String f) {
+        StudentAndConsController.f = f;
+    }
+
     private void deleteTemp() {
         try {
             File file = new File("temp.txt");
@@ -451,6 +440,5 @@ ccc.updateConsult(consultupdate);
         AnimationsTransitions at = new AnimationsTransitions();
         at.animateError(pt, node);
     }
-    
-    
+
 }

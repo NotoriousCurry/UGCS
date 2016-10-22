@@ -40,7 +40,8 @@ public class ConsultationSetup extends DerbySetup {
                         + "\"TYPE\" VARCHAR(50),"
                         + "\"PRIORITY\"VARCHAR(50),"                     
                         + "\"DATE1\" VARCHAR(12),"
-                        + "\"TIME1\" VARCHAR(12)"
+                        + "\"TIME1\" VARCHAR(12),"
+                        + "\"OWNER\" VARCHAR(250)"
                         + ")";
 
                 System.out.println(sqlText);

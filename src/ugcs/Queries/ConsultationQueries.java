@@ -1,6 +1,10 @@
 
 package ugcs.Queries;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -38,7 +42,7 @@ public class ConsultationQueries extends DerbySetup {
     public void updateConsult(Consultation toUpdate) {
         openConnection();
         try {
-            updateConsult = conn.prepareStatement("update app.Consultation set zid=?, notes=?, type=?, priority=?, date1=?, time1=? where consultationid=?");
+            updateConsult = conn.prepareStatement("update app.Consultation set zid=?, notes=?, type=?, priority=?, date1=?, time1=?, where consultationid=?");
             updateConsult.setString(1, toUpdate.getZid());
             updateConsult.setString(2, toUpdate.getNotes());
             updateConsult.setString(3, toUpdate.getType());
@@ -61,11 +65,13 @@ public class ConsultationQueries extends DerbySetup {
         List<Consultation> Consultations = new ArrayList<Consultation>();
         openConnection();
         try {
-            getAllConsult = conn.prepareStatement("select * from app.CONSULTATION");
+            String key = readOwner();
+            getAllConsult = conn.prepareStatement("select * from app.CONSULTATION where owner=?");
+            getAllConsult.setString(1, key);
             rs = getAllConsult.executeQuery();
             while (rs.next()) {
                 Consultations.add(
-                        new Consultation(rs.getInt("consultationid"), rs.getString("Zid"), rs.getString("notes"), rs.getString("type"), rs.getString("priority"), rs.getString("date1"), rs.getString("time1"))
+                        new Consultation(rs.getInt("consultationid"), rs.getString("Zid"), rs.getString("notes"), rs.getString("type"), rs.getString("priority"), rs.getString("date1"), rs.getString("time1"), rs.getString("owner"))
                 );
             }
             rs.close();
@@ -83,13 +89,15 @@ public class ConsultationQueries extends DerbySetup {
         openConnection();
         try {
 
-            insertConsult = conn.prepareStatement("insert into app.Consultation (zid, notes, type, priority, date1, time1) values (?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            String key = readOwner();
+            insertConsult = conn.prepareStatement("insert into app.Consultation (zid, notes, type, priority, date1, time1, owner) values (?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             insertConsult.setString(1, toInsert.getZid());
             insertConsult.setString(2, toInsert.getNotes());
             insertConsult.setString(3, toInsert.getType());
             insertConsult.setString(4, toInsert.getPriority());
             insertConsult.setString(5, toInsert.getDate1());
             insertConsult.setString(6, toInsert.getTime1());
+            insertConsult.setString(7, key);
             insertConsult.executeUpdate();
 
             ResultSet rs = insertConsult.getGeneratedKeys();
@@ -102,5 +110,29 @@ public class ConsultationQueries extends DerbySetup {
             ex.printStackTrace();
         }
         closeConnection();
+    }
+    
+        private String readOwner() {
+        String fName = "temp.txt";
+        String line = null;
+        String key = "";
+
+        try {
+            FileReader fReader = new FileReader(fName);
+            BufferedReader bReader = new BufferedReader(fReader);
+
+            line = bReader.readLine();
+            String[] sect = line.split(",");
+            key = sect[1];
+
+            bReader.close();
+            System.out.println(key);
+
+        } catch (FileNotFoundException ex) {
+            System.out.println("Unable to find file");
+        } catch (IOException ex) {
+            System.out.println("Error Reading File");
+        }
+        return key;
     }
 }
