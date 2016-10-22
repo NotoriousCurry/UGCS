@@ -60,6 +60,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
@@ -209,38 +210,52 @@ public class CalendarviewController implements Initializable {
         datecol.setCellValueFactory(
                 new PropertyValueFactory<Consultation, String>("date1")
         );
-        datecol.setCellValueFactory(cellData -> cellData.getValue().dateproperty());
-
-        datecol.setCellFactory(column -> {
-            return new TableCell<Consultation, String>() {
+         datecol.setCellValueFactory(cellData -> cellData.getValue().dateproperty());
+        
+        
+        //displays an exclamation mark when the consultation is today
+        datecol.setCellFactory(column -> { 
+            return new TableCell<Consultation, String>(){
                 @Override
-                protected void updateItem(String item, boolean empty) {
+                protected void updateItem(String item, boolean empty){
                     super.updateItem(item, empty);
-
-                    if (item == null || empty) {
+                   
+                    if(item == null || empty){
                         setText(null);
                         setStyle("");
-                    } else {
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    } else{ 
+                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                         DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
 //formatter = formatter.withLocale(Locale.ENGLISH);  // Locale specifies human language for translating, and cultural norms for lowercase/uppercase and abbreviations and such. Example: Locale.US or Locale.CANADA_FRENCH
-                        System.out.println("item " + item);
-                        LocalDate date = LocalDate.parse(item, formatter);
+                    LocalDate date = LocalDate.parse(item, formatter);
+                     System.out.println(" date - " + date);
+
                         setText(item);
-                        LocalDate datenow1 = LocalDate.now();
-                        Date dateupdate2 = localDateToUtilDate(datenow1);
-                        SimpleDateFormat dateformatJava2 = new SimpleDateFormat("dd/MM/yyyy");
-                        String datenow3 = dateformatJava2.format(dateupdate2);
-                        LocalDate datenowcompare = LocalDate.parse(datenow3, formatter);
-                        if (date == datenowcompare) {
+                         LocalDate datenow1 = LocalDate.now();
+                Date dateupdate2 = localDateToUtilDate(datenow1);
+                SimpleDateFormat dateformatJava2 = new SimpleDateFormat("dd/MM/yyyy");
+                String datenow3 = dateformatJava2.format(dateupdate2);
+                LocalDate datenowcompare = LocalDate.parse(datenow3,formatter);
+                
+                        System.out.println("now = " + datenowcompare );
+                        if(date.equals(datenowcompare)){
+                            System.out.println(" should be working");
                             setTextFill(Color.BLACK);
-                            setStyle("-fx-background-color: lightgreen");
-
+                            
+                           // setStyle("-fx-background-color: lightgreen");
+                            HBox box = new HBox();
+                            box.setSpacing(10);
+                            ImageView imageview = new ImageView();
+                            imageview.setImage(new Image(getClass().getResourceAsStream("Resources/exc3.png")));
+                    box.getChildren().addAll(imageview);
+                    setGraphic(box);
                         }
-                    }
                 }
-            };
-        });
-
+            }
+        };
+                    });
+        
         timecol.setCellValueFactory(
                 new PropertyValueFactory<Consultation, String>("time1")
         );
