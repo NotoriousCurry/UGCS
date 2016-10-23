@@ -169,4 +169,12 @@ public class AnimationsTransitions {
         fadeI.play();
         
     }
+    
+    public void animateAlert(FadeTransition ft, Label l) {
+        ft.setDuration(Duration.millis(1500));
+        ft.setNode(l);
+        ft.setFromValue(0.0);
+        ft.setToValue(1.0);
+        ft.play();
+    }
 }

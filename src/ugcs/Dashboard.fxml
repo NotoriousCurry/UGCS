@@ -61,5 +61,23 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
+      <Label fx:id="todAlert" layoutX="38.0" layoutY="598.0" text="!" textFill="#f50505" visible="false">
+         <font>
+            <Font size="80.0" />
+         </font>
+      </Label>
+      <Label fx:id="tmrwAlert" layoutX="122.0" layoutY="598.0" text="!" textFill="#cda803" visible="false">
+         <font>
+            <Font size="80.0" />
+         </font>
+      </Label>
+      <Label fx:id="todLabel" layoutX="69.0" layoutY="622.0" text="" textFill="#f50505" visible="false">
+         <font>
+            <Font size="48.0" />
+         </font></Label>
+      <Label fx:id="tmrwLabel" layoutX="150.0" layoutY="622.0" text="" textFill="#cda803" visible="false">
+         <font>
+            <Font size="48.0" />
+         </font></Label>
    </children>
 </AnchorPane>

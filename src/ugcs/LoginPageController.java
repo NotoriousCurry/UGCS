@@ -27,6 +27,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import ugcs.Queries.UgcQueries;
 import org.jasypt.util.password.BasicPasswordEncryptor;
+import ugcs.Alert.AlertMethods;
 import ugcs.Audio.AudioMethods;
 
 /**
@@ -149,6 +150,7 @@ public class LoginPageController implements Initializable {
             ex.printStackTrace();
         }
         System.out.println("temp created");
+        tester();
     }
 
     private void handleAudio(String file) {
@@ -176,6 +178,11 @@ public class LoginPageController implements Initializable {
         handleAudio("pad_confirm.wav");
         at.changeScreenKey(e, a, b, c, d);
 
+    }
+    
+    private void tester() {
+        AlertMethods am = new AlertMethods();
+        am.checkConsToday();
     }
 
 }

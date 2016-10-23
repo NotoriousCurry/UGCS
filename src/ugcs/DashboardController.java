@@ -11,8 +11,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import ugcs.Alert.AlertMethods;
 import ugcs.Audio.AudioMethods;
 
 /**
@@ -39,13 +38,26 @@ public class DashboardController implements Initializable {
     ImageView coopImage;
     @FXML
     Label coopLabel;
+    @FXML
+    Label todLabel;
+    @FXML
+    Label tmrwLabel;
+    @FXML
+    Label todAlert;
+    @FXML
+    Label tmrwAlert;
 
     private FadeTransition fadeI = new FadeTransition();
     private FadeTransition fadeL = new FadeTransition();
+    private FadeTransition ft = new FadeTransition();
+    private FadeTransition ft1 = new FadeTransition();
+    private FadeTransition ft2 = new FadeTransition();
+    private FadeTransition ft3 = new FadeTransition();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        alert();
         String userType = readType();
 
         if (userType.equals("COOP")) {
@@ -71,22 +83,6 @@ public class DashboardController implements Initializable {
 
     }
 
-    private void handleTransitionButton(ActionEvent e, String a, String b, String c, String d) {
-        AnimationsTransitions at = new AnimationsTransitions();
-        at.changeScreenButton(e, a, b, c, d);
-    }
-
-    private void handleAudio(String file) {
-        AudioMethods am = new AudioMethods();
-
-        am.playAudio(file);
-    }
-
-    private void animateButton(FadeTransition fadeL, FadeTransition fadeI, ImageView i, Label l) {
-        AnimationsTransitions at = new AnimationsTransitions();
-        at.animateFade(fadeI, fadeL, i, l);
-    }
-
     private String readType() {
         String fName = "temp.txt";
         String line = null;
@@ -110,4 +106,52 @@ public class DashboardController implements Initializable {
         }
         return type;
     }
+
+    private void alert() {
+        AlertMethods am = new AlertMethods();
+        am.checkConsToday();
+        String todCons = am.readTod();
+        String tmrwCons = am.readTmrw();
+
+        if (Integer.parseInt(todCons) >= 1) {
+            System.out.println("YOU HAVE " + todCons + " APPOINTMENTS TODAY");
+            todLabel.setText(todCons);
+            todAlert.setVisible(true);
+            animAlert(ft, todAlert);
+            todLabel.setVisible(true);
+            animAlert(ft1, todLabel);
+            handleAudio("beep_short_on.wav");
+        }
+
+        if (Integer.parseInt(tmrwCons) >= 1) {
+            System.out.println("YOU HAVE " + tmrwCons + " APPOINTMENTS TMRW");
+            tmrwLabel.setText(tmrwCons);
+            tmrwAlert.setVisible(true);
+            animAlert(ft2, tmrwAlert);
+            tmrwLabel.setVisible(true);
+            animAlert(ft3, tmrwLabel);
+        }
+    }
+
+    private void handleTransitionButton(ActionEvent e, String a, String b, String c, String d) {
+        AnimationsTransitions at = new AnimationsTransitions();
+        at.changeScreenButton(e, a, b, c, d);
+    }
+
+    private void handleAudio(String file) {
+        AudioMethods am = new AudioMethods();
+
+        am.playAudio(file);
+    }
+
+    private void animateButton(FadeTransition fadeL, FadeTransition fadeI, ImageView i, Label l) {
+        AnimationsTransitions at = new AnimationsTransitions();
+        at.animateFade(fadeI, fadeL, i, l);
+    }
+
+    private void animAlert(FadeTransition ft, Label l) {
+        AnimationsTransitions at = new AnimationsTransitions();
+        at.animateAlert(ft, l);
+    }
+
 }
