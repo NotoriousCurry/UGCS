@@ -5,6 +5,7 @@
  */
 package ugcs;
 
+import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -17,6 +18,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -88,18 +90,18 @@ public class AnimationsTransitions {
         });
         timeline.play();
     }
-    
+
     public void changeScreenKey(KeyEvent event, String a, String b, String c, String d) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Group root1 = new Group();
         Group root2 = new Group();
         Rectangle rect1 = new Rectangle(1200, 800);
         Label lab1 = new Label("LOADING...");
-        rect1.setFill(new ImagePattern(new Image("ugcs/Resources/"+a)));
+        rect1.setFill(new ImagePattern(new Image("ugcs/Resources/" + a)));
         root1.getChildren().addAll(rect1, lab1);
         Rectangle rect2 = new Rectangle(1200, 800);
         Label lab2 = new Label("LOADED!");
-        rect2.setFill(new ImagePattern(new Image("ugcs/Resources/"+b)));
+        rect2.setFill(new ImagePattern(new Image("ugcs/Resources/" + b)));
         root2.getChildren().addAll(rect2, lab2);
 
         Scene scene1 = new Scene(root1, 1200, 800);
@@ -137,17 +139,34 @@ public class AnimationsTransitions {
         });
         timeline.play();
     }
-    
-        public void animateError(PathTransition pathT, Label node) {
+
+    public void animateError(PathTransition pathT, Label node) {
         // Animate error Label
         Path path = new Path();
         path.getElements().add(new MoveTo(0, 5));
-        path.getElements().add(new LineTo(5,5));
+        path.getElements().add(new LineTo(5, 5));
         pathT.setNode(node);
         pathT.setPath(path);
         pathT.setDuration(Duration.millis(50));
         pathT.setCycleCount(4);
         pathT.setAutoReverse(true);
         pathT.play();
+    }
+
+    public void animateFade(FadeTransition fadeI, FadeTransition fadeL, ImageView i, Label l) {
+        // Animate buttons to fade in
+        
+        fadeI.setDuration(Duration.millis(2500));
+        fadeI.setNode(i);
+        fadeI.setFromValue(0.0);
+        fadeI.setToValue(1.0);
+        fadeI.play();
+        
+        fadeL.setDuration(Duration.millis(2500));
+        fadeL.setNode(l);
+        fadeL.setFromValue(0.0);
+        fadeL.setToValue(1.0);
+        fadeI.play();
+        
     }
 }

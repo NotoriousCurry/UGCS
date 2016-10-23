@@ -1,4 +1,3 @@
-
 package ugcs.Queries;
 
 import java.io.BufferedReader;
@@ -16,14 +15,14 @@ import ugcs.Model.Consultation;
 
 /**
  *
- * @author Peter 
+ * @author Peter
  */
 public class ConsultationQueries extends DerbySetup {
 
     PreparedStatement deleteConsult = null;
     PreparedStatement insertConsult = null;
     PreparedStatement getAllConsult = null;
-    PreparedStatement updateConsult= null;
+    PreparedStatement updateConsult = null;
     ResultSet rs = null;
 
     public void deleteConsult(Consultation toDelete) {
@@ -50,8 +49,6 @@ public class ConsultationQueries extends DerbySetup {
             updateConsult.setString(5, toUpdate.getDate1());
             updateConsult.setString(6, toUpdate.getTime1());
             updateConsult.setInt(7, toUpdate.getConsultationid());
-
-            
 
             updateConsult.executeUpdate();
 
@@ -84,6 +81,7 @@ public class ConsultationQueries extends DerbySetup {
         return Consultations;
     }
 //
+
     public void insertConsult(Consultation toInsert) {
 
         openConnection();
@@ -111,8 +109,8 @@ public class ConsultationQueries extends DerbySetup {
         }
         closeConnection();
     }
-    
-        private String readOwner() {
+
+    private String readOwner() {
         String fName = "temp.txt";
         String line = null;
         String key = "";
