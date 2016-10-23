@@ -78,6 +78,9 @@ public class DashboardController implements Initializable {
             @Override
             public void handle(ActionEvent e) {
                 System.out.println("COOP STUFFF PLZ");
+                
+           //     handleTransitionButton(e, "dashS.png", "calendarS.png", "CalendarView.fxml", "Consultations");
+
             }
         });
 
