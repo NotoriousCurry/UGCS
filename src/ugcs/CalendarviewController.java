@@ -33,6 +33,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -206,7 +207,6 @@ public class CalendarviewController implements Initializable {
                 new PropertyValueFactory<Consultation, String>("date1")
         );
         datecol.setCellValueFactory(cellData -> cellData.getValue().dateproperty());
-
         //displays an exclamation mark when the consultation is today
         datecol.setCellFactory(column -> {
             return new TableCell<Consultation, String>() {
@@ -231,6 +231,7 @@ public class CalendarviewController implements Initializable {
                         SimpleDateFormat dateformatJava2 = new SimpleDateFormat("dd/MM/yyyy");
                         String datenow3 = dateformatJava2.format(dateupdate2);
                         LocalDate datenowcompare = LocalDate.parse(datenow3, formatter);
+                        LocalDate datetomorrow = LocalDate.now().plusDays(1);
 
                         System.out.println("now = " + datenowcompare);
                         if (date.equals(datenowcompare)) {
@@ -239,11 +240,30 @@ public class CalendarviewController implements Initializable {
 
                             // setStyle("-fx-background-color: lightgreen");
                             HBox box = new HBox();
-                            box.setSpacing(10);
+                            box.setSpacing(10);   
+
                             ImageView imageview = new ImageView();
                             imageview.setImage(new Image(getClass().getResourceAsStream("Resources/exc3.png")));
                             box.getChildren().addAll(imageview);
                             setGraphic(box);
+                            
+                        }
+                        else if 
+                            (date.equals(datetomorrow)) {
+                            System.out.println(" should be working 2");
+                            setTextFill(Color.BLACK);
+
+                            // setStyle("-fx-background-color: lightgreen");
+                            HBox box = new HBox();
+                            box.setSpacing(10);
+                            ImageView imageview = new ImageView();
+                            imageview.setImage(new Image(getClass().getResourceAsStream("Resources/excred2.png")));
+                            box.getChildren().addAll(imageview);
+                            setGraphic(box);
+                        
+                        
+                        
+                        
                         }
                     }
                 }

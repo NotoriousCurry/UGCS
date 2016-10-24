@@ -79,7 +79,7 @@ public class DashboardController implements Initializable {
             public void handle(ActionEvent e) {
                 System.out.println("COOP STUFFF PLZ");
                 
-           //     handleTransitionButton(e, "dashS.png", "calendarS.png", "CalendarView.fxml", "Consultations");
+              handleTransitionButton(e, "dashS.png", "calendarS.png", "CoopStudent.fxml", "CO-OP");
 
             }
         });
