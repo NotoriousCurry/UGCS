@@ -1,8 +1,9 @@
 .button {
 -fx-background-color:#6e6d6d;
--fx-font-family: "Arial Bold";
+-fx-font-family: "Arial";
 }
 
 .button:hover {
     -fx-background-color: #6e6e6ef3;
 }
+
