@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ugcs.AdvanceStandingFormController">
+   <children>
+      <ImageView fitHeight="804.0" fitWidth="1200.0">
+         <image>
+            <Image url="@Resources/genericbackroung3605.png" />
+         </image>
+      </ImageView>
+      <Accordion layoutX="14.0" layoutY="157.0" />
+      <AnchorPane layoutX="342.0" layoutY="-103.0" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+      <Text fill="WHITE" layoutX="11.0" layoutY="778.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Developed by The Suicide Squad">
+         <font>
+            <Font name="Arial" size="11.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="10.0" layoutY="758.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UNSW Coordinator Information System, School of Information Systems and Technology Management" wrappingWidth="535.6162109375">
+         <font>
+            <Font name="Arial" size="11.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="10.0" layoutY="738.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UNSW Sydney NSW 2052 Australia Telephone +61 2 9385 1000">
+         <font>
+            <Font name="Arial" size="11.0" />
+         </font>
+      </Text>
+      <Button fx:id="logOut" layoutX="1101.0" layoutY="135.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="87.0" stylesheets="@Resources/returnandlogout.css" text="Logout" textAlignment="CENTER" textFill="WHITE" />
+      <Label layoutX="889.0" layoutY="140.0" text="Welcome, " textFill="WHITE" />
+      <Label layoutX="954.0" layoutY="140.0" text="FirstName" textFill="WHITE" />
+      <Button fx:id="rPrev" layoutX="1061.0" layoutY="686.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="139.0" stylesheets="@Resources/returnandlogout.css" text="Return to Previous" />
+      <Button fx:id="rDash" layoutY="686.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="146.0" stylesheets="@Resources/returnandlogout.css" text="Return to Dashboard" />
+      <Pane layoutX="129.0" layoutY="200.0" prefHeight="506.0" prefWidth="926.0">
+         <children>
+            <Label layoutX="521.0" layoutY="31.0" prefHeight="17.0" prefWidth="73.0" text="Location:" />
+            <TextField fx:id="company" editable="false" layoutX="165.0" layoutY="57.0" opacity="0.5" prefHeight="27.0" prefWidth="265.0" stylesheets="@Resources/highlightrow.css">
+               <effect>
+                  <Lighting bumpInput="$null">
+                     <light>
+                        <Light.Distant />
+                     </light>
+                  </Lighting>
+               </effect>
+            </TextField>
+            <TextField fx:id="roledesc" editable="false" layoutX="165.0" layoutY="113.0" opacity="0.5" prefHeight="27.0" prefWidth="623.0" stylesheets="@Resources/highlightrow.css">
+               <effect>
+                  <Lighting bumpInput="$null">
+                     <light>
+                        <Light.Distant />
+                     </light>
+                  </Lighting>
+               </effect>
+            </TextField>
+            <Label layoutX="165.0" layoutY="32.0" prefHeight="17.0" prefWidth="73.0" text="Company:" />
+            <TextArea fx:id="jobnotesField" layoutX="164.0" layoutY="204.0" prefHeight="222.0" prefWidth="623.0" stylesheets="@Resources/searchexpand.css" />
+            <Label layoutX="166.0" layoutY="165.0" text="Notes:" />
+            <Label layoutX="166.0" layoutY="90.0" prefHeight="17.0" prefWidth="130.0" text="Role Description:" />
+            <TextField fx:id="location" editable="false" layoutX="521.0" layoutY="56.0" opacity="0.5" prefHeight="27.0" prefWidth="265.0" stylesheets="@Resources/highlightrow.css">
+               <effect>
+                  <Lighting bumpInput="$null">
+                     <light>
+                        <Light.Distant />
+                     </light>
+                  </Lighting>
+               </effect>
+            </TextField>
+            <Label layoutX="165.0" layoutY="2.0" text="Job Information below:">
+               <font>
+                  <Font name="Arial Bold" size="13.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Button fx:id="submitButton" layoutX="756.0" layoutY="663.0" mnemonicParsing="false" onAction="#Create" prefHeight="29.0" prefWidth="146.0" stylesheets="@Resources/test.css" text="Submit" />
+   </children>
+</AnchorPane>

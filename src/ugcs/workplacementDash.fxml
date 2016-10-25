@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ugcs.DashboardController">
+   <children>
+      <ImageView fitHeight="800.0" fitWidth="1200.0" pickOnBounds="true">
+         <image>
+            <Image url="@Resources/genericbackroung3605.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="546.0" fitWidth="1200.0" layoutY="164.0" opacity="0.14" pickOnBounds="true">
+         <image>
+            <Image url="@Resources/Unsw_quadrangle_building_2010-05-11.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="133.0" layoutY="513.0" text="View Student Information">
+         <font>
+            <Font name="Arial Bold Italic" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="882.0" layoutY="513.0" text="Send Preference Form">
+         <font>
+            <Font name="Arial Bold Italic" size="18.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="172.0" fitWidth="177.0" layoutX="151.0" layoutY="314.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Resources/viewstudentinfologo.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="172.0" fitWidth="177.0" layoutX="892.0" layoutY="314.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Resources/sendpreflogo.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="studentinfobutton" layoutX="122.0" layoutY="301.0" mnemonicParsing="false" opacity="0.0" prefHeight="250.0" prefWidth="240.0" text="Button">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Button fx:id="profilebutton" layoutX="864.0" layoutY="301.0" mnemonicParsing="false" opacity="0.0" prefHeight="250.0" prefWidth="219.0" text="Button">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <ImageView fitHeight="172.0" fitWidth="177.0" layoutX="527.0" layoutY="314.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Resources/jobinfologo.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="522.0" layoutY="513.0" text="View Job Information">
+         <font>
+            <Font name="Arial Bold Italic" size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="myconsultationbutton1" layoutX="498.0" layoutY="301.0" mnemonicParsing="false" opacity="0.0" prefHeight="250.0" prefWidth="240.0" text="Button">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>
