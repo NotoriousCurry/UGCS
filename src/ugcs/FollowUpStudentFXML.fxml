@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.effect.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -7,23 +9,56 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="538.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ugcs.FollowUpStudentFXMLController">
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ugcs.FollowUpStudentFXMLController">
    <children>
-      <TableView fx:id="studentfollowtable" layoutX="24.0" layoutY="14.0" prefHeight="329.0" prefWidth="393.0" stylesheets="@Resources/highlightrow%20copy.css">
+      <ImageView fitHeight="800.0" fitWidth="1200.0" pickOnBounds="true">
+         <image>
+            <Image url="@Resources/genericbackroung3605.png" />
+         </image>
+      </ImageView>
+      <TableView fx:id="studentfollowtable" layoutX="222.0" layoutY="236.0" prefHeight="329.0" prefWidth="768.0" stylesheets="@Resources/highlightrow%20copy.css">
         <columns>
-          <TableColumn fx:id="zidcol1" prefWidth="128.0" text="ZID" />
-          <TableColumn fx:id="fnamecol1" prefWidth="130.0" text="FIRSTNAME" />
-            <TableColumn fx:id="lnamecol1" prefWidth="134.0" text="LASTNAME" />
+          <TableColumn fx:id="zidcol1" prefWidth="256.0" text="ZID" />
+          <TableColumn fx:id="fnamecol1" prefWidth="256.0" text="FIRSTNAME" />
+            <TableColumn fx:id="lnamecol1" prefWidth="256.0" text="LASTNAME" />
         </columns>
       </TableView>
-      <Button fx:id="followup" layoutX="282.0" layoutY="463.0" mnemonicParsing="false" onAction="#followupevent" style="-fx-background-color: green;" stylesheets="@Resources/test.css" text="Follow Up Now" />
-      <Button fx:id="return" layoutX="29.0" layoutY="463.0" mnemonicParsing="false" onAction="#returnPrev" style="-fx-background-color: green;" stylesheets="@Resources/test.css" text="Return Previous" />
-      <RadioButton fx:id="iebox" layoutX="260.0" layoutY="416.0" mnemonicParsing="false" text="International Exchange" />
-      <RadioButton fx:id="dpbox" layoutX="260.0" layoutY="391.0" mnemonicParsing="false" text="Disciplinary" />
-      <RadioButton fx:id="cebox" layoutX="260.0" layoutY="366.0" mnemonicParsing="false" text="Course Enrolment" />
-      <RadioButton fx:id="cgbox" layoutX="22.0" layoutY="416.0" mnemonicParsing="false" text="Career Guidance" />
-      <RadioButton fx:id="apbox" layoutX="22.0" layoutY="391.0" mnemonicParsing="false" text="Attendance and Performance" />
-      <RadioButton fx:id="adbox" layoutX="22.0" layoutY="366.0" mnemonicParsing="false" text="Advanced Standing" />
+      <Button fx:id="followup" layoutX="880.0" layoutY="634.0" mnemonicParsing="false" onAction="#followupevent" stylesheets="@Resources/test.css" text="Follow Up Now" />
+      <Button fx:id="return" layoutX="471.0" layoutY="135.0" mnemonicParsing="false" onAction="#returnPrev" stylesheets="@Resources/returnandlogout.css" text="Return to Previous" />
+      <RadioButton fx:id="iebox" layoutX="460.0" layoutY="638.0" mnemonicParsing="false" text="International Exchange" />
+      <RadioButton fx:id="dpbox" layoutX="460.0" layoutY="613.0" mnemonicParsing="false" text="Disciplinary" />
+      <RadioButton fx:id="cebox" layoutX="460.0" layoutY="588.0" mnemonicParsing="false" text="Course Enrolment" />
+      <RadioButton fx:id="cgbox" layoutX="222.0" layoutY="638.0" mnemonicParsing="false" text="Career Guidance" />
+      <RadioButton fx:id="apbox" layoutX="222.0" layoutY="613.0" mnemonicParsing="false" text="Attendance and Performance" />
+      <RadioButton fx:id="adbox" layoutX="222.0" layoutY="588.0" mnemonicParsing="false" text="Advanced Standing" />
+      <Text fill="WHITE" layoutX="51.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coordinator IS">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="14.0" layoutY="739.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UNSW Sydney NSW 2052 Australia Telephone +61 2 9385 1000">
+         <font>
+            <Font name="Arial" size="11.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="14.0" layoutY="759.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UNSW Coordinator Information System, School of Information Systems and Technology Management" wrappingWidth="535.6162109375">
+         <font>
+            <Font name="Arial" size="11.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="15.0" layoutY="779.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Developed by The Suicide Squad">
+         <font>
+            <Font name="Arial" size="11.0" />
+         </font>
+      </Text>
+      <Button fx:id="rDash" layoutX="252.0" layoutY="131.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="156.0" stylesheets="@Resources/returnandlogout.css" text="Return to Dashboard" />
+      <Label layoutX="952.0" layoutY="140.0" text="FirstName" textFill="WHITE" />
+      <Label layoutX="887.0" layoutY="140.0" text="Welcome, " textFill="WHITE" />
+      <Button fx:id="logOut" layoutX="1099.0" layoutY="135.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="87.0" stylesheets="@Resources/returnandlogout.css" text="Logout" textAlignment="CENTER" textFill="WHITE" />
+      <Label layoutX="222.0" layoutY="203.0" text="Please select a student and consultation type for follow up below:">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

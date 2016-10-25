@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.effect.*?>
 <?import java.net.*?>
 <?import javafx.scene.shape.*?>
@@ -19,13 +20,13 @@
 
 <AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #e5e4e2;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ugcs.CalendarviewController">
     <children>
-        <ImageView fitHeight="800.0" fitWidth="1203.0" pickOnBounds="true">
+        <ImageView fitHeight="800.0" fitWidth="1205.0" pickOnBounds="true">
             <image>
                 <Image url="@Resources/genericbackroung3605.png" />
             </image>
         </ImageView>
         <Button fx:id="logOut" layoutX="1096.0" layoutY="136.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="87.0" stylesheets="@Resources/returnandlogout.css" text="Logout" textAlignment="CENTER" textFill="WHITE" />
-        <Button fx:id="createCon" layoutX="1024.0" layoutY="196.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="181.0" stylesheets="@Resources/test.css" text="Create Consultation" textFill="WHITE" />
+        <Button fx:id="createCon" layoutX="221.0" layoutY="206.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="146.0" stylesheets="@Resources/test.css" text="Create Consultation" textFill="WHITE" />
       <ScrollPane fx:id="sp2" hbarPolicy="NEVER" layoutX="221.0" layoutY="256.0" prefViewportHeight="409.0" prefViewportWidth="795.0" vbarPolicy="NEVER" vvalue="40.0">
          <content>
               <Agenda fx:id="agenda" allowDragging="false" allowResize="false" layoutX="221.0" layoutY="256.0" pickOnBounds="false" prefHeight="410.0" prefWidth="794.0" />
@@ -43,27 +44,26 @@
                 <TableColumn fx:id="timecol" minWidth="0.0" prefWidth="63.0" text="Time" />
             </columns>
         </TableView>
-        <ToggleButton fx:id="tb" layoutX="221.0" layoutY="196.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="57.0" text="Day" />
-        <ToggleButton fx:id="tb2" layoutX="278.0" layoutY="196.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="57.0" text="Week" />
-        <ToggleButton fx:id="tb3" layoutX="335.0" layoutY="196.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="63.0" text="Range" />
+        <ToggleButton fx:id="tb" layoutX="221.0" layoutY="674.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="57.0" text="Day" />
+        <ToggleButton fx:id="tb2" layoutX="278.0" layoutY="674.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="57.0" text="Week" />
+        <ToggleButton fx:id="tb3" layoutX="335.0" layoutY="674.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="63.0" text="Range" />
         <Label fx:id="fName" layoutX="884.0" layoutY="141.0" textFill="WHITE" />
-        <Button fx:id="switchTable" layoutX="418.0" layoutY="196.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="153.0" text="Switch to Table View" />
-        <Button fx:id="switchCalendar" layoutX="418.0" layoutY="196.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="153.0" text="Switch Back" visible="false" />
-        <Button fx:id="rPrev" layoutX="1056.0" layoutY="679.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="147.0" stylesheets="@Resources/returnandlogout.css" text="Return to Previous" />
-        <Button fx:id="rDash" layoutY="676.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="146.0" stylesheets="@Resources/returnandlogout.css" text="Return to Dashboard" />
-        <Button fx:id="pdf" layoutX="1059.0" layoutY="322.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#PDFClicked" prefHeight="26.0" prefWidth="146.0" stylesheets="@Resources/test.css" text="Print PDF" textFill="WHITE" visible="false" />
-      <Button fx:id="followupbutton" layoutX="1059.0" layoutY="435.0" mnemonicParsing="false" onAction="#Follow" prefHeight="26.0" prefWidth="146.0" text="Follow Up">
-         <stylesheets>
-            <URL value="@Resources/test.css" />
-            <URL value="@Resources/addprintbutton.css" />
-         </stylesheets></Button>
+        <Button fx:id="switchTable" layoutX="862.0" layoutY="206.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="153.0" text="Switch to Table View" />
+        <Button fx:id="switchCalendar" layoutX="400.0" layoutY="206.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="146.0" text="Switch Back" visible="false" />
+        <Button fx:id="rPrev" layoutX="462.0" layoutY="133.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="147.0" stylesheets="@Resources/returnandlogout.css" text="Return to Previous" />
+        <Button fx:id="rDash" layoutX="234.0" layoutY="133.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="171.0" stylesheets="@Resources/returnandlogout.css" text="Return to Dashboard" />
+        <Button fx:id="pdf" layoutX="1040.0" layoutY="206.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#PDFClicked" prefHeight="26.0" prefWidth="146.0" stylesheets="@Resources/test.css" text="Print PDF" textFill="WHITE" visible="false" />
+      <Button fx:id="followupbutton" layoutX="903.0" layoutY="674.0" mnemonicParsing="false" onAction="#Follow" prefHeight="27.0" prefWidth="115.0" style="-fx-text-fill: white;" stylesheets="@Resources/addprintbutton.css" text="Follow Up" />
       <SplitPane dividerPositions="0.4836272040302267" layoutX="15.0" layoutY="196.0" orientation="VERTICAL" prefHeight="455.0" prefWidth="181.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="239.0" prefWidth="179.0">
                <children>
                     <DatePicker fx:id="datepick" layoutX="14.0" layoutY="21.0" prefHeight="34.0" prefWidth="136.0" promptText="Choose a date..." style="-fx-border-color: silver;" />
-                    <ComboBox fx:id="combo" layoutX="14.0" layoutY="78.0" prefHeight="27.0" prefWidth="87.0" promptText="time..." style="-fx-background-color: silver;" />
-                  <Button fx:id="createonpage" layoutX="14.0" layoutY="129.0" mnemonicParsing="false" onAction="#create" style="-fx-background-color: gold;" stylesheets="@Resources/addprintbutton.css" text="Add to Calendar" />
+                    <ComboBox fx:id="combo" layoutX="14.0" layoutY="62.0" prefHeight="27.0" prefWidth="136.0" promptText="time..." style="-fx-background-color: silver;" />
+                  <Button fx:id="createonpage" layoutX="14.0" layoutY="162.0" mnemonicParsing="false" onAction="#create" prefHeight="26.0" prefWidth="136.0" style="-fx-background-color: gold;" stylesheets="@Resources/addprintbutton.css" text="Add to Calendar">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                </children>
             </AnchorPane>
               <ScrollPane fx:id="sp" layoutX="-19.0" layoutY="-41.0" prefHeight="194.0" prefViewportHeight="197.0" prefViewportWidth="195.0" prefWidth="197.0">
@@ -76,7 +76,27 @@
             <ColorAdjust brightness="-0.02" contrast="0.14" />
          </effect>
       </SplitPane>
-      <Button fx:id="editbutton" layoutX="1059.0" layoutY="282.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#EditC" prefHeight="26.0" prefWidth="146.0" stylesheets="@Resources/test.css" text="Edit" textFill="WHITE" />
-      <Button fx:id="addstudentbutton" layoutX="1059.0" layoutY="364.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#AddStudent" prefHeight="26.0" prefWidth="146.0" stylesheets="@Resources/test.css" text="Add a Student " textFill="WHITE" visible="false" />
+      <Button fx:id="editbutton" layoutX="807.0" layoutY="674.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#EditC" prefHeight="26.0" prefWidth="90.0" stylesheets="@Resources/test.css" text="Edit" textFill="WHITE" />
+      <Button fx:id="addstudentbutton" layoutX="1040.0" layoutY="236.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#AddStudent" prefHeight="26.0" prefWidth="146.0" stylesheets="@Resources/test.css" text="Add a Student " textFill="WHITE" visible="false" />
+      <Text fill="WHITE" layoutX="56.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coordinator IS">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="15.0" layoutY="737.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UNSW Sydney NSW 2052 Australia Telephone +61 2 9385 1000">
+         <font>
+            <Font name="Arial" size="11.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="15.0" layoutY="757.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UNSW Coordinator Information System, School of Information Systems and Technology Management" wrappingWidth="535.6162109375">
+         <font>
+            <Font name="Arial" size="11.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="16.0" layoutY="777.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Developed by The Suicide Squad">
+         <font>
+            <Font name="Arial" size="11.0" />
+         </font>
+      </Text>
     </children>
 </AnchorPane>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ugcs.AdvanceStandingFormController">
+   <children>
+      <ImageView fitHeight="804.0" fitWidth="1200.0">
+         <image>
+            <Image url="@Resources/genericbackroung3605.png" />
+         </image>
+      </ImageView>
+      <Accordion layoutX="14.0" layoutY="157.0" />
+      <AnchorPane layoutX="342.0" layoutY="-103.0" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+      <Text fill="WHITE" layoutX="11.0" layoutY="778.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Developed by The Suicide Squad">
+         <font>
+            <Font name="Arial" size="11.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="10.0" layoutY="758.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UNSW Coordinator Information System, School of Information Systems and Technology Management" wrappingWidth="535.6162109375">
+         <font>
+            <Font name="Arial" size="11.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="10.0" layoutY="738.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UNSW Sydney NSW 2052 Australia Telephone +61 2 9385 1000">
+         <font>
+            <Font name="Arial" size="11.0" />
+         </font>
+      </Text>
+      <Button fx:id="logOut" layoutX="1101.0" layoutY="135.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="87.0" stylesheets="@Resources/returnandlogout.css" text="Logout" textAlignment="CENTER" textFill="WHITE" />
+      <Label layoutX="889.0" layoutY="140.0" text="Welcome, " textFill="WHITE" />
+      <Label layoutX="954.0" layoutY="140.0" text="FirstName" textFill="WHITE" />
+      <Button fx:id="rDash" layoutX="244.0" layoutY="132.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="163.0" stylesheets="@Resources/returnandlogout.css" text="Return to Dashboard" />
+      <Text fill="WHITE" layoutX="61.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coordinator IS">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Text>
+      <SplitPane dividerPositions="0.40699815837937386" layoutX="326.0" layoutY="268.0" prefHeight="348.0" prefWidth="606.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <ImageView fitHeight="173.0" fitWidth="163.0" layoutX="28.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Resources/profilelogo.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="28.0" layoutY="219.0" prefHeight="17.0" prefWidth="107.0" text="User ID:" />
+                  <Label layoutX="28.0" layoutY="269.0" prefHeight="17.0" prefWidth="107.0" text="Name:" />
+                  <TextField fx:id="userzid" layoutX="26.0" layoutY="236.0" />
+                  <TextField fx:id="userfandlname" layoutX="28.0" layoutY="286.0" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <Label layoutX="39.0" layoutY="119.0" prefHeight="17.0" prefWidth="130.0" text="New Password:" />
+                  <Label layoutX="39.0" layoutY="33.0" prefHeight="17.0" prefWidth="130.0" text="Current Password:" />
+                  <Label layoutX="39.0" layoutY="196.0" prefHeight="17.0" prefWidth="232.0" text="Re-Enter New Password:" />
+                  <PasswordField layoutX="37.0" layoutY="68.0" prefHeight="27.0" prefWidth="265.0" promptText="Enter your current password" stylesheets="@Resources/highlightrow.css" />
+                  <PasswordField layoutX="37.0" layoutY="146.0" prefHeight="27.0" prefWidth="265.0" promptText="Enter your new password" stylesheets="@Resources/highlightrow.css" />
+                  <PasswordField layoutX="37.0" layoutY="223.0" prefHeight="27.0" prefWidth="265.0" promptText="Enter your new password" stylesheets="@Resources/highlightrow.css" />
+                  <Button fx:id="submitButton" layoutX="39.0" layoutY="287.0" mnemonicParsing="false" onAction="#Create" prefHeight="29.0" prefWidth="265.0" stylesheets="@Resources/test.css" text="Submit" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+      <Label layoutX="325.0" layoutY="232.0" text="Change your password below:">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
