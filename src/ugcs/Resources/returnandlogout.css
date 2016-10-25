@@ -1,6 +1,8 @@
 .button{
-    -fx-background-color: black;
+    -fx-background-color: transparent;
     -fx-text-fill: white;
+    -fx-font-family: "Arial bold";
+    -fx-font-size:13px;
 }
 
 .button:hover{
