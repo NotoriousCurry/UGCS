@@ -22,8 +22,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -41,6 +43,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
@@ -60,6 +63,7 @@ import ugcs.Audio.AudioMethods;
 import ugcs.Queries.ConsultationQueries;
 import ugcs.Model.Consultation;
 import ugcs.Model.Student;
+import ugcs.Queries.StudentFollowQueries;
 import ugcs.Queries.StudentQueries;
 
 /**
@@ -74,6 +78,8 @@ public class CareerGuidanceFormController implements Initializable {
      */
     private @FXML
     Button upload;
+    private @FXML
+    Button updatebutton;
     private @FXML
     Label viewlabel;
     private @FXML
@@ -109,12 +115,13 @@ public class CareerGuidanceFormController implements Initializable {
     Button rPrev;
     @FXML
     private ImageView imageaa;
-    
+
     Stage stage;
     Parent newroot;
-      public void Viewlabel(MouseEvent event) {
+
+    public void Viewlabel(MouseEvent event) {
         try {
-             stage = new Stage();
+            stage = new Stage();
 
             newroot = FXMLLoader.load(getClass().getResource("VIEWIMAGE.fxml"));
 
@@ -129,6 +136,27 @@ public class CareerGuidanceFormController implements Initializable {
         }
 
     }
+    /*
+     public void staffcheck(ActionEvent event){
+     Boolean check = true;
+     StudentQueries sq = new StudentQueries();
+     ObservableList<Student> slist = FXCollections.observableList(sq.getStudents());
+     StudentFollowQueries sfq = new StudentFollowQueries();
+
+     for(Student s : slist){
+     if(s.getZID().equals(zId)){
+     if (staffcheck.isSelected() == check){
+     sfq.insertStudents(s);
+     }
+     else{
+     check = false;
+     sfq.deleteStudent(s);
+              
+     }    
+     }
+     }
+     }
+     */
 
     public void Upload(ActionEvent event) {
 
@@ -176,7 +204,7 @@ public class CareerGuidanceFormController implements Initializable {
                         //updateStudent.setBlob(5, sww.getTRanscript());
 
                         updateStudent.setBinaryStream(5, data, (int) file.length());
-               
+
                         updateStudent.executeUpdate();
                         // blob.free();
                         System.out.println("1234");
@@ -191,11 +219,10 @@ public class CareerGuidanceFormController implements Initializable {
                         rs.next();
                         Blob blob2 = rs.getBlob("TRANSCRIPT");
                         byte[] aa = blob2.getBytes(1, (int) blob2.length());
-                     
 
                         System.out.println("bytes = " + aa);
                         ByteArrayInputStream in = new ByteArrayInputStream(aa);
-         
+
                         BufferedImage read = ImageIO.read(in); //returns null
                         System.out.println("setting image");
                         System.out.println(" in = " + in);
@@ -204,15 +231,14 @@ public class CareerGuidanceFormController implements Initializable {
                         imageaa.setImage(SwingFXUtils.toFXImage(read, null));
                         System.out.println("should be set?");
                         System.out.println("attempting read");
-                   
+
                         data.close();
                         conn.close();
-
 
                         rs.close();
                         pstmt.close();
                         conn.close();
-                        } catch (SQLException ex) {
+                    } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
 
@@ -242,27 +268,71 @@ public class CareerGuidanceFormController implements Initializable {
         }
 
     }
+    StudentQueries sq = new StudentQueries();
+    ObservableList<Student> slist = FXCollections.observableList(sq.getStudents());
+    ConsultationQueries cq = new ConsultationQueries();
+    ObservableList<Consultation> clist = FXCollections.observableList(cq.getConsultations());
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        StudentQueries sq = new StudentQueries();
-        ObservableList<Student> slist = FXCollections.observableList(sq.getStudents());
-        String zidselected = StudentAndConsController.getselected();
-        System.out.println(zidselected);
-        zId.setText(zidselected);
-        for (Student sw : slist) {
-            if (sw.getZID().equals(StudentAndConsController.getselected())) {
-                String fname1 = sw.getFName();
-                String lname1 = sw.getLName();
-                String email1 = sw.getEMail();
-                String course1 = sw.getCourse();
-                fName.setText(fname1);
-                lName.setText(lname1);
-                eMail.setText(email1);
-                course.setText(course1);
+       //IF the staffcheck is PREVIOUSLY checked, then it should be checked again
+          StudentFollowQueries sfq = new StudentFollowQueries();
+
+            ObservableList<Student> sflist = FXCollections.observableList(sfq.getStudents());
+            for (Student sf : sflist) {
+                if (sf.getZID().equals(zId.getText())) {
+
+                    System.out.println("already exists");
+                    staffcheck.setSelected(true);
+                } else {
+staffcheck.setSelected(false);
+                  }}
+            // initialize page if its opened via an edit button                 
+                            
+        ConsultationQueries cqq = new ConsultationQueries();
+        ObservableList<Consultation> clist2 = FXCollections.observableList(cqq.getConsultations());
+        if (StudentAndConsController.getExists() == "true") {
+            for (Consultation cw : clist) {
+                String i = String.valueOf(StudentAndConsController.getselectedCID());
+                if (cw.getConsultationid().toString().equals(i)) {
+                    for (Student sw2 : slist) {
+                        if (sw2.getZID().equals(cw.getZid())) {
+                            String fname1 = sw2.getFName();
+                            String lname1 = sw2.getLName();
+                            String email1 = sw2.getEMail();
+                            String course1 = sw2.getCourse();
+                            zId.setText(cw.getZid());
+                            fName.setText(fname1);
+                            lName.setText(lname1);
+                            eMail.setText(email1);
+                            course.setText(course1);
+                            
+                            break;
+                        }
+
+                    }
+                }
+            }
+        } else {            
+//intialize page if its opened via the create consultation screen.
+
+            for (Student sw : slist) {
+                if (sw.getZID().equals(StudentAndConsController.getselected())) {
+                    String fname1 = sw.getFName();
+                    String lname1 = sw.getLName();
+                    String email1 = sw.getEMail();
+                    String course1 = sw.getCourse();
+                    zId.setText(sw.getZID());
+                    fName.setText(fname1);
+                    lName.setText(lname1);
+                    eMail.setText(email1);
+                    course.setText(course1);
+                    break;
+                }
             }
         }
-         for (Student sw : slist) {
+
+        for (Student sw : slist) {
             if (sw.getZID().equals(StudentAndConsController.getselected())) {
                 try {
                     Connection conn = DriverManager.getConnection("jdbc:derby:"
@@ -278,39 +348,40 @@ public class CareerGuidanceFormController implements Initializable {
                     rs = pstmt.executeQuery();
                     rs.next();
                     Blob blob2 = rs.getBlob("TRANSCRIPT");
-                    if(blob2!=null){
-                    byte[] aa = blob2.getBytes(1, (int) blob2.length());
+                    if (blob2 != null) {
+                        byte[] aa = blob2.getBytes(1, (int) blob2.length());
                     // BufferedImage bi = ImageIO.read(blob2.getBinaryStream());
-                    //      System.out.println("bufferimage = " + bi);
+                        //      System.out.println("bufferimage = " + bi);
 
-                    System.out.println("bytes = " + aa);
-                    ByteArrayInputStream in = new ByteArrayInputStream(aa);
+                        System.out.println("bytes = " + aa);
+                        ByteArrayInputStream in = new ByteArrayInputStream(aa);
                     // ImageReader rdr = ImageIO.getImageReadersByFormatName("png").next();
-                    //Iterator<ImageReader> iter = ImageIO.getImageReadersBySuffix(gg);
-                    // ImageReader reader = rdr.next();
-                    // ImageInputStream imageinput = ImageIO.createImageInputStream(in);
-                    //rdr.setInput(imageinput);
-                    //BufferedImage bi = rdr.read(0);
-                    // in.close();
+                        //Iterator<ImageReader> iter = ImageIO.getImageReadersBySuffix(gg);
+                        // ImageReader reader = rdr.next();
+                        // ImageInputStream imageinput = ImageIO.createImageInputStream(in);
+                        //rdr.setInput(imageinput);
+                        //BufferedImage bi = rdr.read(0);
+                        // in.close();
 
                     //    System.out.println("please be buffered image = " + bi);
-                    // System.out.println("iter = " + rdr);
-                    BufferedImage read;
-                    try {
-                        read = ImageIO.read(in); //returns null
+                        // System.out.println("iter = " + rdr);
+                        BufferedImage read;
+                        try {
+                            read = ImageIO.read(in); //returns null
 
-                        System.out.println("setting image");
-                        System.out.println(" in = " + in);
-                        System.out.println("read = " + ImageIO.read(in));
+                            System.out.println("setting image");
+                            System.out.println(" in = " + in);
+                            System.out.println("read = " + ImageIO.read(in));
 
-                        imageaa.setImage(SwingFXUtils.toFXImage(read, null));
-                        conn.close();
-                        in.close();
-                        rs.close();
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
+                            imageaa.setImage(SwingFXUtils.toFXImage(read, null));
+                            conn.close();
+                            in.close();
+                            rs.close();
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
                     }
-                    } rs.close();
+                    rs.close();
                     conn.close();
                 } catch (SQLException ex) {
                     Logger.getLogger(VIEWIMAGEController.class.getName()).log(Level.SEVERE, null, ex);
@@ -326,7 +397,7 @@ public class CareerGuidanceFormController implements Initializable {
                 "4pm");
 
         priorityChoice.getItems().addAll("High", "Medium", "Low");
-        
+
         viewlabel.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent e) {
@@ -337,26 +408,126 @@ public class CareerGuidanceFormController implements Initializable {
         backHome.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
+                StudentAndConsController.setExists("false");
                 handleTransitionButton(e, "asformS.png", "conS.png", "StudentAndCons.fxml", "Create Consultation");
 
             }
         });
-        
+
         rDash.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
+                StudentAndConsController.setExists("false");
                 handleTransitionButton(e, "asformS.png", "dashS.png", "Dashboard.fxml", "Create Consultation");
 
             }
         });
-        
+
         rPrev.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
+                StudentAndConsController.setExists("false");
                 handleTransitionButton(e, "asformS.png", "conS.png", "StudentAndCons.fxml", "Create Consultation");
 
             }
         });
+
+        if (StudentAndConsController.getExists().equals("true")) {
+            for (Consultation cw : clist) {
+                String i = String.valueOf(StudentAndConsController.getselectedCID());
+                if (cw.getConsultationid().toString().equals(i)) {
+                    System.out.println("hello");
+                    String d = cw.getDate1();
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+//formatter = formatter.withLocale(Locale.ENGLISH);  // Locale specifies human language for translating, and cultural norms for lowercase/uppercase and abbreviations and such. Example: Locale.US or Locale.CANADA_FRENCH
+                    LocalDate date = LocalDate.parse(d, formatter);
+                    datePicked.setValue(date);
+                    String t = cw.getTime1();
+                    timePicked.setValue(t);
+                    priorityChoice.getSelectionModel().select(cw.getPriority());
+                  //  priorityChoice.setValue(date);
+                    notesField.setText(cw.getNotes());
+                    updatebutton.setVisible(true);
+                    break; //this mother fucking line stops its from freezing during tranisation
+
+                }
+            }
+        }
+
+    }
+
+    public void UpdateNow(ActionEvent event) {
+        ConsultationQueries cqq = new ConsultationQueries();
+        ObservableList<Consultation> clist2 = FXCollections.observableList(cqq.getConsultations());
+        StudentAndConsController.setExists("false");
+ Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Changes");
+        alert.setHeaderText(null);
+        alert.setContentText("Apply changes?");
+          ButtonType buttonTypeyes = new ButtonType("Apply");
+            ButtonType buttonTypecancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+            alert.getButtonTypes().setAll(buttonTypecancel, buttonTypeyes);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == buttonTypeyes) {
+        for (Consultation cw : clist2) {
+            String i = String.valueOf(StudentAndConsController.getselectedCID());
+            if (cw.getConsultationid().toString().equals(i)) {
+                Integer a1 = cw.getConsultationid();
+                
+                System.out.println("a1 = " + a1);
+                String a2 = cw.getZid();
+                String a3 = notesField.getText();
+
+                String a5 = priorityChoice.getSelectionModel().getSelectedItem().toString();
+                String a4 = cw.getType();
+                LocalDate dateupdate = datePicked.getValue();
+                Date dateupdate2 = localDateToUtilDate(dateupdate);
+                SimpleDateFormat dateformatJava2 = new SimpleDateFormat("dd/MM/yyyy");
+                String a6 = dateformatJava2.format(dateupdate2);
+                String a7 = timePicked.getValue().toString();
+                System.out.println("a7 time = " + cw.getTime1());
+
+                Consultation cupdate = new Consultation(a1, a2, a3, a4, a5, a6, a7);
+                cqq.updateConsult(cupdate);
+                break;
+            }
+            
+        }
+
+        if (staffcheck.isSelected() == true) {
+            System.out.println("true");
+
+            StudentQueries sq = new StudentQueries();
+            StudentFollowQueries sfq = new StudentFollowQueries();
+
+            ObservableList<Student> sflist = FXCollections.observableList(sfq.getStudents());
+            for (Student sf : sflist) {
+                if (sf.getZID().equals(zId.getText())) {
+
+                    System.out.println("already exists");
+                } else {
+
+                    for (Student s : slist) {
+
+                        if (s.getZID().equals(zId.getText())) {
+                            System.out.println("true2");
+
+                            sfq.insertStudents(s);
+                        }
+
+                    }
+
+                }
+            }
+
+        }gotoHome(event);
+        }else{
+            System.out.println("cancel");
+        }
+         
+                
+            
     }
 
     public Date localDateToUtilDate(LocalDate localDate) {
@@ -367,6 +538,7 @@ public class CareerGuidanceFormController implements Initializable {
     }
 
     public void Create(ActionEvent event) {
+
         Boolean isComplete = false;
         String zid = "";
         String date3 = "";
@@ -411,12 +583,12 @@ public class CareerGuidanceFormController implements Initializable {
         }
 
         /* if (typeChoice.getSelectionModel().getSelectedItem() != null) {
-            type = typeChoice.getSelectionModel().getSelectedItem().toString();
-            isComplete = true;
-        } else {
-            System.out.println("TYPE GONE NIGGA");
-            isComplete = false;
-        }
+         type = typeChoice.getSelectionModel().getSelectedItem().toString();
+         isComplete = true;
+         } else {
+         System.out.println("TYPE GONE NIGGA");
+         isComplete = false;
+         }
          */
         //  String firstname = firstnamefield.getText();
         //  String lastname = lastnamefield.getText();
@@ -426,12 +598,31 @@ public class CareerGuidanceFormController implements Initializable {
             System.out.println("date is " + date3 + "time is " + time);
             Consultation c = new Consultation(zid, notes, "Career Guidance", priority, date3, time);
             ConsultationQueries cq = new ConsultationQueries();
+
             cq.insertConsult(c);
             ObservableList<Consultation> cd = FXCollections.observableArrayList(cq.getConsultations());
             System.out.println(cq.getConsultations());
             //  System.out.println(cd.get(0).getDate1());
             //  System.out.println(cd.get(0).getTime1());
             // System.out.println(cd.get(0).getconsultationid());
+            if (staffcheck.isSelected() == true) {
+                System.out.println("true");
+
+                StudentQueries sq = new StudentQueries();
+                ObservableList<Student> slist = FXCollections.observableList(sq.getStudents());
+                StudentFollowQueries sfq = new StudentFollowQueries();
+
+                for (Student s : slist) {
+
+                    if (s.getZID().equals(zId.getText())) {
+                        System.out.println("true2");
+
+                        sfq.insertStudents(s);
+                    }
+
+                }
+
+            }
             //POP UP lol
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Consultation Created");
@@ -454,13 +645,13 @@ public class CareerGuidanceFormController implements Initializable {
     }
 
     /* public void Cancel(ActionEvent event) {
-        Stage stageedit = (Stage) cancelButton.getScene().getWindow();
-        stageedit.close();
+     Stage stageedit = (Stage) cancelButton.getScene().getWindow();
+     stageedit.close();
 
-    }*/
+     }*/
     private void gotoHome(ActionEvent event) {
         Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        try {
+        try {StudentAndConsController.setExists("false");
             Parent root = FXMLLoader.load(getClass().getResource("CalendarView.fxml"));
             Scene scene = new Scene(root);
             primaryStage.setTitle("Home Screen");
