@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import java.util.*;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javax.mail.*;
 import javax.mail.internet.*;
@@ -52,8 +53,13 @@ public class workplacementDash implements Initializable {
         placementinfo.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-
-                handleTransitionButton(e, "placementS.png", "jobS.png", "jobinfo.fxml", "Placement Dashboard");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Page Coming Soon");
+                alert.setHeaderText("Page Coming Soon");
+                alert.setHeaderText(null);
+                alert.setContentText("This page isnt quite ready for release just yet. \nWe appreciate your patience.");
+                alert.showAndWait();
+                //handleTransitionButton(e, "placementS.png", "jobS.png", "jobinfo.fxml", "Placement Dashboard");
 
             }
         });
