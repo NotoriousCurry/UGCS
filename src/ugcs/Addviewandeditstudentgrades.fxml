@@ -39,7 +39,7 @@
       <Label layoutX="889.0" layoutY="140.0" text="Welcome, " textFill="WHITE" />
       <Label layoutX="954.0" layoutY="140.0" text="FirstName" textFill="WHITE" />
       <Button fx:id="prevr" layoutX="453.0" layoutY="132.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="139.0" stylesheets="@Resources/returnandlogout.css" text="Return to Previous" />
-      <Button layoutX="238.0" layoutY="131.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="170.0" stylesheets="@Resources/returnandlogout.css" text="Return to Dashboard" />
+      <Button fx:id="rDash" layoutX="238.0" layoutY="131.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="170.0" stylesheets="@Resources/returnandlogout.css" text="Return to Dashboard" />
       <Pane layoutX="129.0" layoutY="200.0" prefHeight="506.0" prefWidth="926.0">
          <children>
             <TextField fx:id="ltext" editable="false" layoutX="165.0" layoutY="178.0" opacity="0.5" prefHeight="27.0" prefWidth="265.0" stylesheets="@Resources/highlightrow.css">

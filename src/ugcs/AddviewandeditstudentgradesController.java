@@ -17,33 +17,26 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
-import ugcs.Model.Student;
 import ugcs.Model.StudentCOOP;
+import ugcs.Queries.FileQueries;
 import ugcs.Queries.StudentCOOPQueries;
 
 /**
  *
  * @author Peterrpancakes
  */
-public class AddviewandeditstudentgradesController implements Initializable  {
-    
-    
-    
-   
-    private
-      @FXML
+public class AddviewandeditstudentgradesController implements Initializable {
+
+    private @FXML
     Button logout;
-    private
-       @FXML
+    private @FXML
     Button prevr;
-    private
-     @FXML
+    private @FXML
+    Button rDash;
+    private @FXML
     TextField ztext;
     private @FXML
     TextField ftext;
@@ -51,74 +44,79 @@ public class AddviewandeditstudentgradesController implements Initializable  {
     TextField ltext;
     private @FXML
     TextField subtext;
-     private @FXML
+    private @FXML
     TextField marktext;
     private @FXML
     TextField wamtext;
     private @FXML
     TextField semtext;
-     
-    
-      private @FXML
-    TextArea notesarea;
-      private
     @FXML
+    Label FirstName;
+
+    private @FXML
+    TextArea notesarea;
+    private @FXML
     Button submit1;
 
-    
-    
-    
     StudentCOOPQueries scq1 = new StudentCOOPQueries();
-   ObservableList<StudentCOOP> studentcooplist = FXCollections.observableArrayList(scq1.getStudentCOOP());
+    FileQueries fq = new FileQueries();
+    ObservableList<StudentCOOP> studentcooplist = FXCollections.observableArrayList(scq1.getStudentCOOP());
 
-     @Override
+    @Override
     public void initialize(URL url, ResourceBundle rb) {
-       
-            for(StudentCOOP sc : studentcooplist){
-                if(sc.getZID().equals(ManageStudentmarksController.getString())){
-            
-        ztext.setText(sc.getZID());
-        ftext.setText(sc.getFName());
-        ltext.setText(sc.getLName());
-        subtext.setText(sc.getSUbject());
-        marktext.setText(sc.getMArk().toString());
-        wamtext.setText(sc.getWAm().toString());
-        semtext.setText(sc.getSEmestercompleted().toString());
-        notesarea.setText(sc.getNOtes());
-                }
-                }
-        
+
+        FirstName.setText(fq.readName());
+        for (StudentCOOP sc : studentcooplist) {
+            if (sc.getZID().equals(ManageStudentmarksController.getString())) {
+
+                ztext.setText(sc.getZID());
+                ftext.setText(sc.getFName());
+                ltext.setText(sc.getLName());
+                subtext.setText(sc.getSUbject());
+                marktext.setText(sc.getMArk().toString());
+                wamtext.setText(sc.getWAm().toString());
+                semtext.setText(sc.getSEmestercompleted().toString());
+                notesarea.setText(sc.getNOtes());
+            }
+        }
+
         //String zID, String fName, String lName, String gEnder, String aDdress, 
-          //    Integer cOntact, String eMail, String wOrkemail, String nOtes,
-           // String sUbject, Integer sEmestercompleted, Integer mArk, Integer wAm
-        
-          submit1.setOnAction(new EventHandler<ActionEvent>() {
+        //    Integer cOntact, String eMail, String wOrkemail, String nOtes,
+        // String sUbject, Integer sEmestercompleted, Integer mArk, Integer wAm
+        submit1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                 for(StudentCOOP sc : studentcooplist){
-                if(sc.getZID().equals(ztext.getText())){
-                    System.out.println("updating coop marks");
-                StudentCOOP update1 = new StudentCOOP(ztext.getText(), ftext.getText(),ltext.getText(), sc.getGEnder(),
-                sc.getADdress(), sc.getCOntact(), sc.getEMail(), sc.getWOrkemail(), 
-                     notesarea.getText(),  subtext.getText(), Integer.parseInt(semtext.getText()),
-                        Double.parseDouble(marktext.getText()) ,Double.parseDouble(wamtext.getText()) );
-                    StudentCOOPQueries scq2 = new StudentCOOPQueries();
+                for (StudentCOOP sc : studentcooplist) {
+                    if (sc.getZID().equals(ztext.getText())) {
+                        System.out.println("updating coop marks");
+                        StudentCOOP update1 = new StudentCOOP(ztext.getText(), ftext.getText(), ltext.getText(), sc.getGEnder(),
+                                sc.getADdress(), sc.getCOntact(), sc.getEMail(), sc.getWOrkemail(),
+                                notesarea.getText(), subtext.getText(), Integer.parseInt(semtext.getText()),
+                                Double.parseDouble(marktext.getText()), Double.parseDouble(wamtext.getText()));
+                        StudentCOOPQueries scq2 = new StudentCOOPQueries();
 
-                scq2.updateStudentCOOP(update1);
-                    System.out.println("student coop updated with grades");
-                    handleTransitionButton(e, "conS.png", "calendarS.png", "ManageStudentmarks.fxml", "Dashboard");
+                        scq2.updateStudentCOOP(update1);
+                        System.out.println("student coop updated with grades");
+                        handleTransitionButton(e, "conS.png", "calendarS.png", "ManageStudentmarks.fxml", "Dashboard");
 
+                    }
                 }
-                 }
             }
         });
-          
- 
-          logout.setOnAction(new EventHandler<ActionEvent>() {
+
+        logout.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                deleteTemp();
+                fq.deleteTemp();
                 handleTransitionButton(e, "conS.png", "loginS.png", "LoginPage.fxml", "Login");
+            }
+        });
+        
+        rDash.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                fq.deleteTemp();
+                handleTransitionButton(e, "conS.png", "loginS.png", "mystudentsDash.fxml", "My Students Dashboard");
             }
         });
 
@@ -128,27 +126,9 @@ public class AddviewandeditstudentgradesController implements Initializable  {
                 handleTransitionButton(e, "conS.png", "calendarS.png", "ManageStudentmarks.fxml", "Dashboard");
             }
         });
-}
-
-    
-    
-    
-    
-       private void deleteTemp() {
-        try {
-            File file = new File("temp.txt");
-            if (file.delete()) {
-                System.out.println(file.getName() + " is Deleted");
-            } else {
-                System.out.println("Delete operation failed");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
-
-  private void handleTransitionButton(ActionEvent e, String a, String b, String c, String d) {
+    private void handleTransitionButton(ActionEvent e, String a, String b, String c, String d) {
         AnimationsTransitions at = new AnimationsTransitions();
         at.changeScreenButton(e, a, b, c, d);
 

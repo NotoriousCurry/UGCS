@@ -26,7 +26,7 @@ public class mystudentsDashController implements Initializable {
     @FXML
     Button logout;
     @FXML
-    Button prevr;
+    Button rPrev;
     @FXML
     Button managestudents;
     @FXML
@@ -42,7 +42,7 @@ public class mystudentsDashController implements Initializable {
         managestudents.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                handleTransitionButton(e, "dashS.png", "calendarS.png", "ManageStudent2.fxml", "COOP Students");
+                handleTransitionButton(e, "coopdashS.png", "manageS.png", "ManageStudent2.fxml", "COOP Students");
             }
         });
 
@@ -50,7 +50,16 @@ public class mystudentsDashController implements Initializable {
             @Override
             public void handle(ActionEvent e) {
                 
-              handleTransitionButton(e, "dashS.png", "calendarS.png", "workplacementDash.fxml", "Placement Dashboard");
+              handleTransitionButton(e, "coopdashS.png", "placementS.png", "workplacementDash.fxml", "Placement Dashboard");
+
+            }
+        });
+        
+        rPrev.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                
+              handleTransitionButton(e, "coopdashS.png", "dashS.png", "Dashboard.fxml", "Dashboard");
 
             }
         });

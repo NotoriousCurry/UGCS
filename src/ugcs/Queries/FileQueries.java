@@ -23,7 +23,7 @@ public class FileQueries {
     public String readName() {
         String fName = "temp.txt";
         String line = null;
-        String name = "Welcome, New User";
+        String name = "New User";
 
         try {
             FileReader fReader = new FileReader(fName);
@@ -31,7 +31,7 @@ public class FileQueries {
 
             line = bReader.readLine();
             String[] sect = line.split(",");
-            name = "Welcome, " + sect[0];
+            name = sect[0];
 
             bReader.close();
 
@@ -63,7 +63,6 @@ public class FileQueries {
         } catch (IOException ex) {
             System.out.println("Error Reading File");
         }
-        System.out.println(pass);
         return pass;
     }
 

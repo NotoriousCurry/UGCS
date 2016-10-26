@@ -136,6 +136,7 @@ public class AttendancePerformanceFormController implements Initializable {
         }
 
     }
+
     /*
      public void staffcheck(ActionEvent event){
      Boolean check = true;
@@ -275,20 +276,21 @@ public class AttendancePerformanceFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       //IF the staffcheck is PREVIOUSLY checked, then it should be checked again
-          StudentFollowQueries sfq = new StudentFollowQueries();
+        //IF the staffcheck is PREVIOUSLY checked, then it should be checked again
+        StudentFollowQueries sfq = new StudentFollowQueries();
 
-            ObservableList<Student> sflist = FXCollections.observableList(sfq.getStudents());
-            for (Student sf : sflist) {
-                if (sf.getZID().equals(zId.getText())) {
+        ObservableList<Student> sflist = FXCollections.observableList(sfq.getStudents());
+        for (Student sf : sflist) {
+            if (sf.getZID().equals(zId.getText())) {
 
-                    System.out.println("already exists");
-                    staffcheck.setSelected(true);
-                } else {
-staffcheck.setSelected(false);
-                  }}
-            // initialize page if its opened via an edit button                 
-                            
+                System.out.println("already exists");
+                staffcheck.setSelected(true);
+            } else {
+                staffcheck.setSelected(false);
+            }
+        }
+        // initialize page if its opened via an edit button                 
+
         ConsultationQueries cqq = new ConsultationQueries();
         ObservableList<Consultation> clist2 = FXCollections.observableList(cqq.getConsultations());
         if (StudentAndConsController.getExists() == "true") {
@@ -306,14 +308,14 @@ staffcheck.setSelected(false);
                             lName.setText(lname1);
                             eMail.setText(email1);
                             course.setText(course1);
-                            
+
                             break;
                         }
 
                     }
                 }
             }
-        } else {            
+        } else {
 //intialize page if its opened via the create consultation screen.
 
             for (Student sw : slist) {
@@ -350,12 +352,12 @@ staffcheck.setSelected(false);
                     Blob blob2 = rs.getBlob("TRANSCRIPT");
                     if (blob2 != null) {
                         byte[] aa = blob2.getBytes(1, (int) blob2.length());
-                    // BufferedImage bi = ImageIO.read(blob2.getBinaryStream());
+                        // BufferedImage bi = ImageIO.read(blob2.getBinaryStream());
                         //      System.out.println("bufferimage = " + bi);
 
                         System.out.println("bytes = " + aa);
                         ByteArrayInputStream in = new ByteArrayInputStream(aa);
-                    // ImageReader rdr = ImageIO.getImageReadersByFormatName("png").next();
+                        // ImageReader rdr = ImageIO.getImageReadersByFormatName("png").next();
                         //Iterator<ImageReader> iter = ImageIO.getImageReadersBySuffix(gg);
                         // ImageReader reader = rdr.next();
                         // ImageInputStream imageinput = ImageIO.createImageInputStream(in);
@@ -363,7 +365,7 @@ staffcheck.setSelected(false);
                         //BufferedImage bi = rdr.read(0);
                         // in.close();
 
-                    //    System.out.println("please be buffered image = " + bi);
+                        //    System.out.println("please be buffered image = " + bi);
                         // System.out.println("iter = " + rdr);
                         BufferedImage read;
                         try {
@@ -445,7 +447,7 @@ staffcheck.setSelected(false);
                     String t = cw.getTime1();
                     timePicked.setValue(t);
                     priorityChoice.getSelectionModel().select(cw.getPriority());
-                  //  priorityChoice.setValue(date);
+                    //  priorityChoice.setValue(date);
                     notesField.setText(cw.getNotes());
                     updatebutton.setVisible(true);
                     break; //this mother fucking line stops its from freezing during tranisation
@@ -460,74 +462,73 @@ staffcheck.setSelected(false);
         ConsultationQueries cqq = new ConsultationQueries();
         ObservableList<Consultation> clist2 = FXCollections.observableList(cqq.getConsultations());
         StudentAndConsController.setExists("false");
- Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation Changes");
         alert.setHeaderText(null);
         alert.setContentText("Apply changes?");
-          ButtonType buttonTypeyes = new ButtonType("Apply");
-            ButtonType buttonTypecancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-            alert.getButtonTypes().setAll(buttonTypecancel, buttonTypeyes);
+        ButtonType buttonTypeyes = new ButtonType("Apply");
+        ButtonType buttonTypecancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(buttonTypecancel, buttonTypeyes);
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == buttonTypeyes) {
-        for (Consultation cw : clist2) {
-            String i = String.valueOf(StudentAndConsController.getselectedCID());
-            if (cw.getConsultationid().toString().equals(i)) {
-                Integer a1 = cw.getConsultationid();
-                
-                System.out.println("a1 = " + a1);
-                String a2 = cw.getZid();
-                String a3 = notesField.getText();
+            for (Consultation cw : clist2) {
+                String i = String.valueOf(StudentAndConsController.getselectedCID());
+                if (cw.getConsultationid().toString().equals(i)) {
+                    Integer a1 = cw.getConsultationid();
 
-                String a5 = priorityChoice.getSelectionModel().getSelectedItem().toString();
-                String a4 = cw.getType();
-                LocalDate dateupdate = datePicked.getValue();
-                Date dateupdate2 = localDateToUtilDate(dateupdate);
-                SimpleDateFormat dateformatJava2 = new SimpleDateFormat("dd/MM/yyyy");
-                String a6 = dateformatJava2.format(dateupdate2);
-                String a7 = timePicked.getValue().toString();
-                System.out.println("a7 time = " + cw.getTime1());
+                    System.out.println("a1 = " + a1);
+                    String a2 = cw.getZid();
+                    String a3 = notesField.getText();
 
-                Consultation cupdate = new Consultation(a1, a2, a3, a4, a5, a6, a7);
-                cqq.updateConsult(cupdate);
-                break;
+                    String a5 = priorityChoice.getSelectionModel().getSelectedItem().toString();
+                    String a4 = cw.getType();
+                    LocalDate dateupdate = datePicked.getValue();
+                    Date dateupdate2 = localDateToUtilDate(dateupdate);
+                    SimpleDateFormat dateformatJava2 = new SimpleDateFormat("dd/MM/yyyy");
+                    String a6 = dateformatJava2.format(dateupdate2);
+                    String a7 = timePicked.getValue().toString();
+                    System.out.println("a7 time = " + cw.getTime1());
+
+                    Consultation cupdate = new Consultation(a1, a2, a3, a4, a5, a6, a7);
+                    cqq.updateConsult(cupdate);
+                    break;
+                }
+
             }
-            
-        }
 
-        if (staffcheck.isSelected() == true) {
-            System.out.println("true");
+            if (staffcheck.isSelected() == true) {
+                System.out.println("true");
 
-            StudentQueries sq = new StudentQueries();
-            StudentFollowQueries sfq = new StudentFollowQueries();
+                StudentQueries sq = new StudentQueries();
+                StudentFollowQueries sfq = new StudentFollowQueries();
 
-            ObservableList<Student> sflist = FXCollections.observableList(sfq.getStudents());
-            for (Student sf : sflist) {
-                if (sf.getZID().equals(zId.getText())) {
+                ObservableList<Student> sflist = FXCollections.observableList(sfq.getStudents());
+                for (Student sf : sflist) {
+                    if (sf.getZID().equals(zId.getText())) {
 
-                    System.out.println("already exists");
-                } else {
+                        System.out.println("already exists");
+                    } else {
 
-                    for (Student s : slist) {
+                        for (Student s : slist) {
 
-                        if (s.getZID().equals(zId.getText())) {
-                            System.out.println("true2");
+                            if (s.getZID().equals(zId.getText())) {
+                                System.out.println("true2");
 
-                            sfq.insertStudents(s);
+                                sfq.insertStudents(s);
+                            }
+
                         }
 
                     }
-
                 }
-            }
 
-        }gotoHome(event);
-        }else{
+            }
+            gotoHome(event);
+        } else {
             System.out.println("cancel");
         }
-         
-                
-            
+
     }
 
     public Date localDateToUtilDate(LocalDate localDate) {
@@ -651,7 +652,8 @@ staffcheck.setSelected(false);
      }*/
     private void gotoHome(ActionEvent event) {
         Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        try {StudentAndConsController.setExists("false");
+        try {
+            StudentAndConsController.setExists("false");
             Parent root = FXMLLoader.load(getClass().getResource("CalendarView.fxml"));
             Scene scene = new Scene(root);
             primaryStage.setTitle("Home Screen");
