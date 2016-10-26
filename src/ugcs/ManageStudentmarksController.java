@@ -29,12 +29,12 @@ import ugcs.Queries.StudentCOOPQueries;
  *
  * @author Peterrpancakes
  */
-public class ManageStudentController implements Initializable  {
+public class ManageStudentmarksController implements Initializable  {
     
     
     private
         @FXML
-    TableView<StudentCOOP> studentcooptable;
+    TableView<StudentCOOP> studentcooptable2;
         private
     @FXML
     TableColumn zidcol;
@@ -46,22 +46,18 @@ public class ManageStudentController implements Initializable  {
     TableColumn lnamecol;
          private
     @FXML
-    TableColumn addresscol;
+    TableColumn semcol;
           private
     @FXML
-    TableColumn contactcol;
+    TableColumn markcol;
         private
     @FXML
-    TableColumn gendercol;
+    TableColumn wamcol;
         private
     @FXML
-    TableColumn emailcol;
+    TableColumn subcol;
         private
-    @FXML
-    TableColumn privemailcol;
-        private
-    @FXML
-    TableColumn notescol;
+   
     @FXML
     Button add;
      @FXML
@@ -73,8 +69,8 @@ public class ManageStudentController implements Initializable  {
        @FXML
     Button backhome;
      
-        private static String check = "false";
-                private static String string1;
+       
+                private static String string2;
 
 
     
@@ -97,54 +93,33 @@ public class ManageStudentController implements Initializable  {
         lnamecol.setCellValueFactory(
                 new PropertyValueFactory<StudentCOOP, String>("lName")
         );
-        gendercol.setCellValueFactory(
-                new PropertyValueFactory<StudentCOOP, String>("gEnder")
+        semcol.setCellValueFactory(
+                new PropertyValueFactory<StudentCOOP, Integer>("sEmestercompleted")
         );
-        addresscol.setCellValueFactory(
-                new PropertyValueFactory<StudentCOOP, String>("aDdress")
+        markcol.setCellValueFactory(
+                new PropertyValueFactory<StudentCOOP, Integer>("mArk")
         );
-        contactcol.setCellValueFactory(
-                new PropertyValueFactory<StudentCOOP, Integer>("cOntact")
+        wamcol.setCellValueFactory(
+                new PropertyValueFactory<StudentCOOP, Integer>("wAm")
         );
-         emailcol.setCellValueFactory(
-                new PropertyValueFactory<StudentCOOP, String>("eMail")
+         subcol.setCellValueFactory(
+                new PropertyValueFactory<StudentCOOP, String>("sUbject")
         );
-        privemailcol.setCellValueFactory(
-                new PropertyValueFactory<StudentCOOP, String>("wOrkemail")
-        );
-        notescol.setCellValueFactory(
-                new PropertyValueFactory<StudentCOOP, String>("nOtes")
-        );
+       
         
-        studentcooptable.setItems(null);
-        studentcooptable.setItems(studentcooplist);
+        studentcooptable2.setItems(null);
+        studentcooptable2.setItems(studentcooplist);
         
         
-        
-        
-
-        add.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-           setCheck("false");
-           //   StudentAndConsController.setselected(studentcooptable.getSelectionModel().getSelectedItem().getzID());
-            //transition to screen with autofilled info...
-              handleTransitionButton(e, "conS.png", "loginS.png", "Addviewandeditstudentinfo.fxml", "Student Info");
-                    System.out.println("false");
-                
-               
-                
-            
-            }});
              viewedit.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
                 
-                if(studentcooptable.getSelectionModel().isEmpty() != true){
-                     setCheck("true");
-                    setString(studentcooptable.getSelectionModel().getSelectedItem().getZID());
-                 handleTransitionButton(e, "conS.png", "loginS.png", "Addviewandeditstudentinfo.fxml", "Student Info");
-                    System.out.println("true");
+                if(studentcooptable2.getSelectionModel().isEmpty() != true){
+                   
+                    setString(studentcooptable2.getSelectionModel().getSelectedItem().getZID());
+                 handleTransitionButton(e, "conS.png", "loginS.png", "Addviewandeditstudentgrades.fxml", "Student Grades");
+                    System.out.println("openinglad");
                 }else{
                 //alert pls
                 
@@ -172,7 +147,7 @@ public class ManageStudentController implements Initializable  {
         prevr.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                handleTransitionButton(e, "conS.png", "calendarS.png", "mystudentsDash.fxml", "Dashboard");
+                handleTransitionButton(e, "conS.png", "calendarS.png", "workplacementDash.fxml", "Dashboard");
             }
         });
         backhome.setOnAction(new EventHandler<ActionEvent>() {
@@ -183,22 +158,15 @@ public class ManageStudentController implements Initializable  {
         });
 }
 
-    public static String getCheck() {
-        return check;
-
-    }
-
-    public static void setCheck(String check) {
-        ManageStudentController.check = check;
-    }
+ 
     
      public static String getString() {
-        return string1;
+        return string2;
 
     }
 
-    public static void setString(String string1) {
-        ManageStudentController.string1 = string1;
+    public static void setString(String string2) {
+        ManageStudentmarksController.string2 = string2;
     }
     
     

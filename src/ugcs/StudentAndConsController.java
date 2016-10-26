@@ -56,7 +56,7 @@ public class StudentAndConsController implements Initializable {
     private Button rPrev;
 
     private static String studentst;
-    private static String f = "False";
+    private static String f = "false";
     private static Integer i;
     private PathTransition pathT = new PathTransition();
 
@@ -92,17 +92,23 @@ public class StudentAndConsController implements Initializable {
     TextField coursetex;
     @FXML
     TextField emailtex;
+    private
     @FXML
     TableView<Student> studenttable;
+    private
     @FXML
     TableColumn zidcol;
+    private
     @FXML
     TableColumn fnamecol;
+    private
     @FXML
     TableColumn lnamecol;
+    private
 
     @FXML
     TableColumn coursecol;
+    private
     @FXML
     TableColumn emailcol;
     Stage stage;

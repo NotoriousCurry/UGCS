@@ -408,6 +408,7 @@ staffcheck.setSelected(false);
         backHome.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
+                StudentAndConsController.setExists("false");
                 handleTransitionButton(e, "asformS.png", "conS.png", "StudentAndCons.fxml", "Create Consultation");
 
             }
@@ -416,6 +417,7 @@ staffcheck.setSelected(false);
         rDash.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
+                StudentAndConsController.setExists("false");
                 handleTransitionButton(e, "asformS.png", "dashS.png", "Dashboard.fxml", "Create Consultation");
 
             }
@@ -424,6 +426,7 @@ staffcheck.setSelected(false);
         rPrev.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
+                StudentAndConsController.setExists("false");
                 handleTransitionButton(e, "asformS.png", "conS.png", "StudentAndCons.fxml", "Create Consultation");
 
             }
@@ -439,7 +442,6 @@ staffcheck.setSelected(false);
 //formatter = formatter.withLocale(Locale.ENGLISH);  // Locale specifies human language for translating, and cultural norms for lowercase/uppercase and abbreviations and such. Example: Locale.US or Locale.CANADA_FRENCH
                     LocalDate date = LocalDate.parse(d, formatter);
                     datePicked.setValue(date);
-
                     String t = cw.getTime1();
                     timePicked.setValue(t);
                     priorityChoice.getSelectionModel().select(cw.getPriority());
@@ -649,7 +651,7 @@ staffcheck.setSelected(false);
      }*/
     private void gotoHome(ActionEvent event) {
         Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        try {
+        try {StudentAndConsController.setExists("false");
             Parent root = FXMLLoader.load(getClass().getResource("CalendarView.fxml"));
             Scene scene = new Scene(root);
             primaryStage.setTitle("Home Screen");

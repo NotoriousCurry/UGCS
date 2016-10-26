@@ -41,7 +41,7 @@ public class StudentCOOPQueries extends ugcs.Database.DerbySetup {
                         new StudentCOOP(rs.getString("ZID"), rs.getString("FIRSTNAME"), rs.getString("LASTNAME"),
                                 rs.getString("GENDER"), rs.getString("ADDRESS"), rs.getInt("CONTACT"), rs.getString("EMAIL"),
                         rs.getString("WORKEMAIL"), rs.getString("NOTES"), rs.getString("SUBJECT"), 
-                        rs.getInt("SEMESTERCOMPLETED"), rs.getInt("MARK"), rs.getInt("WAM"))
+                        rs.getInt("SEMESTERCOMPLETED"), rs.getDouble("MARK"), rs.getDouble("WAM"))
                 );
             }
             rs.close();
@@ -56,22 +56,22 @@ public class StudentCOOPQueries extends ugcs.Database.DerbySetup {
      public void insertStudentCOOP(StudentCOOP toInsert) {
         openConnection();
         try {
-            insertStudent = conn.prepareStatement("insert into APP.STUDENT (ZID, FIRSTNAME, LASTNAME, "
+            insertStudent = conn.prepareStatement("insert into APP.STUDENTCOOP (ZID, FIRSTNAME, LASTNAME, "
                     + "GENDER, ADDRESS, CONTACT, EMAIL, WORKEMAIL, NOTES, SUBJECT, SEMESTERCOMPLETED, MARK, WAM) "
                     + "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            insertStudent.setString(1, toInsert.getzID());
-            insertStudent.setString(2, toInsert.getfName());
-            insertStudent.setString(3, toInsert.getlName());
-            insertStudent.setString(4, toInsert.getgEnder());
-            insertStudent.setString(5, toInsert.getaDdress());
-            insertStudent.setInt(6, toInsert.getcOntact());
-            insertStudent.setString(7, toInsert.geteMail());
-            insertStudent.setString(8, toInsert.getwOrkemail());
-            insertStudent.setString(9, toInsert.getnOtes());
-            insertStudent.setString(10, toInsert.getsUbject());
-            insertStudent.setInt(11, toInsert.getsEmestercompleted());
-            insertStudent.setInt(12, toInsert.getmArk());
-            insertStudent.setInt(13, toInsert.getwAm());
+            insertStudent.setString(1, toInsert.getZID());
+            insertStudent.setString(2, toInsert.getFName());
+            insertStudent.setString(3, toInsert.getLName());
+            insertStudent.setString(4, toInsert.getGEnder());
+            insertStudent.setString(5, toInsert.getADdress());
+            insertStudent.setInt(6, toInsert.getCOntact());
+            insertStudent.setString(7, toInsert.getEMail());
+            insertStudent.setString(8, toInsert.getWOrkemail());
+            insertStudent.setString(9, toInsert.getNOtes());
+            insertStudent.setString(10, toInsert.getSUbject());
+            insertStudent.setInt(11, toInsert.getSEmestercompleted());
+            insertStudent.setDouble(12, toInsert.getMArk());
+            insertStudent.setDouble(13, toInsert.getWAm());
             
             insertStudent.executeUpdate();
 
@@ -80,26 +80,28 @@ public class StudentCOOPQueries extends ugcs.Database.DerbySetup {
         }
         closeConnection();
     }
-
+                                                                                                               
+                                                     
     // Assumes we cannot change zID without deleting and recreating user, prevents accidental changes to zID
     public void updateStudentCOOP(StudentCOOP toUpdate) {
         openConnection();
         try {
-            updateStudent = conn.prepareStatement("update APP.STUDENT set FIRSTNAME=?, LASTNAME=?, GENDER=?, ADDRESS=? ,"
-                    + " CONTACT=?, EMAIL=?, WORKEMAIL?, NOTES=?, SUBJECT =?, SEMESTERCOMPLETED=?, MARK=?, WAM=?");
-            updateStudent.setString(1, toUpdate.getzID());
-            updateStudent.setString(2, toUpdate.getfName());
-            updateStudent.setString(3, toUpdate.getlName());
-            updateStudent.setString(4, toUpdate.getgEnder());
-            updateStudent.setString(5, toUpdate.getaDdress());
-            updateStudent.setInt(6, toUpdate.getcOntact());
-            updateStudent.setString(7, toUpdate.geteMail());
-            updateStudent.setString(8, toUpdate.getwOrkemail());
-            updateStudent.setString(9, toUpdate.getnOtes());
-            updateStudent.setString(10, toUpdate.getsUbject());
-            updateStudent.setInt(11, toUpdate.getsEmestercompleted());
-            updateStudent.setInt(12, toUpdate.getmArk());
-            updateStudent.setInt(13, toUpdate.getwAm());
+            updateStudent = conn.prepareStatement("update app.studentcoop set firstname=?, lastname=?, gender=?, address=?,"
+                    + " contact=?, email=?, workemail=?, notes=?, subject=?, semestercompleted=?, mark=?, wam=?");
+            
+          updateStudent.setString(1, toUpdate.getZID());
+            updateStudent.setString(1, toUpdate.getFName());
+            updateStudent.setString(2, toUpdate.getLName());
+            updateStudent.setString(3, toUpdate.getGEnder());
+            updateStudent.setString(4, toUpdate.getADdress());
+            updateStudent.setInt(5, toUpdate.getCOntact());
+            updateStudent.setString(6, toUpdate.getEMail());
+            updateStudent.setString(7, toUpdate.getWOrkemail());
+            updateStudent.setString(8, toUpdate.getNOtes());
+            updateStudent.setString(9, toUpdate.getSUbject());
+            updateStudent.setInt(10, toUpdate.getSEmestercompleted());
+            updateStudent.setDouble(11, toUpdate.getMArk());
+            updateStudent.setDouble(12, toUpdate.getWAm());
 
             updateStudent.executeUpdate();
 
@@ -112,8 +114,8 @@ public class StudentCOOPQueries extends ugcs.Database.DerbySetup {
     public void deleteStudent(StudentCOOP toDelete) {
         openConnection();
         try {
-            deleteStudent = conn.prepareStatement("delete from APP.STUDENT where ZID = ?");
-            deleteStudent.setString(1, toDelete.getzID());
+            deleteStudent = conn.prepareStatement("delete from APP.STUDENTCOOP where ZID = ?");
+            deleteStudent.setString(1, toDelete.getZID());
 
             deleteStudent.execute();
         } catch (SQLException ex) {

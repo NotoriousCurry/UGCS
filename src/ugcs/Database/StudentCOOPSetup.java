@@ -31,11 +31,11 @@ public class StudentCOOPSetup extends DerbySetup {
 
             if (!rs.next()) {
                
-                String sqlText = "CREATE TABLE APP.STUDENT("
+                String sqlText = "CREATE TABLE APP.STUDENTCOOP("
                         + "\"ZID\" VARCHAR(8) not null primary key, "
                         + "\"FIRSTNAME\"VARCHAR(50),"
                         + "\"LASTNAME\" VARCHAR(50),"
-                        + "\"GENDER\" CHAR,"
+                        + "\"GENDER\" VARCHAR(10),"
                         + "\"ADDRESS\" VARCHAR(100),"
                         + "\"CONTACT\" INT,"                       
                         + "\"EMAIL\" VARCHAR(50),"
@@ -43,9 +43,8 @@ public class StudentCOOPSetup extends DerbySetup {
                         + "\"NOTES\" VARCHAR(5000),"   
                         + "\"SUBJECT\" VARCHAR(50),"                       
                         + "\"SEMESTERCOMPLETED\" INT,"                     
-                        + "\"MARK\" INT,"   
-                        + "\"WAM\" INT"
-                        
+                        + "\"MARK\" DOUBLE,"   
+                        + "\"WAM\" DOUBLE"                       
                         + ")";
 
                 System.out.println(sqlText);

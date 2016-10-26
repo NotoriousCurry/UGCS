@@ -169,7 +169,6 @@ public class CalendarviewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
         // followupbutton.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("Resources/Butt.gif"))));
         notetextshow.setWrapText(true);
         sp.setFitToWidth(true);
@@ -203,9 +202,9 @@ public class CalendarviewController implements Initializable {
         prioritycol.setCellValueFactory(
                 new PropertyValueFactory<Consultation, String>("priority")
         );
-        datecol.setCellValueFactory(
-                new PropertyValueFactory<Consultation, String>("date1")
-        );
+      //  datecol.setCellValueFactory(
+        //        new PropertyValueFactory<Consultation, String>("date1")
+        //);
         datecol.setCellValueFactory(cellData -> cellData.getValue().dateproperty());
         //displays an exclamation mark when the consultation is today
         datecol.setCellFactory(column -> {
@@ -243,7 +242,7 @@ public class CalendarviewController implements Initializable {
                             box.setSpacing(10);   
 
                             ImageView imageview = new ImageView();
-                            imageview.setImage(new Image(getClass().getResourceAsStream("Resources/exc3.png")));
+                            imageview.setImage(new Image(getClass().getResourceAsStream("Resources/excred.png")));
                             box.getChildren().addAll(imageview);
                             setGraphic(box);
                             
@@ -257,7 +256,7 @@ public class CalendarviewController implements Initializable {
                             HBox box = new HBox();
                             box.setSpacing(10);
                             ImageView imageview = new ImageView();
-                            imageview.setImage(new Image(getClass().getResourceAsStream("Resources/excred2.png")));
+                            imageview.setImage(new Image(getClass().getResourceAsStream("Resources/exc3.png")));
                             box.getChildren().addAll(imageview);
                             setGraphic(box);
                         
@@ -689,7 +688,7 @@ public class CalendarviewController implements Initializable {
                 stage.initModality(Modality.APPLICATION_MODAL);
                 stage.initOwner(followupbutton.getScene().getWindow());
 
-                stage.show();
+                stage.showAndWait();
 
                 /*  System.out.println(" attemping to open");
 
@@ -1022,7 +1021,7 @@ public class CalendarviewController implements Initializable {
         am.playAudio(file);
     }
 
-    private void handleTransitionButton(ActionEvent e, String a, String b, String c, String d) {
+    public void handleTransitionButton(ActionEvent e, String a, String b, String c, String d) {
         AnimationsTransitions at = new AnimationsTransitions();
         at.changeScreenButton(e, a, b, c, d);
 

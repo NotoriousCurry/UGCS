@@ -5,23 +5,30 @@
  */
 package ugcs.Model;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 
 
 public class StudentCOOP {
 
-    private String zID;
-    private String fName;
-    private String lName;    
-    private String gEnder;
-    private String aDdress;     
-    private Integer cOntact;
-    private String eMail;
-    private String wOrkemail;    
-    private String nOtes;
-    private String sUbject;
-    private Integer sEmestercompleted;
-    private Integer mArk;
-    private Integer wAm;
+    private final StringProperty zID;
+    private final StringProperty fName;
+   private final StringProperty lName;    
+    private final StringProperty gEnder;
+    private final StringProperty aDdress;     
+    private IntegerProperty cOntact;
+    private final StringProperty eMail;
+    private final StringProperty wOrkemail;    
+    private final StringProperty nOtes;
+    private final StringProperty sUbject;
+    private IntegerProperty sEmestercompleted;
+    private DoubleProperty mArk;
+   private DoubleProperty wAm;
 
     public StudentCOOP() {
         this.zID = null;
@@ -41,127 +48,143 @@ public class StudentCOOP {
     }
     public StudentCOOP(String zID, String fName, String lName, String gEnder, String aDdress, 
               Integer cOntact, String eMail, String wOrkemail, String nOtes,
-            String sUbject, Integer sEmestercompleted, Integer mArk, Integer wAm) {
-         this.zID = zID;
-        this.fName = fName;
-        this.lName = lName;
-        this.gEnder = gEnder;
-        this.aDdress =aDdress;
+            String sUbject, Integer sEmestercompleted, Double mArk, Double wAm) {
+         this.zID= new SimpleStringProperty(zID);
+        this.fName = new SimpleStringProperty(fName);
+        this.lName = new SimpleStringProperty(lName);
+        this.gEnder = new SimpleStringProperty(gEnder);
+        this.aDdress = new SimpleStringProperty(aDdress);
+        this.cOntact = new SimpleIntegerProperty(cOntact);
+        this.eMail = new SimpleStringProperty(eMail);
+        this.wOrkemail =new SimpleStringProperty(wOrkemail);
+        this.nOtes = new SimpleStringProperty(nOtes);
+        this.sUbject = new SimpleStringProperty(sUbject);
+        this.sEmestercompleted = new SimpleIntegerProperty(sEmestercompleted);
+        this.mArk = new SimpleDoubleProperty(mArk);
+        this.wAm = new SimpleDoubleProperty(wAm);
+
+    }
+
+
+
+    public String getZID() {
+        return zID.get();
+    }
+
+   // public void setzID(String zID) {
+     //   this.zID = zID;
+    //}
+
+    public String getFName() {
+        return fName.get();
+    }
+
+  //  public void setfName(String fName) {
+   //     this.fName = fName;
+    //}
+
+    public String getLName() {
+        return lName.get();
+    }
+
+    //public void setlName(String lName) {
+     //   this.lName = lName;
+    //}
+
+    public String getGEnder() {
+        return gEnder.get();
+    }
+
+    //public void setgEnder(String gEnder) {
+     //   this.gEnder = gEnder;
+    //}
+
+    public String getADdress() {
+        return aDdress.get();
+    }
+
+   // public void setaDdress(String aDdress) {
+   //     this.aDdress = aDdress;
+   // }
+
+    public Integer getCOntact() {
+        return cOntact.get();
+    }
+
+   // public void setcOntact(Integer cOntact) {
+     //   this.cOntact = cOntact;
+    //}
+
+    public String getEMail() {
+        return eMail.get();
+    }
+
+   // public void seteMail(String eMail) {
+    //    this.eMail = eMail;
+   // }
+
+    public String getWOrkemail() {
+        return wOrkemail.get();
+    }
+
+  //  public void setwOrkemail(String wOrkemail) {
+  //      this.wOrkemail = wOrkemail;
+  //  }
+
+    public String getNOtes() {
+        return nOtes.get();
+    }
+
+  //  public void setnOtes(String nOtes) {
+  //      this.nOtes = nOtes;
+  //  }
+
+    public String getSUbject() {
+        return sUbject.get();
+    }
+
+   // public void setsUbject(String sUbject) {
+   //     this.sUbject = sUbject;
+   // }
+
+    public Integer getSEmestercompleted() {
+        return sEmestercompleted.get();
+    }
+
+   // public void setsEmestercompleted(Integer sEmestercompleted) {
+     //   this.sEmestercompleted = sEmestercompleted;
+    //}
+
+    public Double getMArk() {
+        return mArk.get();
+    }
+
+ //   public void setmArk(Integer mArk) {
+   //     this.mArk = mArk;
+    //}
+
+    public Double getWAm() {
+        return wAm.get();
+    }
+
+ //   public void setwAm(Integer wAm) {
+  //      this.wAm = wAm;
+   // }
+
+    public void setCOntact(IntegerProperty cOntact) {
         this.cOntact = cOntact;
-        this.eMail = eMail;
-        this.wOrkemail = wOrkemail;
-        this.nOtes = nOtes;
-        this.sUbject = sUbject;
-        this.sEmestercompleted = sEmestercompleted;
-        this.mArk = mArk;
-        this.wAm = wAm;
-
     }
 
-
-
-    public String getzID() {
-        return zID;
-    }
-
-    public void setzID(String zID) {
-        this.zID = zID;
-    }
-
-    public String getfName() {
-        return fName;
-    }
-
-    public void setfName(String fName) {
-        this.fName = fName;
-    }
-
-    public String getlName() {
-        return lName;
-    }
-
-    public void setlName(String lName) {
-        this.lName = lName;
-    }
-
-    public String getgEnder() {
-        return gEnder;
-    }
-
-    public void setgEnder(String gEnder) {
-        this.gEnder = gEnder;
-    }
-
-    public String getaDdress() {
-        return aDdress;
-    }
-
-    public void setaDdress(String aDdress) {
-        this.aDdress = aDdress;
-    }
-
-    public Integer getcOntact() {
-        return cOntact;
-    }
-
-    public void setcOntact(Integer cOntact) {
-        this.cOntact = cOntact;
-    }
-
-    public String geteMail() {
-        return eMail;
-    }
-
-    public void seteMail(String eMail) {
-        this.eMail = eMail;
-    }
-
-    public String getwOrkemail() {
-        return wOrkemail;
-    }
-
-    public void setwOrkemail(String wOrkemail) {
-        this.wOrkemail = wOrkemail;
-    }
-
-    public String getnOtes() {
-        return nOtes;
-    }
-
-    public void setnOtes(String nOtes) {
-        this.nOtes = nOtes;
-    }
-
-    public String getsUbject() {
-        return sUbject;
-    }
-
-    public void setsUbject(String sUbject) {
-        this.sUbject = sUbject;
-    }
-
-    public Integer getsEmestercompleted() {
-        return sEmestercompleted;
-    }
-
-    public void setsEmestercompleted(Integer sEmestercompleted) {
+    public void setSEmestercompleted(IntegerProperty sEmestercompleted) {
         this.sEmestercompleted = sEmestercompleted;
     }
 
-    public Integer getmArk() {
-        return mArk;
-    }
-
-    public void setmArk(Integer mArk) {
+    public void setMArk(DoubleProperty mArk) {
         this.mArk = mArk;
     }
 
-    public Integer getwAm() {
-        return wAm;
-    }
-
-    public void setwAm(Integer wAm) {
+    public void setWAm(DoubleProperty wAm) {
         this.wAm = wAm;
     }
-
+    
 }

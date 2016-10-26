@@ -11,7 +11,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ugcs.AdvanceStandingFormController">
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ugcs.AddviewandeditstudentgradesController">
    <children>
       <ImageView fitHeight="804.0" fitWidth="1200.0">
          <image>
@@ -35,14 +35,14 @@
             <Font name="Arial" size="11.0" />
          </font>
       </Text>
-      <Button fx:id="logOut" layoutX="1101.0" layoutY="135.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="87.0" stylesheets="@Resources/returnandlogout.css" text="Logout" textAlignment="CENTER" textFill="WHITE" />
+      <Button fx:id="logout" layoutX="1101.0" layoutY="135.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="87.0" stylesheets="@Resources/returnandlogout.css" text="Logout" textAlignment="CENTER" textFill="WHITE" />
       <Label layoutX="889.0" layoutY="140.0" text="Welcome, " textFill="WHITE" />
       <Label layoutX="954.0" layoutY="140.0" text="FirstName" textFill="WHITE" />
-      <Button fx:id="rPrev" layoutX="1061.0" layoutY="686.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="139.0" stylesheets="@Resources/returnandlogout.css" text="Return to Previous" />
-      <Button fx:id="rDash" layoutY="686.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="146.0" stylesheets="@Resources/returnandlogout.css" text="Return to Dashboard" />
+      <Button fx:id="prevr" layoutX="1061.0" layoutY="686.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="139.0" stylesheets="@Resources/returnandlogout.css" text="Return to Previous" />
+      <Button layoutY="686.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="146.0" stylesheets="@Resources/returnandlogout.css" text="Return to Dashboard" />
       <Pane layoutX="129.0" layoutY="200.0" prefHeight="506.0" prefWidth="926.0">
          <children>
-            <TextField fx:id="lName" editable="false" layoutX="522.0" layoutY="112.0" opacity="0.5" prefHeight="27.0" prefWidth="265.0" stylesheets="@Resources/highlightrow.css">
+            <TextField fx:id="ltext" editable="false" layoutX="165.0" layoutY="178.0" opacity="0.5" prefHeight="27.0" prefWidth="265.0" stylesheets="@Resources/highlightrow.css">
                <effect>
                   <Lighting bumpInput="$null">
                      <light>
@@ -51,8 +51,8 @@
                   </Lighting>
                </effect>
             </TextField>
-            <Label layoutX="521.0" layoutY="31.0" prefHeight="17.0" prefWidth="53.0" text="Gender:" />
-            <TextField fx:id="zId" editable="false" layoutX="165.0" layoutY="57.0" opacity="0.5" prefHeight="27.0" prefWidth="265.0" stylesheets="@Resources/highlightrow.css">
+            <Label layoutX="673.0" layoutY="159.0" prefHeight="17.0" prefWidth="53.0" text="WAM:" />
+            <TextField fx:id="ztext" editable="false" layoutX="165.0" layoutY="57.0" opacity="0.5" prefHeight="27.0" prefWidth="265.0" stylesheets="@Resources/highlightrow.css">
                <effect>
                   <Lighting bumpInput="$null">
                      <light>
@@ -61,7 +61,7 @@
                   </Lighting>
                </effect>
             </TextField>
-            <TextField fx:id="fName" editable="false" layoutX="165.0" layoutY="113.0" opacity="0.5" prefHeight="27.0" prefWidth="265.0" stylesheets="@Resources/highlightrow.css">
+            <TextField fx:id="ftext" editable="false" layoutX="165.0" layoutY="113.0" opacity="0.5" prefHeight="27.0" prefWidth="265.0" stylesheets="@Resources/highlightrow.css">
                <effect>
                   <Lighting bumpInput="$null">
                      <light>
@@ -71,136 +71,23 @@
                </effect>
             </TextField>
             <Label layoutX="165.0" layoutY="32.0" prefHeight="16.0" prefWidth="27.0" text="ZID:" />
-            <TextArea fx:id="notesField" layoutX="163.0" layoutY="332.0" prefHeight="135.0" prefWidth="623.0" stylesheets="@Resources/searchexpand.css" />
-            <Label layoutX="163.0" layoutY="306.0" text="Notes:" />
+            <TextArea fx:id="notesarea" layoutX="163.0" layoutY="262.0" prefHeight="205.0" prefWidth="623.0" stylesheets="@Resources/searchexpand.css" />
+            <Label layoutX="170.0" layoutY="230.0" text="Notes:" />
             <Label layoutX="166.0" layoutY="90.0" prefHeight="17.0" prefWidth="130.0" text="Student First Name:" />
-            <Label layoutX="522.0" layoutY="89.0" text="Student Last Name:" />
-            <TextField fx:id="Gender" editable="false" layoutX="521.0" layoutY="56.0" opacity="0.5" prefHeight="27.0" prefWidth="265.0" stylesheets="@Resources/highlightrow.css">
-               <effect>
-                  <Lighting bumpInput="$null">
-                     <light>
-                        <Light.Distant />
-                     </light>
-                  </Lighting>
-               </effect>
-            </TextField>
-            <TextField fx:id="privateeMail" editable="false" layoutX="164.0" layoutY="171.0" opacity="0.5" prefHeight="27.0" prefWidth="111.0" stylesheets="@Resources/highlightrow.css">
-               <effect>
-                  <Lighting bumpInput="$null">
-                     <light>
-                        <Light.Distant />
-                     </light>
-                  </Lighting>
-               </effect>
-            </TextField>
-            <Label layoutX="165.0" layoutY="151.0" text="Subject:" />
-            <Label layoutX="522.0" layoutY="148.0" text="Semester Completed" />
-            <TextField fx:id="workemail" editable="false" layoutX="522.0" layoutY="171.0" opacity="0.5" prefHeight="27.0" prefWidth="265.0" stylesheets="@Resources/highlightrow.css">
-               <effect>
-                  <Lighting bumpInput="$null">
-                     <light>
-                        <Light.Distant />
-                     </light>
-                  </Lighting>
-               </effect>
-            </TextField>
-            <Label layoutX="317.0" layoutY="151.0" text="Mark:" />
-            <TextField fx:id="homephone" editable="false" layoutX="319.0" layoutY="171.0" opacity="0.5" prefHeight="27.0" prefWidth="111.0" stylesheets="@Resources/highlightrow.css">
-               <effect>
-                  <Lighting bumpInput="$null">
-                     <light>
-                        <Light.Distant />
-                     </light>
-                  </Lighting>
-               </effect>
-            </TextField>
+            <Label layoutX="165.0" layoutY="155.0" text="Student Last Name:" />
+            <TextField fx:id="wamtext" layoutX="673.0" layoutY="180.0" opacity="0.5" prefHeight="27.0" prefWidth="111.0" stylesheets="@Resources/highlightrow.css" />
+            <TextField fx:id="subtext" layoutX="520.0" layoutY="54.0" opacity="0.5" prefHeight="27.0" prefWidth="111.0" stylesheets="@Resources/highlightrow.css" />
+            <Label layoutX="521.0" layoutY="34.0" text="Subject:" />
+            <Label layoutX="520.0" layoutY="159.0" text="Semester:" />
+            <TextField fx:id="semtext" layoutX="520.0" layoutY="180.0" opacity="0.5" prefHeight="27.0" prefWidth="111.0" stylesheets="@Resources/highlightrow.css" />
+            <Label layoutX="673.0" layoutY="34.0" text="Mark:" />
+            <TextField fx:id="marktext" layoutX="675.0" layoutY="54.0" opacity="0.5" prefHeight="27.0" prefWidth="111.0" stylesheets="@Resources/highlightrow.css" />
             <Label layoutX="165.0" layoutY="2.0" text="Student Information Below:">
                <font>
                   <Font name="Arial Bold" size="13.0" />
                </font>
             </Label>
-            <TextField fx:id="homephone1" editable="false" layoutX="320.0" layoutY="273.0" opacity="0.5" prefHeight="27.0" prefWidth="111.0" stylesheets="@Resources/highlightrow.css">
-               <effect>
-                  <Lighting bumpInput="$null">
-                     <light>
-                        <Light.Distant />
-                     </light>
-                  </Lighting>
-               </effect>
-            </TextField>
-            <TextField fx:id="privateeMail1" editable="false" layoutX="165.0" layoutY="273.0" opacity="0.5" prefHeight="27.0" prefWidth="111.0" stylesheets="@Resources/highlightrow.css">
-               <effect>
-                  <Lighting bumpInput="$null">
-                     <light>
-                        <Light.Distant />
-                     </light>
-                  </Lighting>
-               </effect>
-            </TextField>
-            <TextField fx:id="homephone2" editable="false" layoutX="320.0" layoutY="204.0" opacity="0.5" prefHeight="27.0" prefWidth="111.0" stylesheets="@Resources/highlightrow.css">
-               <effect>
-                  <Lighting bumpInput="$null">
-                     <light>
-                        <Light.Distant />
-                     </light>
-                  </Lighting>
-               </effect>
-            </TextField>
-            <TextField fx:id="privateeMail2" editable="false" layoutX="165.0" layoutY="204.0" opacity="0.5" prefHeight="27.0" prefWidth="111.0" stylesheets="@Resources/highlightrow.css">
-               <effect>
-                  <Lighting bumpInput="$null">
-                     <light>
-                        <Light.Distant />
-                     </light>
-                  </Lighting>
-               </effect>
-            </TextField>
-            <Button fx:id="submitButton" layoutX="643.0" layoutY="478.0" mnemonicParsing="false" onAction="#Create" prefHeight="29.0" prefWidth="146.0" stylesheets="@Resources/test.css" text="Submit" />
-            <TextField fx:id="homephone3" editable="false" layoutX="320.0" layoutY="239.0" opacity="0.5" prefHeight="27.0" prefWidth="111.0" stylesheets="@Resources/highlightrow.css">
-               <effect>
-                  <Lighting bumpInput="$null">
-                     <light>
-                        <Light.Distant />
-                     </light>
-                  </Lighting>
-               </effect>
-            </TextField>
-            <TextField fx:id="privateeMail3" editable="false" layoutX="165.0" layoutY="239.0" opacity="0.5" prefHeight="27.0" prefWidth="111.0" stylesheets="@Resources/highlightrow.css">
-               <effect>
-                  <Lighting bumpInput="$null">
-                     <light>
-                        <Light.Distant />
-                     </light>
-                  </Lighting>
-               </effect>
-            </TextField>
-            <TextField fx:id="workemail1" editable="false" layoutX="522.0" layoutY="204.0" opacity="0.5" prefHeight="27.0" prefWidth="265.0" stylesheets="@Resources/highlightrow.css">
-               <effect>
-                  <Lighting bumpInput="$null">
-                     <light>
-                        <Light.Distant />
-                     </light>
-                  </Lighting>
-               </effect>
-            </TextField>
-            <TextField fx:id="workemail2" editable="false" layoutX="522.0" layoutY="240.0" opacity="0.5" prefHeight="27.0" prefWidth="265.0" stylesheets="@Resources/highlightrow.css">
-               <effect>
-                  <Lighting bumpInput="$null">
-                     <light>
-                        <Light.Distant />
-                     </light>
-                  </Lighting>
-               </effect>
-            </TextField>
-            <TextField fx:id="workemail3" editable="false" layoutX="522.0" layoutY="273.0" opacity="0.5" prefHeight="27.0" prefWidth="265.0" stylesheets="@Resources/highlightrow.css">
-               <effect>
-                  <Lighting bumpInput="$null">
-                     <light>
-                        <Light.Distant />
-                     </light>
-                  </Lighting>
-               </effect>
-            </TextField>
+            <Button fx:id="submit1" layoutX="643.0" layoutY="478.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="146.0" stylesheets="@Resources/test.css" text="Submit" />
          </children>
       </Pane>
    </children>

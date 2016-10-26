@@ -7,7 +7,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ugcs.DashboardController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ugcs.workplacementDash">
    <children>
       <ImageView fitHeight="800.0" fitWidth="1200.0" pickOnBounds="true">
          <image>
@@ -39,11 +39,11 @@
             <Image url="@Resources/sendpreflogo.png" />
          </image>
       </ImageView>
-      <Button fx:id="studentinfobutton" layoutX="122.0" layoutY="301.0" mnemonicParsing="false" opacity="0.0" prefHeight="250.0" prefWidth="240.0" text="Button">
+      <Button fx:id="studentinfo" layoutX="122.0" layoutY="301.0" mnemonicParsing="false" opacity="0.0" prefHeight="250.0" prefWidth="240.0" text="Button">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button fx:id="profilebutton" layoutX="864.0" layoutY="301.0" mnemonicParsing="false" opacity="0.0" prefHeight="250.0" prefWidth="219.0" text="Button">
+      <Button fx:id="sendemail" layoutX="864.0" layoutY="301.0" mnemonicParsing="false" opacity="0.0" prefHeight="250.0" prefWidth="219.0" text="Button">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
@@ -57,10 +57,12 @@
             <Font name="Arial Bold Italic" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="myconsultationbutton1" layoutX="498.0" layoutY="301.0" mnemonicParsing="false" opacity="0.0" prefHeight="250.0" prefWidth="240.0" text="Button">
+      <Button fx:id="placementinfo" layoutX="498.0" layoutY="301.0" mnemonicParsing="false" opacity="0.0" prefHeight="250.0" prefWidth="240.0" text="Button">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <Button fx:id="prevr" layoutX="1083.0" layoutY="684.0" mnemonicParsing="false" stylesheets="@Resources/returnandlogout.css" text="Previous" />
+      <Button fx:id="logout" layoutX="1089.0" layoutY="138.0" mnemonicParsing="false" stylesheets="@Resources/returnandlogout.css" text="Logout" />
    </children>
 </AnchorPane>

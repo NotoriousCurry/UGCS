@@ -56,6 +56,7 @@ public class FollowUpStudentFXMLController implements Initializable {
     TableColumn lnamecol1;
     @FXML
     Button followup;
+       
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -95,7 +96,7 @@ public class FollowUpStudentFXMLController implements Initializable {
 
             Stage stageedit = (Stage) followup.getScene().getWindow();
             stageedit.close();
-            handleTransitionButton(event, "calendarS.png", "asformS.png", "AdvanceStandingForm.fxml", "Create Consultation");
+          handleTransitionButton(event, "calendarS.png", "asformS.png", "AdvanceStandingForm.fxml", "Create Consultation");
         } else if (apbox.isSelected()) {
             Stage stageedit = (Stage) followup.getScene().getWindow();
             stageedit.close();
