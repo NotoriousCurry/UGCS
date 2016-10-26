@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import ugcs.Database.ConsultationSetup;
+import ugcs.Database.StudentCOOPSetup;
 import ugcs.Database.StudentFollowSetup;
 import ugcs.Database.StudentSetup;
 import ugcs.Database.UGCSetup;
@@ -40,6 +41,7 @@ public class UGCS extends Application {
         UGCSetup.setupDatabase();
         ConsultationSetup.setupDatabase();
         StudentFollowSetup.setupDatabase();
+        StudentCOOPSetup.setupDatabase();
 
         launch(args);
     }
