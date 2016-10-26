@@ -53,7 +53,7 @@
         <Button fx:id="rPrev" layoutX="462.0" layoutY="133.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="147.0" stylesheets="@Resources/returnandlogout.css" text="Return to Previous" />
         <Button fx:id="rDash" layoutX="234.0" layoutY="133.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="171.0" stylesheets="@Resources/returnandlogout.css" text="Return to Dashboard" />
         <Button fx:id="pdf" layoutX="1040.0" layoutY="206.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#PDFClicked" prefHeight="26.0" prefWidth="146.0" stylesheets="@Resources/test.css" text="Print PDF" textFill="WHITE" visible="false" />
-        <Button fx:id="pdfAll" layoutX="1040.0" layoutY="236.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="26.0" prefWidth="146.0" stylesheets="@Resources/test.css" text="All Consultations" textFill="WHITE" visible="false" />
+        <Button fx:id="pdfAll" layoutX="1040.0" layoutY="246.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="26.0" prefWidth="146.0" stylesheets="@Resources/test.css" text="All Consultations" textFill="WHITE" visible="false" />
         <Button fx:id="followupbutton" layoutX="903.0" layoutY="674.0" mnemonicParsing="false" onAction="#Follow" prefHeight="27.0" prefWidth="115.0" style="-fx-text-fill: white;" stylesheets="@Resources/addprintbutton.css" text="Follow Up" />
       <SplitPane dividerPositions="0.4836272040302267" layoutX="15.0" layoutY="196.0" orientation="VERTICAL" prefHeight="455.0" prefWidth="181.0">
         <items>

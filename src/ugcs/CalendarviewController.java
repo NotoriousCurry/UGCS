@@ -476,7 +476,7 @@ public class CalendarviewController implements Initializable {
 
             @Override
             public void handle(MouseEvent t) {
-                pdf.setStyle("-fx-background-color:#dae7f3;");
+                pdfAll.setStyle("-fx-background-color:#dae7f3;");
             }
         });
 
@@ -484,7 +484,7 @@ public class CalendarviewController implements Initializable {
 
             @Override
             public void handle(MouseEvent t) {
-                pdf.setStyle("-fx-background-colour:orange");
+                pdfAll.setStyle("-fx-background-colour:orange");
             }
         });
 
