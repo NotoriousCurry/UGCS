@@ -21,6 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import ugcs.Alert.AlertMethods;
 import ugcs.Audio.AudioMethods;
+import ugcs.Queries.FileQueries;
 
 /**
  *
@@ -46,6 +47,8 @@ public class DashboardController implements Initializable {
     Label todAlert;
     @FXML
     Label tmrwAlert;
+    @FXML
+    Button logOut;
 
     private FadeTransition fadeI = new FadeTransition();
     private FadeTransition fadeL = new FadeTransition();
@@ -53,6 +56,7 @@ public class DashboardController implements Initializable {
     private FadeTransition ft1 = new FadeTransition();
     private FadeTransition ft2 = new FadeTransition();
     private FadeTransition ft3 = new FadeTransition();
+    FileQueries fq = new FileQueries();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -82,6 +86,14 @@ public class DashboardController implements Initializable {
               handleTransitionButton(e, "dashS.png", "calendarS.png", "mystudentsDash.fxml", "CO-OP");
 
             }
+        });
+        logOut.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                fq.deleteTemp();
+                handleTransitionButton(e, "dashS.png", "loginS.png", "LoginPage.fxml", "Login");
+            }
+        ;
         });
 
     }

@@ -24,7 +24,7 @@
             <Font name="Arial Bold Italic" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="coopLabel" layoutX="535.0" layoutY="513.0" text="Co-Op Students" visible="true">
+      <Label fx:id="coopLabel" layoutX="535.0" layoutY="513.0" text="Co-Op Students" visible="false">
          <font>
             <Font name="Arial Bold Italic" size="18.0" />
          </font>
@@ -44,7 +44,7 @@
             <Image url="@Resources/profilelogo.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="coopImage" fitHeight="172.0" fitWidth="172.0" layoutX="514.0" layoutY="314.0" pickOnBounds="true" preserveRatio="true" visible="true">
+      <ImageView fx:id="coopImage" fitHeight="172.0" fitWidth="172.0" layoutX="514.0" layoutY="314.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@Resources/managestudentslogo.png" />
          </image>
@@ -53,7 +53,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button fx:id="coopButton" layoutX="480.0" layoutY="301.0" mnemonicParsing="false" opacity="0.0" prefHeight="250.0" prefWidth="240.0" text="Button" visible="true">
+      <Button fx:id="coopButton" layoutX="480.0" layoutY="301.0" mnemonicParsing="false" opacity="0.0" prefHeight="250.0" prefWidth="240.0" text="Button" visible="false">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>

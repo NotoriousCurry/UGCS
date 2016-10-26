@@ -5,11 +5,8 @@
  */
 package ugcs;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -33,7 +30,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -67,16 +63,11 @@ import jfxtras.internal.scene.control.skin.agenda.AgendaDaysFromDisplayedSkin;
 import jfxtras.internal.scene.control.skin.agenda.AgendaWeekSkin;
 import jfxtras.scene.control.agenda.Agenda;
 import jfxtras.scene.control.agenda.Agenda.Appointment;
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.font.PDFont;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
-import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import ugcs.Audio.AudioMethods;
 import ugcs.Model.Consultation;
 import ugcs.Model.Event;
 import ugcs.Queries.ConsultationQueries;
+import ugcs.Queries.FileQueries;
 
 /**
  *
@@ -139,6 +130,8 @@ public class CalendarviewController implements Initializable {
     Label searchLabel;
     @FXML
     Button followupbutton;
+    @FXML
+    Button pdfAll;
 
     @FXML
     ScrollPane sp;
@@ -164,17 +157,23 @@ public class CalendarviewController implements Initializable {
     @FXML
     ScrollPane sp2;
 
+    FileQueries fq = new FileQueries();
+    PDFMaker pdfm = new PDFMaker();
+
     public final void setWrapText(boolean value) {
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // followupbutton.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("Resources/Butt.gif"))));
+        //FileQueries fq = new FileQueries();
         notetextshow.setWrapText(true);
         sp.setFitToWidth(true);
         sp.setFitToHeight(true);
-        fName.setText(readName());
+        fName.setText(fq.readName());
         pdf.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("Resources/mini3.gif"))));
+        pdfAll.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("Resources/mini3.gif"))));
+
         sp2.setVvalue(40);
         combo.getItems().addAll("9am", "10am",
                 "11am",
@@ -202,7 +201,7 @@ public class CalendarviewController implements Initializable {
         prioritycol.setCellValueFactory(
                 new PropertyValueFactory<Consultation, String>("priority")
         );
-      //  datecol.setCellValueFactory(
+        //  datecol.setCellValueFactory(
         //        new PropertyValueFactory<Consultation, String>("date1")
         //);
         datecol.setCellValueFactory(cellData -> cellData.getValue().dateproperty());
@@ -239,16 +238,14 @@ public class CalendarviewController implements Initializable {
 
                             // setStyle("-fx-background-color: lightgreen");
                             HBox box = new HBox();
-                            box.setSpacing(10);   
+                            box.setSpacing(10);
 
                             ImageView imageview = new ImageView();
                             imageview.setImage(new Image(getClass().getResourceAsStream("Resources/excred.png")));
                             box.getChildren().addAll(imageview);
                             setGraphic(box);
-                            
-                        }
-                        else if 
-                            (date.equals(datetomorrow)) {
+
+                        } else if (date.equals(datetomorrow)) {
                             System.out.println(" should be working 2");
                             setTextFill(Color.BLACK);
 
@@ -259,10 +256,7 @@ public class CalendarviewController implements Initializable {
                             imageview.setImage(new Image(getClass().getResourceAsStream("Resources/exc3.png")));
                             box.getChildren().addAll(imageview);
                             setGraphic(box);
-                        
-                        
-                        
-                        
+
                         }
                     }
                 }
@@ -478,6 +472,22 @@ public class CalendarviewController implements Initializable {
             }
         });
 
+        pdfAll.setOnMouseEntered(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent t) {
+                pdf.setStyle("-fx-background-color:#dae7f3;");
+            }
+        });
+
+        pdfAll.setOnMouseExited(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent t) {
+                pdf.setStyle("-fx-background-colour:orange");
+            }
+        });
+
         followupbutton.setOnMouseEntered(new EventHandler<MouseEvent>() {
 
             @Override
@@ -534,6 +544,7 @@ public class CalendarviewController implements Initializable {
                 searchLabel.setVisible(true);
                 notetextshow.setVisible(true);
                 pdf.setVisible(true);
+                pdfAll.setVisible(true);
                 notetextshow.setVisible(true);
 
             }
@@ -566,7 +577,7 @@ public class CalendarviewController implements Initializable {
         logOut.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                deleteTemp();
+                fq.deleteTemp();
                 handleTransitionButton(e, "calendarS.png", "loginS.png", "LoginPage.fxml", "Login");
             }
         ;
@@ -585,7 +596,33 @@ public class CalendarviewController implements Initializable {
             }
         ;
         });
-        readPass();
+        pdfAll.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                try {
+                    byte[] bytes = pdfm.createAllPdf();
+
+                    FileChooser fc = new FileChooser();
+                    fc.setTitle("Consultation PDF");
+                    fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
+                    File file = fc.showSaveDialog(null);
+                    FileOutputStream output = new FileOutputStream(file);
+                    if (file != null) {
+                        System.out.println("not chosen");
+                    }
+                    if (!file.exists()) {
+                        file.createNewFile();
+                    }
+                    output.write(bytes);
+                    output.flush();
+                    output.close();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        ;
+        });
+        fq.readPass();
     }
 
     public void removeappointment(Appointment aa) {
@@ -877,142 +914,6 @@ public class CalendarviewController implements Initializable {
         output.flush();
         output.close();
 
-    }
-
-    public void PDF(ActionEvent event) {
-        // NEED TO UPDATE WITH NEW PDF CODE
-        System.out.println("ADD NEW PDF CODE HERE");
-        try {
-            PDDocument doc = new PDDocument();
-            PDPage page = new PDPage();
-            doc.addPage(page);
-            float scale = 1f;
-            PDImageXObject pdImage = PDImageXObject.createFromFile("src/ugcs/Resources/UNSW-LOGO.png", doc);
-
-            PDPageContentStream content = new PDPageContentStream(doc, page);
-
-            Consultation chosen = consulttable.getSelectionModel().getSelectedItem();
-            ConsultationQueries cq = new ConsultationQueries();
-            ObservableList<Consultation> listconsult = FXCollections.observableArrayList(cq.getConsultations());
-            PDFont font = PDType1Font.COURIER_BOLD_OBLIQUE;
-
-            System.out.println(chosen);
-            for (Consultation cc : listconsult) {
-                if (chosen.getZid().equals(cc.getZid())) {
-                    try {
-
-                        String fileName = "Student Report PDF #" + cc.getConsultationid() + ".pdf";
-
-                        content.drawImage(pdImage, 20, 20, pdImage.getWidth() * scale, pdImage.getHeight() * scale);
-
-                        content.beginText();
-                        content.setFont(PDType1Font.HELVETICA, 26);
-                        content.moveTextPositionByAmount(220, 750);
-                        content.drawString("Student Report #" + cc.getConsultationid());
-                        content.endText();
-
-                        String zids = cc.getZid();
-                        String types = cc.getType();
-                        String dates = cc.getDate1();
-                        String times = cc.getTime1();
-
-                        content.beginText();
-                        content.setFont(PDType1Font.HELVETICA, 16);
-                        content.moveTextPositionByAmount(220, 700);
-                        content.drawString("Zid: " + zids);
-                        content.endText();
-
-                        content.beginText();
-                        content.setFont(PDType1Font.HELVETICA, 16);
-                        content.moveTextPositionByAmount(220, 650);
-                        content.drawString("Type: " + types);
-                        content.endText();
-
-                        content.beginText();
-                        content.setFont(PDType1Font.HELVETICA, 16);
-                        content.moveTextPositionByAmount(220, 600);
-                        content.drawString("Date: " + dates);
-                        content.endText();
-
-                        content.beginText();
-                        content.setFont(PDType1Font.HELVETICA, 16);
-                        content.moveTextPositionByAmount(220, 550);
-                        content.drawString("Time: " + times);
-                        content.endText();
-
-                        content.close();
-                        doc.save(fileName);
-                        doc.close();
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
-                }
-
-            }
-        } catch (IOException e) {
-            System.out.println("error");
-        }
-
-    }
-
-    private String readName() {
-        String fName = "temp.txt";
-        String line = null;
-        String name = "Welcome, New User";
-
-        try {
-            FileReader fReader = new FileReader(fName);
-            BufferedReader bReader = new BufferedReader(fReader);
-
-            line = bReader.readLine();
-            String[] sect = line.split(",");
-            name = "Welcome, " + sect[0];
-
-            bReader.close();
-
-        } catch (FileNotFoundException ex) {
-            System.out.println("Unable to find file");
-        } catch (IOException ex) {
-            System.out.println("Error Reading File");
-        }
-        return name;
-    }
-
-    private String readPass() {
-        String fName = "temp.txt";
-        String line = null;
-        String pass = null;
-
-        try {
-            FileReader fReader = new FileReader(fName);
-            BufferedReader bReader = new BufferedReader(fReader);
-
-            line = bReader.readLine();
-            String[] sect = line.split(",");
-            pass = sect[1];
-
-            bReader.close();
-
-        } catch (FileNotFoundException ex) {
-            System.out.println("Unable to find file");
-        } catch (IOException ex) {
-            System.out.println("Error Reading File");
-        }
-        System.out.println(pass);
-        return pass;
-    }
-
-    private void deleteTemp() {
-        try {
-            File file = new File("temp.txt");
-            if (file.delete()) {
-                System.out.println(file.getName() + " is Deleted");
-            } else {
-                System.out.println("Delete operation failed");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     private void handleAudio(String file) {
