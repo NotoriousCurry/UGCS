@@ -123,7 +123,7 @@ public class ManageStudentController implements Initializable {
                 if (studentcooptable.getSelectionModel().isEmpty() != true) {
                     setCheck("true");
                     setString(studentcooptable.getSelectionModel().getSelectedItem().getZID());
-                    handleTransitionButton(e, "conS.png", "loginS.png", "Addviewandeditstudentinfo.fxml", "Student Info");
+                    handleTransitionButton(e, "manageS.png", "addcoopstudS.png", "Addviewandeditstudentinfo.fxml", "Student Info");
                     System.out.println("true");
                 } else {
                     //alert pls

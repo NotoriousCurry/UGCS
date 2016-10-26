@@ -114,7 +114,7 @@ public class AddviewandeditstudentinfoController implements Initializable  {
 
                 scq2.updateStudentCOOP(editcoop);
                     System.out.println("student coop updated");
-                    handleTransitionButton(e, "conS.png", "calendarS.png", "ManageStudent2.fxml", "Dashboard");
+                    handleTransitionButton(e, "addcoopstudS.png", "manageS.png", "ManageStudent2.fxml", "Dashboard");
 
                 }
                  }
@@ -131,7 +131,7 @@ public class AddviewandeditstudentinfoController implements Initializable  {
                 
                 scq.insertStudentCOOP(addcoop);
                 System.out.println("student coop added");
-                handleTransitionButton(e, "conS.png", "calendarS.png", "ManageStudent2.fxml", "Dashboard");
+                handleTransitionButton(e, "addcoopstudS.png", "manageS.png", "ManageStudent2.fxml", "Dashboard");
 
                 
             }
@@ -144,14 +144,14 @@ public class AddviewandeditstudentinfoController implements Initializable  {
             @Override
             public void handle(ActionEvent e) {
                 deleteTemp();
-                handleTransitionButton(e, "conS.png", "loginS.png", "LoginPage.fxml", "Login");
+                handleTransitionButton(e, "addcoopstudS.png", "loginS.png", "LoginPage.fxml", "Login");
             }
         });
 
         prevr.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                handleTransitionButton(e, "conS.png", "calendarS.png", "ManageStudent2.fxml", "Dashboard");
+                handleTransitionButton(e, "addcoopstudS.png", "manageS.png", "ManageStudent2.fxml", "Dashboard");
             }
         });
 }

@@ -101,7 +101,7 @@ public class ManageStudentmarksController implements Initializable {
                 if (studentcooptable2.getSelectionModel().isEmpty() != true) {
 
                     setString(studentcooptable2.getSelectionModel().getSelectedItem().getZID());
-                    handleTransitionButton(e, "conS.png", "loginS.png", "Addviewandeditstudentgrades.fxml", "Student Grades");
+                    handleTransitionButton(e, "studinfoS.png", "editgradesS.png", "Addviewandeditstudentgrades.fxml", "Student Grades");
                     System.out.println("openinglad");
                 } else {
                     //alert pls
