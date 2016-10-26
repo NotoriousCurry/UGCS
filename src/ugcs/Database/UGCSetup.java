@@ -79,7 +79,7 @@ public class UGCSetup extends DerbySetup {
             String encPassCOOP = passEnc.encryptPassword("coop");
             
             createDefaultUGC = conn.prepareStatement("INSERT INTO APP.UGC(ZID, PASSWORD, FIRSTNAME, LASTNAME, EMAIL, TYPE)" + 
-                    "VALUES ('z1234567', ?, 'Micheal','Cahalane', 'z1234567@unsw.edu.au', 'NORM')");
+                    "VALUES ('z1234567', ?, 'Michael','Cahalane', 'z1234567@unsw.edu.au', 'NORM')");
             createDefaultUGC.setString(1, encPassUGC);
             createDefaultUGC.executeUpdate();
 

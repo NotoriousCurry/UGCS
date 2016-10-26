@@ -241,7 +241,7 @@ public class CalendarviewController implements Initializable {
                             box.setSpacing(10);
 
                             ImageView imageview = new ImageView();
-                            imageview.setImage(new Image(getClass().getResourceAsStream("Resources/excred.png")));
+                            imageview.setImage(new Image(getClass().getResourceAsStream("Resources/excred2.png")));
                             box.getChildren().addAll(imageview);
                             setGraphic(box);
 
