@@ -63,6 +63,29 @@
          </cursor>
       </Button>
       <Button fx:id="prevr" layoutX="1083.0" layoutY="684.0" mnemonicParsing="false" stylesheets="@Resources/returnandlogout.css" text="Previous" />
-      <Button fx:id="logout" layoutX="1089.0" layoutY="138.0" mnemonicParsing="false" stylesheets="@Resources/returnandlogout.css" text="Logout" />
+      <Button fx:id="logout" layoutX="1093.0" layoutY="135.0" mnemonicParsing="false" stylesheets="@Resources/returnandlogout.css" text="Logout" />
+      <Text fill="WHITE" layoutX="62.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coordinator IS">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Text>
+      <Button fx:id="rDash" layoutX="245.0" layoutY="132.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="163.0" stylesheets="@Resources/returnandlogout.css" text="Return to Dashboard" />
+      <Label layoutX="955.0" layoutY="140.0" text="FirstName" textFill="WHITE" />
+      <Label layoutX="890.0" layoutY="140.0" text="Welcome, " textFill="WHITE" />
+      <Text fill="WHITE" layoutX="11.0" layoutY="738.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UNSW Sydney NSW 2052 Australia Telephone +61 2 9385 1000">
+         <font>
+            <Font name="Arial" size="11.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="11.0" layoutY="758.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UNSW Coordinator Information System, School of Information Systems and Technology Management" wrappingWidth="535.6162109375">
+         <font>
+            <Font name="Arial" size="11.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="12.0" layoutY="778.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Developed by The Suicide Squad">
+         <font>
+            <Font name="Arial" size="11.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

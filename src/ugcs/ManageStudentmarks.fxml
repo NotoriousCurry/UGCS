@@ -23,8 +23,8 @@
             <Font name="Arial Bold" size="13.0" />
          </font>
       </Label>
-      <Button fx:id="prevr" layoutX="1056.0" layoutY="684.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="146.0" text="Return to Previous" />
-      <Button fx:id="backhome" layoutX="-1.0" layoutY="683.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="146.0" text="Return to Dashboard" />
+      <Button fx:id="prevr" layoutX="457.0" layoutY="136.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="146.0" text="Return to Previous" />
+      <Button fx:id="backhome" layoutX="238.0" layoutY="136.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="156.0" text="Return to Dashboard" />
       <Button fx:id="logout" layoutX="1045.0" layoutY="135.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="141.0" text="Logout" textAlignment="CENTER" textFill="WHITE" />
       <Label layoutX="917.0" layoutY="138.0" text="Welcome, " textFill="WHITE" />
       <Label layoutX="982.0" layoutY="138.0" text="FirstName" textFill="WHITE" />
@@ -45,5 +45,25 @@
       <Button fx:id="viewedit" layoutX="1020.0" layoutY="201.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="156.0" stylesheets="@Resources/test.css" text="Complete Records" />
       <Label layoutX="291.0" layoutY="216.0" text="Sort By:" />
       <ChoiceBox fx:id="studentfilter" layoutX="354.0" layoutY="211.0" prefHeight="27.0" prefWidth="176.0" />
+      <Text fill="WHITE" layoutX="47.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coordinator IS">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="15.0" layoutY="773.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Developed by The Suicide Squad">
+         <font>
+            <Font name="Arial" size="11.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="14.0" layoutY="753.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UNSW Coordinator Information System, School of Information Systems and Technology Management" wrappingWidth="535.6162109375">
+         <font>
+            <Font name="Arial" size="11.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="14.0" layoutY="733.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UNSW Sydney NSW 2052 Australia Telephone +61 2 9385 1000">
+         <font>
+            <Font name="Arial" size="11.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
