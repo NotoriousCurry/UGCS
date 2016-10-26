@@ -11,3 +11,5 @@ To Run this application, do the following:
 Default Access Accounts:
 UGC - Username: z1234567 Password: ugc
 COOP - Username: z7654321 Password: coop
+
+Currently, it is not possible to export the application as a JAR file. Doing so will result in premature closing.
