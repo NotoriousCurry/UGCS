@@ -27,7 +27,7 @@
       <Button fx:id="backHome" layoutX="238.0" layoutY="136.0" mnemonicParsing="false" onAction="#backhome" prefHeight="26.0" prefWidth="164.0" text="Return to Dashboard" />
       <Button fx:id="logOut" layoutX="1045.0" layoutY="135.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="141.0" text="Logout" textAlignment="CENTER" textFill="WHITE" />
       <Label layoutX="914.0" layoutY="141.0" text="Welcome, " textFill="WHITE" />
-      <Label layoutX="979.0" layoutY="141.0" text="FirstName" textFill="WHITE" />
+      <Label fx:id="FirstName" layoutX="979.0" layoutY="141.0" text="FirstName" textFill="WHITE" />
       <Label layoutX="157.0" layoutY="548.0" prefHeight="16.0" prefWidth="227.0" text="Please select a Consultation Type:">
          <font>
             <Font name="Arial Bold" size="13.0" />

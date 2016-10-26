@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -95,7 +96,24 @@ public class DashboardController implements Initializable {
             }
         ;
         });
+        profilebutton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Page Coming Soon");
+            alert.setHeaderText("Page Coming Soon");
+            alert.setHeaderText(null);
+            alert.setContentText("This page isnt quite ready for release just yet. \nWe appreciate your patience.");
+            alert.showAndWait();
+            }
+        ;
+        });
 
+                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirm Student Details");
+            alert.setHeaderText("Confirmation");
+            alert.setHeaderText(null);
+            alert.setContentText("Are the student details correct?");
     }
 
     private String readType() {

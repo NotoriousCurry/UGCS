@@ -68,7 +68,7 @@
             <Font name="Arial Bold" size="13.0" />
          </font>
       </Text>
-      <Label layoutX="980.0" layoutY="139.0" text="FirstName" textFill="WHITE" />
+      <Label fx:id="FirstName" layoutX="980.0" layoutY="139.0" text="FirstName" textFill="WHITE" />
       <Label layoutX="915.0" layoutY="139.0" text="Welcome, " textFill="WHITE" />
       <Button fx:id="logOut" layoutX="1045.0" layoutY="134.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="141.0" stylesheets="@Resources/returnandlogout.css" text="Logout" textAlignment="CENTER" textFill="WHITE" />
       <Button fx:id="rPrev" layoutX="248.0" layoutY="134.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="146.0" stylesheets="@Resources/returnandlogout.css" text="Return to Previous" />

@@ -14,6 +14,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import ugcs.Queries.FileQueries;
 
 
 /**
@@ -24,19 +26,23 @@ public class mystudentsDashController implements Initializable {
 
     
     @FXML
-    Button logout;
+    Button logOut;
     @FXML
     Button rPrev;
     @FXML
     Button managestudents;
     @FXML
     Button manageplacement;
+    @FXML
+    Label FirstName;
   
+    FileQueries fq = new FileQueries();
 
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        FirstName.setText(fq.readName());
      
 
         managestudents.setOnAction(new EventHandler<ActionEvent>() {
@@ -60,6 +66,14 @@ public class mystudentsDashController implements Initializable {
             public void handle(ActionEvent e) {
                 
               handleTransitionButton(e, "coopdashS.png", "dashS.png", "Dashboard.fxml", "Dashboard");
+
+            }
+        });
+        logOut.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                fq.deleteTemp();
+              handleTransitionButton(e, "coopdashS.png", "loginS.png", "LoginPage.fxml", "Login");
 
             }
         });

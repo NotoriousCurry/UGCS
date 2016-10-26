@@ -40,6 +40,7 @@ import ugcs.Audio.AudioMethods;
 import ugcs.Model.Consultation;
 import ugcs.Model.Student;
 import ugcs.Queries.ConsultationQueries;
+import ugcs.Queries.FileQueries;
 import ugcs.Queries.StudentQueries;
 
 /**
@@ -115,12 +116,17 @@ public class StudentAndConsController implements Initializable {
     Parent newroot;
     @FXML
     Button updatebuttonnow;
+    @FXML
+    Label FirstName;
+    
+    FileQueries fq = new FileQueries();
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        FirstName.setText(fq.readName());
         createButton.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("Resources/arrow4.png"))));
         createButton.resize(20, 20);
         StudentQueries ss = new StudentQueries();

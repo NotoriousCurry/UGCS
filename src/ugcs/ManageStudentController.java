@@ -21,8 +21,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
-import ugcs.Model.Student;
 import ugcs.Model.StudentCOOP;
+import ugcs.Queries.FileQueries;
 import ugcs.Queries.StudentCOOPQueries;
 
 /**
@@ -61,16 +61,19 @@ public class ManageStudentController implements Initializable {
     Button prevr;
     @FXML
     Button backhome;
+    @FXML
+    Label FirstName;
 
     private static String check = "false";
     private static String string1;
 
     StudentCOOPQueries scq = new StudentCOOPQueries();
+    FileQueries fq = new FileQueries();
     ObservableList<StudentCOOP> studentcooplist = FXCollections.observableArrayList(scq.getStudentCOOP());
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println(studentcooplist);
+        FirstName.setText(fq.readName());
         zidcol.setCellValueFactory(
                 new PropertyValueFactory<StudentCOOP, String>("zID")
         );

@@ -170,7 +170,7 @@ public class CalendarviewController implements Initializable {
         notetextshow.setWrapText(true);
         sp.setFitToWidth(true);
         sp.setFitToHeight(true);
-        fName.setText(fq.readName());
+        fName.setText("Welcome, " + fq.readName());
         pdf.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("Resources/mini3.gif"))));
         pdfAll.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("Resources/mini3.gif"))));
 

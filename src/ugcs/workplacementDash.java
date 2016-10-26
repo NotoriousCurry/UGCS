@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import java.util.*;
+import javafx.scene.control.Label;
 import javax.mail.*;
 import javax.mail.internet.*;
 import ugcs.Queries.FileQueries;
@@ -32,11 +33,14 @@ public class workplacementDash implements Initializable {
     Button sendemail;
     @FXML
     Button rDash;
+    @FXML
+    Label FirstName;
 
     FileQueries fq = new FileQueries();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        FirstName.setText(fq.readName());
 
         studentinfo.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -58,6 +62,14 @@ public class workplacementDash implements Initializable {
             public void handle(ActionEvent e) {
 
                 handleTransitionButton(e, "placementS.png", "coopdashS.png", "mystudentsDash.fxml", "Placement Dashboard");
+
+            }
+        });
+        logout.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                fq.deleteTemp();
+                handleTransitionButton(e, "placementS.png", "loginS.png", "LoginPage.fxml", "Login");
 
             }
         });

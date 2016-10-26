@@ -70,7 +70,7 @@
          </font>
       </Text>
       <Button fx:id="rDash" layoutX="245.0" layoutY="132.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="163.0" stylesheets="@Resources/returnandlogout.css" text="Return to Dashboard" />
-      <Label layoutX="955.0" layoutY="140.0" text="FirstName" textFill="WHITE" />
+      <Label fx:id="FirstName" layoutX="955.0" layoutY="140.0" text="FirstName" textFill="WHITE" />
       <Label layoutX="890.0" layoutY="140.0" text="Welcome, " textFill="WHITE" />
       <Text fill="WHITE" layoutX="11.0" layoutY="738.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UNSW Sydney NSW 2052 Australia Telephone +61 2 9385 1000">
          <font>
